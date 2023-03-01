@@ -4,13 +4,17 @@
     box-sizing: border-box;
 }
 
+body{
+    width: 100%;
+    height: 100%;
+}
+
 header{
     width: 100%;
     height: 100px;
     display: flex;
     align-items: center;
     justify-content: space-between;
-    /* background-color: rgba(16, 18, 22, 0.97); */
     color: white;
 }
 
@@ -139,7 +143,7 @@ header a{
 
 #white{
     width: 100%;
-    height: 2450px;
+    height: 2750px;
     background-image: url(assets/Line\ 1.png),url(assets/Line\ 2.png);
     background-repeat: no-repeat;
     background-size: contain;
@@ -231,7 +235,7 @@ header a{
 }
 
 .back .conteudo #foto1,.back .conteudo #foto2{
-    width:20%;
+    width:25%;
     height: 70%;
     background-color:rgba(217, 217, 217, 1);
 }
@@ -243,7 +247,7 @@ header a{
     flex-direction: column;
     align-items: center;
     justify-content: space-around;
-    padding: 30px 0px 150px;
+    padding: 30px 0px 125px;
 }
 
 #objetivo h1{
@@ -252,12 +256,123 @@ header a{
     font-weight: 600;
     position: absolute;
     margin-left: 60px;
+    margin-top: -35px;
+}
+
+.titulo-equipe{
+    width: 100%;
+    height: 100px;
+    display: flex;
+    justify-content: center;
+    font-size: 60px;
+    font-weight: 600;
+    color: red;
+}
+
+.integrantes{
+    width: 100%;
+    height: 220px;
+    display: flex;
+    justify-content: space-around;
+}
+
+.integrantes .conjunto{
+    width: 220px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.conjunto .fotos-integrantes{
+    width: 175px;
+    border-radius: 150px;
+    background-color:rgba(217, 217, 217, 1);
+    height: 80%;
+}
+
+.conjunto .nome-integrantes{
+    width: 100%;
+    height: 20%;
+    font-size: 25px;
+    font-weight: 600;
+    text-align: center;
+    padding-top: 2.5%;
+}
+
+.contato{
+    font-size: 60px;
+    font-weight: 600;
+    text-align: center;
+    margin-top: 100px;
+    margin-bottom: 50px;
+    font-family: 'Inter';
+}
+
+.quadrado-form-contato{
+    width:80%;
+    height:500px;
+    margin: 0% 10% 0% 10%;
+    background-color: rgba(177, 22, 35, 0.55);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    padding: 2% 1% 3% 2%;
+}
+
+.quadrado-form-contato textarea{
+    background-color:rgba(0, 0, 0, 0.54);
+    color: white;
+    font-size: 25px;
+    resize: none;
+}
+
+.quadrado-form-contato textarea::placeholder{
+    color: white;
+    text-align: start;
+    align-items: center;
+}
+
+
+#ipt_descricao::placeholder{
+    vertical-align: text-top;
+}
+
+.quadrado-form-contato button{
+    font-size: 25px;
+    font-weight: 600;
+    background-color: rgba(159, 17, 27, 1);
+    border: none;
+    color: white;
+    width: 15%;
+    height: 12%;
+    text-align: center;
+    margin: 2.5% 42.5% 0% 42.5%;
+}
+
+.quadrado-form-contato button:hover{
+    cursor: pointer;
+}
+
+.quadrado-form-contato #ipt_nome, .quadrado-form-contato #ipt_email{
+    width: 60%;
+    height: 10%;
+}
+
+.quadrado-form-contato #ipt_descricao{
+    width: 98%;
+    height: 50%;
+    font-size: 25px;
+    
 }
 
 footer{
     width: 100%;
-    height: 100%;
+    height: 100px;
     background-color: rgba(16, 18, 22, 0.97);
     color: white;
     font-size: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }

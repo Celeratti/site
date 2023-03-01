@@ -1,0 +1,27 @@
+
+@media only screen and (max-width: 900px){
+    #metro, #maquina, #qrcode{
+            display: none;
+        }
+    
+    header nav{
+        /* margin-right: 70px; */
+        width: 380px;
+    }
+    
+    .texto #big-titulo{
+        font-size: 45px;
+        margin-top: 80px;
+    }
+    
+    .integrantes .conjunto{
+        width: 80px;
+    }
+    .conjunto .fotos-integrantes{
+        width: 125px;
+        border-radius: 120px;
+        background-color:rgba(217, 217, 217, 1);
+        height: 60%;
+    }
+    
+    }
