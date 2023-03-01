@@ -1,5 +1,8 @@
 
 @media only screen and (max-width: 900px){
+    body{
+        width: 100%;
+    }
     #metro, #maquina, #qrcode{
             display: none;
         }
@@ -24,4 +27,64 @@
         height: 60%;
     }
     
+    #white{
+        height: 2800px;
+        width: 100%;
     }
+
+    .container .texto{
+        width: 100%;
+    }
+    .container .imagens{
+        display: none;
+    }
+
+
+    #mvv{
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        height: 1600px;
+    }
+
+    #mvv .mvv-conjunto{
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        width: 100%;
+        height: 500px;
+    }
+
+    #mvv .titulos{
+        padding-top: 0px;
+    }
+
+    .mvv-conjunto #foto1, .mvv-conjunto #foto2, .mvv-conjunto #foto3{
+        width: 70%;
+    }
+
+    .desc .desc-titulo{
+        margin-left: 80px;
+    }
+
+    #mvv .desc p{
+        width: 60%;
+        height: 150px;
+    }
+
+
+    .back .conteudo #foto1,.back .conteudo #foto2{
+        height: 50%;
+    }
+
+    .back .conteudo{
+        height: 45%;
+        padding: 0px 100px 0px 50px
+    }
+
+    .back .conteudo .texto{
+        width: 30%;
+        padding: 100px 0px 75px;
+        border: solid 2px red;
+    }
+}
