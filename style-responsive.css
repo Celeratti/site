@@ -1,15 +1,14 @@
 
 @media only screen and (max-width: 900px){
     body{
-        width: 100%;
+        height: 4000px;
     }
     #metro, #maquina, #qrcode{
             display: none;
         }
     
     header nav{
-        /* margin-right: 70px; */
-        width: 380px;
+        width: 50%;
     }
     
     .texto #big-titulo{
@@ -18,18 +17,17 @@
     }
     
     .integrantes .conjunto{
-        width: 80px;
+        width: 15%;
     }
     .conjunto .fotos-integrantes{
-        width: 125px;
+        width: 100%;
         border-radius: 120px;
         background-color:rgba(217, 217, 217, 1);
-        height: 60%;
+        height: 55%;
     }
     
     #white{
-        height: 2800px;
-        width: 100%;
+        height: 3850px;
     }
 
     .container .texto{
@@ -73,17 +71,41 @@
     }
 
 
+    #objetivo{
+        height: 1050px;
+    }
+
+
     .back .conteudo #foto1,.back .conteudo #foto2{
         height: 50%;
+        width: 35%;
+    }
+
+    #objetivo .back .quadrado-grande{
+        width: 70%;
+        height: 950px;
     }
 
     .back .conteudo{
-        height: 45%;
-        padding: 0px 100px 0px 50px
+        height: 80%;
+        padding: 0px 100px 0px 50px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+
     }
 
     .back .conteudo .texto{
         width: 30%;
         padding: 100px 0px 75px;
     }
+
+    #objetivo h1{
+        width: 100%;
+        text-align: center;
+        padding: 0;
+        margin: 0;
+        margin-top: -40px;
+    }
+
 }
