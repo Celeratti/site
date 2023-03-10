@@ -76,15 +76,21 @@
     }
 
 
-    .back .conteudo #foto1,.back .conteudo #foto2{
-        height: 50%;
-        width: 35%;
+    .back .conteudo .objetivo-conjunto #foto1,.back .conteudo .objetivo-conjunto #foto2{
+        height: 350px;
+        width: 40%;
     }
 
     #objetivo .back .quadrado-grande{
         width: 70%;
         height: 950px;
     }
+    
+    .back .conteudo .objetivo-conjunto{
+        padding-top: 20px;
+        height: 50%;
+    }
+
 
     .back .conteudo{
         height: 80%;
@@ -95,9 +101,9 @@
 
     }
 
-    .back .conteudo .texto{
-        width: 30%;
-        padding: 100px 0px 75px;
+    .back .conteudo .objetivo-conjunto .texto{
+        width: 35%;
+        padding: 20px 0px 75px;
     }
 
     #objetivo h1{

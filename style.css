@@ -2,6 +2,7 @@
     padding: 0;
     margin: 0;
     box-sizing: border-box;
+    font-family: 'Roboto', sans-serif;
 }
 
 header{
@@ -240,14 +241,15 @@ header a{
     display: flex;
     flex-direction: row;
     height: 90%;
-    margin-top: 10%;
+    margin-top: 40px;
     width: 80%;
     padding-left: 35px;
 }
 
 .back .conteudo .objetivo-conjunto #foto1,.back .conteudo .objetivo-conjunto #foto2{
-    width:40%;
-    height: 85%;
+    width: 35%;
+    height: 400px;
+    margin-left: 40px;
     background-color:rgba(217, 217, 217, 1);
 }
 
@@ -272,8 +274,8 @@ header a{
     color: red;
     font-weight: 600;
     position: absolute;
-    margin-left: 60px;
-    margin-top: -35px;
+    margin-left: 80px;
+    margin-top: -40px;
 }
 
 .titulo-equipe{
@@ -381,6 +383,31 @@ header a{
     height: 50%;
     font-size: 25px;
     
+}
+
+#integrante1{
+    background-image: url("https://avatars.githubusercontent.com/u/111136785?s=96&v=4");
+    background-size: cover;
+}
+
+#integrante2{
+    background-image: url("https://avatars.githubusercontent.com/u/111135556?s=96&v=4");
+    background-size: cover;
+}
+
+#integrante3{
+background-image: url("https://avatars.githubusercontent.com/u/111136118?s=96&v=4");
+background-size: cover;
+}
+
+#integrante4{
+background-image: url("/assets/rayssa.jpeg");
+background-size: cover;
+}
+
+#integrante5{
+background-image: url("https://avatars.githubusercontent.com/u/111136908?s=96&v=4");
+background-size: cover;
 }
 
 footer{
