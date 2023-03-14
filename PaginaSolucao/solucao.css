@@ -1,3 +1,7 @@
+*, *::before, *::after {
+    font-family: 'Roboto', sans-serif;
+}
+
 body {
     background-color: #101216;
     background-image: url(/PaginaSolucao/assets/imgs/Line\ 5.png),url(assets/imgs/Line\ 6.png) ;
@@ -8,14 +12,14 @@ body {
     width: 100%;
     /* border: 1px solid #2ad414; */
     display: flex;
-    justify-content: space-around;
+    /* justify-content: space-around; */
 }
 
 #logo img {
     width: 300px;
     height: 50px;
     /* border: 1px solid red;  */
-    margin-right: 500px;
+    margin-right: 400px;
 }
 
 #menu {
@@ -24,7 +28,8 @@ body {
     color: white;
     display: flex;
     float: right;
-    width: 40%;
+    width: 60%;
+    font-size: 20px;
 }
 
 #menu #solucao{
