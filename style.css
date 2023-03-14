@@ -56,6 +56,26 @@ header a{
     font-style: italic;
     text-align: center;
 }
+#imgValores{
+    width: 50%;
+    height: 70%;
+    margin-top: 35px;
+    margin-left: 110px;
+}
+
+#imgVisao{
+    width: 50%;
+    height: 80%;
+    margin-top: 25px;
+    margin-left: 110px;
+}
+
+#imgMissao{
+    width: 50%;
+    height: 70%;
+    margin-top: 35px;
+    margin-left: 110px;
+}
 
 .container{
     display: flex;
@@ -444,3 +464,5 @@ footer{
     align-items: center;
     justify-content: center;
 }
+
+
