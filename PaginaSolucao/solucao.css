@@ -5,7 +5,7 @@
 body {
     background-color: #101216;
     background-image: url(/PaginaSolucao/assets/imgs/Line\ 5.png),url(assets/imgs/Line\ 6.png) ;
-    
+    font-family: 'Roboto', sans-serif;
 }
 
 #topo {
@@ -34,6 +34,12 @@ body {
 
 #menu #solucao{
     color: #B11623;
+}
+
+
+#menu a{
+    text-decoration: none;
+    color: white;
 }
 
 .main {
@@ -176,7 +182,7 @@ body {
         color: white;
         display: flex;
         width: 50%;
-       right: 100px;
+       right: 110px;
     }
 
     #logo img {
@@ -196,7 +202,7 @@ body {
     .nomedasolucao {
         /* border: 1px solid orangered; */
         background-color: rgba(255, 255, 255, 0);
-        color: white;
+        color: #B11623;
         position: absolute;
         display: flex;
         float: left;
@@ -208,14 +214,14 @@ body {
 
     .nomedasolucao h1 {
         background-color: rgba(255, 255, 255, 0);
-        font-size: x-large;
+        font-size: xxx-large;
     }
 
     .conteudo {
         background-color: #cccccc;
         /* border: 1px solid rgb(55, 57, 168); */
         width: 80%;
-        height: 650px;
+        height: 950px;
         margin-top: 55px;
     }
     
@@ -238,10 +244,10 @@ body {
     #foto2 img{
         /* border: 1px solid red; */
         display: block;
-        width: 300px;
-        height: 300px;
+        width: 500px;
+        height: 350px;
         margin-top: 30px;
-        margin-left: 45px;
+        margin-left: 60px;
     }
 
     .descricao{
@@ -250,19 +256,20 @@ body {
         position: absolute;
         display: flex;
         justify-content: center;
-        width: 230px;
+        width: 600px;
         height: 270px;
-        margin-left: 360px;
-        top: 150px;
+        margin-left: 20px;
+        top: 500px;
+        font-size: large;
     }
 
     #so{
         /* border: 1px solid blue; */
         background: transparent;
         height: 250px;
-        width: 450px;
-        margin-left: 100px;
-        margin-top: 40px;
+        width: 480px;
+        margin-left: 50px;
+        margin-top: 300px;
     }
     
     #so h2{
@@ -277,7 +284,7 @@ body {
         width: 170px;
         height: 170px;
         right: 480px;
-        top: 500px;
+        top: 800px;
     }
 
     .imagem2 img{
@@ -287,7 +294,7 @@ body {
         background: transparent;
         width: 120px;
         height: 120px;
-        top: 520px;
+        top: 820px;
         right: 150px;
     }
 
@@ -298,7 +305,7 @@ body {
         background: transparent;
         width: 170px;
         height: 170px;
-        top: 500px;
+        top: 800px;
         right: 290px;
     }
 }
