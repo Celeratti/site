@@ -4,7 +4,7 @@
 }
 .caixaLogo{
     background-color: #101216;
-    height: 100%;
+    height: 109.5%;
     display: flex;
     justify-content: center;
     border: 2px solid;
@@ -17,7 +17,7 @@
 
 .divPrincipal{
     display: flex;
-    height: 46.3vw;
+    height: 48.8vw;
 
 }
 
@@ -30,7 +30,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 100%;
+    height: 110%;
 }
 
 .caixaFormulario h1{
@@ -72,7 +72,7 @@ color: #4e4b4b;
     position: relative;
     width: 287px;
     height: 46px;
-    top: 45%;
+    top: 40%;
     
     font-family: 'Inter';
     font-style: italic;
@@ -82,7 +82,7 @@ color: #4e4b4b;
     color: white;
 }
 .seta{
-    top: 43.5%;
+    top: 38.5%;
     position: relative;
 }
 
@@ -130,7 +130,7 @@ ul{
     left: 140px;
     margin-top: 35px;
     font-size: 11pt;
-    width: 30%;
+    width: 32%;
     font-family: Arial, Helvetica, sans-serif;
 
 }
@@ -178,7 +178,7 @@ button{
 
 .caixaLogo p{
     position: relative;
-    top: 85%;
+    top: 70%;
     width: 305px;
     height: 41px;
     left: 0px;
@@ -210,30 +210,39 @@ button{
     width: 50%;
 
 }
+.subCaixaFormulario{
+    margin-top: -100px;
+}
 
 
 @media (max-width: 900px){
     .formulario{
         left: 0px;
     }
+    body{
+        width: 60vh;
+    }
     .divPrincipal{
         display: block;
+        width: 60vh;
+        left: 10px;
     }
     .caixaFormulario,
     .caixaLogo {
-        width: 100%;
+        width: 115.5%;
 }
     .caixaLogo{
         height: 50%;
     }
 
     .caixaFormulario{
-        text-align: center;
         height: 100vh;
     }
     
 
     #emailRodape{
+        margin-top: -10px;
+        position: relative;
         opacity: 0;
     }
 
@@ -248,49 +257,58 @@ button{
         margin-top: -300px;
         font-size: 32pt;
         width: 500px;
-        left: -150px;
+        left: -60px;
 
     }
     .caixaFormulario h2{
         font-size:20pt;
         width: 700px;
-        left: -130px;
+        left: -56px;
     }
 
     button{
-        left: -80px;
+        left: 110px;
     }
     .formulario{
         height: 400px;
+        width: 96%;
+
     }
     .formulario li{
         font-size: 20pt;
         margin-top: 50px;
         left: 30px;
+        
     }
     input{
         margin-top: 50px;
         font-size: 20pt;
+        margin-left: 30px;
+
     }
     button{
         height: 50px;
         margin-top: 20px;
         font-size: 20pt;
+        margin-left: 130px;
     }
     #linkCadastro{
         margin-top: 50px;
         color: #000000;
         font-size: 15pt;
-        margin-left: 90px;
+        margin-left: 100px;
     }
     .subCaixaFormulario{
         width: 100%;
         height: 50%;
         margin-left: 40px;
-        margin-top: 300px;
+        position: relative;
+        margin-top: 240px;
+    }
+    .subCaixaFormulario h2{
+        width: 90%;
     }
 }
-
 
 
 
