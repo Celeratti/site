@@ -59,6 +59,7 @@
 
     .mvv-conjunto #foto1, .mvv-conjunto #foto2, .mvv-conjunto #foto3{
         width: 70%;
+        padding-left: 50px;
     }
 
     .desc .desc-titulo{

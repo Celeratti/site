@@ -287,6 +287,8 @@ header a{
     height: 400px;
     margin-left: 40px;
     background-color:rgba(217, 217, 217, 1);
+    display: flex;
+    justify-content: center;
 }
 
 .back .conteudo .objetivo-conjunto .texto{
@@ -304,6 +306,18 @@ header a{
 .objetivo-conjunto .texto p{
     height: 70%;
 }
+
+.objetivo-conjunto #foto1{
+    background-image: url("assets/train-2373323_1280.jpg");
+    background-size: cover;
+}
+
+
+.objetivo-conjunto #foto2{
+    background-image: url("assets/space-center-693251_1280.jpg");
+    background-size: cover;
+}
+
 
 #objetivo h1{
     font-size: 70px;
