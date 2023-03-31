@@ -11,16 +11,17 @@
     margin-left: 20px;
 }
 
-header{
+.header{
     width: 100%;
     height: 100px;
     display: flex;
     align-items: center;
     justify-content: space-between;
-    color: white;
+    z-index: 0;
+    position: absolute;
 }
 
-header nav{
+.header nav{
     width: 40%;
     height: 100%;
     align-items: center;
@@ -35,18 +36,53 @@ header nav{
     font-size: 22px;
 }
 
-#agora{
-    color: red;
-    cursor: default;
-}
-
-header a{
+.header li, .header a{
     text-decoration: none;
     color: #CCCCCC;
     font-weight: 600;
-    font-size: 20px;
+    font-size: 18px;
 }
 
+.carousel-texto{
+    z-index: 0;
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    font-size: 20px;
+    color: white;
+    width: 700px;
+    height: 330px;
+    margin-top: 203px;
+    margin-left: 212px;
+    justify-content: space-around;
+}
+
+.carousel-texto #big-titulo{
+font-size: 50px;
+}
+
+.carousel-texto #texto-descritivo{
+    font-size: 20px;
+}
+.carousel-texto button{
+    background-color: #9F111B;
+    height: 50px;
+    width: 200px;
+    border: none;
+    color: white;
+}
+
+
+.active{
+    width: 100%;
+    height: 630px;
+    display: flex;;
+}
+
+.carousel-item{
+    background-image: url(./assets/bacckground.PNG);
+    background-size:cover;
+}
 
 #imgValores{
     width: 50%;
@@ -69,71 +105,9 @@ header a{
     margin-left: 110px;
 }
 
-.container{
-    display: flex;
-    flex-direction: column;
-    width: 100%;
-    height: 630px;
-    display: flex;
-    background-color: rgba(16, 18, 22, 0.97);
-    background-image: url(assets/Line\ 3.png), url(assets/Line\ 4.png);
-    background-repeat: no-repeat;
-    color: #CCCCCC;
-}
-
-.container .texto{
-    width: 50%;
-    height: 100%;
-    padding-left: 50px;
-}
-
-.container #big-titulo{
-    font-size: 60px;
-    font-weight: 600;
-    width: 100%;
-    text-align: left;
-}
-
-.container .texto h3{
-    font-size: 25px;
-    font-weight: 600;
-    margin-top: 30px;
-}
-
-.texto .indicadores{
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    width: 60%;
-    margin-top: 40px;
-    font-size: 20px;
-    text-align: center;
-}
-.texto .titulo-banner1{
-    font-size: 55px;
-    font-weight: 600;
-}
-
-.texto .texto-indicadores{
-    display: flex;
-    flex-direction: column;
-}
-
-.container .imagens{
-    width: 50%;
-    height: 100%;
-    display: flex;
-    flex-direction: column;
-}
-
-#conteudo{
-    display: flex;
-    flex-direction: row;
-}
-
 #white{
     width: 100%;
-    height: 2150px;
+    height: 1850px;
     background-image: url(assets/Line\ 1.png),url(assets/Line\ 2.png);
     background-repeat: no-repeat;
     background-size: cover;
@@ -199,90 +173,9 @@ header a{
     margin-top: 10px;
 }
 
-#objetivo{
-    width: 100%;
-    height: 700px;
-}
-
-#objetivo .back{
-    width: 100%;
-    height: 80%;
-    display: flex;
-    justify-content: center;
-    margin-top: 50px;
-}
-
-#objetivo .back .quadrado-grande{
-    width: 80%;
-    height: 90%;
-    background-color: rgba(0, 0, 0, 0.29);
-}
-.back .conteudo{
-    width: 95%;
-    height: 80%;
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: space-between;
-    position: absolute;
-}
-
-.back .conteudo .objetivo-conjunto{
-    display: flex;
-    flex-direction: row;
-    height: 90%;
-    margin-top: 40px;
-    width: 80%;
-    padding-left: 35px;
-}
-
-.back .conteudo .objetivo-conjunto #foto1,.back .conteudo .objetivo-conjunto #foto2{
-    width: 35%;
-    height: 400px;
-    margin-left: 40px;
-    background-color:rgba(217, 217, 217, 1);
-    display: flex;
-    justify-content: center;
-}
-
-.back .conteudo .objetivo-conjunto .texto{
-    width: 30%;
-    height: 100%;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: space-around;
-    font-size: 15px;
-    margin-left: 50px;
-    margin-top: -20px;
-}
-
-.objetivo-conjunto .texto p{
-    height: 70%;
-}
-
-.objetivo-conjunto #foto1{
-    background-image: url("assets/train-2373323_1280.jpg");
-    background-size: cover;
-}
-
-
-.objetivo-conjunto #foto2{
-    background-image: url("assets/space-center-693251_1280.jpg");
-    background-size: cover;
-}
-
-
-#objetivo h1{
-    font-size: 70px;
-    color: red;
-    font-weight: 600;
-    position: absolute;
-    margin-left: 80px;
-    margin-top: -40px;
-}
 
 .titulo-equipe{
+    margin-top: 100px;
     width: 100%;
     height: 100px;
     display: flex;
@@ -421,6 +314,93 @@ background-size: cover;
 background-image: url("assets/sophia.png");
 background-size: cover;
 }
+
+#objetivo-section{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    width: 100%;
+}
+
+#objetivo-section .objetivos{
+    width: 835px;
+    display: flex;
+    justify-content: center;
+    height: 480px;
+    background-color: gray;
+}
+
+#objetivo-section .objetivos .textos-objetivos{
+display: flex;
+flex-direction: column;
+text-align: center;
+margin-top: 50px;
+height: 100%;
+width: 35%;
+}
+
+.objetivos .textos-objetivos h2{
+    color: #9F111B;
+}
+
+.objetivos .textos-objetivos p, .objetivos .textos-objetivos h2{
+    font-size: 15px;
+    font-weight: 600px;
+}
+
+.card {
+    width: 400px;
+    cursor: pointer;
+    /* margin-left: 300px; */
+    height: 480px;
+    border: none;
+  }
+  
+  .content {
+    text-align: center;
+    position: relative;
+    transition: all 2.25s;
+    background-color: rgb(127, 204, 240);
+    height: 480px;
+    padding: 5em;
+    transform-style: preserve-3d;
+  }
+  
+  .card:hover .content {
+    transform: rotateY(0.5turn);
+  }
+  
+  .front,
+  .back {
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    padding: 2em;
+    transform-style: preserve-3d;
+    backface-visibility: hidden;
+  }
+  
+  .title {
+    transform: translateZ(5rem);
+    font-size: 2rem;
+  }
+  
+  .subtitle {
+    transform: translateZ(2rem);
+  }
+  
+  .back {
+    transform: rotateY(0.5turn);
+    background-color: #009bff;
+  }
+  
+  .description {
+    transform: translateZ(3rem);
+  }
+  
+  
 
 footer{
     width: 100%;
