@@ -1,15 +1,26 @@
-*, *::before, *::after {
+*,
+*::before,
+*::after {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
     font-family: 'Roboto', sans-serif;
+}
+
+#logo {
+    display: flex;
+    flex-direction: column;
+    margin-left: 20px;
 }
 
 body {
     background-color: white;
-    background-image: url(img/Line\ 2.png) ;
+    background-image: url(img/Line\ 2.png);
     background-repeat: no-repeat;
     font-family: 'Roboto', sans-serif;
 }
 
-header{
+header {
     width: 100%;
     height: 100px;
     display: flex;
@@ -18,7 +29,7 @@ header{
     color: white;
 }
 
-header nav{
+header nav {
     width: 40%;
     height: 100%;
     align-items: center;
@@ -28,25 +39,25 @@ header nav{
     margin-right: 27px;
 }
 
-.navbar-botoes:hover{
+.navbar-botoes:hover {
     text-decoration: underline;
     font-size: 22px;
 }
 
-#agora{
+#agora {
     color: red;
     cursor: default;
 }
 
-header a{
+header a {
     text-decoration: none;
     color: #CCCCCC;
     font-weight: 600;
     font-size: 20px;
 }
 
-#nome-header{
-    height:100%;
+#nome-header {
+    height: 100%;
     margin-left: 37px;
     font-weight: 600;
     font-size: 45px;
@@ -54,6 +65,7 @@ header a{
     font-style: italic;
     text-align: center;
 }
+
 .main {
     display: flex;
     justify-content: center;
@@ -82,17 +94,13 @@ header a{
 
 .conteudo {
     /* border: 1px solid red; */
+    background-color: black;
     width: 100%;
     height: 450px;
     position: absolute;
     left: 0px;
     top: 0px;
     z-index: -1;
-}
-
-.conteudo img{  
-    width: 100%;
-    height: 450px;
 }
 
 #foto1 {
@@ -114,7 +122,7 @@ header a{
     display: none;
 }
 
-.descricao{
+.descricao {
     /* border: 1px solid green; */
     background: transparent;
     position: absolute;
@@ -128,60 +136,61 @@ header a{
     top: 25%;
 }
 
-.descricao p{
+.descricao p {
     color: white;
     background: transparent;
     bottom: 60px;
     font-size: x-large;
 }
 
-.descricao h1{
+.descricao h1 {
     color: white;
     font-size: xx-large;
 }
 
-#so{
-    /* border: 1px solid blue; */
+#so {
     background: transparent;
     height: 50px;
     width: 76%;
     margin-left: 170px;
-    margin-top: 45px;
+    margin-top: 400px;
+    border: 1px solid white;
 }
 
-#so h1{
-    
-        font-size: 30px;
-        white-space: nowrap;
-        overflow: hidden;
-        animation: typewriter 4s steps(13) infinite alternate,
-          blink 800ms steps(13) infinite normal;
-        border-right: 5px solid black;
-      }
-      @keyframes typewriter {
-        from {
-          width: 0%;
-        }
-        to {
-          width: 100%;
-        }
-      }
-      @keyframes blink {
-        from {
-          border-color: black;
-        }
-        to {
-          border-color: transparent;
-        }
-      }
+#so h1 {
+    font-size: 30px;
+    white-space: nowrap;
+    overflow: hidden;
+    animation: typewriter 4s steps(13) infinite alternate,
+        blink 800ms steps(13) infinite normal;
+    border-right: 5px solid black;
+}
 
+@keyframes typewriter {
+    from {
+        width: 0%;
+    }
 
+    to {
+        width: 100%;
+    }
+}
 
-.imagem1{
+@keyframes blink {
+    from {
+        border-color: black;
+    }
+
+    to {
+        border-color: transparent;
+    }
+}
+
+.imagem1 {
     background: transparent;
 }
 
-.imagem1 img{
+.imagem1 img {
     /* border: 1px solid red; */
     background: transparent;
     position: absolute;
@@ -191,10 +200,11 @@ header a{
     top: 550px;
 }
 
-.imagem2{
+.imagem2 {
     background: transparent;
 }
-.imagem2 img{
+
+.imagem2 img {
     /* border: 1px solid red; */
     display: flex;
     position: absolute;
@@ -205,11 +215,11 @@ header a{
     top: 550px;
 }
 
-.imagem3{
+.imagem3 {
     background: transparent;
 }
 
-.imagem3 img{
+.imagem3 img {
     /* border: 1px solid red; */
     display: flex;
     position: absolute;
@@ -222,142 +232,51 @@ header a{
 
 /* ---------------------------------- AQUI COMEÇA A CODIFICAÇÃO DA TELA NA VERSÃO RESPONSIVA PARA IPAD AIR ---------------------------------------------------------- */
 
-@media only screen and (max-width: 820px) {
+@media only screen and (max-width: 900px) {
 
-    #topo {
-        /* border: 1px solid #1714d4; */
-    }
-
-    #menu {
-        /* border: 1px solid red; */
-        position: absolute;
-        color: white;
-        display: flex;
+    header nav{
         width: 50%;
-       right: 110px;
     }
-
-    #logo img {
-        width: 30%;
-        height: 50px;
-        /* border: 1px solid red; */
-    }
-
-    .main {
-        display: flex;
-        justify-content: center;
-        /* border: 1px solid rgb(228, 8, 45); */
-        width: 100%;
-        height: 100%;
-    }
-
-    .nomedasolucao {
-        /* border: 1px solid orangered; */
-        background-color: rgba(255, 255, 255, 0);
-        color: #B11623;
-        position: absolute;
-        display: flex;
-        float: left;
-        width: 90%;
-        height: 50px;
-        margin-left: 330px;
-        z-index: auto;
-    }
-
-    .nomedasolucao h1 {
-        background-color: rgba(255, 255, 255, 0);
-        font-size: xxx-large;
-    }
-
     .conteudo {
-        background-color: #cccccc;
-        /* border: 1px solid rgb(55, 57, 168); */
-        width: 80%;
-        height: 950px;
-        margin-top: 55px;
+        height: 700px;
     }
+    .main{
+        height: 1400px;
+    }
+
+    .descricao {
+        width: 80%;
+        text-align: center;
+        margin-left: 100px;
+        height: 400px;
+        /* border: solid 2px red; */
+    }
+
     
-    .conteudo img {
+    #so {
+        margin-top: 700px;
+        margin-left: 0px;
+        width: 100%;
+    }
+
+    #so h1 {
+        font-size: 25px;
+        margin-left: 80px;
+    }
+
+    .imagem1 img {
         width: 300px;
         height: 300px;
-        margin-top: 20px;
-        margin-left: 45px;
+        margin-top: 550px;
+        right: 250px;
     }
 
-    #foto1{
-        display: none;
+    #so .imagem2 img{
+        margin-top: 300px;
+        margin-right: -50px;
+    }
+    #so .imagem3 img{
+        margin-top: 300px;
     }
 
-    #foto2{
-        display: block;
-        background-color: transparent;
-    }
-
-    #foto2 img{
-        /* border: 1px solid red; */
-        display: block;
-        width: 500px;
-        height: 350px;
-        margin-top: 30px;
-        margin-left: 60px;
-    }
-
-    .descricao{
-        /* border: 1px solid green; */
-        background: transparent;
-        position: absolute;
-        display: flex;
-        justify-content: center;
-        width: 600px;
-        height: 270px;
-        margin-left: 20px;
-        top: 500px;
-        font-size: large;
-    }
-
-    #so{
-        /* border: 1px solid blue; */
-        background: transparent;
-        height: 250px;
-        width: 480px;
-        margin-left: 50px;
-        margin-top: 350px;
-    }
-    
-    #so h2{
-        background: transparent;
-    
-    }
-
-    .imagem1 img{
-        /* border: 1px solid red; */
-        background: transparent;
-        position: absolute;
-        width: 170px;
-        height: 170px;
-        right: 480px;
-        top: 800px;
-    }
-
-    .imagem2 img{
-        /* border: 1px solid red; */
-        display: flex;
-        position: absolute;
-        background: transparent;
-        width: 120px;
-        height: 120px;
-        top: 820px;
-        right: 150px;
-    }
-
-    .imagem3 img{
-        /* border: 1px solid red; */
-        display: flex;
-        position: absolute;
-        background: transparent;
-        width: 170px;
-        height: 170px;
-        top: 800px;
-        right: 290px;
-    }
 }

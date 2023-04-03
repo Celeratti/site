@@ -1,11 +1,5 @@
 
 @media only screen and (max-width: 900px){
-    body{
-        height: 4000px;
-    }
-    #metro, #maquina, #qrcode{
-            display: none;
-        }
     
     header nav{
         width: 50%;
@@ -27,7 +21,7 @@
     }
     
     #white{
-        height: 3850px;
+        height: 2650px;
     }
 
     .container .texto{
@@ -71,48 +65,64 @@
         height: 150px;
     }
 
-
-    #objetivo{
-        height: 1050px;
+    .mvv-conjunto #foto1, .mvv-conjunto #foto2,.mvv-conjunto #foto3{
+        width: 100%;
+        display: flex;
+        justify-content: center;
     }
 
-
-    .back .conteudo .objetivo-conjunto #foto1,.back .conteudo .objetivo-conjunto #foto2{
-        height: 350px;
-        width: 40%;
-    }
-
-    #objetivo .back .quadrado-grande{
-        width: 70%;
-        height: 950px;
+    #imgMissao{
+        margin-left: 0px;
+        width: 30%;
+        height: 70%;
+        margin-top: 35px;
     }
     
-    .back .conteudo .objetivo-conjunto{
-        padding-top: 20px;
-        height: 50%;
+    #imgVisao{
+        margin-left: 0px;
+        width: 30%;
+        height: 70%;
+        margin-top: 35px;
     }
-
-
-    .back .conteudo{
-        height: 80%;
-        padding: 0px 100px 0px 50px;
+    #imgValores{
+        margin-left: 0px;
+        width: 30%;
+        height: 70%;
+        margin-top: 35px;
+    }
+    
+    #objetivo-section .objetivos {
+        background-image: url("img/train-2373323_1280.jpg");
+        width: 500px;
         display: flex;
-        flex-direction: column;
         justify-content: center;
-
+        height: 350px;
     }
 
-    .back .conteudo .objetivo-conjunto .texto{
-        width: 35%;
-        padding: 20px 0px 75px;
+    #objetivo-section .objetivos .textos-objetivos {
+        flex-direction: row;
+        width: 80%;
     }
 
-    #objetivo h1{
-        width: 100%;
-        text-align: center;
-        padding: 0;
-        margin: 0;
-        margin-top: -40px;
+    .card {
+        width: 250px;
+        cursor: pointer;
+        /* margin-left: 300px; */
+        height: 350px;
+        border: none;
     }
+    .title {
+        transform: translateZ(5rem);
+        font-size: 1.25rem;
+    }
+    
+    
+
+
+
+    
+
+
+
 
 }

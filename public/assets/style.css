@@ -1,17 +1,19 @@
-*, *::before, *::after {
+*,
+*::before,
+*::after {
     padding: 0;
     margin: 0;
     box-sizing: border-box;
     font-family: 'Roboto', sans-serif;
 }
 
-#logo{
+#logo {
     display: flex;
     flex-direction: column;
     margin-left: 20px;
 }
 
-.header{
+.header {
     width: 100%;
     height: 100px;
     display: flex;
@@ -21,7 +23,7 @@
     position: absolute;
 }
 
-.header nav{
+.header nav {
     width: 40%;
     height: 100%;
     align-items: center;
@@ -31,40 +33,42 @@
     margin-right: 27px;
 }
 
-.navbar-botoes:hover{
+.navbar-botoes:hover {
     text-decoration: underline;
     font-size: 22px;
 }
 
-.header li, .header a{
+.header li,
+.header a {
     text-decoration: none;
     color: #CCCCCC;
     font-weight: 600;
     font-size: 18px;
 }
 
-.carousel-texto{
+.carousel-texto {
     z-index: 0;
     position: absolute;
     display: flex;
     flex-direction: column;
     font-size: 20px;
     color: white;
-    width: 700px;
+    width: 100%;
     height: 330px;
     margin-top: 203px;
-    margin-left: 212px;
+    padding-left: 212px;
     justify-content: space-around;
 }
 
-.carousel-texto #big-titulo{
-font-size: 50px;
+.carousel-texto #big-titulo {
+    font-size: 50px;
 }
 
-.carousel-texto #texto-descritivo{
+.carousel-texto #texto-descritivo {
     font-size: 20px;
 }
-.carousel-texto button{
+
+.carousel-texto button {
     cursor: pointer;
     background-color: #9F111B;
     height: 50px;
@@ -74,60 +78,60 @@ font-size: 50px;
 }
 
 
-.active{
+.active {
     width: 100%;
     height: 630px;
     display: flex;
 }
 
-.carousel-indicators{
+.carousel-indicators {
     cursor: pointer;
 }
 
-.carousel-item{
+.carousel-item {
     background-image: url(https://i.pinimg.com/originals/2d/ac/46/2dac461ac6a1804ee7ed3bbf087f2c36.gif);
-    background-size:cover;
+    background-size: cover;
 }
 
 
 
-#imgValores{
+#imgValores {
     width: 50%;
     height: 70%;
     margin-top: 35px;
     margin-left: 110px;
 }
 
-#imgVisao{
+#imgVisao {
     width: 50%;
     height: 80%;
     margin-top: 25px;
     margin-left: 110px;
 }
 
-#imgMissao{
+#imgMissao {
     width: 50%;
     height: 70%;
     margin-top: 35px;
     margin-left: 110px;
 }
 
-#white{
+#white {
     width: 100%;
-    height: 1850px;
+    height: 850px;
     background-image: url(img/Line\ 1.png), url(img/Line\ 2.png);
     background-repeat: no-repeat;
     background-size: cover;
 }
 
-#mvv{
+#mvv {
     width: 100%;
     height: 800px;
     display: flex;
     flex-direction: row;
 }
 
-#mvv .mvv-conjunto{
+#mvv .mvv-conjunto {
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -135,7 +139,7 @@ font-size: 50px;
     height: 700px;
 }
 
-#mvv .titulos{
+#mvv .titulos {
     width: 100%;
     display: flex;
     justify-content: center;
@@ -145,13 +149,13 @@ font-size: 50px;
     padding-top: 111px;
 }
 
-#mvv .descricao{
+#mvv .descricao {
     width: 100%;
     height: 20%;
     display: flex;
 }
 
-#mvv .desc{
+#mvv .desc {
     width: 100%;
     height: 100%;
     display: flex;
@@ -162,7 +166,7 @@ font-size: 50px;
     color: black;
 }
 
-.desc .desc-titulo{
+.desc .desc-titulo {
     width: 80%;
     text-align: center;
     font-size: 30px;
@@ -171,17 +175,18 @@ font-size: 50px;
 }
 
 
-.desc .desc-titulo span{
+.desc .desc-titulo span {
     font-size: 18px;
 }
 
-#mvv .desc p{
+#mvv .desc p {
     width: 70%;
     margin-top: 10px;
+    text-align: center;
 }
 
 
-.titulo-equipe{
+.titulo-equipe {
     margin-top: 100px;
     width: 100%;
     height: 100px;
@@ -192,14 +197,14 @@ font-size: 50px;
     color: #9F111B;
 }
 
-.integrantes{
+.integrantes {
     width: 100%;
     height: 220px;
     display: flex;
     justify-content: space-around;
 }
 
-.integrantes .conjunto{
+.integrantes .conjunto {
     width: 220px;
     display: flex;
     justify-content: center;
@@ -207,22 +212,21 @@ font-size: 50px;
     flex-direction: column;
 }
 
-.conjunto .fotos-integrantes{
+.conjunto .fotos-integrantes {
     width: 175px;
     border-radius: 150px;
-    background-color:rgba(217, 217, 217, 1);
+    background-color: rgba(217, 217, 217, 1);
     height: 80%;
 }
 
-.conjunto .fotos-integrantes:hover{
+.conjunto .fotos-integrantes:hover {
     box-shadow: 3px 2px 15px black;
-    width: 180px;
     cursor: pointer;
-    transition: 0.1s;    
+    transition: 0.1s;
 }
 
 
-.conjunto .nome-integrantes{
+.conjunto .nome-integrantes {
     width: 100%;
     height: 20%;
     font-size: 25px;
@@ -231,110 +235,45 @@ font-size: 50px;
     padding-top: 2.5%;
 }
 
-.contato{
-    font-size: 60px;
-    font-weight: 600;
-    text-align: center;
-    margin-top: 100px;
-    margin-bottom: 50px;
-    font-family: 'Inter';
-}
 
-.quadrado-form-contato{
-    width:80%;
-    height:500px;
-    margin: 0% 10% 0% 10%;
-    background-color: rgba(177, 22, 35, 0.55);
-    display: flex;
-    flex-direction: column;
-    justify-content: space-around;
-    padding: 2% 1% 3% 2%;
-}
-
-.quadrado-form-contato textarea{
-    background-color:rgba(0, 0, 0, 0.54);
-    color: white;
-    font-size: 25px;
-    resize: none;
-}
-
-.quadrado-form-contato textarea::placeholder{
-    color: white;
-    text-align: start;
-    align-items: center;
-}
-
-
-#ipt_descricao::placeholder{
-    vertical-align: text-top;
-}
-
-.quadrado-form-contato button{
-    font-size: 25px;
-    font-weight: 600;
-    background-color: rgba(159, 17, 27, 1);
-    border: none;
-    color: white;
-    width: 15%;
-    height: 12%;
-    text-align: center;
-    margin: 2.5% 42.5% 0% 42.5%;
-}
-
-.quadrado-form-contato button:hover{
-    cursor: pointer;
-}
-
-.quadrado-form-contato #ipt_nome, .quadrado-form-contato #ipt_email{
-    width: 60%;
-    height: 10%;
-}
-
-.quadrado-form-contato #ipt_descricao{
-    width: 98%;
-    height: 50%;
-    font-size: 25px;
-    
-}
-
-#integrante1{
+#integrante1 {
     background-image: url("img/gabriel.jpeg");
     background-size: cover;
 }
 
-#integrante2{
+#integrante2 {
     background-image: url("img/igor.png");
     background-size: cover;
 }
 
-#integrante3{
-background-image: url("img/paula.jpeg");
-background-size: cover;
+#integrante3 {
+    background-image: url("img/paula.jpeg");
+    background-size: cover;
 }
 
-#integrante4{
-background-image: url("img/rayssa.jpeg");
-background-size: cover;
+#integrante4 {
+    background-image: url("img/rayssa.jpeg");
+    background-size: cover;
 }
 
-#integrante5{
-background-image: url("img/sophia.png");
-background-size: cover;
+#integrante5 {
+    background-image: url("img/sophia.png");
+    background-size: cover;
 }
 
-#integrante6{
+#integrante6 {
     background-image: url("img/celeratti-mascote.png");
     background-size: cover;
-    }
+}
 
-#objetivo-section{
+#objetivo-section {
     display: flex;
     flex-direction: row;
     justify-content: space-around;
     width: 100%;
 }
 
-#objetivo-section .objetivos{
+#objetivo-section .objetivos {
     background-image: url("img/train-2373323_1280.jpg");
     width: 835px;
     display: flex;
@@ -342,25 +281,26 @@ background-size: cover;
     height: 480px;
 }
 
-#objetivo-section .objetivos .textos-objetivos{
-display: flex;
-flex-direction: column;
-text-align: center;
-margin-top: 50px;
-height: 100%;
-width: 35%;
+#objetivo-section .objetivos .textos-objetivos {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    margin-top: 50px;
+    height: 100%;
+    width: 35%;
 }
 
-.objetivos .textos-objetivos h2{
+.objetivos .textos-objetivos h2 {
     color: #ffffff;
 }
 
-.objetivos .textos-objetivos p{
+.objetivos .textos-objetivos p {
     color: white;
 }
 
 
-.objetivos .textos-objetivos p, .objetivos .textos-objetivos h2{ 
+.objetivos .textos-objetivos p,
+.objetivos .textos-objetivos h2 {
     font-size: 15px;
     font-weight: 600px;
 }
@@ -371,9 +311,9 @@ width: 35%;
     /* margin-left: 300px; */
     height: 480px;
     border: none;
-  }
-  
-  .content {
+}
+
+.content {
     color: white;
     text-align: center;
     position: relative;
@@ -382,14 +322,14 @@ width: 35%;
     height: 480px;
     padding: 5em;
     transform-style: preserve-3d;
-  }
-  
-  .card:hover .content {
+}
+
+.card:hover .content {
     transform: rotateY(0.5turn);
-  }
-  
-  .front,
-  .back {
+}
+
+.front,
+.back {
     position: absolute;
     top: 0;
     left: 0;
@@ -398,30 +338,31 @@ width: 35%;
     padding: 2em;
     transform-style: preserve-3d;
     backface-visibility: hidden;
-  }
-  
-  .title {
+}
+
+.title {
     transform: translateZ(5rem);
     font-size: 2rem;
-  }
-  
-  .subtitle {
+}
+
+.subtitle {
     transform: translateZ(2rem);
-  }
-  
-  .back {
+}
+
+.back {
     color: white;
     transform: rotateY(0.5turn);
-    background-color: #9F111B;;
-  }
-  
-  .description {
-    transform: translateZ(3rem);
-  }
-  
-  
+    background-color: #9F111B;
+    ;
+}
 
-footer{
+.description {
+    transform: translateZ(3rem);
+}
+
+
+
+footer {
     width: 100%;
     height: 200px;
     background-color: rgba(16, 18, 22, 0.97);
@@ -435,15 +376,16 @@ footer{
 }
 
 
-footer span{
+footer span {
     font-size: 25px;
 }
-#footer-logo{
+
+#footer-logo {
     display: flex;
     flex-direction: column;
 }
 
-#indices-footer{
+#indices-footer {
     display: flex;
     align-items: center;
     flex-direction: row;
@@ -451,7 +393,7 @@ footer span{
     height: 80%;
 }
 
-footer ol{
+footer ol {
     list-style: none;
     display: flex;
     flex-direction: row;
@@ -459,11 +401,9 @@ footer ol{
     justify-content: space-around;
 }
 
-footer ol a{
+footer ol a {
     color: white;
     text-decoration: none;
     font-size: 30px;
     font-weight: 600;
 }
-
-
