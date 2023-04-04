@@ -2,6 +2,13 @@
     outline: none;
 
 }
+#caixaArea{
+    position: relative;
+    margin-left: 18px;
+    margin-top: 40px;
+}
+
+
 .caixaLogo{
     background-color: #101216;
     height: 100%;
@@ -12,7 +19,14 @@
 .subCaixaFormulario{
     margin-top: -160px;
 }
-
+.subCaixaFormulario h1{
+    border: 2px solid black;
+    width: 500px;
+}
+.caixaTextArea{
+    width: 200px;
+    border: #000000 1px solid;
+}
 .subCaixaLogo{
     display: block;
 }
@@ -22,11 +36,13 @@
     height: 49.7vw;
 
 }
-
+body{
+    background-color: #9F111B;
+}
 
 
 .caixaFormulario{
-    background-image: url("../img/fundo.png");
+    background-image: url("img/fundo.png");
     background-repeat: no-repeat;
     background-size: cover;
     display: flex;
@@ -138,9 +154,10 @@ ul{
 
 }
 .caixaUl{
-    width: 100%;
+    width: 450px;
     height: 100%;
     margin-top: 20px;
+    background-color: #98A6CA;
 }
 .caixaUl li{
     left: 10px;

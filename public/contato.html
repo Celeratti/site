@@ -4,8 +4,8 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cadastro</title>
-    <link rel="stylesheet" href="assets/cadastro.css">
+    <title>Contato</title>
+    <link rel="stylesheet" href="assets/contato.css">
     <link rel="stylesheet" href="assets/reset.css">
 
 </head>
@@ -25,25 +25,26 @@
             
             <div class="subCaixaFormulario">
 
-            <h1>Cadastre-se</h1>
-            <h2>Ficamos felizes em colaborar com o seu negócio</h2>
+            <h1>Entre em Contato</h1>
             <div class="formulario">
                 <div class="caixaUl">
                     <ul>
-                        <li>Razão social </li>
+                        <li>Nome</li>
                         <input type="email" id="nome_input">
-                        <li>CNPJ: </li>
+                        <li>E-Mail: </li>
                         <input type="email" id="cnpj" maxlength="11" >
-                        <li>E-mail: </li>
-                        <input type="email" id="email_input">
-                        <li>Senha: </li>
-                        <input type="password" id="senha_input">
-                        <li>Confirmar Senha: </li>
-                        <input type="password" id="confirmacao_senha_input">
+                        <div id="caixaArea">
+                            <textarea name="" id="" cols="55" rows="15" style="background-color: white;">
+                            </textarea>
 
-                        <button class="btn" onclick="cadastrar()">Cadastrar</button>
+                        </div>
 
-                        <p id="linkCadastro"><a href="../login.html" style="color: #9F111B;">Ja possui uma conta?</a> </p>
+
+                        </textarea>
+                        
+
+                        <button class="btn" onclick="cadastrar()">Enviar</button>
+
 
                     </ul>
 
