@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>CELERATTI</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    
+    <div class="janela">
+        <div class="header-left">
+            <img src="Logo.png" alt="">
+
+            <div class="hello">
+                <h3>Nome do <span id="b_usuario">usuário</span>!</h3>
+            </div>
+
+            <div class="email">
+                    <h3>Email da empresa</h3>
+            </div>
+
+            <div class="cargo">
+                <h3>Cargo</h3>
+            </div>
+
+            <div class="btn-logout" onclick="limparSessao()">
+                <h3>Sair</h3>
+            </div>
+
+        </div>
+    </div>
+
+        <h1 id="via">ViaMobilidade</h1>
+        
+        <div class="maquina1">
+            <h2>Maquina 01 - Linha Verde</h2>
+        </div>
+
+        <div class="dash-right">
+                <canvas id="myChart"></canvas>
+        </div>
+        
+        <div class="maquina2">
+            <h2>Maquina 02 - Linha Verde</h2>
+        </div>
+
+        <div class="dash-right1">
+            <canvas id="myChart1"></canvas>
+    </div>
+    
+</body>
+</html>
+<script>
+   const ctx = document.getElementById('myChart');
+
+new Chart(ctx, {
+  type: 'line',
+  data: {
+    labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
+    datasets: [{
+      label: '# of Votes',
+      data: [12, 49, 23, 55, 12, 3],
+      borderWidth: 1
+    }]
+  },
+  options: {
+    scales: {
+      y: {
+        beginAtZero: true
+      }
+    }
+  }
+});
+</script>
+
+
+<script>
+    const ctx1 = document.getElementById('myChart1');
+ 
+ new Chart(ctx1, {
+    type: 'line',
+  data: {
+    labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
+    datasets: [{
+      label: '# of Votes',
+      data: [12, 49, 23, 55, 12, 3],
+      borderWidth: 1
+    }]
+  },
+  options: {
+    scales: {
+      y: {
+        beginAtZero: true
+      }
+    }
+  }
+ });
+ </script>
