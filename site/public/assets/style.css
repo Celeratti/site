@@ -1,0 +1,409 @@
+*,
+*::before,
+*::after {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    font-family: 'Roboto', sans-serif;
+}
+
+#logo {
+    display: flex;
+    flex-direction: column;
+    margin-left: 20px;
+}
+
+.header {
+    width: 100%;
+    height: 100px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    z-index: 0;
+    position: absolute;
+}
+
+.header nav {
+    width: 40%;
+    height: 100%;
+    align-items: center;
+    list-style: none;
+    display: flex;
+    justify-content: space-between;
+    margin-right: 27px;
+}
+
+.navbar-botoes:hover {
+    text-decoration: underline;
+    font-size: 22px;
+}
+
+.header li,
+.header a {
+    text-decoration: none;
+    color: #CCCCCC;
+    font-weight: 600;
+    font-size: 18px;
+}
+
+.carousel-texto {
+    z-index: 0;
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    font-size: 20px;
+    color: white;
+    width: 100%;
+    height: 330px;
+    margin-top: 203px;
+    padding-left: 212px;
+    justify-content: space-around;
+}
+
+.carousel-texto #big-titulo {
+    font-size: 50px;
+}
+
+.carousel-texto #texto-descritivo {
+    font-size: 20px;
+}
+
+.carousel-texto button {
+    cursor: pointer;
+    background-color: #9F111B;
+    height: 50px;
+    width: 200px;
+    border: none;
+    color: white;
+}
+
+
+.active {
+    width: 100%;
+    height: 630px;
+    display: flex;
+}
+
+.carousel-indicators {
+    cursor: pointer;
+}
+
+.carousel-item {
+    background-image: url(https://i.pinimg.com/originals/2d/ac/46/2dac461ac6a1804ee7ed3bbf087f2c36.gif);
+    background-size: cover;
+}
+
+
+
+#imgValores {
+    width: 50%;
+    height: 70%;
+    margin-top: 35px;
+    margin-left: 110px;
+}
+
+#imgVisao {
+    width: 50%;
+    height: 80%;
+    margin-top: 25px;
+    margin-left: 110px;
+}
+
+#imgMissao {
+    width: 50%;
+    height: 70%;
+    margin-top: 35px;
+    margin-left: 110px;
+}
+
+#white {
+    width: 100%;
+    height: 850px;
+    background-image: url(img/Line\ 1.png), url(img/Line\ 2.png);
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+#mvv {
+    width: 100%;
+    height: 800px;
+    display: flex;
+    flex-direction: row;
+}
+
+#mvv .mvv-conjunto {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 33.3%;
+    height: 700px;
+}
+
+#mvv .titulos {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    font-size: 40px;
+    font-weight: 600;
+    color: red;
+    padding-top: 111px;
+}
+
+#mvv .descricao {
+    width: 100%;
+    height: 20%;
+    display: flex;
+}
+
+#mvv .desc {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-size: 15px;
+    font-weight: 600;
+    color: black;
+}
+
+.desc .desc-titulo {
+    width: 80%;
+    text-align: center;
+    font-size: 30px;
+    margin-top: 30px;
+    color: red;
+}
+
+
+.desc .desc-titulo span {
+    font-size: 18px;
+}
+
+#mvv .desc p {
+    width: 70%;
+    margin-top: 10px;
+    text-align: center;
+}
+
+
+.titulo-equipe {
+    margin-top: 100px;
+    width: 100%;
+    height: 100px;
+    display: flex;
+    justify-content: center;
+    font-size: 60px;
+    font-weight: 600;
+    color: #9F111B;
+}
+
+.integrantes {
+    width: 100%;
+    height: 220px;
+    display: flex;
+    justify-content: space-around;
+}
+
+.integrantes .conjunto {
+    width: 220px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.conjunto .fotos-integrantes {
+    width: 175px;
+    border-radius: 150px;
+    background-color: rgba(217, 217, 217, 1);
+    height: 80%;
+}
+
+.conjunto .fotos-integrantes:hover {
+    box-shadow: 3px 2px 15px black;
+    cursor: pointer;
+    transition: 0.1s;
+}
+
+
+.conjunto .nome-integrantes {
+    width: 100%;
+    height: 20%;
+    font-size: 25px;
+    font-weight: 600;
+    text-align: center;
+    padding-top: 2.5%;
+}
+
+
+#integrante1 {
+    background-image: url("img/gabriel.jpeg");
+    background-size: cover;
+}
+
+#integrante2 {
+    background-image: url("img/igor.png");
+    background-size: cover;
+}
+
+#integrante3 {
+    background-image: url("img/paula.jpeg");
+    background-size: cover;
+}
+
+#integrante4 {
+    background-image: url("img/rayssa.jpeg");
+    background-size: cover;
+}
+
+#integrante5 {
+    background-image: url("img/sophia.png");
+    background-size: cover;
+}
+
+#integrante6 {
+    background-image: url("img/celeratti-mascote.png");
+    background-size: cover;
+}
+
+#objetivo-section {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    width: 100%;
+}
+
+#objetivo-section .objetivos {
+    background-image: url("img/train-2373323_1280.jpg");
+    width: 835px;
+    display: flex;
+    justify-content: center;
+    height: 480px;
+}
+
+#objetivo-section .objetivos .textos-objetivos {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    margin-top: 50px;
+    height: 100%;
+    width: 35%;
+}
+
+.objetivos .textos-objetivos h2 {
+    color: #ffffff;
+}
+
+.objetivos .textos-objetivos p {
+    color: white;
+}
+
+
+.objetivos .textos-objetivos p,
+.objetivos .textos-objetivos h2 {
+    font-size: 15px;
+    font-weight: 600px;
+}
+
+.card {
+    width: 400px;
+    cursor: pointer;
+    /* margin-left: 300px; */
+    height: 480px;
+    border: none;
+}
+
+.content {
+    color: white;
+    text-align: center;
+    position: relative;
+    transition: all 2.25s;
+    background-color: #9F111B;
+    height: 480px;
+    padding: 5em;
+    transform-style: preserve-3d;
+}
+
+.card:hover .content {
+    transform: rotateY(0.5turn);
+}
+
+.front,
+.back {
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    padding: 2em;
+    transform-style: preserve-3d;
+    backface-visibility: hidden;
+}
+
+.title {
+    transform: translateZ(5rem);
+    font-size: 2rem;
+}
+
+.subtitle {
+    transform: translateZ(2rem);
+}
+
+.back {
+    color: white;
+    transform: rotateY(0.5turn);
+    background-color: #9F111B;
+    ;
+}
+
+.description {
+    transform: translateZ(3rem);
+}
+
+
+
+footer {
+    width: 100%;
+    height: 200px;
+    background-color: rgba(16, 18, 22, 0.97);
+    color: white;
+    flex-direction: column;
+    font-size: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+}
+
+
+footer span {
+    font-size: 25px;
+}
+
+#footer-logo {
+    display: flex;
+    flex-direction: column;
+}
+
+#indices-footer {
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+    width: 100%;
+    height: 80%;
+}
+
+footer ol {
+    list-style: none;
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    justify-content: space-around;
+}
+
+footer ol a {
+    color: white;
+    text-decoration: none;
+    font-size: 30px;
+    font-weight: 600;
+}
