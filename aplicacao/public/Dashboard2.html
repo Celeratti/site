@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="dashboard2.css">
+    <title>Document</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+</head>
+
+<body>
+
+    <main>
+
+        <div id="titulo">
+          <h1>ViaMobildiade</h1>
+          <h3>Máquina 01</h3>
+        </div>
+
+        <div id="metricas">
+            <img src="assets/img/legenda (3).png" alt="">
+        </div>
+
+        <div id="disco">
+            <canvas id="myChart"></canvas>
+
+        </div>
+
+        <div id="cpu">
+            <canvas id="myChart1"></canvas>
+        </div>
+
+        <div id="memoriaEmUso">
+            <canvas id="myChart3"></canvas>
+        </div>
+
+        <div id="janela">
+            <canvas id="myChart4"></canvas>
+        </div>
+
+
+        <div id="propriedades">
+
+        </div>
+
+
+
+
+    </main>
+
+</body>
+
+</html>
+
+
+
+<script>
+     const ctx = document.getElementById('myChart');
+
+new Chart(ctx, {
+  type: 'line',
+  data: {
+    labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
+    datasets: [{
+      label: '# of Votes',
+      data: [12, 19, 3, 5, 2, 3],
+      borderWidth: 1
+    }]
+  },
+  options: {
+    scales: {
+      y: {
+        beginAtZero: true
+      }
+    }
+  }
+});
+
+
+const ctx1 = document.getElementById('myChart1');
+
+new Chart(ctx1, {
+  type: 'line',
+  data: {
+    labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
+    datasets: [{
+      label: '# of Votes',
+      data: [12, 19, 3, 5, 2, 3],
+      borderWidth: 1
+    }]
+  },
+  options: {
+    scales: {
+      y: {
+        beginAtZero: true
+      }
+    }
+  }
+});
+
+const ctx3 = document.getElementById('myChart3');
+
+new Chart(ctx3, {
+  type: 'line',
+  data: {
+    labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
+    datasets: [{
+      label: '# of Votes',
+      data: [12, 19, 3, 5, 2, 3],
+      borderWidth: 1
+    }]
+  },
+  options: {
+    scales: {
+      y: {
+        beginAtZero: true
+      }
+    }
+  }
+});
+
+
+
+
+const ctx4 = document.getElementById('myChart4');
+
+new Chart(ctx4, {
+  type: 'line',
+  data: {
+    labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
+    datasets: [{
+      label: '# of Votes',
+      data: [12, 19, 3, 5, 2, 3],
+      borderWidth: 1
+    }]
+  },
+  options: {
+    scales: {
+      y: {
+        beginAtZero: true
+      }
+    }
+  }
+});
+</script>
