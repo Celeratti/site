@@ -1,5 +1,7 @@
 body{
     margin: 0;
+    background-image: url(img/Line\ 3.png), url(img/Line\ 4.png);
+    background-repeat: no-repeat;
 }
 
 
@@ -12,25 +14,38 @@ main{
 }
 
 
+
 #titulo{
-    border: 1px solid red;
+    /* border: 1px solid red; */
     position: absolute;
     display: flex;
     align-items: center;
     flex-direction: column;
-    left: 20%;
+    right: 78%;
     width: 360px;
     height: 60px;
 }
 
-#metricas{
-    border: 1px solid red;
+#titulo h3{
     position: absolute;
     display: flex;
-    top: 100px;
-    left: 15%;
-    width: 500px;
-    height: 30px;
+    top: 60%;
+}
+
+#titulo a{
+ text-decoration: none;
+ font-size: large;
+}
+
+#metricas{
+    /* border: 1px solid red; */
+    position: absolute;
+    display: flex;
+    top: 40px;
+    left: 35%;
+    width: 510px;
+    height: 100px;
+    /* background-color: #101216; */
 }
 
 #metricas img{
@@ -38,64 +53,386 @@ main{
     height: 30px;
 }
 
+.legenda{
+    border: 1px solid red;
+    position: absolute;
+    display: flex;
+    left: 78%;
+    top: 50%;
+    border-radius: 100px;
+    background-color: red;
+    width: 18px;
+    height: 18px;
+}
+
+#metricas h3{
+    position: absolute;
+    display: flex;
+    left: 83%;
+    top: 30%;
+}
+
+.legenda1{
+    border: 1px solid rgb(255, 94, 0);
+    position: absolute;
+    display: flex;
+    left: 57%;
+    top: 50%;
+    border-radius: 100px;
+    background-color: rgb(255, 94, 0);
+    width: 18px;
+    height: 18px;
+}
+
+#metricas #alert1{
+    position: absolute;
+    display: flex;
+    left: 62%;
+    top: 30%;
+}
+
+.legenda2{
+    border: 1px solid rgb(229, 255, 0);
+    position: absolute;
+    display: flex;
+    left: 30%;
+    top: 50%;
+    border-radius: 100px;
+    background-color: rgb(229, 255, 0);
+    width: 18px;
+    height: 18px;
+}
+
+
+#metricas #alert2{
+    position: absolute;
+    display: flex;
+    left: 35%;
+    top: 30%;
+}
+
+
+.legenda3{
+    border: 1px solid rgb(0, 255, 21);
+    position: absolute;
+    display: flex;
+    left: 10%;
+    top: 50%;
+    border-radius: 100px;
+    background-color: rgb(0, 255, 21);
+    width: 18px;
+    height: 18px;
+}
+
+#metricas #alert3{
+    position: absolute;
+    display: flex;
+    left: 15%;
+    top: 30%;
+}
+
+
+/* Isso anima a bolinha */
+@keyframes animate{
+    0%{
+      opacity: 0;
+    }
+    50%{
+      opacity: 1;
+    }
+    100%{
+      opacity: 0;
+    }
+  }
+
+.borda{
+    position: absolute;
+    display: flex;
+    top: 140px;
+    left: 2%;
+    background-color: #011b4e;
+    /* border: 1px solid red; */
+    width: 435px;
+    height: 265px;
+    z-index: -1;
+}
+
 #disco{
     /* border: 1px solid red; */
     position: absolute;
     display: flex;
-    top: 150px;
-    left: 1%;
+    top: 140px;
+    left: 3%;
     width: 410px;
     height: 265px;
-    background-color: rgb(190, 190, 190);
+    background-color: #011b4e;
+   
+}
+
+#disco h2{
+    color: white;
+    position: absolute;
+    display: flex;
+    left: 5%;
+}
+
+
+
+#disco .circulo{
+    border: 1px solid red;
+    position: absolute;
+    display: flex;
+    left: 68%;
+    top: 9%;
+    border-radius: 100px;
+    background-color: red;
+    width: 16px;
+    height: 16px;
+    animation: animate 0.75s linear infinite;
+
+}
+
+
+.borda1{
+    position: absolute;
+    display: flex;
+    top: 140px;
+    left: 39%;
+    background-color: #011b4e;;
+    /* border: 1px solid red; */
+    width: 440px;
+    height: 265px;
+    z-index: -1;
 }
 
 #cpu{
     /* border: 1px solid red; */
     position: absolute;
     display: flex;
-    top: 150px;
-    left: 35%;
+    top: 140px;
+    left: 40%;
     width: 410px;
     height: 265px;
-    background-color: rgb(190, 190, 190);
+    background-color: #011b4e;;
 }
 
+#cpu h2{
+    color: white;
+    position: absolute;
+    display: flex;
+    left: 5%;
+}
+
+
+#cpu .circulo{
+    border: 1px solid red;
+    position: absolute;
+    display: flex;
+    left: 60%;
+    top: 8%;
+    border-radius: 100px;
+    background-color: red;
+    width: 16px;
+    height: 16px;
+     animation: animate 0.75s linear infinite;
+}
+
+.borda2{
+    position: absolute;
+    display: flex;
+    top: 410px;
+    left: 2%;
+    background-color: #001235;
+    /* border: 1px solid red; */
+    width: 435px;
+    height: 265px;
+    z-index: -1;
+}
 
 #memoriaEmUso{
     /* border: 1px solid red; */
-    background-color: rgb(190, 190, 190);
+    background-color: #001235;
     position: absolute;
     display: flex;
-    top: 420px;
-    left: 1%;
+    top: 410px;
+    left: 3%;
     width: 410px;
     height: 265px;
 }
 
+#memoriaEmUso h2{
+    color: white;
+    position: absolute;
+    display: flex;
+    left: 5%;
+}
+
+#memoriaEmUso .circulo{
+    border: 1px solid rgb(238, 255, 0);
+    position: absolute;
+    display: flex;
+    left: 53%;
+    top: 8%;
+    border-radius: 100px;
+    background-color: rgb(238, 255, 0);
+    width: 16px;
+    height: 16px;
+    animation: animate 0.95s linear infinite;
+
+}
+
+
+.borda3{
+    position: absolute;
+    display: flex;
+    top: 410px;
+    left: 39%;
+    background-color: #011b4e;
+    /* border: 1px solid red; */
+    width: 440px;
+    height: 265px;
+    z-index: -1;
+}
 
 #janela{
     /* border: 1px solid red; */
     position: absolute;
     display: flex;
-    top: 420px;
-    left: 35%;
+    top: 410px;
+    left: 40%;
     width: 410px;
     height: 265px;
-    background-color: rgb(190, 190, 190);
-    box-shadow: rgb(155, 155, 155) -2px -2px;
+    background-color: #011b4e;
+}
+
+#janela h2{
+    color: white;
+    position: absolute;
+    display: flex;
+    left: 5%;
+}
+
+#janela .circulo{
+    border: 1px solid rgb(9, 255, 0);
+    position: absolute;
+    display: flex;
+    left: 35%;
+    top: 8%;
+    border-radius: 100px;
+    background-color: rgb(9, 255, 0);
+    width: 16px;
+    height: 16px;
+
 }
 
 
 #propriedades{
-    border: 1px solid red;
+    /* border: 1px solid red; */
     position: absolute;
     display: flex;
     left: 75%;
-    top: 10px;
-    width: 330px;
-    height: 100%;
+    width: 335px;
+    height: 104%;
+    background-color: #011b4e;
 }
 
+#propriedades h1{
+    position: absolute;
+    display: flex;
+    left: 4%;
+   color: white;
+   font-size: xxx-large;
+   font-family: Arial, Helvetica, sans-serif;
+}
+
+#propriedades .divisao{
+    /* border: 1px solid red; */
+    color: white;
+    position: absolute;
+    display: flex;
+    top: 15%;
+    left: 15px;
+    width: 301px;
+    height: 130px;
+}
+
+
+#propriedades .divisao #superior{
+    position: absolute;
+    display: flex;
+    bottom: 60%;
+    left: 10%;
+}
+
+
+#propriedades .divisao h3{
+    position: absolute;
+    display: flex;
+    left: 10%;
+}
+
+
+#propriedades .divisao1{
+    /* border: 1px solid red; */
+    color: white;
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    top: 43%;
+    left: 15px;
+    width: 300px;
+    height: 100px;
+}
+
+#propriedades .divisao1 #superior{
+    position: absolute;
+    display: flex;
+    bottom: 80%;
+}
+
+span{
+    color: red;
+}
+
+span1{
+    color: rgb(9, 255, 0);
+}
+
+#propriedades .divisao2{
+    /* border: 1px solid red; */
+    position: absolute;
+    display: flex;
+    top: 60%;
+    left: 15px;
+    width: 300px;
+    height: 250px;
+}
+
+.divisao2 h2{
+    position: absolute;
+    display: flex;
+    bottom: 83%;
+    color: white;
+}
+
+
+.divisao2 h3{
+    position: absolute;
+    display: flex;
+    color: white;
+    left: 35%;
+    top: 70%;
+}
+
+
+.divisao2 img{
+    position: absolute;
+    display: flex;
+    top: 77%;
+    left: 15%;
+    width: 40px;
+    height: 40px;
+}
 
 #myChart, #myChart1,  #myChart2,  #myChart3,  #myChart4{
     position: absolute;
@@ -106,3 +443,14 @@ main{
     width: 100px;
     height: 100px;
 }
+
+#myChart5{
+    position: absolute;
+    display: flex;
+    top: 10%;
+    background-color: white;
+    border: 1px solif black;
+    width: 100px;
+    height: 100px;
+}
+
