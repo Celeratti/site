@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="assets/css/index.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.inputmask/3.3.4/jquery.inputmask.bundle.min.js"></script>
+</head>
+<body>
+
+
+
+    <h1 class="tituloPrincipal">CELERATTI</h1>
+    <img src="assets/img/seta.png" class="seta" alt="">
+
+    <h1 class="nomeEmpresa">Via Mobilidade</h1>
+    <h1 class="subTitulo">Cadastro de funcionários</h1>
+    <img src="assets/img/add.png" id="add" alt="">
+<button id="btn_add" data-toggle="modal" data-target="#exampleModal"> Add Usuário</button>
+<img src="assets/img/lupa.png" alt="" id="icon_lupa">
+<input type="text" id="ipt_pesquisar" placeholder="Pesquisar">
+<table id="customers">
+
+    <th>Nome</th>
+    <th>Sobrenome</th>
+    <th>Email</th>
+    <th>Telefone</th>
+    <th>Token</th>
+    <th>Cargo</th>
+    <th id="thOpcoes">
+        <img src="assets/img/gear.png" alt="" id="imgGear">
+    </th>
+  </tr>
+  <tr>
+    <td>Maria</td>
+    <td>Oliveira Sales</td>
+    <td>maria@gmail.com</td>
+    <td>(11) 971002286</td>
+    <td>764</td>
+    <td>Gerente</td>
+    <td>
+        <img src="assets/img/lapis.png" alt="" class="opcoesTabela" onclick="editar('Maria', 'Oliveira Sales', 'maria@gmail.com	', '(11) 971002286', '764', 'Gerente')">
+        <img src="assets/img/lixeira.png" alt="" class="opcoesTabela" onclick="Excluir('Maria', 'Oliveira Sales')">
+    </td>
+  </tr>
+  <tr>
+    <td>Ricardo</td>
+    <td>Pereira Silva</td>
+    <td>Ricardo@gmail.com</td>
+    <td>(11) 971413286</td>
+    <td>902</td>
+    <td>Técnico</td>
+    <td>
+        <img src="assets/img/lapis.png" alt="" class="opcoesTabela">
+        <img src="assets/img/lixeira.png" alt="" class="opcoesTabela">
+    </td>  </tr>
+  <tr>
+    <td>João</td>
+    <td>Machado</td>
+    <td>joao@gmail.com</td>
+    <td>(11) 577913286</td>
+    <td>721</td>
+    <td>Técnico</td>
+    <td>
+        <img src="assets/img/lapis.png" alt="" class="opcoesTabela">
+        <img src="assets/img/lixeira.png" alt="" class="opcoesTabela">
+    </td>  </tr>
+  
+</table>
+
+<div class="modal" id="modal">
+    <div class="modal-content">
+        <div class="modal-header">
+            Adicionar novo funcionário
+        </div>
+        <div class="form-group">
+            <label for="nome">Nome:</label>
+            <input type="text" id="nome" name="nome" required oninput="validarNome()">
+            <section id="labelNome">O nome não pode ser nulo</section>
+        </div>
+        <div class="form-group">
+            <label for="sobrenome">Sobrenome:</label>
+            <input type="text" id="sobrenome" name="sobrenome" required oninput="validarSobrenome()">
+            <section id="labelSobrenome">O Sobrenome não pode ser nulo</section>
+
+        </div>
+        <div class="form-group">
+            <label for="email">E-mail:</label>
+            <input type="email" id="email" name="email" required oninput="validarEmail()">
+            <section id="labelEmail">E-mail Inválido</section>
+
+        </div>
+        <div class="form-group">
+            <label for="telefone">Telefone:</label>
+            <input id="telefone" type="text" placeholder="(99) 9999-9999" oninput="validarTelefone()">
+            <section id="labelTelefone">Telefone Inválido</section>
+
+        </div>
+        <div class="form-group">
+            <label for="cargo">Cargo:</label>
+            <select name="cargo">
+                <option value="gerente">Gerente</option>
+                <option value="tecnico">Técnico</option>
+              </select>
+        </div>
+        <hr>
+        <div style="display: flex; justify-content: flex"></div>
+            <div style="display: flex; justify-content: flex-end">
+                <button class="btn" id="btnCancel" style="background-color: #9F111B;">Cancelar</button>
+                <button class="btn" id="btnSave" style="background-color: #9F111B;" onclick="Salvar()" id="">Salvar</button>
+            </div>
+        </div>
+    </div>
+
+	<div class="modalEx" id="modalEx">
+		<div class="modalEx-content">
+			<div class="modalEx-header">
+				Adicionar novo funcionário
+			</div>
+			<div class="form-group">
+				<label for="nome" id="lblExcluir">Deseja realmente excluir o funcionário(a) Maria ?</label>
+			</div>
+
+
+
+
+			
+            <hr id="linhaExcluir">
+			<div style="display: flex; justify-content: flex"></div>
+                <div style="display: flex; justify-content: flex-end">
+                    <button class="btn" style="background-color: #9F111B;" onclick="CancelarEx()">Cancelar</button>
+                    <button  class="btn" style="background-color: #9F111B;" onclick="ExcluirFinal()">Excluir</button>
+                </div>
+            </div>
+        </div>
+
+
+</body>
+</html>
+
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.inputmask/3.3.4/jquery.inputmask.bundle.min.js"></script>
+
+        <script>
+
+            function editar(nome, sobrenome, email, telefone, tokem, cargo){
+                modal.style.display = "block";
+                document.querySelector("#nome").value = nome
+                document.querySelector("#sobrenome").value = sobrenome
+                document.querySelector("#telefone").value = telefone
+                document.querySelector("#email").value = email
+                document.querySelector("#tokem").value = tokem
+                document.querySelector("#cargo").value = cargo
+
+
+            }
+            const modalEx = document.getElementById("modalEx");
+
+
+            function Excluir(nome, sobrenome){
+                modalEx.style.display = "block";
+                document.querySelector("#lblExcluir").innerHTML = "Deseja realmente excluir o funcionário(a) "+nome +" "+ sobrenome+ "?"
+
+            }
+                
+
+            function Salvar(){
+                validarNome()
+
+                validarSobrenome()
+
+                validarEmail()
+
+                validarTelefone()
+            }
+
+            const modal = document.getElementById("modal");
+            const btnModal = document.getElementById("btn_add");
+            const botaoCancel = document.getElementById("btnCancel");
+            const botaoSave = document.getElementById("btnSave");
+        
+            btnModal.onclick = function() {
+                modal.style.display = "block";
+            }
+            botaoCancel.onclick = function() {
+                modal.style.display = "none";
+            }
+            botaoSave.onclick = function() {
+                modal.style.display = "none";
+            }
+            
+
+            $(document).ready(function(){
+                $('#telefone').inputmask('(99) 9999-99999');
+            });
+            
+            window.onclick = function(event) {
+                if (event.target == modal) {
+                    modal.style.display = "none";
+                }
+            }
+
+            function validarNome(){
+                var nome = document.querySelector("#nome").value
+                if(nome==""){
+                    document.querySelector("#labelNome").style.display = "block"
+                }
+                else{
+                    document.querySelector("#labelNome").style.display = "none"
+                }
+            }
+
+            function validarSobrenome(){
+                var sobrenome = document.querySelector("#sobrenome").value
+                if(sobrenome==""){
+                    document.querySelector("#labelSobrenome").style.display = "block"
+                }
+                else{
+                    document.querySelector("#labelSobrenome").style.display = "none"
+                }
+            }
+            function validarEmail(){
+                var email = document.querySelector("#email").value
+                if(email=="" || !(/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email))){
+                    document.querySelector("#labelEmail").style.display = "block"
+                }
+                else{
+                    document.querySelector("#labelEmail").style.display = "none"
+                }
+            }
+
+            function validarTelefone(){
+                var telefone = document.querySelector("#telefone").value
+                var numeros = telefone.match(/\d+/g).map(Number);
+
+
+                var string = numeros.toString();
+                var StringSemVirgulas = string.replace(/,/g, "");
+
+                
+                
+
+
+           
+                if(telefone=="" || StringSemVirgulas.length != 11){
+                    document.querySelector("#labelTelefone").style.display = "block"
+                }
+                else{
+                    document.querySelector("#labelTelefone").style.display = "none"
+                }
+            }
+
+
+
+function ExcluirFinal(){
+    modalEx.style.display = "none";
+}
+function CancelarEx(){
+    modalEx.style.display = "none";
+}
+
+
+
+
+
+var campoPesquisa = document.getElementById("ipt_pesquisar");
+var tabela = document.getElementById("customers");
+
+campoPesquisa.addEventListener("input", function() {
+  // Obter o valor do campo de pesquisa
+  var valor = campoPesquisa.value.toLowerCase();
+  
+  // Obter todas as linhas da tabela (exceto o cabeçalho)
+  var linhas = tabela.getElementsByTagName("tr");
+  for (var i = 1; i < linhas.length; i++) {
+    // Obter o valor das células da linha (nome e sobrenome)
+    var nome = linhas[i].getElementsByTagName("td")[0].textContent.toLowerCase();
+    var sobrenome = linhas[i].getElementsByTagName("td")[1].textContent.toLowerCase();
+    
+    // Verificar se o nome ou sobrenome contém o valor pesquisado
+    if (nome.indexOf(valor) >= 0 || sobrenome.indexOf(valor) >= 0) {
+      // Se o nome ou sobrenome contém o valor pesquisado, mostrar a linha
+      linhas[i].style.display = "";
+    } else {
+      // Se o nome ou sobrenome não contém o valor pesquisado, ocultar a linha
+      linhas[i].style.display = "none";
+    }
+  }
+});
+   
+            
+            window.onclick = function(event) {
+                if (event.target == modalEx) {
+                    modalEx.style.display = "none";
+                }
+            }
+
+        </script>
