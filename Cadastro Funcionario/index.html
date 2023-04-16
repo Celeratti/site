@@ -19,7 +19,7 @@
     <h1 class="nomeEmpresa">Via Mobilidade</h1>
     <h1 class="subTitulo">Cadastro de funcionários</h1>
     <img src="assets/img/add.png" id="add" alt="">
-<button id="btn_add" data-toggle="modal" data-target="#exampleModal"> Add Usuário</button>
+<button id="btn_add" data-toggle="modal" data-target="#exampleModal" onclick="Adicionar()"> Add Usuário</button>
 <img src="assets/img/lupa.png" alt="" id="icon_lupa">
 <input type="text" id="ipt_pesquisar" placeholder="Pesquisar">
 <table id="customers">
@@ -42,8 +42,8 @@
     <td>764</td>
     <td>Gerente</td>
     <td>
-        <img src="assets/img/lapis.png" alt="" class="opcoesTabela" onclick="editar('Maria', 'Oliveira Sales', 'maria@gmail.com	', '(11) 971002286', '764', 'Gerente')">
-        <img src="assets/img/lixeira.png" alt="" class="opcoesTabela" onclick="Excluir('Maria', 'Oliveira Sales')">
+        <img id="imgLapis" src="assets/img/lapis.png" alt="" class="opcoesTabela" onclick="editar('Maria', 'Oliveira Sales', 'maria@gmail.com', '(11) 971002286', 764, 'Gerente', this)">
+        <img id="imgLixeira" src="assets/img/lixeira.png" alt="" class="opcoesTabela" onclick="Excluir('Maria', 'Oliveira Sales', this)">
     </td>
   </tr>
   <tr>
@@ -101,16 +101,16 @@
         </div>
         <div class="form-group">
             <label for="cargo">Cargo:</label>
-            <select name="cargo">
-                <option value="gerente">Gerente</option>
-                <option value="tecnico">Técnico</option>
+            <select name="cargo" id="cargo">
+                <option value="Gerente">Gerente</option>
+                <option value="Tecnico">Técnico</option>
               </select>
         </div>
         <hr>
         <div style="display: flex; justify-content: flex"></div>
             <div style="display: flex; justify-content: flex-end">
                 <button class="btn" id="btnCancel" style="background-color: #9F111B;">Cancelar</button>
-                <button class="btn" id="btnSave" style="background-color: #9F111B;" onclick="Salvar()" id="">Salvar</button>
+                <button class="btn" id="btnSave" style="background-color: #9F111B;" onclick="Salvarr()" id="">Salvar</button>
             </div>
         </div>
     </div>
@@ -132,7 +132,7 @@
 			<div style="display: flex; justify-content: flex"></div>
                 <div style="display: flex; justify-content: flex-end">
                     <button class="btn" style="background-color: #9F111B;" onclick="CancelarEx()">Cancelar</button>
-                    <button  class="btn" style="background-color: #9F111B;" onclick="ExcluirFinal()">Excluir</button>
+                    <button  class="btn" style="background-color: #9F111B;" onclick="ExcluirFinal(this)">Excluir</button>
                 </div>
             </div>
         </div>
@@ -145,36 +145,102 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.inputmask/3.3.4/jquery.inputmask.bundle.min.js"></script>
 
         <script>
+            var acao =""
+            var linhaEscolhida = "";
 
-            function editar(nome, sobrenome, email, telefone, tokem, cargo){
+            function editar(nome, sobrenome, email, telefone, tokem, cargo, linha, celulaLixeira){
+
                 modal.style.display = "block";
                 document.querySelector("#nome").value = nome
                 document.querySelector("#sobrenome").value = sobrenome
                 document.querySelector("#telefone").value = telefone
                 document.querySelector("#email").value = email
-                document.querySelector("#tokem").value = tokem
                 document.querySelector("#cargo").value = cargo
 
+                acao ="Editar"
+                linhaEscolhida = celulaLixeira.parentNode.parentNode;
+                console.log(linhaEscolhida)
 
             }
             const modalEx = document.getElementById("modalEx");
 
 
-            function Excluir(nome, sobrenome){
+            function Excluir(nome, sobrenome, celulaLixeira){
                 modalEx.style.display = "block";
                 document.querySelector("#lblExcluir").innerHTML = "Deseja realmente excluir o funcionário(a) "+nome +" "+ sobrenome+ "?"
-
+                linhaEscolhida = celulaLixeira.parentNode.parentNode;
+                console.log(linhaEscolhida)
             }
                 
 
-            function Salvar(){
-                validarNome()
+            function Salvarr(){
 
-                validarSobrenome()
+                if(acao == "Salvar"){
+                var nomeRecebido = validarNome()
 
-                validarEmail()
+                var sobreNomeRecebido = validarSobrenome()
 
-                validarTelefone()
+                var emailRecebido = validarEmail()
+
+                var telefoneRecebido = validarTelefone()
+ 
+                var cargoRecebido = document.querySelector("#cargo").value
+
+                var novaLinha = document.createElement("tr");
+                var colunaNome = document.createElement("td");
+                var colunaSobrenome = document.createElement("td");
+                var colunaEmail = document.createElement("td");
+                var colunaTelefone = document.createElement("td");
+                var colunaTokem = document.createElement("td");
+                var colunaCargo = document.createElement("td");
+                var tdImagens = document.createElement("td");
+
+                var novaImagem = document.createElement("img");
+                novaImagem.id = "imgLapis";
+                novaImagem.src = "assets/img/lapis.png";
+                novaImagem.alt = "";
+                novaImagem.classList.add("opcoesTabela");
+                novaImagem.setAttribute("onclick", "editar('Maria', 'Oliveira Sales', 'maria@gmail.com', '(11) 971002286', '764', 'Gerente')");
+
+                var novaImagem2= document.createElement("img");
+                novaImagem2.id = "imgLixeira";
+                novaImagem2.src = "assets/img/lixeira.png";
+                novaImagem2.alt = "";
+                novaImagem2.classList.add("opcoesTabela");
+                novaImagem2.setAttribute("onclick", "Excluir('Maria', 'Oliveira Sales')");
+
+                colunaNome.innerHTML =nomeRecebido
+                colunaSobrenome.innerHTML =sobreNomeRecebido
+                colunaEmail.innerHTML =emailRecebido
+                colunaTelefone.innerHTML =telefoneRecebido
+                colunaTokem.innerHTML ="847"
+                colunaCargo.innerHTML =cargoRecebido
+
+                 novaLinha.appendChild(colunaNome);
+                 novaLinha.appendChild(colunaSobrenome);
+                 novaLinha.appendChild(colunaEmail);
+                 novaLinha.appendChild(colunaTelefone);
+                 novaLinha.appendChild(colunaTokem);
+                 novaLinha.appendChild(colunaCargo);
+
+                 var imagem = document.querySelector("#imgLapis")
+
+                 tdImagens.appendChild(novaImagem)
+                 tdImagens.appendChild(novaImagem2)
+
+                 novaLinha.appendChild(tdImagens);               
+
+                 var tabela = document.getElementById("customers").getElementsByTagName("tbody")[0];
+                 tabela.appendChild(novaLinha);
+
+                modal.style.display = "none";
+                }
+                else{
+                    console.log(linhaEscolhida.getElementsByTagName("td")[1])
+                }
+
+                
+
             }
 
             const modal = document.getElementById("modal");
@@ -184,11 +250,9 @@
         
             btnModal.onclick = function() {
                 modal.style.display = "block";
+                acao ="Salvar"
             }
             botaoCancel.onclick = function() {
-                modal.style.display = "none";
-            }
-            botaoSave.onclick = function() {
                 modal.style.display = "none";
             }
             
@@ -210,6 +274,7 @@
                 }
                 else{
                     document.querySelector("#labelNome").style.display = "none"
+                    return nome
                 }
             }
 
@@ -220,6 +285,7 @@
                 }
                 else{
                     document.querySelector("#labelSobrenome").style.display = "none"
+                    return sobrenome
                 }
             }
             function validarEmail(){
@@ -229,6 +295,7 @@
                 }
                 else{
                     document.querySelector("#labelEmail").style.display = "none"
+                    return email
                 }
             }
 
@@ -250,12 +317,20 @@
                 }
                 else{
                     document.querySelector("#labelTelefone").style.display = "none"
+                    return telefone
                 }
             }
 
-
+            function Adicionar(){
+                acao = "Editar"
+            }
 
 function ExcluirFinal(){
+// obtém a linha que contém a célula de lixeira clicada
+var linha = linhaEscolhida
+
+// remove a linha da tabela
+linha.parentNode.removeChild(linha);
     modalEx.style.display = "none";
 }
 function CancelarEx(){
