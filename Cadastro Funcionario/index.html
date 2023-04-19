@@ -42,7 +42,7 @@
     <td>764</td>
     <td>Gerente</td>
     <td>
-        <img id="imgLapis" src="assets/img/lapis.png" alt="" class="opcoesTabela" onclick="editar('Maria', 'Oliveira Sales', 'maria@gmail.com', '(11) 971002286', 764, 'Gerente', this)">
+        <img id="imgLapis" src="assets/img/lapis.png" alt="" class="opcoesTabela" onclick="editar('Maria', 'Oliveira Sales', 'maria@gmail.com', '(11) 971002286', 'Gerente', this)">
         <img id="imgLixeira" src="assets/img/lixeira.png" alt="" class="opcoesTabela" onclick="Excluir('Maria', 'Oliveira Sales', this)">
     </td>
   </tr>
@@ -148,20 +148,20 @@
             var acao =""
             var linhaEscolhida = "";
 
-            function editar(nome, sobrenome, email, telefone, tokem, cargo, linha, celulaLixeira){
+            function editar(nome, sobrenome, email, telefone, cargo,  celulaLapis){
 
                 modal.style.display = "block";
                 document.querySelector("#nome").value = nome
                 document.querySelector("#sobrenome").value = sobrenome
                 document.querySelector("#telefone").value = telefone
                 document.querySelector("#email").value = email
-                document.querySelector("#cargo").value = cargo
+                //document.querySelector("#cargo").value = email
 
                 acao ="Editar"
-                linhaEscolhida = celulaLixeira.parentNode.parentNode;
+                linhaEscolhida = celulaLapis.parentNode.parentNode;
                 console.log(linhaEscolhida)
-
-            }
+                
+            }   
             const modalEx = document.getElementById("modalEx");
 
 
@@ -175,7 +175,7 @@
 
             function Salvarr(){
 
-                if(acao == "Salvar"){
+               
                 var nomeRecebido = validarNome()
 
                 var sobreNomeRecebido = validarSobrenome()
@@ -183,8 +183,9 @@
                 var emailRecebido = validarEmail()
 
                 var telefoneRecebido = validarTelefone()
- 
-                var cargoRecebido = document.querySelector("#cargo").value
+
+                if(acao == "Salvar"){
+
 
                 var novaLinha = document.createElement("tr");
                 var colunaNome = document.createElement("td");
@@ -194,6 +195,8 @@
                 var colunaTokem = document.createElement("td");
                 var colunaCargo = document.createElement("td");
                 var tdImagens = document.createElement("td");
+
+                var cargoRecebido = document.querySelector("#cargo").value
 
                 var novaImagem = document.createElement("img");
                 novaImagem.id = "imgLapis";
@@ -233,13 +236,18 @@
                  var tabela = document.getElementById("customers").getElementsByTagName("tbody")[0];
                  tabela.appendChild(novaLinha);
 
-                modal.style.display = "none";
                 }
                 else{
-                    console.log(linhaEscolhida.getElementsByTagName("td")[1])
+                    linhaEscolhida.getElementsByTagName("td")[0].innerHTML = document.querySelector("#nome").value
+                    linhaEscolhida.getElementsByTagName("td")[1].innerHTML = document.querySelector("#sobrenome").value
+                    linhaEscolhida.getElementsByTagName("td")[2].innerHTML = document.querySelector("#telefone").value
+                    linhaEscolhida.getElementsByTagName("td")[3].innerHTML = document.querySelector("#email").value
+                    linhaEscolhida.getElementsByTagName("td")[4].innerHTML = 864
+                    linhaEscolhida.getElementsByTagName("td")[5].innerHTML = document.querySelector("#cargo").value
                 }
 
-                
+                modal.style.display = "none";
+
 
             }
 
@@ -249,6 +257,10 @@
             const botaoSave = document.getElementById("btnSave");
         
             btnModal.onclick = function() {
+                document.querySelector("#nome").value=""
+                document.querySelector("#sobrenome").value=""
+                document.querySelector("#telefone").value =""
+                document.querySelector("#email").value = ""
                 modal.style.display = "block";
                 acao ="Salvar"
             }
@@ -302,15 +314,8 @@
             function validarTelefone(){
                 var telefone = document.querySelector("#telefone").value
                 var numeros = telefone.match(/\d+/g).map(Number);
-
-
                 var string = numeros.toString();
-                var StringSemVirgulas = string.replace(/,/g, "");
-
-                
-                
-
-
+                var StringSemVirgulas = string.replace(/,/g, "");             
            
                 if(telefone=="" || StringSemVirgulas.length != 11){
                     document.querySelector("#labelTelefone").style.display = "block"
@@ -322,6 +327,8 @@
             }
 
             function Adicionar(){
+                    alert("teste")
+                   
                 acao = "Editar"
             }
 
@@ -343,18 +350,15 @@ function CancelarEx(){
 
 var campoPesquisa = document.getElementById("ipt_pesquisar");
 var tabela = document.getElementById("customers");
-
 campoPesquisa.addEventListener("input", function() {
   // Obter o valor do campo de pesquisa
   var valor = campoPesquisa.value.toLowerCase();
-  
   // Obter todas as linhas da tabela (exceto o cabeçalho)
   var linhas = tabela.getElementsByTagName("tr");
   for (var i = 1; i < linhas.length; i++) {
     // Obter o valor das células da linha (nome e sobrenome)
     var nome = linhas[i].getElementsByTagName("td")[0].textContent.toLowerCase();
     var sobrenome = linhas[i].getElementsByTagName("td")[1].textContent.toLowerCase();
-    
     // Verificar se o nome ou sobrenome contém o valor pesquisado
     if (nome.indexOf(valor) >= 0 || sobrenome.indexOf(valor) >= 0) {
       // Se o nome ou sobrenome contém o valor pesquisado, mostrar a linha
