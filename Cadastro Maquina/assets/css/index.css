@@ -1,0 +1,305 @@
+body{
+  background-image: url("../img/fundo.png");
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.tituloPrincipal{
+  font-family: 'Inter';
+  font-style: italic;
+  font-weight: 600;
+  font-size: 45px;
+  line-height: 54px;
+  color: black;
+  margin-top: 20px;
+  margin-left: 40px;
+}
+#linhaExcluir{
+  margin-top: -10px;
+  margin-bottom: 40px;
+}
+.seta{
+  margin-left: 40px;
+  position: absolute;
+  margin-top: -50px;
+}
+.nomeEmpresa{
+  position: absolute;
+  width: 314px;
+  height: 69px;
+  left: 620px;
+  top: 34px;
+  font-family: Arial, Helvetica, sans-serif;
+  font-style: normal;
+  font-weight: 300;
+  font-size: 45px;
+  line-height: 54px;
+  color: #000000;
+}
+
+.subTitulo{
+    position: absolute;
+width: 484px;
+height: 69px;
+left: 590px;
+top: 90px;
+
+font-family: 'Inter';
+font-style: normal;
+font-weight: 300;
+font-size: 35px;
+line-height: 42px;
+
+color: #000000;
+
+}
+
+#customers {
+  font-family: Arial, Helvetica, sans-serif;
+  border-collapse: collapse;
+  width: 80%;
+  margin-left: 150px;
+  margin-top: 150px;
+  border-radius: 5px;
+  border: 0.01px solid rgba(82, 76, 76, 0.279);
+  background-color: #fff;
+}
+  
+  #customers td, #customers th {
+    padding: 8px;
+  }
+
+  #customers th {
+    padding: 8px;
+  }
+
+  #customers tr:hover {background-color: #ddd;}  
+#customers th {
+  padding-top: 12px;
+  padding-bottom: 12px;
+  text-align: left;
+  color: black;
+    
+}
+
+#imgGear{
+  width: 30px;
+  height: 30px;
+  position: absolute;
+  margin-top: -14px;
+  margin-left: 7px;
+}
+#imgGear:hover{
+  cursor: pointer;
+}
+
+.opcoesTabela{
+  width: 20px;
+  height: 20px;
+}
+
+.opcoesTabela{
+  cursor: pointer;
+}
+
+#thOpcoes{
+  width: 45px;
+}
+
+#customers td {
+  border-bottom: 0.01px solid rgba(82, 76, 76, 0.105);
+}
+
+#customers th {
+  border-bottom: 0.01px solid rgba(82, 76, 76, 0.105);
+}
+
+  #btn_add{
+    position: absolute;
+    margin-top: 80px;
+    margin-left:1235px;
+    background-color: #9F111B;
+    color: white;
+    height: 30px;
+    width: 130px;
+    padding-left: 35px;
+    border: none;
+
+  }
+#add{
+  width: 20px;
+  height: 20px;
+  margin-left: 1250px;
+  margin-top: 85px;
+  z-index: 2;
+  position: absolute;
+}
+
+
+
+
+#ipt_pesquisar::placeholder {
+    font-size: 12pt;
+    color: black;
+}
+
+#ipt_pesquisar{
+  position: absolute;
+  margin-top: 80px;
+  margin-left: 970px;
+  background-color: #f2f2f2;
+  height: 25px;
+  border: none;
+  padding-left: 40px;
+  width: 200px;
+  height: 30px;
+}
+
+#icon_lupa{
+  position: absolute;
+  margin-top: 85px;
+  margin-left: 980px;
+width: 22px;
+z-index: 2;
+}
+#icon_lupa:hover{
+  cursor: pointer;
+}
+
+#btn_add:hover{
+  cursor: pointer;
+}
+
+#add{
+  cursor: pointer;
+}
+
+
+
+
+
+
+
+.modal {
+  font-family: Arial, sans-serif;
+display: none;
+position: fixed;
+z-index: 1;
+left: 0;
+top: 0;
+width: 100%;
+height: 100%;
+overflow: auto;
+background-color: rgba(0, 0, 0, 0.68);
+padding-top: 30px;
+padding-left: 0%;
+z-index: 3;
+}
+
+.modal-content {
+background-color: #FFF;
+margin: auto;
+padding: 20px;
+border-radius: 10px;
+width: 35%;
+}
+
+.modal-header {
+background-color: #9F111B;
+color: #FFF;
+padding: 10px;
+border-radius: 10px 10px 0 0;
+font-size: 24px;
+font-weight: bold;
+text-align: center;
+  margin-top: -20px;
+  width: 103.9%;
+  margin-left: -20px;
+  margin-bottom: 20px;
+}
+
+.form-group {
+display: flex;
+flex-direction: column;
+margin-bottom: 20px;
+}
+
+label {
+font-weight: bold;
+margin-bottom: 5px;
+}
+
+input {
+  height: 30px;
+  margin-bottom: 10px;
+}
+select{
+  height: 30px;
+}
+
+.btn {
+color: #FFF;
+border: none;
+padding: 10px;
+border-radius: 5px;
+font-weight: bold;
+cursor: pointer;
+margin-right: 10px;
+
+}
+
+
+section{
+  color: red;
+  margin-top: -4px;
+  font-size: 10pt;
+  display: none;
+}
+
+
+hr{
+  border: 0.1px solid black;
+}
+
+#lblExcluir{
+  margin-top: 20px;
+}
+
+.modalEx {
+  font-family: Arial, sans-serif;
+  z-index: 3;
+display: none;
+position: fixed;
+left: 0;
+top: 0;
+width: 100%;
+height: 100%;
+overflow: auto;
+background-color: rgba(0, 0, 0, 0.68);
+padding-top: 60px;
+padding-left: 0%;
+}
+
+.modalEx-content {
+background-color: #FFF;
+margin: auto;
+padding: 20px;
+border-radius: 10px;
+width: 35%;
+  height: 22%;
+  margin-top: 100px;
+}
+
+.modalEx-header {
+background-color: #9F111B;
+color: #FFF;
+padding: 10px;
+border-radius: 10px 10px 0 0;
+font-size: 24px;
+font-weight: bold;
+text-align: center;
+  margin-top: -20px;
+  width: 104.2%;
+  margin-left: -20px;
+  margin-bottom: 10px;
+}

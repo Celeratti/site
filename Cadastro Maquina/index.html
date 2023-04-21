@@ -1,5 +1,3 @@
-
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -19,53 +17,53 @@
     <img src="assets/img/seta.png" class="seta" alt="">
 
     <h1 class="nomeEmpresa">Via Mobilidade</h1>
-    <h1 class="subTitulo">Cadastro de funcionários</h1>
+    <h1 class="subTitulo">Cadastro de máquinas</h1>
     <img src="assets/img/add.png" id="add" alt="">
-<button id="btn_add" data-toggle="modal" data-target="#exampleModal" onclick="Adicionar()"> Add Usuário</button>
+<button id="btn_add" data-toggle="modal" data-target="#exampleModal" onclick="Adicionar()"> Add Máquina</button>
 <img src="assets/img/lupa.png" alt="" id="icon_lupa">
 <input type="text" id="ipt_pesquisar" placeholder="Pesquisar">
 <table id="customers">
 
-    <th>Nome</th>
-    <th>Sobrenome</th>
-    <th>Email</th>
-    <th>Telefone</th>
-    <th>Token</th>
-    <th>Cargo</th>
+    <th>Estação</th>
+    <th>Andar</th>
+    <th>Nome máquina</th>
+    <th>Sistema Operacional</th>
+    <th>Fabricante</th>
+    <th>Status</th>
     <th id="thOpcoes">
         <img src="assets/img/gear.png" alt="" id="imgGear">
     </th>
   </tr>
   <tr>
-    <td>Maria</td>
-    <td>Oliveira Sales</td>
-    <td>maria@gmail.com</td>
-    <td>(11) 971002286</td>
-    <td>764</td>
-    <td>Gerente</td>
+    <td>Presidente Altino</td>
+    <td>2</td>
+    <td>alt@2</td>
+    <td>Linux</td>
+    <td>Dell</td>
+    <td>Desativado</td>
     <td>
-        <img id="imgLapis" src="assets/img/lapis.png" alt="" class="opcoesTabela" onclick="editar('Maria', 'Oliveira Sales', 'maria@gmail.com', '(11) 971002286', 'Gerente', this)">
-        <img id="imgLixeira" src="assets/img/lixeira.png" alt="" class="opcoesTabela" onclick="Excluir('Maria', 'Oliveira Sales', this)">
+        <img id="imgLapis" src="assets/img/lapis.png" alt="" class="opcoesTabela" onclick="editar('Presidente Altino', '2', 'alt@2	', 'Linux', 'Dell', 'Ativado', this)">
+        <img id="imgLixeira" src="assets/img/lixeira.png" alt="" class="opcoesTabela" onclick="Excluir('alt@2', this)">
     </td>
   </tr>
   <tr>
-    <td>Ricardo</td>
-    <td>Pereira Silva</td>
-    <td>Ricardo@gmail.com</td>
-    <td>(11) 971413286</td>
-    <td>902</td>
-    <td>Técnico</td>
+    <td>Osasco</td>
+    <td>4</td>
+    <td>osas@3</td>
+    <td>Windowns</td>
+    <td>Lenovo</td>
+    <td>Atívado</td>
     <td>
         <img src="assets/img/lapis.png" alt="" class="opcoesTabela">
         <img src="assets/img/lixeira.png" alt="" class="opcoesTabela">
     </td>  </tr>
   <tr>
-    <td>João</td>
-    <td>Machado</td>
-    <td>joao@gmail.com</td>
-    <td>(11) 577913286</td>
-    <td>721</td>
-    <td>Técnico</td>
+    <td>Ceasa</td>
+    <td>6</td>
+    <td>cea@1</td>
+    <td>Linux</td>
+    <td>Lenovo</td>
+    <td>Atívado</td>
     <td>
         <img src="assets/img/lapis.png" alt="" class="opcoesTabela">
         <img src="assets/img/lixeira.png" alt="" class="opcoesTabela">
@@ -76,36 +74,41 @@
 <div class="modal" id="modal">
     <div class="modal-content">
         <div class="modal-header">
-            Adicionar novo funcionário
+            Adicionar nova máquina
         </div>
         <div class="form-group">
-            <label for="nome">Nome:</label>
+            <label for="nome">Estação:</label>
             <input type="text" id="nome" name="nome" required oninput="validarNome()">
-            <section id="labelNome">O nome não pode ser nulo</section>
+            <section id="labelNome">A estação não pode ser nulo</section>
         </div>
         <div class="form-group">
-            <label for="sobrenome">Sobrenome:</label>
+            <label for="nome">Andar:</label>
+            <input type="text" id="nome2" name="nome" required oninput="validarNome()">
+            <section id="labelNome">O andar não pode ser nulo</section>
+        </div>
+        <div class="form-group">
+            <label for="sobrenome">Nome máquina:</label>
             <input type="text" id="sobrenome" name="sobrenome" required oninput="validarSobrenome()">
             <section id="labelSobrenome">O Sobrenome não pode ser nulo</section>
 
         </div>
         <div class="form-group">
-            <label for="email">E-mail:</label>
+            <label for="email">Sistema Operacional:</label>
             <input type="email" id="email" name="email" required oninput="validarEmail()">
-            <section id="labelEmail">E-mail Inválido</section>
+            <section id="labelEmail">Sistema Operacional Inválido</section>
 
         </div>
         <div class="form-group">
-            <label for="telefone">Telefone:</label>
-            <input id="telefone" type="text" placeholder="(99) 9999-9999" oninput="validarTelefone()">
-            <section id="labelTelefone">Telefone Inválido</section>
+            <label for="telefone">Fabricante:</label>
+            <input id="telefone" type="text" placeholder="" oninput="validarTelefone()">
+            <section id="labelTelefone">Fabricante Inválido</section>
 
         </div>
         <div class="form-group">
-            <label for="cargo">Cargo:</label>
+            <label for="cargo">Status:</label>
             <select name="cargo" id="cargo">
-                <option value="Gerente">Gerente</option>
-                <option value="Tecnico">Técnico</option>
+                <option value="Ativado">Ativado</option>
+                <option value="Desativado">Desativado</option>
               </select>
         </div>
         <hr>
@@ -123,7 +126,7 @@
 				Adicionar novo funcionário
 			</div>
 			<div class="form-group">
-				<label for="nome" id="lblExcluir">Deseja realmente excluir o funcionário(a) Maria ?</label>
+				<label for="nome" id="lblExcluir">Deseja excluir a máquina 	alt@2</label>
 			</div>
 
 
@@ -150,26 +153,28 @@
             var acao =""
             var linhaEscolhida = "";
 
-            function editar(nome, sobrenome, email, telefone, cargo,  celulaLapis){
+            function editar(nome, sobrenome, email, telefone, cargo, ativado, celulaLapis){
 
                 modal.style.display = "block";
                 document.querySelector("#nome").value = nome
-                document.querySelector("#sobrenome").value = sobrenome
-                document.querySelector("#telefone").value = telefone
-                document.querySelector("#email").value = email
+                document.querySelector("#nome2").value = sobrenome
+                document.querySelector("#sobrenome").value = email
+                document.querySelector("#telefone").value = cargo
+                document.querySelector("#email").value = telefone
                 //document.querySelector("#cargo").value = email
 
                 acao ="Editar"
-                linhaEscolhida = celulaLapis.parentNode.parentNode;
-                console.log(linhaEscolhida)
+
+                
+                linhaEscolhida =celulaLapis.parentNode.parentNode
                 
             }   
             const modalEx = document.getElementById("modalEx");
 
 
-            function Excluir(nome, sobrenome, celulaLixeira){
+            function Excluir(nome, celulaLixeira){
                 modalEx.style.display = "block";
-                document.querySelector("#lblExcluir").innerHTML = "Deseja realmente excluir o funcionário(a) "+nome +" "+ sobrenome+ "?"
+                document.querySelector("#lblExcluir").innerHTML = "Deseja excluir a máquina "+ nome+ "?"
                 linhaEscolhida = celulaLixeira.parentNode.parentNode;
                 console.log(linhaEscolhida)
             }
@@ -184,7 +189,7 @@
 
                 var emailRecebido = validarEmail()
 
-                var telefoneRecebido = validarTelefone()
+                
 
                 if(acao == "Salvar"){
 
@@ -240,11 +245,12 @@
 
                 }
                 else{
+                    
                     linhaEscolhida.getElementsByTagName("td")[0].innerHTML = document.querySelector("#nome").value
-                    linhaEscolhida.getElementsByTagName("td")[1].innerHTML = document.querySelector("#sobrenome").value
-                    linhaEscolhida.getElementsByTagName("td")[2].innerHTML = document.querySelector("#telefone").value
-                    linhaEscolhida.getElementsByTagName("td")[3].innerHTML = document.querySelector("#email").value
-                    linhaEscolhida.getElementsByTagName("td")[4].innerHTML = 864
+                    linhaEscolhida.getElementsByTagName("td")[1].innerHTML = document.querySelector("#nome2").value
+                    linhaEscolhida.getElementsByTagName("td")[2].innerHTML = document.querySelector("#email").value
+                    linhaEscolhida.getElementsByTagName("td")[3].innerHTML = document.querySelector("#telefone").value
+                    linhaEscolhida.getElementsByTagName("td")[4].innerHTML = document.querySelector("#telefone").value
                     linhaEscolhida.getElementsByTagName("td")[5].innerHTML = document.querySelector("#cargo").value
                 }
 
@@ -271,9 +277,7 @@
             }
             
 
-            $(document).ready(function(){
-                $('#telefone').inputmask('(99) 9999-99999');
-            });
+   
             
             window.onclick = function(event) {
                 if (event.target == modal) {
@@ -303,33 +307,19 @@
                 }
             }
             function validarEmail(){
-                var email = document.querySelector("#email").value
-                if(email=="" || !(/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email))){
-                    document.querySelector("#labelEmail").style.display = "block"
+                var nome = document.querySelector("#email").value
+                if(nome==""){
+                    document.querySelector("#labelNome").style.display = "block"
                 }
                 else{
-                    document.querySelector("#labelEmail").style.display = "none"
-                    return email
+                    document.querySelector("#labelNome").style.display = "none"
+                    return nome
                 }
             }
 
-            function validarTelefone(){
-                var telefone = document.querySelector("#telefone").value
-                var numeros = telefone.match(/\d+/g).map(Number);
-                var string = numeros.toString();
-                var StringSemVirgulas = string.replace(/,/g, "");             
-           
-                if(telefone=="" || StringSemVirgulas.length != 11){
-                    document.querySelector("#labelTelefone").style.display = "block"
-                }
-                else{
-                    document.querySelector("#labelTelefone").style.display = "none"
-                    return telefone
-                }
-            }
+            
 
             function Adicionar(){
-                    alert("teste")
                    
                 acao = "Editar"
             }
@@ -380,3 +370,31 @@ campoPesquisa.addEventListener("input", function() {
             }
 
         </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
