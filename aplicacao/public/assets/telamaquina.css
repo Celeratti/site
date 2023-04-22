@@ -1,0 +1,288 @@
+@import url('https://fonts.googleapis.com/css2?family=Dancing+Script&family=Great+Vibes&family=Poppins:wght@300&family=Raleway&display=swap');
+
+body {
+    margin: 0;
+    background-image: url(img/Line\ 3.png), url(img/Line\ 6.png);
+    background-repeat: no-repeat;
+    font-family: 'Dancing Script', cursive;
+    font-family: 'Great Vibes', cursive;
+    font-family: 'Poppins', sans-serif;
+    font-family: 'Raleway', sans-serif;
+}
+
+
+main {
+    /* border: 1px solid red; */
+    position: absolute;
+    display: flex;
+    width: 100%;
+    height: 650px;
+}
+
+
+
+#titulo {
+    /* border: 1px solid red; */
+    position: absolute;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    top: -10px;
+    right: 35%;
+    width: 410px;
+    height: 60px;
+}
+
+
+main a {
+    position: absolute;
+    display: flex;
+    left: 85%;
+    top: 2%;
+    color: black;
+    text-decoration: none;
+}
+
+/* Isso anima a bolinha */
+@keyframes animate {
+    0% {
+        opacity: 0;
+    }
+
+    50% {
+        opacity: 1;
+    }
+
+    100% {
+        opacity: 0;
+    }
+}
+
+
+/* -------------- Gráfico Do Disco  --------------*/
+#disco {
+    border: 1px solid grey;
+    position: absolute;
+    display: flex;
+    top: 60px;
+    left: 15%;
+    width: 425px;
+    height: 220px;
+    background-color: #001235;
+    box-shadow: 5px 10px #242424;
+}
+
+.bolinhaAlerta {
+    background-color: #F91A1A;
+    width: 16px;
+    height: 16px;
+    border-radius: 100px;
+    animation: animate 0.80s linear infinite;
+    position: absolute;
+    left: 93%;
+    top: 9px;
+    z-index: 1px;
+}
+
+#disco #curve_chart {
+    width: 425px;
+    height: 220px;
+}
+
+.legendaDisco {
+    /* border: 1px solid red; */
+    position: absolute;
+    display: flex;
+    top: 260px;
+    left: 16%;
+    width: 420px;
+    height: 60px;
+}
+
+
+.legendaDisco img {
+    position: absolute;
+    display: flex;
+    top: 45%;
+    right: 4%;
+    width: 410px;
+    height: 20px;
+}
+
+.legendaDisco p {
+    margin-top: 30px;
+}
+
+/* -------------- Fim Gráfico Do Disco  --------------*/
+
+
+/* -------------- Gráfico Da CPU  --------------*/
+#cpu {
+    border: 1px solid grey;
+    position: absolute;
+    display: flex;
+    top: 60px;
+    left: 50%;
+    width: 425px;
+    height: 220px;
+    background-color: #001235;
+    box-shadow: 5px 10px #242424;
+}
+
+.bolinhaAlerta {
+    background-color: #F91A1A;
+    width: 16px;
+    height: 16px;
+    border-radius: 100px;
+    animation: animate 0.80s linear infinite;
+    position: absolute;
+    left: 93%;
+    top: 9px;
+    z-index: 1px;
+}
+
+#cpu #curve_chart1 {
+    width: 425px;
+    height: 220px
+}
+
+.legendaCpu {
+    /* border: 1px solid red; */
+    position: absolute;
+    display: flex;
+    top: 260px;
+    left: 51%;
+    width: 420px;
+    height: 60px;
+}
+
+
+.legendaCpu img {
+    position: absolute;
+    display: flex;
+    top: 45%;
+    right: 4%;
+    width: 410px;
+    height: 20px;
+}
+
+.legendaCpu p {
+    margin-top: 30px;
+}
+
+/* -------------- Fim Gráfico Da CPU --------------*/
+
+
+/* -------------- Gráfico Da Memoria--------------*/
+#memoriaEmUso {
+    border: 1px solid grey;
+    position: absolute;
+    display: flex;
+    top: 350px;
+    left: 15%;
+    width: 425px;
+    height: 220px;
+    background-color: #001235;
+    box-shadow: 5px 10px #242424;
+}
+
+#memoriaEmUso #curve_chart3 {
+    width: 425px;
+    height: 220px
+}
+
+.bolinhaAlerta2 {
+    background-color: rgb(238, 255, 0);
+    width: 16px;
+    height: 16px;
+    border-radius: 100px;
+    animation: animate 0.90s linear infinite;
+    position: absolute;
+    left: 93%;
+    top: 9px;
+    z-index: 1px;
+}
+
+.legendaMemoriaEmUso {
+    /* border: 1px solid red; */
+    position: absolute;
+    display: flex;
+    top: 550px;
+    left: 16%;
+    width: 420px;
+    height: 60px;
+}
+
+
+.legendaMemoriaEmUso img {
+    position: absolute;
+    display: flex;
+    top: 45%;
+    right: 4%;
+    width: 410px;
+    height: 20px;
+}
+
+.legendaMemoriaEmUso p {
+    margin-top: 30px;
+}
+
+/* -------------- Fim Gráfico Da Memoria--------------*/
+
+
+/* -------------- Gráfico Do Processador --------------*/
+
+#rede {
+    border: 1px solid grey;
+    position: absolute;
+    display: flex;
+    top: 350px;
+    left: 50%;
+    width: 425px;
+    height: 220px;
+    background-color: #001235;
+    box-shadow: 5px 10px #242424;
+}
+
+#rede #curve_chart2 {
+    width: 425px;
+    height: 220px
+}
+
+
+.legendaRede {
+    /* border: 1px solid red; */
+    position: absolute;
+    display: flex;
+    top: 550px;
+    left: 51%;
+    width: 420px;
+    height: 60px;
+}
+
+.bolinhaAlerta3 {
+    background-color: rgb(51, 255, 0);
+    width: 16px;
+    height: 16px;
+    border-radius: 100px;
+    position: absolute;
+    left: 93%;
+    top: 9px;
+    z-index: 1px;
+}
+
+.legendaRede img {
+    position: absolute;
+    display: flex;
+    top: 45%;
+    right: 4%;
+    width: 410px;
+    height: 20px;
+}
+
+.legendaRede p {
+    margin-top: 30px;
+}
+
+
+/* -------------- Fim Gráfico Do Processador --------------*/
