@@ -1,6 +1,10 @@
+@import url('https://fonts.googleapis.com/css2?family=Dancing+Script&family=Great+Vibes&family=Poppins:wght@300&family=Raleway&display=swap%27');
 * {
     outline: none;
-
+    font-family: 'Dancing Script', cursive;
+    font-family: 'Great Vibes', cursive;
+    font-family: 'Poppins', sans-serif;
+    font-family: 'Raleway', sans-serif;
 }
 .caixaLogo{
     background-color: #101216;
@@ -14,14 +18,15 @@
 .subCaixaLogo{
     display: block;
 }
+.caixaLogo img{
+    width: 220px;
+    height: 90px;
+}
 
 .divPrincipal{
     display: flex;
     height: 48.8vw;
-
 }
-
-
 
 .caixaFormulario{
     background-image: url("../img/fundo.png");
@@ -46,9 +51,8 @@ font-style: normal;
 font-weight: 300;
 font-size: 35px;
 line-height: 54px;
-    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
 color: #80131b;
-
 }
 .caixaFormulario h2{
 

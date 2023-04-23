@@ -1,10 +1,14 @@
+@import url('https://fonts.googleapis.com/css2?family=Dancing+Script&family=Great+Vibes&family=Poppins:wght@300&family=Raleway&display=swap%27');
 *,
 *::before,
 *::after {
     padding: 0;
     margin: 0;
     box-sizing: border-box;
-    font-family: 'Roboto', sans-serif;
+    font-family: 'Dancing Script', cursive;
+    font-family: 'Great Vibes', cursive;
+    font-family: 'Poppins', sans-serif;
+    font-family: 'Raleway', sans-serif;
 }
 
 #logo {
@@ -92,8 +96,6 @@
     background-image: url(https://i.pinimg.com/originals/2d/ac/46/2dac461ac6a1804ee7ed3bbf087f2c36.gif);
     background-size: cover;
 }
-
-
 
 #imgValores {
     width: 50%;
@@ -323,6 +325,15 @@
     padding: 5em;
     transform-style: preserve-3d;
 }
+.content img{
+    width: 250px;
+    height: 250px;
+}
+.content #img2{
+    width: 180px;
+    height: 180px;
+}
+
 
 .card:hover .content {
     transform: rotateY(0.5turn);

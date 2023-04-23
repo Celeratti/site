@@ -1,6 +1,10 @@
+@import url('https://fonts.googleapis.com/css2?family=Dancing+Script&family=Great+Vibes&family=Poppins:wght@300&family=Raleway&display=swap%27');
 * {
     outline: none;
-
+    font-family: 'Dancing Script', cursive;
+    font-family: 'Great Vibes', cursive;
+    font-family: 'Poppins', sans-serif;
+    font-family: 'Raleway', sans-serif;
 }
 .caixaLogo{
     background-color: #101216;
@@ -8,6 +12,10 @@
     display: flex;
     justify-content: center;
     border: 2px solid;
+}
+.caixaLogo img{
+    width: 220px;
+    height: 90px;
 }
 .subCaixaFormulario{
     margin-top: -160px;
