@@ -17,17 +17,26 @@
             <img src="img/Logo.png" alt="">
 
             <div class="hello">
-                <h3>Nome do <span id="b_usuario">usuário</span>!</h3>
+                <h3>Olá, <span id="b_usuario">Mario</span>!</h3>
             </div>
 
             <div class="email">
-                    <h3>Email da empresa</h3>
+                    <h3>mario.silva@viaestacao.com</h3>
             </div>
 
             <div class="cargo">
-                <h3>Cargo</h3>
+                <h3>Analista de Dashboard</h3>
             </div>
 
+            <div class="cargo">
+              <div class="navegacao">
+                <details>
+                  <summary><b>Navegação</b></summary>
+                  <p><a href="TelaEstacoes.html">Estações</a></p>
+                  <p><a href="TelaMaquina.html">Máquinas</a></p>
+                </details>
+              </div>
+            </div>
             <div class="btn-logout" onclick="limparSessao()">
                 <h3>Sair</h3>
             </div>
@@ -35,10 +44,20 @@
         </div>
     </div>
        <h1 id="via">ViaEstação</h1>
+
+       <div class="legenda">
+          <p>Ideal</p>
+          <div class="bolinha1"></div>
+          <p>Emergente</p>
+          <div class="bolinha2"></div>
+          <p>Crítico</p>
+          <div class="bolinha3"></div>
+          <p>Urgente</p>
+          <div class="bolinha4"></div>
+       </div>
         
         <div class="maquina1">
-            <h2>Status da linha</h2>
-            <p><p>
+            <h2>Status da linha verde</h2>
         </div>
 
         <div class="dash-right">
@@ -55,7 +74,7 @@ new Chart(ctx, {
   data: {
     labels: ['Semana 1', 'Semana 2', 'Semana 3', 'Semana 4'],
     datasets: [{
-      label: 'Média semanal das estações',
+      label: 'Quantidade de alertas por estações das ultimas quatro semanas',
       data: [12, 49, 23, 55, 12, 3],
       borderWidth: 1,
       borderColor: '#FF6384',

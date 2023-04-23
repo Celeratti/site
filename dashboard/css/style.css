@@ -39,20 +39,76 @@ body{
     width: 245px;
     height: 80px;
   }
-#via{
+
+  #via{
   position: absolute;
   display: flex;
   left: 55%;
+ }
+
+.legenda{
+    /*border: solid 1px red;*/ 
+    position: absolute;
+    display: flex;
+    justify-content: space-around;
+    top: 22%;
+    left: 58%;
+    width: 401px;
+    height: 50px;
+}
+.legenda .bolinha1 {
+  position: absolute;
+  display: flex;
+  border-radius: 100px;
+  border: 1px solid rgb(9, 255, 0);
+  background-color: rgb(9, 255, 0);
+  top: 33%;
+  left: 17%;
+  height: 15px;
+  width: 15px;
+}
+
+.legenda .bolinha2 {
+  position: absolute;
+  display: flex;
+  border-radius: 100px;
+  border: 1px solid rgb(255, 230, 0);
+  background-color: rgb(255, 230, 0);
+  top: 33%;
+  left: 48%;
+  height: 15px;
+  width: 15px;
+}
+
+.legenda .bolinha3 {
+  position: absolute;
+  display: flex;
+  border-radius: 100px;
+  border: 1px solid rgb(255, 123, 0);
+  background-color: rgb(255, 123, 0);
+  top: 33%;
+  left: 71%;
+  height: 15px;
+  width: 15px;
+}
+
+.legenda .bolinha4 {
+  position: absolute;
+  display: flex;
+  border-radius: 100px;
+  border: 1px solid rgb(255, 8, 0);
+  background-color: rgb(255, 8, 0);
+  top: 33%;
+  left: 96%;
+  height: 15px;
+  width: 15px;
 }
   .maquina1{
     flex-direction: column;
     position: absolute;
     display: flex;
-    left: 55%;
-    top: 13%;
-  }
-  .maquina1 p{
-    left: 25%;
+    left: 53.8%;
+    top: 11%;
   }
   
   .dash-right {
@@ -95,6 +151,9 @@ body{
   
   .email {
     color: wheat;
+  }
+  .navegacao{
+    font-size: medium;
   }
   
   .btn-logout h3 {
