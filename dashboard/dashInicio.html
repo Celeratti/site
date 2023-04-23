@@ -4,15 +4,17 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="style.css">
-    <title>CELERATTI</title>
+    <link rel="stylesheet" href="css/style.css">
+    <title>Dashboard</title>
+    <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script&family=Great+Vibes&family=Poppins:wght@300&family=Raleway&display=swap" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 <body>
     
     <div class="janela">
         <div class="header-left">
-            <img src="Logo.png" alt="">
+            <img src="img/Logo.png" alt="">
 
             <div class="hello">
                 <h3>Nome do <span id="b_usuario">usuário</span>!</h3>
@@ -32,38 +34,32 @@
 
         </div>
     </div>
-
-        <h1 id="via">ViaMobilidade</h1>
+       <h1 id="via">ViaEstação</h1>
         
         <div class="maquina1">
-            <h2>Maquina 01 - Linha Verde</h2>
+            <h2>Status da linha</h2>
+            <p><p>
         </div>
 
         <div class="dash-right">
                 <canvas id="myChart"></canvas>
         </div>
         
-        <div class="maquina2">
-            <h2>Maquina 02 - Linha Verde</h2>
-        </div>
-
-        <div class="dash-right1">
-            <canvas id="myChart1"></canvas>
-    </div>
-    
 </body>
 </html>
 <script>
    const ctx = document.getElementById('myChart');
 
 new Chart(ctx, {
-  type: 'line',
+  type: 'bar',
   data: {
-    labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
+    labels: ['Semana 1', 'Semana 2', 'Semana 3', 'Semana 4'],
     datasets: [{
-      label: '# of Votes',
+      label: 'Média semanal das estações',
       data: [12, 49, 23, 55, 12, 3],
-      borderWidth: 1
+      borderWidth: 1,
+      borderColor: '#FF6384',
+      backgroundColor: '#FFB1C1',
     }]
   },
   options: {
@@ -77,7 +73,7 @@ new Chart(ctx, {
 </script>
 
 
-<script>
+<!--<script>
     const ctx1 = document.getElementById('myChart1');
  
  new Chart(ctx1, {
@@ -98,4 +94,4 @@ new Chart(ctx, {
     }
   }
  });
- </script>
+ </script>-->

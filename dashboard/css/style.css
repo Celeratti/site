@@ -1,6 +1,15 @@
+@import url('https://fonts.googleapis.com/css2?family=Dancing+Script&family=Great+Vibes&family=Poppins:wght@300&family=Raleway&display=swap%27');
 *{
-  font-family: 'Roboto', sans-serif;
+  font-family: 'Dancing Script', cursive;
+    font-family: 'Great Vibes', cursive;
+    font-family: 'Poppins', sans-serif;
+    font-family: 'Raleway', sans-serif;
 }
+body{
+  background-image: url(../img/Line\ 3.png), url(../img/Line\ 6.png);
+  background-repeat: no-repeat;
+}
+
 .janela {
     display: flex;
     width: 100vw;
@@ -33,33 +42,32 @@
 #via{
   position: absolute;
   display: flex;
-  left: 50%;
+  left: 55%;
 }
   .maquina1{
     flex-direction: column;
     position: absolute;
     display: flex;
-    left: 25%;
+    left: 55%;
     top: 13%;
-    text-shadow: #B22222 -1px -1px;
   }
-
-  .maquina2{
-    flex-direction: column;
-    position: absolute;
-    display: flex;
-    top: 60%;
+  .maquina1 p{
     left: 25%;
-    text-shadow: #B22222 -1px -1px;
   }
   
   .dash-right {
     display: flex;
-    width: 30%;
-    height: 15%;
+    width: 50%;
+    height: 25%;
     position: relative;
-    top: 150px;
-    left: 25%;
+    top: 200px;
+    left: 35%;
+    background: rgba(255, 255, 255, 0.35);
+    box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+    backdrop-filter: blur(13.5px);
+    -webkit-backdrop-filter: blur(13.5px);
+    border-radius: 10px;
+    border: 1px solid rgba(255, 255, 255, 0.18);
   }
 
   .dash-right1 {
