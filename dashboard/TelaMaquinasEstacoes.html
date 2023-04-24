@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Dancing+Script&family=Great+Vibes&family=Poppins:wght@300&family=Raleway&display=swap"
+    rel="stylesheet">
+
+  <link rel="stylesheet" href="assets/maquinasestacoes.css">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+  <title>Document</title>
+</head>
+
+<body>
+
+  <h1>Estacão - Vila Prudente | Máquinas</h1>
+
+  <a id= "a1" href="TelaEstacoes.html">Voltar para a tela de estações</a>
+
+  <div class="legenda">
+    <p>Ideal</p>
+    <div class="bolinha1"></div>
+    <p>Emergente</p>
+    <div class="bolinha2"></div>
+    <p>Crítico</p>
+    <div class="bolinha3"></div>
+    <p>Urgente</p>
+    <div class="bolinha4"></div>
+  </div>
+
+  <a href="TelaMaquina.html">
+    <div class="graficos">
+      <div class="borda">
+        <h3>Máquina 01</h3>
+        <div class="maquina1">
+          <div class="bolinhaAlerta"></div>
+          <canvas id="myChart"></canvas>
+        </div>
+      </div>
+  </a>
+
+  <a href="TelaMaquina.html">
+  <div class="borda2">
+    <h3>Máquina 02</h3>
+    <div class="maquina2">
+      <div class="bolinhaAlerta"></div>
+      <canvas id="myChart2"></canvas>
+    </div>
+  </div>
+  </a>
+
+  <a href="TelaMaquina.html">
+  <div class="borda3">
+    <h3>Máquina 03</h3>
+    <div class="bolinhaAlerta2"></div>
+    <div class="maquina3">
+      <canvas id="myChart3"></canvas>
+    </div>
+  </div>
+  </a>
+
+  <a href="TelaMaquina.html">
+  <div class="borda4">
+    <h3>Máquina 04</h3>
+    <div class="maquina4">
+      <div class="bolinhaAlerta3"></div>
+      <canvas id="myChart4"></canvas>
+    </div>
+  </div>
+  </a>
+
+</body>
+
+</html>
+
+
+
+<script>
+  const ctx = document.getElementById('myChart');
+
+  new Chart(ctx, {
+    type: 'bar',
+    data: {
+      labels: ['M.RAM', 'Disco', 'CPU', 'Rede'],
+      datasets: [{
+        label: '# of Votes',
+        data: [10, 15, 20, 25, 30 , 35, 40,45, 50,55,60,65,70,75,80,85,90,95],
+        borderWidth: 1
+      }]
+    },
+    options: {
+      scales: {
+        y: {
+          beginAtZero: true
+        }
+      }
+    }
+  });
+</script>
+
+
+<script>
+  const ctx1 = document.getElementById('myChart1');
+
+  new Chart(ctx1, {
+    type: 'bar',
+    data: {
+      labels: ['M.RAM', 'Disco', 'CPU', 'Rede'],
+      datasets: [{
+        label: '# of Votes',
+        data: [10, 15, 20, 25, 30 , 35, 40,45, 50,55,60,65,70,75,80,85,90,95],
+        borderWidth: 1
+      }]
+    },
+    options: {
+      scales: {
+        y: {
+          beginAtZero: true
+        }
+      }
+    }
+  });
+</script>
+
+<script>
+  const ctx2 = document.getElementById('myChart2');
+
+  new Chart(ctx2, {
+    type: 'bar',
+    data: {
+      labels: ['M.RAM', 'Disco', 'CPU', 'Rede'],
+      datasets: [{
+        label: '# of Votes',
+        data: [10, 15, 20, 25, 30 , 35, 40,45, 50,55,60,65,70,75,80,85,90,95],
+        borderWidth: 1
+      }]
+    },
+    options: {
+      scales: {
+        y: {
+          beginAtZero: true
+        }
+      }
+    }
+  });
+</script>
+
+
+<script>
+  const ctx3 = document.getElementById('myChart3');
+
+  new Chart(ctx3, {
+    type: 'bar',
+    data: {
+      labels: ['M.RAM', 'Disco', 'CPU', 'Rede'],
+      datasets: [{
+        label: '# of Votes',
+        data: [10, 15, 20, 25, 30 , 35, 40,45, 50,55,60,65,70,75,80,85,90,95],
+        borderWidth: 1
+      }]
+    },
+    options: {
+      scales: {
+        y: {
+          beginAtZero: true
+        }
+      }
+    }
+  });
+</script>
+
+<script>
+  const ctx4 = document.getElementById('myChart4');
+
+  new Chart(ctx4, {
+    type: 'bar',
+    data: {
+      labels: ['M.RAM', 'Disco', 'CPU', 'Rede'],
+      datasets: [{
+        label: '# of Votes',
+        data: [10, 15, 20, 25, 30 , 35, 40,45, 50,55,60,65,70,75,80,85,90,95],
+        borderWidth: 1
+      }]
+    },
+    options: {
+      scales: {
+        y: {
+          beginAtZero: true
+        }
+      }
+    }
+  });
+</script>
