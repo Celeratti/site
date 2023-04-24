@@ -2,7 +2,7 @@
 
 body {
     margin: 0;
-    background-image: url(../img/Line\ 3.png), url(../img/Line\ 6.png);
+    background-image: url(img/Line\ 3.png), url(img/Line\ 6.png);
     background-repeat: no-repeat;
     font-family: 'Dancing Script', cursive;
     font-family: 'Great Vibes', cursive;
@@ -14,6 +14,20 @@ h1 {
     position: absolute;
     display: flex;
     left: 35%;
+}
+
+#a1{
+text-decoration: none;
+color: black;
+}
+
+#a2 {
+    position: absolute;
+    display: flex;
+    left: 80%;
+    top: 2%;
+    color: black;
+    text-decoration: none;
 }
 
 .botoes {
@@ -140,14 +154,14 @@ h1 {
 }
 
 /* Estação Vila Madalena */
-.estacao1 {
-    border: 1px solid red;
+
+.borda1{
     position: absolute;
     display: flex;
-    top: 10%;
+    top: 5%;
     left: 2%;
-    width: 220px;
-    height: 150px;
+    width: 222px;
+    height: 146px;
     background: rgba(255, 255, 255, 0.35);
     box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
     backdrop-filter: blur(13.5px);
@@ -156,6 +170,16 @@ h1 {
     border: 1px solid rgba(255, 255, 255, 0.18);
 }
 
+.estacao1 {
+    border: 1px solid red;
+    position: absolute;
+    display: flex;
+    top: -6%;
+    left: 1%;
+    width: 220px;
+    height: 150px;   
+    border: 1px solid rgba(255, 255, 255, 0.18);
+}
 
 .estacao1 #myChart{
     position: absolute;
@@ -177,14 +201,14 @@ h1 {
     left: 32%;
 }
 
-.estacao2 {
+.borda2{
     border: 1px solid red;
     position: absolute;
     display: flex;
-    top: 10%;
+    top: 5%;
     left: 27%;
-    width: 220px;
-    height: 150px;
+    width: 222px;
+    height: 146px;
     background: rgba(255, 255, 255, 0.35);
     box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
     backdrop-filter: blur(13.5px);
@@ -193,15 +217,25 @@ h1 {
     border: 1px solid rgba(255, 255, 255, 0.18);
 }
 
+.estacao2 {
+    border: 1px solid red;
+    position: absolute;
+    display: flex;
+    top: -6%;
+    left: 2%;
+    width: 220px;
+    height: 150px;
+    border-radius: 10px;
+    border: 1px solid rgba(255, 255, 255, 0.18);
+}
 
 .estacao2 #myChart1{
     position: absolute;
     display: flex;
-    flex-direction: column;
     top: 30%;
     right: 2%;
-    width: 40px;
-    height: 40px;
+    width: 40%;
+    height: 40%;
 }
 
 /* Fim Estação Tamanduateí */
@@ -214,18 +248,32 @@ h1 {
     left: 59%;
 }
 
-.estacao3 {
+
+.borda3{
     border: 1px solid red;
     position: absolute;
     display: flex;
-    top: 10%;
+    top: 5%;
     left: 52%;
-    width: 220px;
-    height: 150px;
+    width: 222px;
+    height: 146px;
     background: rgba(255, 255, 255, 0.35);
     box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
     backdrop-filter: blur(13.5px);
     -webkit-backdrop-filter: blur(13.5px);
+    border-radius: 10px;
+    border: 1px solid rgba(255, 255, 255, 0.18);
+}
+
+
+.estacao3 {
+    border: 1px solid red;
+    position: absolute;
+    display: flex;
+    top: -4%;
+    left: 2%;
+    width: 220px;
+    height: 150px;
     border-radius: 10px;
     border: 1px solid rgba(255, 255, 255, 0.18);
 }
@@ -249,18 +297,32 @@ h1 {
     left: 80%;
 }
 
-.estacao4 {
+
+.borda4{
     border: 1px solid red;
     position: absolute;
     display: flex;
-    top: 10%;
+    top: 5%;
     left: 77%;
-    width: 220px;
-    height: 150px;
+    width: 222px;
+    height: 146px;
     background: rgba(255, 255, 255, 0.35);
     box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
     backdrop-filter: blur(13.5px);
     -webkit-backdrop-filter: blur(13.5px);
+    border-radius: 10px;
+    border: 1px solid rgba(255, 255, 255, 0.18);
+}
+
+
+.estacao4 {
+    border: 1px solid red;
+    position: absolute;
+    display: flex;
+    top: -4%;
+    left: 2%;
+    width: 220px;
+    height: 150px;
     border-radius: 10px;
     border: 1px solid rgba(255, 255, 255, 0.18);
 }
@@ -286,18 +348,30 @@ h1 {
     left: 5%;
 }
 
-.estacao5 {
+.borda5{
     border: 1px solid red;
     position: absolute;
     display: flex;
     top: 50%;
     left: 2%;
-    width: 220px;
+    width: 222px;
     height: 150px;
     background: rgba(255, 255, 255, 0.35);
     box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
     backdrop-filter: blur(13.5px);
     -webkit-backdrop-filter: blur(13.5px);
+    border-radius: 10px;
+    border: 1px solid rgba(255, 255, 255, 0.18);
+}
+
+.estacao5 {
+    border: 1px solid red;
+    position: absolute;
+    display: flex;
+    top: -4%;
+    left: 2%;
+    width: 220px;
+    height: 150px;
     border-radius: 10px;
     border: 1px solid rgba(255, 255, 255, 0.18);
 }
@@ -323,18 +397,30 @@ h1 {
     top: 40%;
 }
 
-.estacao6 {
+.borda6{
     border: 1px solid red;
     position: absolute;
     display: flex;
     top: 50%;
     left: 27%;
-    width: 220px;
+    width: 222px;
     height: 150px;
     background: rgba(255, 255, 255, 0.35);
     box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
     backdrop-filter: blur(13.5px);
     -webkit-backdrop-filter: blur(13.5px);
+    border-radius: 10px;
+    border: 1px solid rgba(255, 255, 255, 0.18);
+}
+
+.estacao6 {
+    border: 1px solid red;
+    position: absolute;
+    display: flex;
+    top: -4%;
+    left: 2%;
+    width: 220px;
+    height: 150px;
     border-radius: 10px;
     border: 1px solid rgba(255, 255, 255, 0.18);
 }
@@ -359,18 +445,29 @@ h1 {
     top: 40%;
 }
 
-.estacao7 {
+.borda7{
     border: 1px solid red;
     position: absolute;
     display: flex;
     top: 50%;
     left: 52%;
-    width: 220px;
+    width: 222px;
     height: 150px;
     background: rgba(255, 255, 255, 0.35);
     box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
     backdrop-filter: blur(13.5px);
     -webkit-backdrop-filter: blur(13.5px);
+    border-radius: 10px;
+    border: 1px solid rgba(255, 255, 255, 0.18);
+}
+.estacao7 {
+    border: 1px solid red;
+    position: absolute;
+    display: flex;
+    top: -4%;
+    left: 2%;
+    width: 220px;
+    height: 150px;
     border-radius: 10px;
     border: 1px solid rgba(255, 255, 255, 0.18);
 }
@@ -396,18 +493,30 @@ h1 {
     left: 7%;
 }
 
-.estacao8 {
+.borda8{
     border: 1px solid red;
     position: absolute;
     display: flex;
-    top: 10%;
+    top: 5%;
     left: 2%;
-    width: 220px;
+    width: 222px;
     height: 150px;
     background: rgba(255, 255, 255, 0.35);
     box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
     backdrop-filter: blur(13.5px);
     -webkit-backdrop-filter: blur(13.5px);
+    border-radius: 10px;
+    border: 1px solid rgba(255, 255, 255, 0.18);
+}
+
+.estacao8 {
+    border: 1px solid red;
+    position: absolute;
+    display: flex;
+    top: -4%;
+    left: 2%;
+    width: 220px;
+    height: 150px;
     border-radius: 10px;
     border: 1px solid rgba(255, 255, 255, 0.18);
 }
@@ -431,18 +540,30 @@ h1 {
     left: 32%;
 }
 
-.estacao9 {
+.borda9{
     border: 1px solid red;
     position: absolute;
     display: flex;
-    top: 10%;
+    top: 5%;
     left: 27%;
-    width: 220px;
+    width: 222px;
     height: 150px;
     background: rgba(255, 255, 255, 0.35);
     box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
     backdrop-filter: blur(13.5px);
     -webkit-backdrop-filter: blur(13.5px);
+    border-radius: 10px;
+    border: 1px solid rgba(255, 255, 255, 0.18);  
+}
+
+.estacao9 {
+    border: 1px solid red;
+    position: absolute;
+    display: flex;
+    top: -4%;
+    left: 2%;
+    width: 220px;
+    height: 150px;
     border-radius: 10px;
     border: 1px solid rgba(255, 255, 255, 0.18);
 }
@@ -468,18 +589,30 @@ h1 {
     left: 57%;
 }
 
-.estacao10 {
+.borda10{
     border: 1px solid red;
     position: absolute;
     display: flex;
-    top: 10%;
+    top: 5%;
     left: 52%;
-    width: 220px;
+    width: 222px;
     height: 150px;
     background: rgba(255, 255, 255, 0.35);
     box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
     backdrop-filter: blur(13.5px);
     -webkit-backdrop-filter: blur(13.5px);
+    border-radius: 10px;
+    border: 1px solid rgba(255, 255, 255, 0.18);   
+}
+
+.estacao10 {
+    border: 1px solid red;
+    position: absolute;
+    display: flex;
+    top: -4%;
+    left: 2%;
+    width: 220px;
+    height: 150px;
     border-radius: 10px;
     border: 1px solid rgba(255, 255, 255, 0.18);
 }
@@ -504,18 +637,30 @@ h1 {
     left: 84%;
 }
 
-.estacao11 {
+.borda11{
     border: 1px solid red;
     position: absolute;
     display: flex;
-    top: 10%;
+    top: 5%;
     left: 77%;
-    width: 220px;
+    width: 222px;
     height: 150px;
     background: rgba(255, 255, 255, 0.35);
     box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
     backdrop-filter: blur(13.5px);
     -webkit-backdrop-filter: blur(13.5px);
+    border-radius: 10px;
+    border: 1px solid rgba(255, 255, 255, 0.18); 
+}
+
+.estacao11 {
+    border: 1px solid red;
+    position: absolute;
+    display: flex;
+    top: -4%;
+    left: 2%;
+    width: 220px;
+    height: 150px;
     border-radius: 10px;
     border: 1px solid rgba(255, 255, 255, 0.18);
 }
@@ -540,18 +685,30 @@ h1 {
     left: 8%;
 }
 
-.estacao12 {
+.borda12{
     border: 1px solid red;
     position: absolute;
     display: flex;
     top: 50%;
     left: 2%;
-    width: 220px;
+    width: 222px;
     height: 150px;
     background: rgba(255, 255, 255, 0.35);
     box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
     backdrop-filter: blur(13.5px);
     -webkit-backdrop-filter: blur(13.5px);
+    border-radius: 10px;
+    border: 1px solid rgba(255, 255, 255, 0.18);  
+}
+
+.estacao12 {
+    border: 1px solid red;
+    position: absolute;
+    display: flex;
+    top: -4%;
+    left: 2%;
+    width: 220px;
+    height: 150px;
     border-radius: 10px;
     border: 1px solid rgba(255, 255, 255, 0.18);
 }
@@ -575,19 +732,30 @@ h1 {
     left: 32%;
     top: 40%;
 }
-
-.estacao13 {
+.borda13{
     border: 1px solid red;
     position: absolute;
     display: flex;
     top: 50%;
     left: 27%;
-    width: 220px;
+    width: 222px;
     height: 150px;
     background: rgba(255, 255, 255, 0.35);
     box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
     backdrop-filter: blur(13.5px);
     -webkit-backdrop-filter: blur(13.5px);
+    border-radius: 10px;
+    border: 1px solid rgba(255, 255, 255, 0.18);  
+}
+
+.estacao13 {
+    border: 1px solid red;
+    position: absolute;
+    display: flex;
+    top: -4%;
+    left: 2%;
+    width: 220px;
+    height: 150px;
     border-radius: 10px;
     border: 1px solid rgba(255, 255, 255, 0.18);
 }
