@@ -6,14 +6,21 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Maquina-Cadastro</title>
     <link rel="stylesheet" href="assets/css/index.css">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.inputmask/3.3.4/jquery.inputmask.bundle.min.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script&family=Great+Vibes&family=Poppins:wght@300&family=Raleway&display=swap" rel="stylesheet">
+    
 </head>
 <body>
 
 
 
-    <h1 class="tituloPrincipal">CELERATTI</h1>
+    <!--<h1 class="tituloPrincipal">CELERATTI</h1>-->
+    <div class="teste-logo"> 
+        <img src="assets/img/CELERATTI.png" alt="">
+    </div>
     <img src="assets/img/seta.png" class="seta" alt="">
 
     <h1 class="nomeEmpresa">Via Mobilidade</h1>
@@ -22,7 +29,7 @@
 <button id="btn_add" data-toggle="modal" data-target="#exampleModal" onclick="Adicionar()"> Add Máquina</button>
 <img src="assets/img/lupa.png" alt="" id="icon_lupa">
 <input type="text" id="ipt_pesquisar" placeholder="Pesquisar">
-<table id="customers">
+<table id="tabela">
 
     <th>Estação</th>
     <th>Andar</th>
@@ -100,7 +107,7 @@
         </div>
         <div class="form-group">
             <label for="telefone">Fabricante:</label>
-            <input id="telefone" type="text" placeholder="" oninput="validarTelefone()">
+            <input id="telefone" type="text" placeholder="">
             <section id="labelTelefone">Fabricante Inválido</section>
 
         </div>
@@ -147,7 +154,6 @@
 </html>
 
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.inputmask/3.3.4/jquery.inputmask.bundle.min.js"></script>
 
         <script>
             var acao =""
@@ -220,10 +226,10 @@
                 novaImagem2.setAttribute("onclick", "Excluir('Maria', 'Oliveira Sales')");
 
                 colunaNome.innerHTML =nomeRecebido
-                colunaSobrenome.innerHTML =sobreNomeRecebido
-                colunaEmail.innerHTML =emailRecebido
-                colunaTelefone.innerHTML =telefoneRecebido
-                colunaTokem.innerHTML ="847"
+                colunaSobrenome.innerHTML =document.querySelector("#nome2").value
+                colunaEmail.innerHTML =document.querySelector("#sobrenome").value
+                colunaTelefone.innerHTML = document.querySelector("#email").value
+                colunaTokem.innerHTML =document.querySelector("#telefone").value
                 colunaCargo.innerHTML =cargoRecebido
 
                  novaLinha.appendChild(colunaNome);
@@ -240,7 +246,7 @@
 
                  novaLinha.appendChild(tdImagens);               
 
-                 var tabela = document.getElementById("customers").getElementsByTagName("tbody")[0];
+                 var tabela = document.getElementById("tabela").getElementsByTagName("tbody")[0];
                  tabela.appendChild(novaLinha);
 
                 }
@@ -248,8 +254,8 @@
                     
                     linhaEscolhida.getElementsByTagName("td")[0].innerHTML = document.querySelector("#nome").value
                     linhaEscolhida.getElementsByTagName("td")[1].innerHTML = document.querySelector("#nome2").value
-                    linhaEscolhida.getElementsByTagName("td")[2].innerHTML = document.querySelector("#email").value
-                    linhaEscolhida.getElementsByTagName("td")[3].innerHTML = document.querySelector("#telefone").value
+                    linhaEscolhida.getElementsByTagName("td")[2].innerHTML = document.querySelector("#sobrenome").value
+                    linhaEscolhida.getElementsByTagName("td")[3].innerHTML = document.querySelector("#email").value
                     linhaEscolhida.getElementsByTagName("td")[4].innerHTML = document.querySelector("#telefone").value
                     linhaEscolhida.getElementsByTagName("td")[5].innerHTML = document.querySelector("#cargo").value
                 }
@@ -279,11 +285,7 @@
 
    
             
-            window.onclick = function(event) {
-                if (event.target == modal) {
-                    modal.style.display = "none";
-                }
-            }
+  
 
             function validarNome(){
                 var nome = document.querySelector("#nome").value
@@ -341,17 +343,22 @@ function CancelarEx(){
 
 
 var campoPesquisa = document.getElementById("ipt_pesquisar");
-var tabela = document.getElementById("customers");
+var tabela = document.getElementById("tabela");
 campoPesquisa.addEventListener("input", function() {
   // Obter o valor do campo de pesquisa
   var valor = campoPesquisa.value.toLowerCase();
   // Obter todas as linhas da tabela (exceto o cabeçalho)
   var linhas = tabela.getElementsByTagName("tr");
+
+
+
+
   for (var i = 1; i < linhas.length; i++) {
     // Obter o valor das células da linha (nome e sobrenome)
     var nome = linhas[i].getElementsByTagName("td")[0].textContent.toLowerCase();
     var sobrenome = linhas[i].getElementsByTagName("td")[1].textContent.toLowerCase();
     // Verificar se o nome ou sobrenome contém o valor pesquisado
+    console.log(nome.indexOf(valor))
     if (nome.indexOf(valor) >= 0 || sobrenome.indexOf(valor) >= 0) {
       // Se o nome ou sobrenome contém o valor pesquisado, mostrar a linha
       linhas[i].style.display = "";
@@ -363,11 +370,7 @@ campoPesquisa.addEventListener("input", function() {
 });
    
             
-            window.onclick = function(event) {
-                if (event.target == modalEx) {
-                    modalEx.style.display = "none";
-                }
-            }
+  
 
         </script>
 

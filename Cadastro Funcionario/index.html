@@ -6,10 +6,17 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Funcinario-Cadastro</title>
     <link rel="stylesheet" href="assets/css/index.css">
-    <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Dancing+Script&family=Great+Vibes&family=Poppins:wght@300&family=Raleway&display=swap" rel="stylesheet">
+
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.inputmask/3.3.4/jquery.inputmask.bundle.min.js"></script>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Dancing+Script&family=Great+Vibes&family=Poppins:wght@300&family=Raleway&display=swap" rel="stylesheet">
+
+  
 </head>
 <body>
     <!--<h1 class="tituloPrincipal">CELERATTI</h1>-->
@@ -26,7 +33,7 @@
 <img src="assets/img/lupa.png" alt="" id="icon_lupa">
 <input type="text" id="ipt_pesquisar" placeholder="Pesquisar">
 
-<table id="customers">
+<table id="tabela">
 
     <th>Nome</th>
     <th>Sobrenome</th>
@@ -119,7 +126,7 @@
         </div>
     </div>
 
-	<div class="modalEx" id="modalEx">
+	<div class="modalEx" id="modalEx" onclick="fecharModal()">
 		<div class="modalEx-content">
 			<div class="modalEx-header">
 				Adicionar novo funcionário
@@ -146,6 +153,11 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.inputmask/3.3.4/jquery.inputmask.bundle.min.js"></script>
 
         <script>
+
+        function fecharModal(){
+            modalEx.style.display = "none";
+        }
+            
             var acao =""
             var linhaEscolhida = "";
 
@@ -160,7 +172,6 @@
 
                 acao ="Editar"
                 linhaEscolhida = celulaLapis.parentNode.parentNode;
-                console.log(linhaEscolhida)
                 
             }   
             const modalEx = document.getElementById("modalEx");
@@ -170,7 +181,6 @@
                 modalEx.style.display = "block";
                 document.querySelector("#lblExcluir").innerHTML = "Deseja realmente excluir o funcionário(a) "+nome +" "+ sobrenome+ "?"
                 linhaEscolhida = celulaLixeira.parentNode.parentNode;
-                console.log(linhaEscolhida)
             }
                 
 
@@ -234,7 +244,7 @@
 
                  novaLinha.appendChild(tdImagens);               
 
-                 var tabela = document.getElementById("customers").getElementsByTagName("tbody")[0];
+                 var tabela = document.getElementById("tabela").getElementsByTagName("tbody")[0];
                  tabela.appendChild(novaLinha);
 
                 }
@@ -274,11 +284,7 @@
                 $('#telefone').inputmask('(99) 9999-99999');
             });
             
-            window.onclick = function(event) {
-                if (event.target == modal) {
-                    modal.style.display = "none";
-                }
-            }
+            fecharModal()
 
             function validarNome(){
                 var nome = document.querySelector("#nome").value
@@ -334,10 +340,8 @@
             }
 
 function ExcluirFinal(){
-// obtém a linha que contém a célula de lixeira clicada
 var linha = linhaEscolhida
 
-// remove a linha da tabela
 linha.parentNode.removeChild(linha);
     modalEx.style.display = "none";
 }
@@ -350,7 +354,7 @@ function CancelarEx(){
 
 
 var campoPesquisa = document.getElementById("ipt_pesquisar");
-var tabela = document.getElementById("customers");
+var tabela = document.getElementById("tabela");
 campoPesquisa.addEventListener("input", function() {
   // Obter o valor do campo de pesquisa
   var valor = campoPesquisa.value.toLowerCase();
@@ -372,10 +376,7 @@ campoPesquisa.addEventListener("input", function() {
 });
    
             
-            window.onclick = function(event) {
-                if (event.target == modalEx) {
-                    modalEx.style.display = "none";
-                }
-            }
+   
+      
 
         </script>
