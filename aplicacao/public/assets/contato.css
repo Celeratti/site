@@ -251,6 +251,10 @@ button{
 }
 
 
+#emailRodape{
+    margin-top: -30px;
+}
+
 @media (max-width: 900px){
     .formulario{
         left: 0px;
