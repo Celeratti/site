@@ -1,32 +1,19 @@
 var mysql = require("mysql2");
 var sql = require('mssql');
 
-// CONEXÃO DO SQL SERVER - AZURE (NUVEM)
-var sqlServerConfig = {
-    server: "SEU_SERVIDOR",
-    database: "SEU_BANCO_DE_DADOS",
-    user: "SEU_USUARIO",
-    password: "SUA_SENHA",
-    pool: {
-        max: 10,
-        min: 0,
-        idleTimeoutMillis: 30000
-    },
-    options: {
-        encrypt: true, // for azure
-    }
-}
-
 // CONEXÃO DO MYSQL WORKBENCH (LOCAL)
 var mySqlConfig = {
     host: "localhost",
-    database: "aquatech",
+    database: "celeratti",
     user: "root",
-    password: "pmp2003",
+    password: "**teste9019K1",
 };
 
 function executar(instrucao) {
     // VERIFICA A VARIÁVEL DE AMBIENTE SETADA EM app.js
+    process.env.AMBIENTE_PROCESSO = "desenvolvimento"
+    console.log("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA")
+
     if (process.env.AMBIENTE_PROCESSO == "producao") {
         return new Promise(function (resolve, reject) {
             sql.connect(sqlServerConfig).then(function () {
@@ -44,6 +31,10 @@ function executar(instrucao) {
         });
     } else if (process.env.AMBIENTE_PROCESSO == "desenvolvimento") {
         return new Promise(function (resolve, reject) {
+
+            console.log("BBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB")
+
+
             var conexao = mysql.createConnection(mySqlConfig);
             conexao.connect();
             conexao.query(instrucao, function (erro, resultados) {

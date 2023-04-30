@@ -68,7 +68,7 @@ color: #80131b;
 width: 88%;
 height: 62px;
 margin-left: 62px;
-top: -20px;
+top: -30px;
 
 font-family: 'Inter';
 font-style: normal;
@@ -103,16 +103,16 @@ z-index: 2;
 .formulario{
     position: relative;
     width: 95%;
-    height: 470px;
+    height: 510px;
     left: 60px;
-    top: -32px;
+    top: -62px;
     background: rgba(255, 255, 255, 0.65);
 
 }
 
 ul li{
     position: relative;
-    top: 20px;
+    top: 10px;
     width: 30%;
 }
 
@@ -141,7 +141,7 @@ ul{
 #linkCadastro{
     position: relative;
     left: 150px;
-    margin-top: 35px;
+    margin-top: 15px;
     font-size: 11pt;
     width: 32%;
     font-family: Arial, Helvetica, sans-serif;
@@ -160,12 +160,12 @@ ul{
 
 input{
     width: 90%;
-    margin-bottom: 2rem;
+    margin-bottom: 5px;
     border: none;
     border-bottom: 1px solid #9F111B;
     background: none;
     color: black;
-    margin-top: 20px;
+    margin-top: 10px;
     margin-bottom: 10px;
     margin-left: 15px;
 }
@@ -227,7 +227,7 @@ button{
 }
 
 #emailRodape{
-    margin-top: -25px;
+    margin-top: -55px;
 }
 
 
