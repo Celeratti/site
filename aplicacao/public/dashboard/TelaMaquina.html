@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="css/telamaquina.css">
+  <title>Componentes</title>
+  <link rel="shortcut icon" href="./assets/img/celeratti-mascote.png" type="image/x-icon">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Dancing+Script&family=Great+Vibes&family=Poppins:wght@300&family=Raleway&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+  <main>
+
+    <div id="titulo">
+      <h1>ViaMobilidade | Máquina 01</h1>
+
+      <link rel="stylesheet" href="">
+    </div>
+
+    <a href="dashInicio.html">Voltar para a tela de máquinas</a>
+
+    <div id="disco">
+      <canvas id="myChart"></canvas>
+      <div class="bolinhaAlerta"></div>
+    </div>
+    <div class="legendaDisco">
+      <details>
+        <summary>Legendas Disco</summary>
+        <img src="img/Group 93tempmetricas.png" alt="">
+        <p>O uso do Disco Aumentou 5% nessa semana, e entrou em estado critico</p>
+      </details>
+    </div>
+
+
+    <div id="cpu">
+      <canvas id="myChart2"></canvas>
+      <div class="bolinhaAlerta"></div>
+    </div>
+    <div class="legendaCpu">
+      <details>
+        <summary>Legendas CPU</summary>
+        <img src="img/Group 94tempmetricas.png" alt="">
+        <p>O uso da CPU Aumentou 5% nessa semana, e entrou em estado critico</p>
+      </details>
+    </div>
+
+    <div id="rede">
+      <canvas id="myChart3"></canvas>
+      <div class="bolinhaAlerta3"></div>
+    </div>
+    <div class="legendaRede">
+      <details>
+        <summary>Legendas Rede</summary>
+        <img src="img/Group 96tempmetricas.png" alt="">
+        <p>O uso da Rede Aumentou 5% nessa semana, e entrou em estado critico</p>
+      </details>
+    </div>
+
+    <div id="memoriaEmUso">
+      <canvas id="myChart4"></canvas>
+      <div class="bolinhaAlerta2"></div>
+    </div>
+    <div class="legendaMemoriaEmUso">
+      <details>
+        <summary>Legendas Memoria</summary>
+        <img src="img/Group 95tempmetricas.png" alt="">
+        <p>O uso da Memoria RAM Aumentou 5% nessa semana, e entrou em estado critico</p>    
+      </details>
+    </div>  
+
+  </main>
+
+</body>
+
+</html>
+
+
+<script>
+
+  function obterDadosGrafico(idMaquina) {
+    
+  
+
+  }
+
+  function obterDadosCpu() {
+    
+    fetch(`medidas/ultimas/${idMaquina}`).then(function (response) {
+      if (response.ok) {
+        response.json().then(function (resposta) {
+          console.log(`Dados recebidos: ${JSON.stringify(resposta)}`);
+          resposta.reverse();
+
+          plotarGrafico(respostam, idMaquina);
+        })
+      } else{
+        console.error(`Nenhum dado encontrado ou erro na API`);
+      }
+    })
+        .catch(function (error) {
+          console.error(`Erro na obtenção dos dados p/ gráfico: ${error.message}`)
+        });
+  }
+
+    function plotarGrafico(resposta, idMaquina) {
+        console.log(`iniciando plotagem do gráfico...`);
+
+        let labels = [];
+
+        let dados = {
+        label: labels,
+        datasets: [{
+          label: `Porcentagem de uso`,
+          data: [],
+          fill: false,
+        }]   
+        };
+
+        for (i = 0;i < resposta.lenght; i++) {
+            var registro = resposta[i];
+            labels.push(registro);
+            dados.datasets[0].data.push(registro)
+        }
+    }
+
+
+
+  const ctx = document.getElementById('myChart');
+
+  new Chart(ctx, {
+    type: 'line',
+    data: {
+      labels: ['Segunda', 'Terça', 'Quarta', 'Quinta', 'Sexta'],
+      datasets: [{
+        label: 'Porcentagem de uso na última semana',
+        data: [10, 15, 22, 35, 30 , 35, 45,45, 50,55,22,65,13,75,20,65,90,95],
+        borderWidth: 1
+      }]
+    },
+    options: {
+      scales: {
+        y: {
+          beginAtZero: true
+        }
+      }
+    }
+  });
+</script>
+
+<script>
+  const ctx2 = document.getElementById('myChart2');
+
+  new Chart(ctx2, {
+    type: 'line',
+    data: {
+      labels: ['Segunda', 'Terça', 'Quarta', 'Quinta', 'Sexta'],
+      datasets: [{
+        label: 'Porcentagem de uso na última semana',
+        data: [80, 15, 20, 15, 30 , 22, 40,45, 60,65,60,65,70,75,80,85,90,95],
+        borderWidth: 1
+      }]
+    },
+    options: {
+      scales: {
+        y: {
+          beginAtZero: true
+        }
+      }
+    }
+  });
+</script>
+
+<script>
+  const ctx3 = document.getElementById('myChart3');
+
+  new Chart(ctx3, {
+    type: 'line',
+    data: {
+      labels: ['Segunda', 'Terça', 'Quarta', 'Quinta', 'Sexta'],
+      datasets: [{
+        label: 'Porcentagem de uso na última semana',
+        data: [10, 15, 20, 33, 30 , 35, 40,45, 50,55,34,65,70,34,80,85,22,95],
+        borderWidth: 1
+      }]
+    },
+    options: {
+      scales: {
+        y: {
+          beginAtZero: true
+        }
+      }
+    }
+  });
+</script>
+
+<script>
+  const ctx4 = document.getElementById('myChart4');
+
+  new Chart(ctx4, {
+    type: 'line',
+    data: {
+      labels: ['Segunda', 'Terça', 'Quarta', 'Quinta', 'Sexta'],
+      datasets: [{
+        label: 'Porcentagem de uso na última semana',
+        data: [78, 35, 20, 25, 34 , 35, 60,45, 54,45,60,35,70,75,80,85,90,95],
+        borderWidth: 1
+      }]
+    },
+    options: {
+      scales: {
+        y: {
+          beginAtZero: true
+        }
+      }
+    }
+  });
+</script>
+
