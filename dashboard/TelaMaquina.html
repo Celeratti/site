@@ -19,7 +19,7 @@
   <main>
 
     <div id="titulo">
-      <h1>ViaMobildiade | Máquina 01</h1>
+      <h1>ViaMobilidade | Máquina 01</h1>
 
       <link rel="stylesheet" href="">
     </div>
@@ -83,6 +83,55 @@
 
 
 <script>
+
+  function obterDadosGrafico(idMaquina) {
+    
+  
+
+  }
+
+  function obterDadosCpu() {
+    
+    fetch(`medidas/ultimas/${idMaquina}`).then(function (response) {
+      if (response.ok) {
+        response.json().then(function (resposta) {
+          console.log(`Dados recebidos: ${JSON.stringify(resposta)}`);
+          resposta.reverse();
+
+          plotarGrafico(respostam, idMaquina);
+        })
+      } else{
+        console.error(`Nenhum dado encontrado ou erro na API`);
+      }
+    })
+        .catch(function (error) {
+          console.error(`Erro na obtenção dos dados p/ gráfico: ${error.message}`)
+        });
+  }
+
+    function plotarGrafico(resposta, idMaquina) {
+        console.log(`iniciando plotagem do gráfico...`);
+
+        let labels = [];
+
+        let dados = {
+        label: labels,
+        datasets: [{
+          label: `Porcentagem de uso`,
+          data: [],
+          fill: false,
+        }]   
+        };
+
+        for (i = 0;i < resposta.lenght; i++) {
+            var registro = resposta[i];
+            labels.push(registro);
+            dados.datasets[0].data.push(registro)
+        }
+    }
+
+
+
   const ctx = document.getElementById('myChart');
 
   new Chart(ctx, {
@@ -90,7 +139,7 @@
     data: {
       labels: ['Segunda', 'Terça', 'Quarta', 'Quinta', 'Sexta'],
       datasets: [{
-        label: 'Quantidade  de Uso na útlima semana',
+        label: 'Porcentagem de uso na última semana',
         data: [10, 15, 22, 35, 30 , 35, 45,45, 50,55,22,65,13,75,20,65,90,95],
         borderWidth: 1
       }]
@@ -113,7 +162,7 @@
     data: {
       labels: ['Segunda', 'Terça', 'Quarta', 'Quinta', 'Sexta'],
       datasets: [{
-        label: 'Quantidade  de Uso na útlima semana',
+        label: 'Porcentagem de uso na última semana',
         data: [80, 15, 20, 15, 30 , 22, 40,45, 60,65,60,65,70,75,80,85,90,95],
         borderWidth: 1
       }]
@@ -136,7 +185,7 @@
     data: {
       labels: ['Segunda', 'Terça', 'Quarta', 'Quinta', 'Sexta'],
       datasets: [{
-        label: 'Quantidade  de Uso na útlima semana',
+        label: 'Porcentagem de uso na última semana',
         data: [10, 15, 20, 33, 30 , 35, 40,45, 50,55,34,65,70,34,80,85,22,95],
         borderWidth: 1
       }]
@@ -159,7 +208,7 @@
     data: {
       labels: ['Segunda', 'Terça', 'Quarta', 'Quinta', 'Sexta'],
       datasets: [{
-        label: 'Quantidade  de Uso na útlima semana',
+        label: 'Porcentagem de uso na última semana',
         data: [78, 35, 20, 25, 34 , 35, 60,45, 54,45,60,35,70,75,80,85,90,95],
         borderWidth: 1
       }]
