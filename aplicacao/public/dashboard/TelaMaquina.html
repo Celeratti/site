@@ -27,7 +27,7 @@
     <a href="dashInicio.html">Voltar para a tela de máquinas</a>
 
     <div id="disco">
-      <canvas id="myChart"></canvas>
+      <canvas id="myChartCanvasDisco"></canvas>
       <div class="bolinhaAlerta"></div>
     </div>
     <div class="legendaDisco">
@@ -40,7 +40,7 @@
 
 
     <div id="cpu">
-      <canvas id="myChart2"></canvas>
+      <canvas id="myChartCanvasCpu"></canvas>
       <div class="bolinhaAlerta"></div>
     </div>
     <div class="legendaCpu">
@@ -83,23 +83,28 @@
 
 
 <script>
+  var idMaquina = 1;
 
-  function obterDadosGrafico(idMaquina) {
+  window.onload = obterDadosGrafico();
+
+  function obterDadosGrafico() {
+    obterDadosDisco(idMaquina);
+    obterDadosCpu(idMaquina);
     
   
 
   }
 
-  function obterDadosCpu() {
+  function obterDadosCpu(idMaquina) {
     
-    fetch(`medidas/ultimas/${idMaquina}`).then(function (response) {
+    fetch(`/medidas/ultimas/cpu/${idMaquina}`, {cache: 'no-store'}).then(function (response) {
       if (response.ok) {
         response.json().then(function (resposta) {
           console.log(`Dados recebidos: ${JSON.stringify(resposta)}`);
           resposta.reverse();
 
-          plotarGrafico(respostam, idMaquina);
-        })
+          plotarGraficoCpu(resposta, idMaquina);
+        });
       } else{
         console.error(`Nenhum dado encontrado ou erro na API`);
       }
@@ -109,117 +114,205 @@
         });
   }
 
-    function plotarGrafico(resposta, idMaquina) {
+    function plotarGraficoCpu(resposta, idMaquina) {
         console.log(`iniciando plotagem do gráfico...`);
 
         let labels = [];
 
         let dados = {
-        label: labels,
+        labels: labels,
         datasets: [{
           label: `Porcentagem de uso`,
           data: [],
           fill: false,
+          borderColor: 'rgb(75, 192, 192)',
+          tension: 0.1
         }]   
         };
 
-        for (i = 0;i < resposta.lenght; i++) {
+        console.log('----------------------------------------------')
+        console.log('Estes dados foram recebidos pela funcao "obterDadosGrafico" e passados para "plotarGrafico":')
+        console.log(resposta)
+
+        for (i = 0;i < resposta.length; i++) {
             var registro = resposta[i];
-            labels.push(registro);
-            dados.datasets[0].data.push(registro)
+            labels.push(registro.momento_grafico);
+            dados.datasets[0].data.push(registro.cpu);
         }
+
+        console.log('----------------------------------------------')
+        console.log('O gráfico será plotado com os respectivos valores:')
+        console.log('Labels:')
+        console.log(labels)
+        console.log('Dados:')
+        console.log(dados.datasets)
+        console.log('----------------------------------------------')
+
+        // Criando estrutura para plotar gráfico - config
+        const config = {
+            type: 'line',
+            data: dados,
+        };
+
+        let myChart = new Chart(
+          document.getElementById(`myChartCanvasCpu`),
+          config
+        );
+
+        setTimeout(() => atualizarGraficoCpu(idMaquina,dados,myChart),2000);
     }
 
+    function atualizarGraficoCpu(idMaquina,dados,myChart) {
+      
+      fetch(`/medidas/tempo-real/cpu/${idMaquina}`, { cache: `no-store` }).then(function (response) {
+        if (response.ok) {
+          response.json().then(function (novoRegistro) {
 
+            console.log(`Dados recebidos: ${JSON.stringify(novoRegistro)}`);
+            console.log(`Dados atuais do gráfico`);
+            console.log(dados);
 
-  const ctx = document.getElementById('myChart');
+            if(novoRegistro[0].momento_grafico == dados.labels[dados.labels.lenght - 1]) {
+              console.log("---------------------------------------------------------------")
+                        console.log("Como não há dados novos para captura, o gráfico não atualizará.")
+                        console.log("Horário do novo dado capturado:")
+                        console.log(novoRegistro[0].momento_grafico)
+                        console.log("Horário do último dado capturado:")
+                        console.log(dados.labels[dados.labels.length - 1])
+                        console.log("---------------------------------------------------------------") 
+            } else{
 
-  new Chart(ctx, {
-    type: 'line',
-    data: {
-      labels: ['Segunda', 'Terça', 'Quarta', 'Quinta', 'Sexta'],
-      datasets: [{
-        label: 'Porcentagem de uso na última semana',
-        data: [10, 15, 22, 35, 30 , 35, 45,45, 50,55,22,65,13,75,20,65,90,95],
-        borderWidth: 1
-      }]
-    },
-    options: {
-      scales: {
-        y: {
-          beginAtZero: true
+              dados.labels.shift();
+              dados.labels.push(novoRegistro[0].momento_grafico);
+
+              dados.datasets[0].data.shift();
+              dados.datasets[0].data.push(novoRegistro[0].cpu);
+
+              myChart.update();
+            }
+            
+            proximaAtualizacao = setTimeout(() => atualizarGrafico(idMaquina, dados, myChart),60000);
+
+          });
+        } else{
+          console.error('Nenhum dado encontrado ou erro na API');
+          proximaAtualizacao = setTimeout(() => atualizarGrafico(idMaquina,dados,myChart),60000);
         }
+      })
+        .catch(function (error) {
+          console.error(`Erro na obtenção dos dados p/ gráfico ${error.message}`)
+        })
+    }
+
+    //Graficos Disco
+
+    function obterDadosDisco(idMaquina) {
+    
+    fetch(`/medidas/ultimas/disco/${idMaquina}`, {cache: 'no-store'}).then(function (response) {
+      if (response.ok) {
+        response.json().then(function (resposta) {
+          console.log(`Dados recebidos: ${JSON.stringify(resposta)}`);
+          resposta.reverse();
+
+          plotarGraficoDisco(resposta, idMaquina);
+        });
+      } else{
+        console.error(`Nenhum dado encontrado ou erro na API`);
       }
-    }
-  });
-</script>
+    })
+        .catch(function (error) {
+          console.error(`Erro na obtenção dos dados p/ gráfico: ${error.message}`)
+        });
+  }
 
-<script>
-  const ctx2 = document.getElementById('myChart2');
+    function plotarGraficoDisco(resposta, idMaquina) {
+        console.log(`iniciando plotagem do gráfico...`);
 
-  new Chart(ctx2, {
-    type: 'line',
-    data: {
-      labels: ['Segunda', 'Terça', 'Quarta', 'Quinta', 'Sexta'],
-      datasets: [{
-        label: 'Porcentagem de uso na última semana',
-        data: [80, 15, 20, 15, 30 , 22, 40,45, 60,65,60,65,70,75,80,85,90,95],
-        borderWidth: 1
-      }]
-    },
-    options: {
-      scales: {
-        y: {
-          beginAtZero: true
+        let labels = [];
+
+        let dados = {
+        labels: labels,
+        datasets: [{
+          label: `Porcentagem de uso`,
+          data: [],
+          fill: false,
+          borderColor: 'rgb(75, 192, 192)',
+          tension: 0.1
+        }]   
+        };
+
+        console.log('----------------------------------------------')
+        console.log('Estes dados foram recebidos pela funcao "obterDadosGrafico" e passados para "plotarGrafico":')
+        console.log(resposta)
+
+        for (i = 0;i < resposta.length; i++) {
+            var registro = resposta[i];
+            labels.push(registro.momento_grafico);
+            dados.datasets[0].data.push(registro.disco);
         }
-      }
+
+        console.log('----------------------------------------------')
+        console.log('O gráfico será plotado com os respectivos valores:')
+        console.log('Labels:')
+        console.log(labels)
+        console.log('Dados:')
+        console.log(dados.datasets)
+        console.log('----------------------------------------------')
+
+        // Criando estrutura para plotar gráfico - config
+        const config = {
+            type: 'line',
+            data: dados,
+        };
+
+        let myChart = new Chart(
+          document.getElementById(`myChartCanvasDisco`),
+          config
+        );
+
+        setTimeout(() => atualizarGraficoDisco(idMaquina,dados,myChart),60000);
     }
-  });
-</script>
 
-<script>
-  const ctx3 = document.getElementById('myChart3');
+    function atualizarGraficoDisco(idMaquina,dados,myChart) {
+      
+      fetch(`/medidas/tempo-real/disco${idMaquina}`, { cache: `no-store` }).then(function (response) {
+        if (response.ok) {
+          response.json().then(function (novoRegistro) {
 
-  new Chart(ctx3, {
-    type: 'line',
-    data: {
-      labels: ['Segunda', 'Terça', 'Quarta', 'Quinta', 'Sexta'],
-      datasets: [{
-        label: 'Porcentagem de uso na última semana',
-        data: [10, 15, 20, 33, 30 , 35, 40,45, 50,55,34,65,70,34,80,85,22,95],
-        borderWidth: 1
-      }]
-    },
-    options: {
-      scales: {
-        y: {
-          beginAtZero: true
+            console.log(`Dados recebidos: ${JSON.stringify(novoRegistro)}`);
+            console.log(`Dados atuais do gráfico`);
+            console.log(dados);
+
+            if(novoRegistro[0].momento_grafico == dados.labels[dados.labels.lenght - 1]) {
+              console.log("---------------------------------------------------------------")
+                        console.log("Como não há dados novos para captura, o gráfico não atualizará.")
+                        console.log("Horário do novo dado capturado:")
+                        console.log(novoRegistro[0].momento_grafico)
+                        console.log("Horário do último dado capturado:")
+                        console.log(dados.labels[dados.labels.length - 1])
+                        console.log("---------------------------------------------------------------") 
+            } else{
+
+              dados.labels.shift();
+              dados.labels.push(novoRegistro[0].momento_grafico);
+
+              dados.datasets[0].data.shift();
+              dados.datasets[0].data.push(novoRegistro[0].disco);
+
+              myChart.update();
+            }
+            
+            proximaAtualizacao = setTimeout(() => atualizarGrafico(idMaquina, dados, myChart),60000);
+
+          });
+        } else{
+          console.error('Nenhum dado encontrado ou erro na API');
+          proximaAtualizacao = setTimeout(() => atualizarGrafico(idMaquina,dados,myChart),60000);
         }
-      }
+      })
+        .catch(function (error) {
+          console.error(`Erro na obtenção dos dados p/ gráfico ${error.message}`)
+        })
     }
-  });
+
 </script>
-
-<script>
-  const ctx4 = document.getElementById('myChart4');
-
-  new Chart(ctx4, {
-    type: 'line',
-    data: {
-      labels: ['Segunda', 'Terça', 'Quarta', 'Quinta', 'Sexta'],
-      datasets: [{
-        label: 'Porcentagem de uso na última semana',
-        data: [78, 35, 20, 25, 34 , 35, 60,45, 54,45,60,35,70,75,80,85,90,95],
-        borderWidth: 1
-      }]
-    },
-    options: {
-      scales: {
-        y: {
-          beginAtZero: true
-        }
-      }
-    }
-  });
-</script>
-
