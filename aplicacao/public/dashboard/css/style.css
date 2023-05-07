@@ -1,0 +1,178 @@
+@import url('https://fonts.googleapis.com/css2?family=Dancing+Script&family=Great+Vibes&family=Poppins:wght@300&family=Raleway&display=swap%27');
+*{
+  font-family: 'Dancing Script', cursive;
+    font-family: 'Great Vibes', cursive;
+    font-family: 'Poppins', sans-serif;
+    font-family: 'Raleway', sans-serif;
+}
+body{
+  background-image: url(../img/Line\ 3.png), url(../img/Line\ 6.png);
+  background-repeat: no-repeat;
+}
+
+.janela {
+    display: flex;
+    width: 100vw;
+  }
+ 
+  .header-left a {
+    text-decoration: none;
+    color: white;
+  } 
+  
+  .header-left {
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 999;
+    height: 100vh;
+    width: 20%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+    border-right: 3px solid #9F111B;
+    background-color: #101216;
+  }
+
+  .header-left img{
+    width: 245px;
+    height: 80px;
+  }
+
+  #via{
+  position: absolute;
+  display: flex;
+  left: 55%;
+ }
+
+.legenda{
+    /*border: solid 1px red;*/ 
+    position: absolute;
+    display: flex;
+    justify-content: space-around;
+    top: 22%;
+    left: 58%;
+    width: 401px;
+    height: 50px;
+}
+.legenda .bolinha1 {
+  position: absolute;
+  display: flex;
+  border-radius: 100px;
+  border: 1px solid rgb(9, 255, 0);
+  background-color: rgb(9, 255, 0);
+  top: 33%;
+  left: 17%;
+  height: 15px;
+  width: 15px;
+}
+
+.legenda .bolinha2 {
+  position: absolute;
+  display: flex;
+  border-radius: 100px;
+  border: 1px solid rgb(255, 230, 0);
+  background-color: rgb(255, 230, 0);
+  top: 33%;
+  left: 48%;
+  height: 15px;
+  width: 15px;
+}
+
+.legenda .bolinha3 {
+  position: absolute;
+  display: flex;
+  border-radius: 100px;
+  border: 1px solid rgb(255, 123, 0);
+  background-color: rgb(255, 123, 0);
+  top: 33%;
+  left: 71%;
+  height: 15px;
+  width: 15px;
+}
+
+.legenda .bolinha4 {
+  position: absolute;
+  display: flex;
+  border-radius: 100px;
+  border: 1px solid rgb(255, 8, 0);
+  background-color: rgb(255, 8, 0);
+  top: 33%;
+  left: 96%;
+  height: 15px;
+  width: 15px;
+}
+  .maquina1{
+    flex-direction: column;
+    position: absolute;
+    display: flex;
+    left: 53.8%;
+    top: 11%;
+  }
+  
+  .dash-right {
+    display: flex;
+    width: 50%;
+    height: 25%;
+    position: relative;
+    top: 200px;
+    left: 35%;
+    background: rgba(255, 255, 255, 0.35);
+    box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+    backdrop-filter: blur(13.5px);
+    -webkit-backdrop-filter: blur(13.5px);
+    border-radius: 10px;
+    border: 1px solid rgba(255, 255, 255, 0.18);
+  }
+
+  .dash-right1 {
+    display: flex;
+    width: 30%;
+    height: 15%;
+    position: relative;
+    top: 250px;
+    left: 25%; 
+  }
+  
+  .hello {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+  }
+  
+  .hello h3 {
+    color: wheat;    
+  }
+
+  .cargo {
+    color: wheat;
+  }
+  
+  .email {
+    color: wheat;
+  }
+  .navegacao{
+    font-size: medium;
+  }
+  
+  .btn-logout h3 {
+    margin: 0;
+    padding: 0;
+    color: wheat;
+  } 
+  
+  .btn-logout {
+    margin: 0;
+    padding: 0;
+    width: 20%;
+    background-color: #9F111B;
+    color: white;
+    border-radius: 2px;
+    text-align: center;
+    padding: 10px 20px;
+    margin-bottom: 100px;
+    cursor: pointer;
+  }
+  
+  
