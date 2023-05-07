@@ -289,9 +289,6 @@ text-align: center;
 }
 
 body{
-  background-image: url("../img/fundo.png");
-  background-repeat: no-repeat;
-  background-size: cover;
 
   font-family: 'Dancing Script', cursive;
   font-family: 'Great Vibes', cursive;

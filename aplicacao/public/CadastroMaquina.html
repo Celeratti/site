@@ -148,7 +148,7 @@
                 </div>
             </div>
         </div>
-
+        
 
 </body>
 </html>
@@ -156,6 +156,7 @@
 
 
         <script>
+            atualizarTabela();
             var acao =""
             var linhaEscolhida = "";
 
@@ -168,12 +169,8 @@
                 document.querySelector("#telefone").value = cargo
                 document.querySelector("#email").value = telefone
                 //document.querySelector("#cargo").value = email
-
-                acao ="Editar"
-
-                
+                acao ="Editar"             
                 linhaEscolhida =celulaLapis.parentNode.parentNode
-                
             }   
             const modalEx = document.getElementById("modalEx");
 
@@ -184,6 +181,29 @@
                 linhaEscolhida = celulaLixeira.parentNode.parentNode;
                 console.log(linhaEscolhida)
             }
+
+
+    function atualizarTabela() {
+
+
+
+
+        //aguardar();
+        fetch("/maquinas/atualizarTabela").then(function (resposta) {
+            console.log("aaaaaaaaaaaaaaaaaaaaaa")
+            if (resposta.ok) {
+                resposta.json().then(function (resposta) {
+
+                    console.log("aaaaaaaaaaaaaaaaaaaaaa")
+
+                });
+            } else {
+                throw ('Houve um erro na API!');
+            }
+        }).catch(function (resposta) {
+            console.error(resposta);
+        });
+    }
                 
 
             function Salvarr(){

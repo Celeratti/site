@@ -18,7 +18,7 @@
 
   
 </head>
-<body>
+<body onload="atualizarTabela()">
     <!--<h1 class="tituloPrincipal">CELERATTI</h1>-->
     <div class="teste-logo"> 
         <img src="assets/img/CELERATTICF.png" alt="">
@@ -39,46 +39,12 @@
     <th>Sobrenome</th>
     <th>Email</th>
     <th>Telefone</th>
-    <th>Token</th>
     <th>Cargo</th>
     <th id="thOpcoes">
         <img src="assets/img/gearCF.png" alt="" id="imgGear">
     </th>
   </tr>
-  <tr>
-    <td>Maria</td>
-    <td>Oliveira Sales</td>
-    <td>maria@gmail.com</td>
-    <td>(11) 971002286</td>
-    <td>764</td>
-    <td>Gerente</td>
-    <td>
-        <img id="imgLapis" src="assets/img/lapisCF.png" alt="" class="opcoesTabela" onclick="editar('Maria', 'Oliveira Sales', 'maria@gmail.com', '(11) 971002286', 'Gerente', this)">
-        <img id="imgLixeira" src="assets/img/lixeiraCF.png" alt="" class="opcoesTabela" onclick="Excluir('Maria', 'Oliveira Sales', this)">
-    </td>
-  </tr>
-  <tr>
-    <td>Ricardo</td>
-    <td>Pereira Silva</td>
-    <td>Ricardo@gmail.com</td>
-    <td>(11) 971413286</td>
-    <td>902</td>
-    <td>Técnico</td>
-    <td>
-        <img src="assets/img/lapisCF.png" alt="" class="opcoesTabela">
-        <img src="assets/img/lixeiraCF.png" alt="" class="opcoesTabela">
-    </td>  </tr>
-  <tr>
-    <td>João</td>
-    <td>Machado</td>
-    <td>joao@gmail.com</td>
-    <td>(11) 577913286</td>
-    <td>721</td>
-    <td>Técnico</td>
-    <td>
-        <img src="assets/img/lapisCF.png" alt="" class="opcoesTabela">
-        <img src="assets/img/lixeiraCF.png" alt="" class="opcoesTabela">
-    </td>  </tr>
+ 
   
 </table>
 
@@ -140,7 +106,7 @@
 			<div style="display: flex; justify-content: flex"></div>
                 <div style="display: flex; justify-content: flex-end">
                     <button class="btn" style="background-color: #9F111B;" onclick="CancelarEx()">Cancelar</button>
-                    <button  class="btn" style="background-color: #9F111B;" onclick="ExcluirFinal(this)">Excluir</button>
+                    <button  class="btn" style="background-color: #9F111B;" onclick="ExcluirFinal()">Excluir</button>
                 </div>
             </div>
         </div>
@@ -153,15 +119,103 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.inputmask/3.3.4/jquery.inputmask.bundle.min.js"></script>
 
         <script>
+var funcionarioSelecionado = 0;
+
+
+var tabelaHtml = document.querySelector("#tabela")
+    function atualizarTabela() {
+        //aguardar();
+        var linhas = document.getElementsByTagName("tr");
+
+        for (var i = linhas.length - 1; i > 0; i--) {
+                        linhas[i].remove()
+        }
+
+        fetch("/funcionarios/atualizarTabela").then(function (resposta) {
+            if (resposta.ok) {
+
+                if (resposta.status == 204) {
+
+                    throw "Nenhum resultado encontrado!!";
+                }
+
+                resposta.json().then(function (resposta) {
+                    console.log("Dados recebidos: ", JSON.stringify(resposta));
+
+
+                for (let i = 0; i < resposta.length && resposta[i].esta_ativo !=0; i++) {
+                    var funcionario = resposta[i]
+                    var novaLinha = document.createElement("tr");
+                    novaLinha.setAttribute("id", funcionario.idfuncionario);
+
+                    var colunaNome = document.createElement("td");
+                    var colunaSobrenome = document.createElement("td");
+                    var colunaEmail = document.createElement("td");
+                    var colunaTelefone = document.createElement("td");
+                    var colunaCargo = document.createElement("td");
+                    var tdImagens = document.createElement("td");
+
+
+                    var novaImagem = document.createElement("img");
+                    novaImagem.id = "imgLapis";
+                    novaImagem.src = "assets/img/lapisCF.png";
+                    novaImagem.alt = "";
+                    novaImagem.classList.add("opcoesTabela");
+                    novaImagem.setAttribute("onclick", `editar('${funcionario.nome}', '${funcionario.sobrenome}', '${funcionario.email}', '${funcionario.telefone}', '${funcionario.cargo}', ${funcionario.idfuncionario})`);
+
+                    var novaImagem2= document.createElement("img");
+                    novaImagem2.id = "imgLixeira";
+                    novaImagem2.src = "assets/img/lixeiraCF.png";
+                    novaImagem2.alt = "";
+                    novaImagem2.classList.add("opcoesTabela");
+                    novaImagem2.setAttribute("onclick", `Excluir('${funcionario.nome}', '${funcionario.sobrenome}', ${funcionario.idfuncionario})`);
+
+                    colunaNome.innerHTML =funcionario.nome
+                    colunaSobrenome.innerHTML =funcionario.sobrenome
+                    colunaEmail.innerHTML =funcionario.email
+                    colunaTelefone.innerHTML =funcionario.telefone
+
+
+                    colunaCargo.innerHTML =funcionario.cargo
+
+                    novaLinha.appendChild(colunaNome);
+                    novaLinha.appendChild(colunaSobrenome);
+                    novaLinha.appendChild(colunaEmail);
+                    novaLinha.appendChild(colunaTelefone);
+                    novaLinha.appendChild(colunaCargo);
+
+                    var imagem = document.querySelector("#imgLapis")
+
+                    tdImagens.appendChild(novaImagem)
+                    tdImagens.appendChild(novaImagem2)
+
+                    novaLinha.appendChild(tdImagens);               
+
+                    var tabela = document.getElementById("tabela").getElementsByTagName("tbody")[0];
+                    tabela.appendChild(novaLinha);
+                    }
+                
+
+                });
+            } else {
+                throw ('Houve um erro na API!');
+
+            }
+        }).catch(function (resposta) {
+            console.error(resposta);
+
+        });
+    }
 
         function fecharModal(){
             modalEx.style.display = "none";
+
         }
             
             var acao =""
             var linhaEscolhida = "";
 
-            function editar(nome, sobrenome, email, telefone, cargo,  celulaLapis){
+            function editar(nome, sobrenome, email, telefone, cargo,  idfuncionario){
 
                 modal.style.display = "block";
                 document.querySelector("#nome").value = nome
@@ -171,16 +225,19 @@
                 //document.querySelector("#cargo").value = email
 
                 acao ="Editar"
-                linhaEscolhida = celulaLapis.parentNode.parentNode;
+                funcionarioSelecionado = idfuncionario
                 
             }   
+
+
             const modalEx = document.getElementById("modalEx");
 
 
-            function Excluir(nome, sobrenome, celulaLixeira){
+            function Excluir(nome, sobrenome, idTr){
                 modalEx.style.display = "block";
                 document.querySelector("#lblExcluir").innerHTML = "Deseja realmente excluir o funcionário(a) "+nome +" "+ sobrenome+ "?"
-                linhaEscolhida = celulaLixeira.parentNode.parentNode;
+
+                linhaEscolhida = idTr;
             }
                 
 
@@ -192,72 +249,70 @@
                 var sobreNomeRecebido = validarSobrenome()
 
                 var emailRecebido = validarEmail()
-
                 var telefoneRecebido = validarTelefone()
 
+                let numerosTelefone = telefoneRecebido.replace(/\D/g, '');
+                const selectElement = document.getElementById("cargo"); // seleciona o elemento select pelo ID
+                var novoCargo = selectElement.value; // pega o valor selecionado pelo usuário
+                
                 if(acao == "Salvar"){
+                 fetch("/funcionarios/cadastrar", {
+                 method: "POST",
+                 headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                // crie um atributo que recebe o valor recuperado aqui
+                // Agora vá para o arquivo routes/usuario.js
+                
+                nomeServer: nomeRecebido,
+                sobreNomeServer: nomeRecebido,
+                telefoneServer: numerosTelefone,
+                emailServer: emailRecebido,
+                senhaServer: "car",
+                cargoServer: "senha",
+                ativoServer: "senha"
+            })
+        }).then(function (resposta) {
+
+            console.log("resposta: ", resposta);
+
+            if (resposta.ok) {
+                atualizarTabela()
 
 
-                var novaLinha = document.createElement("tr");
-                var colunaNome = document.createElement("td");
-                var colunaSobrenome = document.createElement("td");
-                var colunaEmail = document.createElement("td");
-                var colunaTelefone = document.createElement("td");
-                var colunaTokem = document.createElement("td");
-                var colunaCargo = document.createElement("td");
-                var tdImagens = document.createElement("td");
-
-                var cargoRecebido = document.querySelector("#cargo").value
-
-                var novaImagem = document.createElement("img");
-                novaImagem.id = "imgLapis";
-                novaImagem.src = "assets/img/lapisCF.png";
-                novaImagem.alt = "";
-                novaImagem.classList.add("opcoesTabela");
-                novaImagem.setAttribute("onclick", "editar('Maria', 'Oliveira Sales', 'maria@gmail.com', '(11) 971002286', '764', 'Gerente')");
-
-                var novaImagem2= document.createElement("img");
-                novaImagem2.id = "imgLixeira";
-                novaImagem2.src = "assets/img/lixeiraCF.png";
-                novaImagem2.alt = "";
-                novaImagem2.classList.add("opcoesTabela");
-                novaImagem2.setAttribute("onclick", "Excluir('Maria', 'Oliveira Sales')");
-
-                colunaNome.innerHTML =nomeRecebido
-                colunaSobrenome.innerHTML =sobreNomeRecebido
-                colunaEmail.innerHTML =emailRecebido
-                colunaTelefone.innerHTML =telefoneRecebido
-                colunaTokem.innerHTML ="847"
-                colunaCargo.innerHTML =cargoRecebido
-
-                 novaLinha.appendChild(colunaNome);
-                 novaLinha.appendChild(colunaSobrenome);
-                 novaLinha.appendChild(colunaEmail);
-                 novaLinha.appendChild(colunaTelefone);
-                 novaLinha.appendChild(colunaTokem);
-                 novaLinha.appendChild(colunaCargo);
-
-                 var imagem = document.querySelector("#imgLapis")
-
-                 tdImagens.appendChild(novaImagem)
-                 tdImagens.appendChild(novaImagem2)
-
-                 novaLinha.appendChild(tdImagens);               
-
-                 var tabela = document.getElementById("tabela").getElementsByTagName("tbody")[0];
-                 tabela.appendChild(novaLinha);
+                limparFormulario();
+            } else {
+                throw ("Houve um erro ao tentar realizar o cadastro!");
+            }
+        }).catch(function (resposta) {
+            console.log(`#ERRO: ${resposta}`);
+        });
 
                 }
                 else{
-                    linhaEscolhida.getElementsByTagName("td")[0].innerHTML = document.querySelector("#nome").value
-                    linhaEscolhida.getElementsByTagName("td")[1].innerHTML = document.querySelector("#sobrenome").value
-                    linhaEscolhida.getElementsByTagName("td")[2].innerHTML = document.querySelector("#telefone").value
-                    linhaEscolhida.getElementsByTagName("td")[3].innerHTML = document.querySelector("#email").value
-                    linhaEscolhida.getElementsByTagName("td")[4].innerHTML = 864
-                    linhaEscolhida.getElementsByTagName("td")[5].innerHTML = document.querySelector("#cargo").value
-                }
+                    fetch(`/funcionarios/editar/${funcionarioSelecionado}`, {
+                    method: "PUT",
+                    headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({
+                nome: nomeRecebido,
+                sobreNome: sobreNomeRecebido,
+                email: emailRecebido,
+                telefone: numerosTelefone,
+                cargo: novoCargo
+                })
+                }).then(function (resposta) {
+                    atualizarTabela()
 
-                modal.style.display = "none";
+                }).catch(function (resposta) {
+                    console.log(`#ERRO: ${resposta}`);
+                });
+                            
+                }
+                    
+                        modal.style.display = "none";
 
 
             }
@@ -339,10 +394,33 @@
                 acao = "Editar"
             }
 
-function ExcluirFinal(){
-var linha = linhaEscolhida
+function ExcluirFinal(linha){
+    var linhas = document.getElementsByTagName("tr");
+// Loop para excluir cada linha
+for (var i = linhas.length - 1; i > 0; i--) {
+    
+  if(linhas[i].id == linhaEscolhida){
 
-linha.parentNode.removeChild(linha);
+
+            fetch(`/funcionarios/deletar/${linhaEscolhida}`, {
+                    method: "PUT",
+                    headers: {
+                    "Content-Type": "application/json"
+                },
+
+                }).then(function (resposta) {
+                    atualizarTabela()
+
+                }).catch(function (resposta) {
+                    console.log(`#ERRO: ${resposta}`);
+                });
+                            
+                
+
+  }
+  else{
+  }
+}
     modalEx.style.display = "none";
 }
 function CancelarEx(){
@@ -380,3 +458,4 @@ campoPesquisa.addEventListener("input", function() {
       
 
         </script>
+    
