@@ -95,9 +95,132 @@ function buscarMedidasEmTempoRealDisco(idMaquina) {
 }
 
 
+
+
+function buscarUltimasMedidasEstacao(limite_linhas) {
+
+    instrucaoSql = ''
+
+    if (process.env.AMBIENTE_PROCESSO == "producao") {
+        instrucaoSql = `select top ${limite_linhas}`
+    } else if (process.env.AMBIENTE_PROCESSO == "desenvolvimento") {
+        instrucaoSql = `SELECT * FROM estacao limit ${limite_linhas}`
+    } else {
+        console.log("\nO AMBIENTE (produção OU desenvolvimento) NÃO FOI DEFINIDO EM app.js\n");
+        return
+    }
+
+    console.log("Executando a instrução SQL: \n" + instrucaoSql);
+    return database.executar(instrucaoSql);
+}
+
+
+// function buscarUltimasMedidasEstacao2(idEstacao2, limite_linhas) {
+
+//     instrucaoSql = ''
+
+//     if (process.env.AMBIENTE_PROCESSO == "producao") {
+//         instrucaoSql = `select top ${limite_linhas}`
+//     } else if (process.env.AMBIENTE_PROCESSO == "desenvolvimento") {
+//         instrucaoSql = `SELECT maquinasComProblemas, maquinasOperantes FROM estacao WHERE idEstacao = ${idEstacao2} limit 2`
+//     } else {
+//         console.log("\nO AMBIENTE (produção OU desenvolvimento) NÃO FOI DEFINIDO EM app.js\n");
+//         return
+//     }
+
+//     console.log("Executando a instrução SQL: \n" + instrucaoSql);
+//     return database.executar(instrucaoSql);
+// }
+
+// function buscarUltimasMedidasEstacao3(idEstacao3, limite_linhas) {
+
+//     instrucaoSql = ''
+
+//     if (process.env.AMBIENTE_PROCESSO == "producao") {
+//         instrucaoSql = `select top ${limite_linhas}`
+//     } else if (process.env.AMBIENTE_PROCESSO == "desenvolvimento") {
+//         instrucaoSql = `SELECT maquinasComProblemas, maquinasOperantes FROM estacao WHERE idEstacao = ${idEstacao3} limit 2`
+//     } else {
+//         console.log("\nO AMBIENTE (produção OU desenvolvimento) NÃO FOI DEFINIDO EM app.js\n");
+//         return
+//     }
+
+//     console.log("Executando a instrução SQL: \n" + instrucaoSql);
+//     return database.executar(instrucaoSql);
+// }
+
+// function buscarUltimasMedidasEstacao4(idEstacao4, limite_linhas) {
+
+//     instrucaoSql = ''
+
+//     if (process.env.AMBIENTE_PROCESSO == "producao") {
+//         instrucaoSql = `select top ${limite_linhas}`
+//     } else if (process.env.AMBIENTE_PROCESSO == "desenvolvimento") {
+//         instrucaoSql = `SELECT maquinasComProblemas, maquinasOperantes FROM estacao WHERE idEstacao = ${idEstacao4} limit 2`
+//     } else {
+//         console.log("\nO AMBIENTE (produção OU desenvolvimento) NÃO FOI DEFINIDO EM app.js\n");
+//         return
+//     }
+
+//     console.log("Executando a instrução SQL: \n" + instrucaoSql);
+//     return database.executar(instrucaoSql);
+// }
+
+// function buscarUltimasMedidasEstacao5(idEstacao5, limite_linhas) {
+
+//     instrucaoSql = ''
+
+//     if (process.env.AMBIENTE_PROCESSO == "producao") {
+//         instrucaoSql = `select top ${limite_linhas}`
+//     } else if (process.env.AMBIENTE_PROCESSO == "desenvolvimento") {
+//         instrucaoSql = `SELECT maquinasComProblemas, maquinasOperantes FROM estacao WHERE idEstacao = ${idEstacao5} limit 2`
+//     } else {
+//         console.log("\nO AMBIENTE (produção OU desenvolvimento) NÃO FOI DEFINIDO EM app.js\n");
+//         return
+//     }
+
+//     console.log("Executando a instrução SQL: \n" + instrucaoSql);
+//     return database.executar(instrucaoSql);
+// }
+
+// function buscarUltimasMedidasEstacao6(idEstacao6, limite_linhas) {
+
+//     instrucaoSql = ''
+
+//     if (process.env.AMBIENTE_PROCESSO == "producao") {
+//         instrucaoSql = `select top ${limite_linhas}`
+//     } else if (process.env.AMBIENTE_PROCESSO == "desenvolvimento") {
+//         instrucaoSql = `SELECT maquinasComProblemas, maquinasOperantes FROM estacao WHERE idEstacao = ${idEstacao6} limit 2`
+//     } else {
+//         console.log("\nO AMBIENTE (produção OU desenvolvimento) NÃO FOI DEFINIDO EM app.js\n");
+//         return
+//     }
+
+//     console.log("Executando a instrução SQL: \n" + instrucaoSql);
+//     return database.executar(instrucaoSql);
+// }
+
+// function buscarUltimasMedidasEstacao7(idEstacao7, limite_linhas) {
+
+//     instrucaoSql = ''
+
+//     if (process.env.AMBIENTE_PROCESSO == "producao") {
+//         instrucaoSql = `select top ${limite_linhas}`
+//     } else if (process.env.AMBIENTE_PROCESSO == "desenvolvimento") {
+//         instrucaoSql = `SELECT maquinasComProblemas, maquinasOperantes FROM estacao WHERE idEstacao = ${idEstacao7} limit 2`
+//     } else {
+//         console.log("\nO AMBIENTE (produção OU desenvolvimento) NÃO FOI DEFINIDO EM app.js\n");
+//         return
+//     }
+
+//     console.log("Executando a instrução SQL: \n" + instrucaoSql);
+//     return database.executar(instrucaoSql);
+// }
+
 module.exports = {
     buscarUltimasMedidasCpu,
     buscarMedidasEmTempoRealCpu,
     buscarUltimasMedidasDisco,
-    buscarMedidasEmTempoRealDisco
+    buscarMedidasEmTempoRealDisco, 
+    buscarUltimasMedidasEstacao,
 }

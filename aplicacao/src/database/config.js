@@ -6,12 +6,13 @@ var mySqlConfig = {
     host: "localhost",
     database: "mydb",
     user: "root",
-    password: "root",
+    password: "pmp2003",
 };
 
 function executar(instrucao) {
     // VERIFICA A VARIÁVEL DE AMBIENTE SETADA EM app.js
     process.env.AMBIENTE_PROCESSO = "desenvolvimento"
+    console.log("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA")
 
     if (process.env.AMBIENTE_PROCESSO == "producao") {
         return new Promise(function (resolve, reject) {
@@ -31,6 +32,7 @@ function executar(instrucao) {
     } else if (process.env.AMBIENTE_PROCESSO == "desenvolvimento") {
         return new Promise(function (resolve, reject) {
 
+            console.log("BBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB")
 
 
             var conexao = mysql.createConnection(mySqlConfig);

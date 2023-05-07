@@ -18,13 +18,47 @@
         href="https://fonts.googleapis.com/css2?family=Dancing+Script&family=Great+Vibes&family=Poppins:wght@300&family=Raleway&display=swap"
         rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
 </head>
 
 <body>
 
-    <a id= "a2" href="dashInicio.html">Voltar para a tela de linhas</a>
+    <div class="janela">
+        <div class="header-left">
+            <img src="img/Logo.png" alt="">
 
-    <h1>Estações - Linha 2 Verde</h1>
+            <div class="hello">
+                <h3>Olá, <span id="b_usuario">Mario</span>!</h3>
+            </div>
+
+            <div class="email">
+                    <h3>mario.silva@viaestacao.com</h3>
+            </div>
+
+            <div class="cargo">
+                <h3>Analista de Dashboard</h3>
+            </div>
+
+            <div class="cargo">
+              <div class="navegacao">
+                <details>
+                  <summary><b>Navegação</b></summary>
+                  <!-- <p><a href="TelaEstacoes.html">Estações</a></p> -->
+                  <p><a href="TelaMaquina.html">Máquinas</a></p>
+                  <p><a href="TelaMaquina.html">Componentes</a></p>
+                </details>
+              </div>
+            </div>
+            <div class="btn-logout" onclick="limparSessao()">
+                <h3>Sair</h3>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- <a id= "a2" href="dashInicio.html">Voltar para a tela de linhas</a> -->
+
+    <h1>Estações  - Linha 2  - Verde</h1>
 
     <div class="legenda">
         <p>Ideal</p>
@@ -39,460 +73,195 @@
 
     <div class="botoes">
         <button id="btn1" onclick="trocar()">1</button>
-        <button id="btn2" onclick="trocar1()">2</button>
+        <button id="btn2" onclick="trocar1()" style="display: none;">2</button>
     </div>
 
     <div class="estacoes" id="tela1" style="display: block;">
-
-        <a id="a1" href="TelaMaquinasEstacoes.html">
-            <div class="borda1">
-                <h3>Vila Prudente</h3>
-                <div class="estacao1">
-                    <canvas id="myChart"></canvas>
-                </div>
-            </div>
-        </a>
-
-        <a id="a1" href="TelaMaquinasEstacoes.html">
-            <div class="borda2">
-                <h3>Tamanduateí</h3>
-                <div class="estacao2">
-                    <canvas id="myChart1"></canvas>
-                </div>
-            </div>
-        </a>
-
-        <a id="a1" href="TelaMaquinasEstacoes.html">
-            <div class="borda3">
-                <h3>Sacomã</h3>
-                <div class="estacao3">
-                    <canvas id="myChart2"></canvas>
-                </div>
-            </div>
-        </a>
-
-        <a id="a1" href="TelaMaquinasEstacoes.html">
-            <div class="borda4">
-                <h3>Alto do Ipiranga</h3>
-                <div class="estacao4">
-                    <canvas id="myChart3"></canvas>
-                </div>
-            </div>
-        </a>
-
-        <a id="a1" href="TelaMaquinasEstacoes.html">
-            <div class="borda5">
-                <h3>Santos Imigrantes</h3>
-                <div class="estacao5">
-                    <canvas id="myChart4"></canvas>
-                </div>
-            </div>
-        </a>
-
-        <a id="a1" href="TelaMaquinasEstacoes.html">
-            <div class="borda6">
-                <h3>Chakara Klabin</h3>
-                <div class="estacao6">
-                    <canvas id="myChart5"></canvas>
-                </div>
-            </div>
-        </a>
-
-        <a id="a1" href="TelaMaquinasEstacoes.html">
-            <div class="borda7">
-                <h3>Paraíso</h3>
-                <div class="estacao7">
-                    <canvas id="myChart6"></canvas>
-                </div>
-            </div>
     </div>
-    </a>
+    
 
 
     <div class="estacoes" id="tela2" style="display: none;">
 
-        <a id="a1" href="TelaMaquinasEstacoes.html">
-            <div class="borda8">
-                <h3>Brigadeiro</h3>
-                <div class="estacao8">
-                    <canvas id="myChart7"></canvas>
-                </div>
-            </div>
-        </a>
-
-        <a id="a1" href="TelaMaquinasEstacoes.html">
-            <div class="borda9">
-                <h3>Trianon-Masp</h3>
-                <div class="estacao9">
-                    <canvas id="myChart8"></canvas>
-                </div>
-            </div>
-        </a>
-
-        <a id="a1" href="TelaMaquinasEstacoes.html">
-            <div class="borda10">
-                <h3>Consolação</h3>
-                <div class="estacao10">
-                    <canvas id="myChart9"></canvas>
-                </div>
-            </div>
-        </a>
-
-        <a id="a1" href="TelaMaquinasEstacoes.html">
-            <div class="borda11">
-                <h3>Clinicas</h3>
-                <div class="estacao11">
-                    <canvas id="myChart10"></canvas>
-                </div>
-            </div>
-        </a>
-
-        <a id="a1" href="TelaMaquinasEstacoes.html">
-            <div class="borda12">
-                <h3>Sumaré</h3>
-                <div class="estacao12">
-                    <canvas id="myChart11"></canvas>
-                </div>
-            </div>
-        </a>
-
-        <a id="a1" href="TelaMaquinasEstacoes.html">
-            <div class="borda13">
-                <h3>Vila Madalena</h3>
-                <div class="estacao13">
-                    <canvas id="myChart12"></canvas>
-                </div>
-            </div>
-    </a>
+    </div> 
 
 </body>
 
 </html>
 
-<script>
-    const ctx = document.getElementById('myChart');
 
-    new Chart(ctx, {
-        type: 'bar',
-        data: {
-            labels: ['C.problemas', 'Operantes'],
-            datasets: [{
-                label: 'Máquinas',
-                data: [34, 60],
-                borderWidth: 1,
-                categoryPercentage: 0.4,
-                barPercentage: 1.0,
-                layout: {
-                    padding: 25
-                }
-            }]
-        },
-        options: {
-            scales: {
-                y: {
-                    beginAtZero: true
-                }
-            }
+<script defer>
+
+
+window.onload = obterDadosGrafico();
+
+function obterDadosGrafico() {
+  obterDadosEstacao()
+}
+
+//Estação 1
+
+function obterDadosEstacao() {
+    
+    fetch(`/medidas/ultimas/Estacao`, {cache: 'no-store'}).then(function (response) {
+      if (response.ok) {
+        response.json().then(function (resposta) {
+          console.log(`Dados recebidos: ${JSON.stringify(resposta)}`);
+
+          plotarGrafico(resposta);
+        });
+      } else{
+        console.error(`Nenhum dado encontrado ou erro na API`);
+      }
+    })
+        .catch(function (error) {
+          console.error(`Erro na obtenção dos dados p/ gráfico: ${error.message}`)
+        });
+  }
+
+    function plotarGrafico(resposta) {
+
+
+      var estacoes = document.getElementById('tela1');
+
+      var estacoes1 = document.getElementById('tela2');
+
+      tela1.innerHTML = "";
+
+      tela2.innerHTML = "";
+
+      let graficos = [];
+
+      if(resposta.length > 8){
+        btn2.style.display = 'block';
+      }
+
+      for (let i = 0; i < resposta.length; i++) {
+
+        if((i + 1) > 8){
+          estacoes = estacoes1;
         }
-    });
-</script>
 
-<script>
-    const ctx1 = document.getElementById('myChart1');
+        var num = Math.random()* 4; 
 
-    new Chart(ctx1, {
-        type: 'bar',
-        data: {
-            labels: ['C.problemas', 'Operantes'],
-            datasets: [{
-                label: 'Máquinas',
-                data: [34, 60],
-                borderWidth: 1,
-                categoryPercentage: 0.4,
-                barPercentage: 1.0
-            }]
-        },
-        options: {
-            scales: {
-                y: {
-                    beginAtZero: true
-                }
+        var estacao = resposta[i];
+        
+        var ancoraEstacao = document.createElement('a');
+
+        var bordaEstacao = document.createElement('div');
+
+        var bolinhaAlerta = document.createElement('div');
+
+        var h3 = document.createElement('h3');
+
+        var divEstacao = document.createElement('div');
+
+        var grafico = document.createElement('canvas');
+        
+        ancoraEstacao.id ='a1';
+
+        bordaEstacao.className = `borda${i + 1}`;
+
+        num = Math.floor(num);
+
+        num++;
+
+        bolinhaAlerta.className = `bolinhaAlerta${num}`;
+
+        h3.innerHTML = `${estacao.nomeEstacao}`;
+
+        divEstacao.className = `estacao${i + 1}`;
+
+        grafico.id = `myChart${i + 1}`;
+
+        divEstacao.appendChild(grafico);
+
+        bordaEstacao.appendChild(bolinhaAlerta);
+
+        bordaEstacao.appendChild(h3);
+
+        bordaEstacao.appendChild(divEstacao);
+
+        ancoraEstacao.appendChild(bordaEstacao);
+
+        estacoes.appendChild(ancoraEstacao);
+
+        let labels = [];
+
+        let dados = {
+          labels: ['C.problemas', 'Operantes'],
+        datasets: [{
+          label: `Quantidade de máquinas`,
+          data: [],
+          fill: false,
+          backgroundColor: 'red',
+          borderColor: 'rgb(255, 255, 192)',
+          tension: 0.1
+        }]   
+        };
+
+        dados.datasets[0].data.push(estacao.maquinasComProblemas);
+            dados.datasets[0].data.push(estacao.maquinasOperantes);
+
+            const config = {
+            type: 'bar',
+            data: dados,
+        };
+
+        let nomeVariavel = `myChart` + (i + 1);
+
+        let valorVariavel = new Chart(
+          document.getElementById(`myChart${i + 1}`),
+          config
+        );
+
+
+
+      }
+
+
+     }
+
+    function atualizarGraficoEstacao1(idEstacao1,dados,myChart) {
+      
+      fetch(`/medidas/tempo-real/Estacao1/${idEstacao1}`, { cache: `no-store` }).then(function (response) {
+        if (response.ok) {
+          response.json().then(function (novoRegistro) {
+
+            console.log(`Dados recebidos: ${JSON.stringify(novoRegistro)}`);
+            console.log(`Dados atuais do gráfico`);
+            console.log(dados);
+
+            if(novoRegistro[0].data == dados.labels[dados.labels.lenght - 1]) {
+              console.log("---------------------------------------------------------------")
+                        console.log("Como não há dados novos para captura, o gráfico não atualizará.")
+                        console.log("Horário do novo dado capturado:")
+                        console.log(novoRegistro[0].estacao)
+                        console.log("Horário do último dado capturado:")
+                        console.log(dados.labels[dados.labels.length - 1])
+                        console.log("---------------------------------------------------------------") 
+            } else{
+
+              dados.labels.shift();
+              dados.labels.push(novoRegistro[0].maquinasComProblemas);
+
+              dados.labels.shift();
+              dados.labels.push(novoRegistro[0].maquinasOperantes);
+
+
+              myChart.update();
             }
+            
+            proximaAtualizacao = setTimeout(() => atualizarGraficoEstacao1(idEstacao1, dados, myChart),60000);
+
+          });
+        } else{
+          console.error('Nenhum dado encontrado ou erro na API');
+          proximaAtualizacao = setTimeout(() => atualizarGraficoEstacao1(idEstacao1,dados,myChart),60000);
         }
-    });
-</script>
-
-<script>
-    const ctx2 = document.getElementById('myChart2');
-
-    new Chart(ctx2, {
-        type: 'bar',
-        data: {
-            labels: ['C.problemas', 'Operantes'],
-            datasets: [{
-                label: 'Máquinas',
-                data: [34, 60],
-                borderWidth: 1,
-                categoryPercentage: 0.4,
-                barPercentage: 1.0
-            }]
-        },
-        options: {
-            scales: {
-                y: {
-                    beginAtZero: true
-                }
-            }
-        }
-    });
-</script>
-
-<script>
-    const ctx3 = document.getElementById('myChart3');
-
-    new Chart(ctx3, {
-        type: 'bar',
-        data: {
-            labels: ['C.problemas', 'Operantes'],
-            datasets: [{
-                label: 'Máquinas',
-                data: [34, 60],
-                borderWidth: 1,
-                categoryPercentage: 0.4,
-                barPercentage: 1.0
-            }]
-        },
-        options: {
-            scales: {
-                y: {
-                    beginAtZero: true
-                }
-            }
-        }
-    });
-</script>
-
-<script>
-    const ctx4 = document.getElementById('myChart4');
-
-    new Chart(ctx4, {
-        type: 'bar',
-        data: {
-            labels: ['C.problemas', 'Operantes'],
-            datasets: [{
-                label: 'Máquinas',
-                data: [34, 60],
-                borderWidth: 1,
-                categoryPercentage: 0.4,
-                barPercentage: 1.0
-            }]
-        },
-        options: {
-            scales: {
-                y: {
-                    beginAtZero: true
-                }
-            }
-        }
-    });
-</script>
-
-<script>
-    const ctx5 = document.getElementById('myChart5');
-
-    new Chart(ctx5, {
-        type: 'bar',
-        data: {
-            labels: ['C.problemas', 'Operantes'],
-            datasets: [{
-                label: 'Máquinas',
-                data: [34, 60],
-                borderWidth: 1,
-                categoryPercentage: 0.4,
-                barPercentage: 1.0
-            }]
-        },
-        options: {
-            scales: {
-                y: {
-                    beginAtZero: true
-                }
-            }
-        }
-    });
-</script>
-
-<script>
-    const ctx6 = document.getElementById('myChart6');
-
-    new Chart(ctx6, {
-        type: 'bar',
-        data: {
-            labels: ['C.problemas', 'Operantes'],
-            datasets: [{
-                label: 'Máquinas',
-                data: [34, 60],
-                borderWidth: 1,
-                categoryPercentage: 0.4,
-                barPercentage: 1.0
-            }]
-        },
-        options: {
-            scales: {
-                y: {
-                    beginAtZero: true
-                }
-            }
-        }
-    });
-</script>
-
-<script>
-    const ctx7 = document.getElementById('myChart7');
-
-    new Chart(ctx7, {
-        type: 'bar',
-        data: {
-            labels: ['C.problemas', 'Operantes'],
-            datasets: [{
-                label: 'Máquinas',
-                data: [34, 60],
-                borderWidth: 1,
-                categoryPercentage: 0.4,
-                barPercentage: 1.0
-            }]
-        },
-        options: {
-            scales: {
-                y: {
-                    beginAtZero: true
-                }
-            }
-        }
-    });
-</script>
-
-<script>
-    const ctx8 = document.getElementById('myChart8');
-
-    new Chart(ctx8, {
-        type: 'bar',
-        data: {
-            labels: ['C.problemas', 'Operantes'],
-            datasets: [{
-                label: 'Máquinas',
-                data: [34, 60],
-                borderWidth: 1,
-                categoryPercentage: 0.4,
-                barPercentage: 1.0
-            }]
-        },
-        options: {
-            scales: {
-                y: {
-                    beginAtZero: true
-                }
-            }
-        }
-    });
-</script>
-
-<script>
-    const ctx9 = document.getElementById('myChart9');
-
-    new Chart(ctx9, {
-        type: 'bar',
-        data: {
-            labels: ['C.problemas', 'Operantes'],
-            datasets: [{
-                label: 'Máquinas',
-                data: [34, 60],
-                borderWidth: 1,
-                categoryPercentage: 0.4,
-                barPercentage: 1.0
-            }]
-        },
-        options: {
-            scales: {
-                y: {
-                    beginAtZero: true
-                }
-            }
-        }
-    });
-</script>
-
-<script>
-    const ctx10 = document.getElementById('myChart10');
-
-    new Chart(ctx10, {
-        type: 'bar',
-        data: {
-            labels: ['C.problemas', 'Operantes'],
-            datasets: [{
-                label: 'Máquinas',
-                data: [34, 60],
-                borderWidth: 1,
-                categoryPercentage: 0.4,
-                barPercentage: 1.0
-            }]
-        },
-        options: {
-            scales: {
-                y: {
-                    beginAtZero: true
-                }
-            }
-        }
-    });
-</script>
-
-<script>
-    const ctx11 = document.getElementById('myChart11');
-
-    new Chart(ctx11, {
-        type: 'bar',
-        data: {
-            labels: ['C.problemas', 'Operantes'],
-            datasets: [{
-                label: 'Máquinas',
-                data: [34, 60],
-                borderWidth: 1,
-                categoryPercentage: 0.4,
-                barPercentage: 1.0
-            }]
-        },
-        options: {
-            scales: {
-                y: {
-                    beginAtZero: true
-                }
-            }
-        }
-    });
-</script>
-
-<script>
-    const ctx12 = document.getElementById('myChart12');
-
-    new Chart(ctx12, {
-        type: 'bar',
-        data: {
-            labels: ['C.problemas', 'Operantes'],
-            datasets: [{
-                label: 'Máquinas',
-                data: [34, 60],
-                borderWidth: 1,
-                categoryPercentage: 0.4,
-                barPercentage: 1.0
-            }]
-        },
-        options: {
-            scales: {
-                y: {
-                    beginAtZero: true
-                }
-            }
-        }
-    });
+      })
+        .catch(function (error) {
+          console.error(`Erro na obtenção dos dados p/ gráfico ${error.message}`)
+        })
+    }
 </script>
