@@ -30,166 +30,197 @@
     <div class="bolinha4"></div>
   </div>
 
-  <a href="TelaMaquina.html">
-    <div class="graficos">
-      <div class="borda">
-        <h3>Máquina 01</h3>
-        <div class="maquina1">
-          <div class="bolinhaAlerta"></div>
-          <canvas id="myChart"></canvas>
-        </div>
-      </div>
-  </a>
-
-  <a href="TelaMaquina.html">
-  <div class="borda2">
-    <h3>Máquina 02</h3>
-    <div class="maquina2">
-      <div class="bolinhaAlerta"></div>
-      <canvas id="myChart2"></canvas>
-    </div>
+  <div class="botoes">
+    <button id="btn1" onclick="trocar()">1</button>
+    <button id="btn2" onclick="trocar1()" style="display: none;">2</button>
+</div>
+<div class="graficos">
+  <div id="tela1"> 
   </div>
-  </a>
 
-  <a href="TelaMaquina.html">
-  <div class="borda3">
-    <h3>Máquina 03</h3>
-    <div class="bolinhaAlerta2"></div>
-    <div class="maquina3">
-      <canvas id="myChart3"></canvas>
-    </div>
+  <div id="tela2"></div>
   </div>
-  </a>
-
-  <a href="TelaMaquina.html">
-  <div class="borda4">
-    <h3>Máquina 04</h3>
-    <div class="maquina4">
-      <div class="bolinhaAlerta3"></div>
-      <canvas id="myChart4"></canvas>
-    </div>
-  </div>
-  </a>
-
+  
+</div>
+  
 </body>
-
 </html>
 
-
-
 <script>
-  const ctx = document.getElementById('myChart');
+  
+var params = window.location.search
+const urlParams = new URLSearchParams(params);
+const idEstacao= urlParams.get('idEstacao')
+console.log(idEstacao)
+window.onload = obterDadosGrafico();
 
-  new Chart(ctx, {
-    type: 'bar',
-    data: {
-      labels: ['M.RAM', 'Disco', 'CPU', 'Rede'],
-      datasets: [{
-        label: 'Porcentagrm de uso',
-        data: [10, 15, 20, 25, 30 , 35, 40,45, 50,55,60,65,70,75,80,85,90,95],
+function obterDadosGrafico() {
+  obterDadosEstacao(idEstacao
+  )
+}
+
+//Estação 1
+
+function obterDadosEstacao(idEstacao) {
+    
+    fetch(`/estacoes/maquinas/${idEstacao}`, {cache: 'no-store'}).then(function (response) {
+      if (response.ok) {
+        response.json().then(function (resposta) {
+          console.log(`Dados recebidos: ${JSON.stringify(resposta)}`);
+
+          plotarGrafico(resposta);
+        });
+      } else{
+        console.error(`Nenhum dado encontrado ou erro na API`);
+      }
+    })
+        .catch(function (error) {
+          console.error(`Erro na obtenção dos dados p/ gráfico: ${error.message}`)
+        });
+  }
+
+    function plotarGrafico(resposta) {
+
+
+      var page1 = document.getElementById('tela1');
+
+      var page2 = document.getElementById('tela2');
+
+      tela1.innerHTML = "";
+
+      tela2.innerHTML = "";
+
+      let graficos = [];
+
+      if(resposta.length > 8){
+        btn2.style.display = 'block';
+      }
+
+      for (let i = 0; i < resposta.length; i++) {
+
+        if((i + 1) > 4){
+          page1 = page2;
+        }
+
+        var num = Math.random()* 4; 
+
+        var maquina = resposta[i];
+        
+        var ancoraMaquina = document.createElement('a');
+
+        var bordaMaquina = document.createElement('div');
+        
+        var h3 = document.createElement('h3');
+
+        var divMaquina = document.createElement('div');
+        
+        var bolinhaAlerta = document.createElement('div');
+
+        var grafico = document.createElement('canvas');
+
+        
+
+        bordaEstacao.className = `borda${i + 1}`;
+
+        num = Math.floor(num);
+
+        num++;
+
+        bolinhaAlerta.className = `bolinhaAlerta${num}`;
+
+        h3.innerHTML = `${estacao.nomeEstacao}`;
+
+        divMaquina.className = `maquina${i + 1}`;
+
+        grafico.id = `myChart${i + 1}`;
+
+        divMaquina.appendChild(bolinhaAlerta);
+        
+        divMaquina.appendChild(grafico);
+
+        bordaMaquina.appendChild(h3);
+
+        bordaMaquina.appendChild(divMaquina);
+
+        ancoraMaquina.appendChild(bordaMaquina);
+
+        page1.appendChild();
+
+        let labels = [];
+
+        let dados = {
+          labels: ['RAM', 'Disco', 'CPU', 'Rede'],
+        datasets: [{
+          label: `Quantidade de máquinas`,
+          datasets: [{
+        label: 'Porcentagem de uso',
+        data: [],
         borderWidth: 1
       }]
-    },
-    options: {
-      scales: {
-        y: {
-          beginAtZero: true
-        }
+        }]   
+        };
+
+        dados.datasets[0].data.push(maquina.memoriaEmUso);
+        dados.datasets[0].data.push(maquina.discoUso);
+        dados.datasets[0].data.push(maquina.cpuUtilizacao);
+
+            const config = {
+            type: 'bar',
+            data: dados,
+        };
+
+        let nomeVariavel = `myChart` + (i + 1);
+
+        let valorVariavel = new Chart(
+          document.getElementById(`myChart${i + 1}`),
+          config
+        );
       }
-    }
-  });
-</script>
+      setTimeout(() => atualizarGraficoEstacao(idEstacao,dados,myChart),60000);
+     }
+     
 
 
-<script>
-  const ctx1 = document.getElementById('myChart1');
+    function atualizarGraficoEstacao(idEstacao,dados,myChart) {
+      
+      fetch(`/tempo-real/maquinas/${idEstacao}`, { cache: `no-store` }).then(function (response) {
+        if (response.ok) {
+          response.json().then(function (novoRegistro) {
 
-  new Chart(ctx1, {
-    type: 'bar',
-    data: {
-      labels: ['M.RAM', 'Disco', 'CPU', 'Rede'],
-      datasets: [{
-        label: 'Porcentagrm de uso',
-        data: [10, 15, 20, 25, 30 , 35, 40,45, 50,55,60,65,70,75,80,85,90,95],
-        borderWidth: 1
-      }]
-    },
-    options: {
-      scales: {
-        y: {
-          beginAtZero: true
+            console.log(`Dados recebidos: ${JSON.stringify(novoRegistro)}`);
+            console.log(`Dados atuais do gráfico`);
+            console.log(dados);
+
+            if(novoRegistro[0].data == dados.labels[dados.labels.lenght - 1]) {
+              console.log("---------------------------------------------------------------")
+                        console.log("Como não há dados novos para captura, o gráfico não atualizará.")
+                        console.log("Horário do novo dado capturado:")
+                        console.log(novoRegistro[0].estacao)
+                        console.log("Horário do último dado capturado:")
+                        console.log(dados.labels[dados.labels.length - 1])
+                        console.log("---------------------------------------------------------------") 
+            } else{
+
+              dados.data.shift();
+              dados.datasets[0].data.push(maquina.memoriaEmUso);
+              dados.datasets[0].data.push(maquina.discoUso);
+              dados.datasets[0].data.push(maquina.cpuUtilizacao);
+
+
+              myChart.update();
+            }
+            
+            proximaAtualizacao = setTimeout(() => atualizarGraficoEstacao(idEstacao, dados, myChart),60000);
+
+          });
+        } else{
+          console.error('Nenhum dado encontrado ou erro na API');
+          proximaAtualizacao = setTimeout(() => atualizarGraficoEstacao(idEstacao,dados,myChart),60000);
         }
-      }
+      })
+        .catch(function (error) {
+          console.error(`Erro na obtenção dos dados p/ gráfico ${error.message}`)
+        })
     }
-  });
 </script>
-
-<script>
-  const ctx2 = document.getElementById('myChart2');
-
-  new Chart(ctx2, {
-    type: 'bar',
-    data: {
-      labels: ['M.RAM', 'Disco', 'CPU', 'Rede'],
-      datasets: [{
-        label: 'Porcentagrm de uso',
-        data: [10, 15, 20, 25, 30 , 35, 40,45, 50,55,60,65,70,75,80,85,90,95],
-        borderWidth: 1
-      }]
-    },
-    options: {
-      scales: {
-        y: {
-          beginAtZero: true
-        }
-      }
-    }
-  });
-</script>
-
-
-<script>
-  const ctx3 = document.getElementById('myChart3');
-
-  new Chart(ctx3, {
-    type: 'bar',
-    data: {
-      labels: ['M.RAM', 'Disco', 'CPU', 'Rede'],
-      datasets: [{
-        label: 'Porcentagrm de uso',
-        data: [10, 15, 20, 25, 30 , 35, 40,45, 50,55,60,65,70,75,80,85,90,95],
-        borderWidth: 1
-      }]
-    },
-    options: {
-      scales: {
-        y: {
-          beginAtZero: true
-        }
-      }
-    }
-  });
-</script>
-
-<script>
-  const ctx4 = document.getElementById('myChart4');
-
-  new Chart(ctx4, {
-    type: 'bar',
-    data: {
-      labels: ['M.RAM', 'Disco', 'CPU', 'Rede'],
-      datasets: [{
-        label: 'Porcentagrm de uso',
-        data: [10, 15, 20, 25, 30 , 35, 40,45, 50,55,60,65,70,75,80,85,90,95],
-        borderWidth: 1
-      }]
-    },
-    options: {
-      scales: {
-        y: {
-          beginAtZero: true
-        }
-      }
-    }
-  });
-</script>
+<script src="telas.js"></script>

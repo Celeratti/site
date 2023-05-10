@@ -24,6 +24,47 @@ body {
     }
 }
 
+.botoes {
+    /* border: solid 1px red; */
+    position: absolute;
+    display: flex;
+    top: 15%;
+    left: 85%;
+    width: 65px;
+    height: 30px; 
+}
+
+.botoes :hover{
+  background-color: #9F111B;
+  color: white;
+  cursor: pointer;
+}
+
+.botoes button {
+    border-radius: 6px;
+    position: absolute;
+    display: flex;
+    width: 25px;
+    height: 23px;
+    border-color: rgba(0, 0, 0, 0.575);
+}
+
+.botoes #btn1 {
+    border-radius: 6px;
+    position: absolute;
+    display: flex;
+    width: 25px;
+    height: 23px;
+}
+
+.botoes #btn2 {
+    position: absolute;
+    display: flex;
+    left: 61%;
+    width: 25px;
+    height: 23px;
+}
+
 h1 {
     position: absolute;
     display: flex;
