@@ -44,8 +44,8 @@
                 <details>
                   <summary><b>Navegação</b></summary>
                   <!-- <p><a href="TelaEstacoes.html">Estações</a></p> -->
-                  <p><a href="TelaMaquina.html">Máquinas</a></p>
-                  <p><a href="TelaMaquina.html">Componentes</a></p>
+                  <!-- <p><a href="TelaMaquina.html">Máquinas</a></p> -->
+                  <!-- <p><a href="TelaMaquina.html">Componentes</a></p> -->
                 </details>
               </div>
             </div>
@@ -168,11 +168,13 @@ function obterDadosEstacao() {
 
         bolinhaAlerta.className = `bolinhaAlerta${num}`;
 
-        h3.innerHTML = `${estacao.nomeEstacao}`;
+        h3.innerHTML = `${estacao.nome}`;
 
         divEstacao.className = `estacao${i + 1}`;
 
         grafico.id = `myChart${i + 1}`;
+
+        ancoraEstacao.href = `TelaMaquinasEstacoes.html?idEstacao=${estacao.id}`
 
         divEstacao.appendChild(grafico);
 

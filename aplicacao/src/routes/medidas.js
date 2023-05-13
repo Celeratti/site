@@ -32,10 +32,11 @@ router.get("/ultimas/Estacao", function (req, res) {
 });
 
 router.get("/estacoes/maquinas/:idEstacao", function (req, res) {
+    console.log("Cheguei na rota")
     medidaController.buscarMaquinasEstacoes(req, res);
 });
 
-router.get("/tempo-real/maquinas:idEstacao", function (req, res) {
+router.get("/tempo-real/maquinas/:idEstacao", function (req, res) {
     medidaController.buscarTempoRealMaquinas(req, res);
 })
 

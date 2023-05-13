@@ -7,7 +7,11 @@ function buscarMaquinasEstacoes(idEstacao, limite_linhas) {
     if (process.env.AMBIENTE_PROCESSO == "producao") {
         instrucaoSql = `select top ${limite_linhas}`
     } else if (process.env.AMBIENTE_PROCESSO == "desenvolvimento") {
-        instrucaoSql = `SELECT m.id , g.memoriaEmUso , g.discoUso, g.cpuUtilizacao FROM estacao as e JOIN maquina as m ON m.fkestacao = e.id JOIN grupoComponentes as g ON g.fkMaquina = m.id WHERE e.id = ${idEstacao} LIMIT ${limite_linhas};`
+        instrucaoSql = `SELECT m.id , m.nomeIdentificador,g.memoriaEmUso , g.discoUso, g.cpuUtilizacao FROM estacao as e JOIN maquina as m ON m.fkestacao = e.id JOIN grupoComponentes as g ON g.id = (
+            SELECT MAX(id)
+            FROM grupoComponentes
+            WHERE fkMaquina = m.id
+          ) WHERE e.id = ${idEstacao} LIMIT ${limite_linhas};`
     } else {
         console.log("\nO AMBIENTE (produção OU desenvolvimento) NÃO FOI DEFINIDO EM app.js\n");
         return

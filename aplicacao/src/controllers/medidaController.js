@@ -163,7 +163,7 @@ function buscarUltimasMedidasEstacao(req, res) {
 
 function buscarTempoRealMaquinas(req, res) {
 
-    var idMaquina = req.params.idEstacao;
+    var idEstacao = req.params.idEstacao;
 
     console.log(`Recuperando medidas em tempo real`);
 

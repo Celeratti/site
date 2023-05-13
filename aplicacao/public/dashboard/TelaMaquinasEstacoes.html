@@ -36,10 +36,10 @@
 </div>
 <div class="graficos">
   <div id="tela1"> 
+
   </div>
 
-  <div id="tela2"></div>
-  </div>
+  <div id="tela2" style="display: none;"></div>
   
 </div>
   
@@ -55,15 +55,14 @@ console.log(idEstacao)
 window.onload = obterDadosGrafico();
 
 function obterDadosGrafico() {
-  obterDadosEstacao(idEstacao
-  )
+  obterDadosEstacao(idEstacao)
 }
 
 //Estação 1
 
 function obterDadosEstacao(idEstacao) {
     
-    fetch(`/estacoes/maquinas/${idEstacao}`, {cache: 'no-store'}).then(function (response) {
+    fetch(`/medidas/estacoes/maquinas/${idEstacao}`, {cache: 'no-store'}).then(function (response) {
       if (response.ok) {
         response.json().then(function (resposta) {
           console.log(`Dados recebidos: ${JSON.stringify(resposta)}`);
@@ -73,15 +72,12 @@ function obterDadosEstacao(idEstacao) {
       } else{
         console.error(`Nenhum dado encontrado ou erro na API`);
       }
-    })
-        .catch(function (error) {
+    }).catch(function (error) {
           console.error(`Erro na obtenção dos dados p/ gráfico: ${error.message}`)
         });
-  }
+}
 
     function plotarGrafico(resposta) {
-
-
       var page1 = document.getElementById('tela1');
 
       var page2 = document.getElementById('tela2');
@@ -90,9 +86,7 @@ function obterDadosEstacao(idEstacao) {
 
       tela2.innerHTML = "";
 
-      let graficos = [];
-
-      if(resposta.length > 8){
+      if(resposta.length > 4){
         btn2.style.display = 'block';
       }
 
@@ -118,9 +112,7 @@ function obterDadosEstacao(idEstacao) {
 
         var grafico = document.createElement('canvas');
 
-        
-
-        bordaEstacao.className = `borda${i + 1}`;
+        bordaMaquina.className = `borda${i + 1}`;
 
         num = Math.floor(num);
 
@@ -128,11 +120,13 @@ function obterDadosEstacao(idEstacao) {
 
         bolinhaAlerta.className = `bolinhaAlerta${num}`;
 
-        h3.innerHTML = `${estacao.nomeEstacao}`;
+        h3.innerHTML = `${maquina.nomeIdentificador}`;
 
         divMaquina.className = `maquina${i + 1}`;
 
         grafico.id = `myChart${i + 1}`;
+
+        ancoraMaquina.href = `TelaMaquina.html?idMaquina=${maquina.id}&&nomeMaquina=${maquina.nomeIdentificador}`
 
         divMaquina.appendChild(bolinhaAlerta);
         
@@ -144,21 +138,21 @@ function obterDadosEstacao(idEstacao) {
 
         ancoraMaquina.appendChild(bordaMaquina);
 
-        page1.appendChild();
+        page1.appendChild(ancoraMaquina);
 
         let labels = [];
 
         let dados = {
-          labels: ['RAM', 'Disco', 'CPU', 'Rede'],
+          labels: ['RAM', 'Disco', 'CPU'],
         datasets: [{
-          label: `Quantidade de máquinas`,
-          datasets: [{
-        label: 'Porcentagem de uso',
-        data: [],
-        borderWidth: 1
+          label: `Porcentagem de uso`,
+          data: [],
+          fill: false,
+          backgroundColor: 'red',
+          borderColor: 'rgb(255, 255, 192)',
+          tension: 0.1
       }]
-        }]   
-        };
+        }   
 
         dados.datasets[0].data.push(maquina.memoriaEmUso);
         dados.datasets[0].data.push(maquina.discoUso);
@@ -176,8 +170,8 @@ function obterDadosEstacao(idEstacao) {
           config
         );
       }
+    }
       setTimeout(() => atualizarGraficoEstacao(idEstacao,dados,myChart),60000);
-     }
      
 
 

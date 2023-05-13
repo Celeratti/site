@@ -19,9 +19,7 @@
   <main>
 
     <div id="titulo">
-      <h1>ViaMobilidade | Máquina 01</h1>
-
-      <link rel="stylesheet" href="">
+      <h1 id="maquina_nome"></h1>
     </div>
 
     <a href="dashInicio.html">Voltar para a tela de máquinas</a>
@@ -87,7 +85,9 @@
 var params = window.location.search
 const urlParams = new URLSearchParams(params);
 const idMaquina = urlParams.get('idMaquina')
-console.log(idMaquina)
+const nomeMaquina = urlParams.get('nomeMaquina')
+maquina_nome.innerHTML = "ViaMobilidade | Máquina " + nomeMaquina;
+
 window.onload = obterDadosGrafico();
 
 
