@@ -24,6 +24,47 @@ body {
     }
 }
 
+.botoes {
+    /* border: solid 1px red; */
+    position: absolute;
+    display: flex;
+    top: 15%;
+    left: 85%;
+    width: 65px;
+    height: 30px; 
+}
+
+.botoes :hover{
+  background-color: #9F111B;
+  color: white;
+  cursor: pointer;
+}
+
+.botoes button {
+    border-radius: 6px;
+    position: absolute;
+    display: flex;
+    width: 25px;
+    height: 23px;
+    border-color: rgba(0, 0, 0, 0.575);
+}
+
+.botoes #btn1 {
+    border-radius: 6px;
+    position: absolute;
+    display: flex;
+    width: 25px;
+    height: 23px;
+}
+
+.botoes #btn2 {
+    position: absolute;
+    display: flex;
+    left: 61%;
+    width: 25px;
+    height: 23px;
+}
+
 h1 {
     position: absolute;
     display: flex;
@@ -130,7 +171,7 @@ h3{
     top: -4%;
 }
 
-.borda{
+.borda1, .borda5{
     border: 1px solid grey;
     position: absolute;
     display: flex;
@@ -146,7 +187,7 @@ h3{
     border: 1px solid rgba( 255, 255, 255, 0.18 );   
 }
 
-.maquina1 {
+.maquina1 , .maquina5 {
     border: 1px solid grey;
     position: absolute;
     display: flex;
@@ -159,7 +200,7 @@ h3{
 
 }
 
-.bolinhaAlerta {
+.bolinhaAlerta1 {
     background-color: #F91A1A;
     width: 16px;
     height: 16px;
@@ -167,14 +208,14 @@ h3{
     animation: animate 0.80s linear infinite;
     position: absolute;
     left: 93%;
-    top: 9px;
+    top: 5px;
     z-index: 1px;
 }
 
 /* Fim máquina 1 */
 
 /* Máquina 2 */
-.borda2{
+.borda2 , .borda6{
     border: 1px solid grey;
     position: absolute;
     display: flex;
@@ -190,7 +231,7 @@ h3{
     border: 1px solid rgba( 255, 255, 255, 0.18 );     
 }
 
-.maquina2 {
+.maquina2 , .maquina6 {
     border: 1px solid grey;
     position: absolute;
     display: flex;
@@ -203,7 +244,7 @@ h3{
 
 }
 
-.bolinhaAlerta {
+.bolinhaAlerta2{
     background-color: #F91A1A;
     width: 16px;
     height: 16px;
@@ -211,7 +252,7 @@ h3{
     animation: animate 0.80s linear infinite;
     position: absolute;
     left: 93%;
-    top: 9px;
+    top: 5px;
     z-index: 1px;
 }
 
@@ -219,7 +260,7 @@ h3{
 
 /* Máquina 3 */
 
-.borda3{
+.borda3 , .borda7{
     border: 1px solid grey;
     position: absolute;
     display: flex;
@@ -235,7 +276,7 @@ h3{
     border: 1px solid rgba( 255, 255, 255, 0.18 );  
 }
 
-.maquina3 {
+.maquina3 , .maquina7 {
     border: 1px solid grey;
     position: absolute;
     display: flex;
@@ -248,7 +289,7 @@ h3{
 
 }
 
-.bolinhaAlerta2 {
+.bolinhaAlerta3 {
     background-color: rgb(238, 255, 0);
     width: 16px;
     height: 16px;
@@ -256,7 +297,7 @@ h3{
     animation: animate 0.90s linear infinite;
     position: absolute;
     left: 90%;
-    top: 25px;
+    top: 5px;
     z-index: 1px;
 }
 
@@ -265,7 +306,7 @@ h3{
 
 /* Máquina 4 */
 
-.borda4{
+.borda4 , .borda8{
     border: 1px solid grey;
     position: absolute;
     display: flex;
@@ -281,7 +322,7 @@ h3{
     border: 1px solid rgba( 255, 255, 255, 0.18 );     
 }
 
-.maquina4 {
+.maquina4 , .maquina8 {
     border: 1px solid grey;
     position: absolute;
     display: flex;
@@ -294,14 +335,14 @@ h3{
 
 }
 
-.bolinhaAlerta3 {
+.bolinhaAlerta4{
     background-color: rgb(51, 255, 0);
     width: 16px;
     height: 16px;
     border-radius: 100px;
     position: absolute;
     left: 93%;
-    top: -15px;
+    top: 5px;
     z-index: 1px;
 }
 
@@ -309,7 +350,7 @@ h3{
 
 /* Gráficos */
 
- #myChart{
+ #myChart1 , #myChart5{
     position: absolute;
     display: flex;
     top: 30px;
@@ -318,7 +359,7 @@ h3{
     height: 200px;
 }
 
-#myChart2{
+#myChart2 , #myChart6{
     position: absolute;
     display: flex;
     top: 25px;
@@ -327,7 +368,7 @@ h3{
     height: 200px;   
 }
 
-#myChart3{
+#myChart3 , #myChart7{
     position: absolute;
     display: flex;
     top: 5px;

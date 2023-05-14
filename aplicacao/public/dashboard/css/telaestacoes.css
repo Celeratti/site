@@ -10,6 +10,78 @@ body {
     font-family: 'Raleway', sans-serif;
 }
 
+
+.janela {
+    display: flex;
+    width: 100vw;
+  }
+ 
+  .header-left a {
+    text-decoration: none;
+    color: white;
+  } 
+  
+  .header-left {
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 999;
+    height: 100vh;
+    width: 20%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+    border-right: 3px solid #9F111B;
+    background-color: #101216;
+  }
+
+  .header-left img{
+    width: 245px;
+    height: 80px;
+  }
+
+  .hello {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+  }
+  
+  .hello h3 {
+    color: wheat;    
+  }
+
+  .cargo {
+    color: wheat;
+  }
+  
+  .email {
+    color: wheat;
+  }
+  .navegacao{
+    font-size: medium;
+  }
+  
+  .btn-logout h3 {
+    margin: 0;
+    padding: 0;
+    color: wheat;
+  } 
+  
+  .btn-logout {
+    margin: 0;
+    padding: 0;
+    width: 20%;
+    background-color: #9F111B;
+    color: white;
+    border-radius: 2px;
+    text-align: center;
+    padding: 10px 20px;
+    margin-bottom: 100px;
+    cursor: pointer;
+  }
+
+
 h1 {
     position: absolute;
     display: flex;
@@ -35,7 +107,7 @@ color: black;
     position: absolute;
     display: flex;
     top: 15%;
-    left: 85%;
+    left: 92%;
     width: 65px;
     height: 30px; 
 }
@@ -76,8 +148,8 @@ color: black;
     position: absolute;
     display: flex;
     justify-content: space-around;
-    top: 10%;
-    left: 12%;
+    top: 12%;
+    left: 23%;
     width: 401px;
     height: 50px;
 
@@ -136,9 +208,9 @@ color: black;
     position: absolute;
     display: flex;
     top: 20%;
-    left: 11%;
+    left: 23%;
     height: 75%;
-    width: 79%;
+    width: 75%;
     background: rgba(255, 255, 255, 0.35);
     box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
     backdrop-filter: blur(13.5px);
@@ -153,15 +225,80 @@ color: black;
     left: 7%;
 }
 
+/* Isso anima a bolinha */
+@keyframes animate {
+    0% {
+        opacity: 0;
+    }
+
+    50% {
+        opacity: 1;
+    }
+
+    100% {
+        opacity: 0;
+    }
+}
+
+
+.bolinhaAlerta1 {
+    background-color: #F91A1A;
+    width: 16px;
+    height: 16px;
+    border-radius: 100px;
+    animation: animate 0.80s linear infinite;
+    position: absolute;
+    left: 90%;
+    top: 9px;
+    z-index: 1px;
+}
+
+.bolinhaAlerta2 {
+    background-color: rgb(238, 255, 0);
+    width: 16px;
+    height: 16px;
+    border-radius: 100px;
+    animation: animate 0.90s linear infinite;
+    position: absolute;
+    left: 90%;
+    top: 9px;
+    z-index: 1px;
+}
+
+
+.bolinhaAlerta3 {
+    background-color: rgb(51, 255, 0);
+    width: 16px;
+    height: 16px;
+    border-radius: 100px;
+    position: absolute;
+    left: 90%;
+    top: 9px;
+    z-index: 1px;
+}
+
+.bolinhaAlerta4 {
+    background-color: rgb(255, 123, 0);
+    width: 16px;
+    height: 16px;
+    border-radius: 100px;
+    animation: animate 0.80s linear infinite;
+    position: absolute;
+    left: 90%;
+    top: 9px;
+    z-index: 1px;
+}
+
+
 /* Estação Vila Madalena */
 
-.borda1{
+.borda1, .borda9{
     position: absolute;
     display: flex;
     top: 5%;
     left: 2%;
-    width: 222px;
-    height: 146px;
+    width: 232px;
+    height: 176px;
     background: rgba(255, 255, 255, 0.35);
     box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
     backdrop-filter: blur(13.5px);
@@ -170,7 +307,7 @@ color: black;
     border: 1px solid rgba(255, 255, 255, 0.18);
 }
 
-.estacao1 {
+.estacao1, .estacao9 {
     border: 1px solid red;
     position: absolute;
     display: flex;
@@ -181,7 +318,7 @@ color: black;
     border: 1px solid rgba(255, 255, 255, 0.18);
 }
 
-.estacao1 #myChart{
+.estacao1 #myChart1, .estacao9 #myChart9{
     position: absolute;
     display: flex;
     flex-direction: column;
@@ -195,20 +332,22 @@ color: black;
 
 
 /* Estação tamanduatei */
+
+
 #tamanduatei {
     position: absolute;
     display: flex;
     left: 32%;
 }
 
-.borda2{
+.borda2, .borda10{
     border: 1px solid red;
     position: absolute;
     display: flex;
     top: 5%;
     left: 27%;
-    width: 222px;
-    height: 146px;
+    width: 232px;
+    height: 176px;
     background: rgba(255, 255, 255, 0.35);
     box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
     backdrop-filter: blur(13.5px);
@@ -217,7 +356,7 @@ color: black;
     border: 1px solid rgba(255, 255, 255, 0.18);
 }
 
-.estacao2 {
+.estacao2, .estacao10 {
     border: 1px solid red;
     position: absolute;
     display: flex;
@@ -229,7 +368,7 @@ color: black;
     border: 1px solid rgba(255, 255, 255, 0.18);
 }
 
-.estacao2 #myChart1{
+.estacao2 #myChart2, .estacao10 #myChart10{
     position: absolute;
     display: flex;
     top: 30%;
@@ -249,14 +388,14 @@ color: black;
 }
 
 
-.borda3{
+.borda3, .borda11{
     border: 1px solid red;
     position: absolute;
     display: flex;
     top: 5%;
     left: 52%;
-    width: 222px;
-    height: 146px;
+    width: 232px;
+    height: 176px;
     background: rgba(255, 255, 255, 0.35);
     box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
     backdrop-filter: blur(13.5px);
@@ -266,7 +405,7 @@ color: black;
 }
 
 
-.estacao3 {
+.estacao3, .estacao11 {
     border: 1px solid red;
     position: absolute;
     display: flex;
@@ -278,7 +417,7 @@ color: black;
     border: 1px solid rgba(255, 255, 255, 0.18);
 }
 
-.estacao3 #myChart2{
+.estacao3 #myChart3, .estacao11 #myChart11{
     position: absolute;
     display: flex;
     flex-direction: column;
@@ -298,14 +437,14 @@ color: black;
 }
 
 
-.borda4{
+.borda4, .borda12{
     border: 1px solid red;
     position: absolute;
     display: flex;
     top: 5%;
     left: 77%;
-    width: 222px;
-    height: 146px;
+    width: 232px;
+    height: 176px;
     background: rgba(255, 255, 255, 0.35);
     box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
     backdrop-filter: blur(13.5px);
@@ -315,7 +454,7 @@ color: black;
 }
 
 
-.estacao4 {
+.estacao4, .estacao12 {
     border: 1px solid red;
     position: absolute;
     display: flex;
@@ -327,7 +466,7 @@ color: black;
     border: 1px solid rgba(255, 255, 255, 0.18);
 }
 
-.estacao4 #myChart3{
+.estacao4 #myChart4, .estacao12 #myChart12{
     position: absolute;
     display: flex;
     flex-direction: column;
@@ -348,14 +487,14 @@ color: black;
     left: 5%;
 }
 
-.borda5{
+.borda5, .borda13{
     border: 1px solid red;
     position: absolute;
     display: flex;
     top: 50%;
     left: 2%;
-    width: 222px;
-    height: 150px;
+    width: 232px;
+    height: 176px;
     background: rgba(255, 255, 255, 0.35);
     box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
     backdrop-filter: blur(13.5px);
@@ -364,7 +503,7 @@ color: black;
     border: 1px solid rgba(255, 255, 255, 0.18);
 }
 
-.estacao5 {
+.estacao5, .estacao13{
     border: 1px solid red;
     position: absolute;
     display: flex;
@@ -376,7 +515,7 @@ color: black;
     border: 1px solid rgba(255, 255, 255, 0.18);
 }
 
-.estacao5 #myChart4{
+.estacao5 #myChart5, .estacao13 #myChart13{
     position: absolute;
     display: flex;
     flex-direction: column;
@@ -403,8 +542,8 @@ color: black;
     display: flex;
     top: 50%;
     left: 27%;
-    width: 222px;
-    height: 150px;
+    width: 232px;
+    height: 176px;
     background: rgba(255, 255, 255, 0.35);
     box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
     backdrop-filter: blur(13.5px);
@@ -425,7 +564,7 @@ color: black;
     border: 1px solid rgba(255, 255, 255, 0.18);
 }
 
-.estacao6 #myChart5{
+.estacao6 #myChart6{
     position: absolute;
     display: flex;
     flex-direction: column;
@@ -451,8 +590,8 @@ color: black;
     display: flex;
     top: 50%;
     left: 52%;
-    width: 222px;
-    height: 150px;
+    width: 232px;
+    height: 176px;
     background: rgba(255, 255, 255, 0.35);
     box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
     backdrop-filter: blur(13.5px);
@@ -472,7 +611,7 @@ color: black;
     border: 1px solid rgba(255, 255, 255, 0.18);
 }
 
-.estacao7 #myChart6{
+.estacao7 #myChart7{
     position: absolute;
     display: flex;
     flex-direction: column;
@@ -497,10 +636,10 @@ color: black;
     border: 1px solid red;
     position: absolute;
     display: flex;
-    top: 5%;
-    left: 2%;
-    width: 222px;
-    height: 150px;
+    top: 50%;
+    left: 77%;
+    width: 232px;
+    height: 176px;
     background: rgba(255, 255, 255, 0.35);
     box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
     backdrop-filter: blur(13.5px);
@@ -514,258 +653,23 @@ color: black;
     position: absolute;
     display: flex;
     top: -4%;
-    left: 2%;
+    left: 10%;
     width: 220px;
     height: 150px;
     border-radius: 10px;
     border: 1px solid rgba(255, 255, 255, 0.18);
 }
 
-.estacao8 #myChart7{
+.estacao8 #myChart8{
     position: absolute;
     display: flex;
     flex-direction: column;
     top: 30%;
-    right: 2%;
+    right: 10%;
     width: 40px;
     height: 40px;
 }
 
 /* Fim Estação Brigadeiro */
 
-/* Estação Triano-Masp */
-#trianon {
-    position: absolute;
-    display: flex;
-    left: 32%;
-}
 
-.borda9{
-    border: 1px solid red;
-    position: absolute;
-    display: flex;
-    top: 5%;
-    left: 27%;
-    width: 222px;
-    height: 150px;
-    background: rgba(255, 255, 255, 0.35);
-    box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
-    backdrop-filter: blur(13.5px);
-    -webkit-backdrop-filter: blur(13.5px);
-    border-radius: 10px;
-    border: 1px solid rgba(255, 255, 255, 0.18);  
-}
-
-.estacao9 {
-    border: 1px solid red;
-    position: absolute;
-    display: flex;
-    top: -4%;
-    left: 2%;
-    width: 220px;
-    height: 150px;
-    border-radius: 10px;
-    border: 1px solid rgba(255, 255, 255, 0.18);
-}
-
-.estacao9 #myChart8{
-    position: absolute;
-    display: flex;
-    flex-direction: column;
-    top: 30%;
-    right: 2%;
-    width: 40px;
-    height: 40px;
-}
-
-/* Fim Estação Trianon-Masp */
-
-
-/* Estação Consolação */
-
-#consolacao {
-    position: absolute;
-    display: flex;
-    left: 57%;
-}
-
-.borda10{
-    border: 1px solid red;
-    position: absolute;
-    display: flex;
-    top: 5%;
-    left: 52%;
-    width: 222px;
-    height: 150px;
-    background: rgba(255, 255, 255, 0.35);
-    box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
-    backdrop-filter: blur(13.5px);
-    -webkit-backdrop-filter: blur(13.5px);
-    border-radius: 10px;
-    border: 1px solid rgba(255, 255, 255, 0.18);   
-}
-
-.estacao10 {
-    border: 1px solid red;
-    position: absolute;
-    display: flex;
-    top: -4%;
-    left: 2%;
-    width: 220px;
-    height: 150px;
-    border-radius: 10px;
-    border: 1px solid rgba(255, 255, 255, 0.18);
-}
-
-.estacao10 #myChart9{
-    position: absolute;
-    display: flex;
-    flex-direction: column;
-    top: 30%;
-    right: 2%;
-    width: 40px;
-    height: 40px;
-}
-
-/* Fim Estação Consolacao */
-
-/* Estação Clinicas*/
-
-#clinicas {
-    position: absolute;
-    display: flex;
-    left: 84%;
-}
-
-.borda11{
-    border: 1px solid red;
-    position: absolute;
-    display: flex;
-    top: 5%;
-    left: 77%;
-    width: 222px;
-    height: 150px;
-    background: rgba(255, 255, 255, 0.35);
-    box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
-    backdrop-filter: blur(13.5px);
-    -webkit-backdrop-filter: blur(13.5px);
-    border-radius: 10px;
-    border: 1px solid rgba(255, 255, 255, 0.18); 
-}
-
-.estacao11 {
-    border: 1px solid red;
-    position: absolute;
-    display: flex;
-    top: -4%;
-    left: 2%;
-    width: 220px;
-    height: 150px;
-    border-radius: 10px;
-    border: 1px solid rgba(255, 255, 255, 0.18);
-}
-
-.estacao11 #myChart10{
-    position: absolute;
-    display: flex;
-    flex-direction: column;
-    top: 30%;
-    right: 2%;
-    width: 40px;
-    height: 40px;
-}
-/* Fim Estação Clinicas */
-
-/* Estação Sumaré */
-
-#sumare {
-    position: absolute;
-    display: flex;
-    top: 40%;
-    left: 8%;
-}
-
-.borda12{
-    border: 1px solid red;
-    position: absolute;
-    display: flex;
-    top: 50%;
-    left: 2%;
-    width: 222px;
-    height: 150px;
-    background: rgba(255, 255, 255, 0.35);
-    box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
-    backdrop-filter: blur(13.5px);
-    -webkit-backdrop-filter: blur(13.5px);
-    border-radius: 10px;
-    border: 1px solid rgba(255, 255, 255, 0.18);  
-}
-
-.estacao12 {
-    border: 1px solid red;
-    position: absolute;
-    display: flex;
-    top: -4%;
-    left: 2%;
-    width: 220px;
-    height: 150px;
-    border-radius: 10px;
-    border: 1px solid rgba(255, 255, 255, 0.18);
-}
-
-
-.estacao12 #myChart11{
-    position: absolute;
-    display: flex;
-    flex-direction: column;
-    top: 30%;
-    right: 2%;
-    width: 40px;
-    height: 40px;
-}
-/* Fim Estação Sumaré */
-
-/* Estação Vila Madalena */
-#vmadalena{
-    position: absolute;
-    display: flex;
-    left: 32%;
-    top: 40%;
-}
-.borda13{
-    border: 1px solid red;
-    position: absolute;
-    display: flex;
-    top: 50%;
-    left: 27%;
-    width: 222px;
-    height: 150px;
-    background: rgba(255, 255, 255, 0.35);
-    box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
-    backdrop-filter: blur(13.5px);
-    -webkit-backdrop-filter: blur(13.5px);
-    border-radius: 10px;
-    border: 1px solid rgba(255, 255, 255, 0.18);  
-}
-
-.estacao13 {
-    border: 1px solid red;
-    position: absolute;
-    display: flex;
-    top: -4%;
-    left: 2%;
-    width: 220px;
-    height: 150px;
-    border-radius: 10px;
-    border: 1px solid rgba(255, 255, 255, 0.18);
-}
-
-.estacao13 #myChart12{
-    position: absolute;
-    display: flex;
-    flex-direction: column;
-    top: 30%;
-    right: 2%;
-    width: 40px;
-    height: 40px;
-}

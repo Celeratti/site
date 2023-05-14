@@ -30,9 +30,6 @@ function executar(instrucao) {
         });
     } else if (process.env.AMBIENTE_PROCESSO == "desenvolvimento") {
         return new Promise(function (resolve, reject) {
-
-
-
             var conexao = mysql.createConnection(mySqlConfig);
             conexao.connect();
             conexao.query(instrucao, function (erro, resultados) {
