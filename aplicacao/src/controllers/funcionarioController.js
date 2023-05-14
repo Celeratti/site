@@ -3,11 +3,8 @@ var funcionarioModel = require("../models/funcionarioModel");
 var sessoes = [];
 
 function deletar(req, res) {
-
-    var iDFuncionario = req.params.linhaEscolhida;
-    console.log(iDFuncionario)
-
-    funcionarioModel.deletar(iDFuncionario)
+    var id = req.body.id;
+    funcionarioModel.deletar(id)
         .then(
             function (resultado) {
                 res.json(resultado);
@@ -16,7 +13,7 @@ function deletar(req, res) {
         .catch(
             function (erro) {
                 console.log(erro);
-                console.log("Houve um erro ao deletar o post: ", erro.sqlMessage);
+                console.log("Houve um erro ao realizar o post: ", erro.sqlMessage);
                 res.status(500).json(erro.sqlMessage);
             }
         );
@@ -73,7 +70,10 @@ function editar(req, res) {
     console.log("novoSobreNome controller: "+novoSobreNome)
 
     var novoCargo = req.body.cargo;
-    var id = req.params.idfuncionario;
+    var id = req.body.id;
+ 
+
+    console.log("TESTEEEEEEEEEEEEEEEE: "+id)
 
     funcionarioModel.editar(novoNome, novoSobreNome, emailRecebido,telefoneRecebido, novoCargo, id)
         .then(

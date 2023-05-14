@@ -81,6 +81,7 @@
             <select name="cargo" id="cargo">
                 <option value="Gerente">Gerente</option>
                 <option value="Tecnico">Técnico</option>
+                <option value="Analista">Analista</option>
               </select>
         </div>
         <hr>
@@ -142,11 +143,13 @@ var tabelaHtml = document.querySelector("#tabela")
                 resposta.json().then(function (resposta) {
                     console.log("Dados recebidos: ", JSON.stringify(resposta));
 
+                for (let i = 0; i <= resposta.length; i++) {
+                    if(resposta[i].esta_ativo != 0){
 
-                for (let i = 0; i < resposta.length && resposta[i].esta_ativo !=0; i++) {
+
                     var funcionario = resposta[i]
                     var novaLinha = document.createElement("tr");
-                    novaLinha.setAttribute("id", funcionario.idfuncionario);
+                    novaLinha.setAttribute("id", funcionario.id);
 
                     var colunaNome = document.createElement("td");
                     var colunaSobrenome = document.createElement("td");
@@ -161,22 +164,29 @@ var tabelaHtml = document.querySelector("#tabela")
                     novaImagem.src = "assets/img/lapisCF.png";
                     novaImagem.alt = "";
                     novaImagem.classList.add("opcoesTabela");
-                    novaImagem.setAttribute("onclick", `editar('${funcionario.nome}', '${funcionario.sobrenome}', '${funcionario.email}', '${funcionario.telefone}', '${funcionario.cargo}', ${funcionario.idfuncionario})`);
+                    novaImagem.setAttribute("onclick", `editar('${funcionario.nome}', '${funcionario.sobrenome}', '${funcionario.email}', '${funcionario.telefone}', '${funcionario.cargo}', ${funcionario.id})`);
 
                     var novaImagem2= document.createElement("img");
                     novaImagem2.id = "imgLixeira";
                     novaImagem2.src = "assets/img/lixeiraCF.png";
                     novaImagem2.alt = "";
                     novaImagem2.classList.add("opcoesTabela");
-                    novaImagem2.setAttribute("onclick", `Excluir('${funcionario.nome}', '${funcionario.sobrenome}', ${funcionario.idfuncionario})`);
+                    novaImagem2.setAttribute("onclick", `Excluir('${funcionario.nome}', '${funcionario.sobrenome}', ${funcionario.id})`);
 
                     colunaNome.innerHTML =funcionario.nome
                     colunaSobrenome.innerHTML =funcionario.sobrenome
                     colunaEmail.innerHTML =funcionario.email
                     colunaTelefone.innerHTML =funcionario.telefone
 
-
-                    colunaCargo.innerHTML =funcionario.cargo
+                    if(funcionario.fkCargo==1){
+                        colunaCargo.innerHTML = "Gerente"
+                    }
+                    if(funcionario.fkCargo==2){
+                        colunaCargo.innerHTML = "Técnico"
+                    }
+                    if(funcionario.fkCargo==3){
+                        colunaCargo.innerHTML = "Analista"
+                    }
 
                     novaLinha.appendChild(colunaNome);
                     novaLinha.appendChild(colunaSobrenome);
@@ -194,7 +204,7 @@ var tabelaHtml = document.querySelector("#tabela")
                     var tabela = document.getElementById("tabela").getElementsByTagName("tbody")[0];
                     tabela.appendChild(novaLinha);
                     }
-                
+                }
 
                 });
             } else {
@@ -254,6 +264,17 @@ var tabelaHtml = document.querySelector("#tabela")
                 let numerosTelefone = telefoneRecebido.replace(/\D/g, '');
                 const selectElement = document.getElementById("cargo"); // seleciona o elemento select pelo ID
                 var novoCargo = selectElement.value; // pega o valor selecionado pelo usuário
+
+                if(novoCargo =="Gerente"){
+                    novoCargo=1
+                }   
+                if(novoCargo =="Técnico"){
+                    novoCargo=2
+                }    
+                if(novoCargo =="Analista"){
+                    novoCargo=3
+                }    
+
                 
                 if(acao == "Salvar"){
                  fetch("/funcionarios/cadastrar", {
@@ -270,7 +291,7 @@ var tabelaHtml = document.querySelector("#tabela")
                 telefoneServer: numerosTelefone,
                 emailServer: emailRecebido,
                 senhaServer: "car",
-                cargoServer: "senha",
+                cargoServer: novoCargo,
                 ativoServer: "senha"
             })
         }).then(function (resposta) {
@@ -301,7 +322,8 @@ var tabelaHtml = document.querySelector("#tabela")
                 sobreNome: sobreNomeRecebido,
                 email: emailRecebido,
                 telefone: numerosTelefone,
-                cargo: novoCargo
+                cargo: novoCargo,
+                id: funcionarioSelecionado
                 })
                 }).then(function (resposta) {
                     atualizarTabela()
@@ -396,18 +418,20 @@ var tabelaHtml = document.querySelector("#tabela")
 
 function ExcluirFinal(linha){
     var linhas = document.getElementsByTagName("tr");
+
 // Loop para excluir cada linha
 for (var i = linhas.length - 1; i > 0; i--) {
     
   if(linhas[i].id == linhaEscolhida){
 
-
-            fetch(`/funcionarios/deletar/${linhaEscolhida}`, {
+                fetch(`/funcionarios/deletar/${linhaEscolhida}`, {
                     method: "PUT",
                     headers: {
                     "Content-Type": "application/json"
                 },
-
+                body: JSON.stringify({
+                id: linhaEscolhida
+                })
                 }).then(function (resposta) {
                     atualizarTabela()
 

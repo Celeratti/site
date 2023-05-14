@@ -1,9 +1,9 @@
 var database = require("../database/config")
 
 
-function deletar(novoNome, id) {
+function deletar(id) {
     var instrucao = `
-        UPDATE funcionario SET esta_ativo = 0 where idfuncionario = ${id};
+        UPDATE funcionario SET esta_ativo = 0 where id = ${id};
     `;
     console.log("Executando a instrução SQL: \n" + instrucao);
     return database.executar(instrucao);
@@ -13,7 +13,7 @@ function deletar(novoNome, id) {
 function cadastrar(nome, sobrenome, telefone, email, senha, cargo, fkempresa) {
     console.log("Nome: "+nome+ "Sobrenome: "+sobrenome+ "Telefone: "+telefone+ "Email: "+email+ "Senha: "+senha+"Cargo: "+cargo+ "Fkempresa: "+fkempresa)
     var instrucao = `
-        INSERT INTO funcionario (nome, sobrenome, telefone, email, senha, cargo,esta_ativo, fkempresa)  VALUES ('${nome}', '${sobrenome}', '11111111111', '${email}', '${senha}', '${cargo}',1,1 );
+        INSERT INTO funcionario (nome, sobrenome, telefone, email, senha, fkCargo,esta_ativo, fkempresa)  VALUES ('${nome}', '${sobrenome}', '11111111111', '${email}', '${senha}', '${cargo}',1,1 );
     `;
     console.log("Executando a instrução SQL: \n" + instrucao);
     return database.executar(instrucao);
@@ -31,7 +31,7 @@ function atualizarTabela() {
 
 function editar(novoNome, novoSobreNome, emailRecebido,telefoneRecebido, novoCargo, id) {
     var instrucao = `
-        UPDATE funcionario SET nome = '${novoNome}', sobrenome = '${novoSobreNome}', email = '${emailRecebido}', telefone = '${telefoneRecebido}', cargo = '${novoCargo}' WHERE idfuncionario = ${id};
+        UPDATE funcionario SET nome = '${novoNome}', sobrenome = '${novoSobreNome}', email = '${emailRecebido}', telefone = '${telefoneRecebido}', fkCargo = '${novoCargo}' WHERE id = ${id};
     `;
     console.log("Executando a instrução SQL: \n" + instrucao);
     return database.executar(instrucao);

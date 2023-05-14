@@ -41,40 +41,7 @@
         <img src="assets/img/gearCM.png" alt="" id="imgGear">
     </th>
   </tr>
-  <tr>
-    <td>Presidente Altino</td>
-    <td>2</td>
-    <td>alt@2</td>
-    <td>Linux</td>
-    <td>Dell</td>
-    <td>Desativado</td>
-    <td>
-        <img id="imgLapis" src="assets/img/lapisCM.png" alt="" class="opcoesTabela" onclick="editar('Presidente Altino', '2', 'alt@2	', 'Linux', 'Dell', 'Ativado', this)">
-        <img id="imgLixeira" src="assets/img/lixeiraCM.png" alt="" class="opcoesTabela" onclick="Excluir('alt@2', this)">
-    </td>
-  </tr>
-  <tr>
-    <td>Osasco</td>
-    <td>4</td>
-    <td>osas@3</td>
-    <td>Windowns</td>
-    <td>Lenovo</td>
-    <td>Atívado</td>
-    <td>
-        <img src="assets/img/lapisCM.png" alt="" class="opcoesTabela">
-        <img src="assets/img/lixeiraCM.png" alt="" class="opcoesTabela">
-    </td>  </tr>
-  <tr>
-    <td>Ceasa</td>
-    <td>6</td>
-    <td>cea@1</td>
-    <td>Linux</td>
-    <td>Lenovo</td>
-    <td>Atívado</td>
-    <td>
-        <img src="assets/img/lapisCM.png" alt="" class="opcoesTabela">
-        <img src="assets/img/lixeiraCM.png" alt="" class="opcoesTabela">
-    </td>  </tr>
+  
   
 </table>
 
@@ -85,7 +52,10 @@
         </div>
         <div class="form-group">
             <label for="nome">Estação:</label>
-            <input type="text" id="nome" name="nome" required oninput="validarNome()">
+            <select name="nome" id="nome">
+
+
+              </select>
             <section id="labelNome">A estação não pode ser nulo</section>
         </div>
         <div class="form-group">
@@ -96,7 +66,7 @@
         <div class="form-group">
             <label for="sobrenome">Nome máquina:</label>
             <input type="text" id="sobrenome" name="sobrenome" required oninput="validarSobrenome()">
-            <section id="labelSobrenome">O Sobrenome não pode ser nulo</section>
+            <section id="labelSobrenome">O nome não pode ser nulo</section>
 
         </div>
         <div class="form-group">
@@ -114,7 +84,7 @@
         <div class="form-group">
             <label for="cargo">Status:</label>
             <select name="cargo" id="cargo">
-                <option value="Ativado">Ativado</option>
+                <option value="Ativa">Ativado</option>
                 <option value="Desativado">Desativado</option>
               </select>
         </div>
@@ -156,21 +126,25 @@
 
 
         <script>
+            var idTr = 0;
+            var funcionarioSelecionado = 0;
+
             atualizarTabela();
             var acao =""
             var linhaEscolhida = "";
 
-            function editar(nome, sobrenome, email, telefone, cargo, ativado, celulaLapis){
+            function editar(nome, sobrenome, email, telefone, cargo, celulaLapis){
 
-                modal.style.display = "block";
-                document.querySelector("#nome").value = nome
+                modal.style.display = "block";               
                 document.querySelector("#nome2").value = sobrenome
                 document.querySelector("#sobrenome").value = email
                 document.querySelector("#telefone").value = cargo
                 document.querySelector("#email").value = telefone
                 //document.querySelector("#cargo").value = email
-                acao ="Editar"             
-                linhaEscolhida =celulaLapis.parentNode.parentNode
+                acao ="Editar"
+
+                funcionarioSelecionado = celulaLapis
+
             }   
             const modalEx = document.getElementById("modalEx");
 
@@ -178,106 +152,228 @@
             function Excluir(nome, celulaLixeira){
                 modalEx.style.display = "block";
                 document.querySelector("#lblExcluir").innerHTML = "Deseja excluir a máquina "+ nome+ "?"
-                linhaEscolhida = celulaLixeira.parentNode.parentNode;
-                console.log(linhaEscolhida)
+                linhaEscolhida = celulaLixeira;
             }
 
 
-    function atualizarTabela() {
 
 
+var funcionarioSelecionado = 0;
 
 
-        //aguardar();
-        fetch("/maquinas/atualizarTabela").then(function (resposta) {
-            console.log("aaaaaaaaaaaaaaaaaaaaaa")
+        fetch("/maquinas/estacoes").then(function (resposta) {
             if (resposta.ok) {
-                resposta.json().then(function (resposta) {
+                console.log("AAEEEEEEEEEEEEEEEEEEEE")
 
-                    console.log("aaaaaaaaaaaaaaaaaaaaaa")
+                if (resposta.status == 204) {
+
+                    throw "Nenhum resultado encontrado!!";
+                }
+
+                resposta.json().then(function (resposta) {
+                    console.log("Dados recebidos: ", JSON.stringify(resposta));
+
+                for (let i = 0; i < resposta.length; i++) {
+                    
+                    var estacao = resposta[i]
+
+                    console.log(estacao)
+
+                    var selectElement = document.getElementById("nome");
+                    var optionElement = document.createElement("option");
+                    optionElement.value = estacao.id;
+                    optionElement.text = estacao.nome;
+                    selectElement.add(optionElement);
+                    
+                }
 
                 });
             } else {
                 throw ('Houve um erro na API!');
+
             }
         }).catch(function (resposta) {
             console.error(resposta);
+
+        });
+
+
+var tabelaHtml = document.querySelector("#tabela")
+function atualizarTabela() {
+        //aguardar();
+        var linhas = document.getElementsByTagName("tr");
+
+        for (var i = linhas.length - 1; i > 0; i--) {
+                        linhas[i].remove()
+        }
+
+        fetch("/maquinas/atualizarTabela").then(function (resposta) {
+            if (resposta.ok) {
+                console.log("AAEEEEEEEEEEEEEEEEEEEE")
+
+                if (resposta.status == 204) {
+
+                    throw "Nenhum resultado encontrado!!";
+                }
+
+                resposta.json().then(function (resposta) {
+                    console.log("Dados recebidos: ", JSON.stringify(resposta));
+
+                for (let i = 0; i < resposta.length; i++) {
+                    
+                    var maquina = resposta[i]
+                    if(maquina.status =="Ativa"){
+
+                    var novaLinha = document.createElement("tr");
+                    novaLinha.setAttribute("id", maquina.id);
+                    var colunaEstacao = document.createElement("td");
+                    var colunaAndar = document.createElement("td");
+                    var colunaNomeMaquina = document.createElement("td");
+                    var colunaSo = document.createElement("td");
+                    var colunaFabricante = document.createElement("td");
+                    var colunaStatus = document.createElement("td");
+                    var tdImagens = document.createElement("td");
+
+                    var novaImagem = document.createElement("img");
+                    novaImagem.id = "imgLapis";
+                    novaImagem.src = "assets/img/lapisCF.png";
+                    novaImagem.alt = "";
+                    novaImagem.classList.add("opcoesTabela");
+                    novaImagem.setAttribute("onclick", `editar('${maquina.nomeEstacao}', '${maquina.andar}', '${maquina.nomeIdentificador}', '${maquina.sistemaOperacional}', '${maquina.fabricante}', ${maquina.id})`);
+                    console.log("AAAAAAAAAAAAAAAA: "+maquina.id)
+
+                    var novaImagem2= document.createElement("img");
+                    novaImagem2.id = "imgLixeira";
+                    novaImagem2.src = "assets/img/lixeiraCF.png";
+                    novaImagem2.alt = "";
+                    novaImagem2.classList.add("opcoesTabela");
+                    novaImagem2.setAttribute("onclick", `Excluir('${maquina.nomeIdentificador}', ${maquina.id})`);
+
+
+                    colunaEstacao.innerHTML =maquina.nomeEstacao
+                    colunaAndar.innerHTML =maquina.andar
+                    colunaNomeMaquina.innerHTML =maquina.nomeIdentificador
+                    colunaSo.innerHTML =maquina.sistemaOperacional
+                    colunaFabricante.innerHTML =maquina.fabricante
+                    colunaStatus.innerHTML =maquina.status
+
+
+                    novaLinha.appendChild(colunaEstacao);
+                    novaLinha.appendChild(colunaAndar);
+                    novaLinha.appendChild(colunaNomeMaquina);
+                    novaLinha.appendChild(colunaSo);
+                    novaLinha.appendChild(colunaFabricante);
+                    novaLinha.appendChild(colunaStatus);
+
+
+                    var imagem = document.querySelector("#imgLapis")
+
+                    tdImagens.appendChild(novaImagem)
+                    tdImagens.appendChild(novaImagem2)
+
+                    novaLinha.appendChild(tdImagens);               
+
+                    var tabela = document.getElementById("tabela").getElementsByTagName("tbody")[0];
+                    tabela.appendChild(novaLinha);
+                    }
+                    
+                }
+
+                });
+            } else {
+                throw ('Houve um erro na API!');
+
+            }
+        }).catch(function (resposta) {
+            console.error(resposta);
+
         });
     }
-                
 
             function Salvarr(){
 
-               
-                var nomeRecebido = validarNome()
 
-                var sobreNomeRecebido = validarSobrenome()
-
-                var emailRecebido = validarEmail()
 
                 
 
-                if(acao == "Salvar"){
+                var selectElement = document.getElementById("nome");
+                var estacaoRecebida = selectElement.value;
+
+                var andarRecebido = document.querySelector("#nome2").value
+                var nomeMaquinaRecebido = document.querySelector("#sobrenome").value
+                var soRecebido = document.querySelector("#email").value
+                var fabricanteRecebido = document.querySelector("#telefone").value
+
+                var selectElement3 = document.getElementById("cargo");
+                var statusRecebido = selectElement3.value;   
+
+            if(acao == "Salvar"){
 
 
-                var novaLinha = document.createElement("tr");
-                var colunaNome = document.createElement("td");
-                var colunaSobrenome = document.createElement("td");
-                var colunaEmail = document.createElement("td");
-                var colunaTelefone = document.createElement("td");
-                var colunaTokem = document.createElement("td");
-                var colunaCargo = document.createElement("td");
-                var tdImagens = document.createElement("td");
 
-                var cargoRecebido = document.querySelector("#cargo").value
-
-                var novaImagem = document.createElement("img");
-                novaImagem.id = "imgLapis";
-                novaImagem.src = "assets/img/lapisCM.png";
-                novaImagem.alt = "";
-                novaImagem.classList.add("opcoesTabela");
-                novaImagem.setAttribute("onclick", "editar('Maria', 'Oliveira Sales', 'maria@gmail.com', '(11) 971002286', '764', 'Gerente')");
-
-                var novaImagem2= document.createElement("img");
-                novaImagem2.id = "imgLixeira";
-                novaImagem2.src = "assets/img/lixeiraCM.png";
-                novaImagem2.alt = "";
-                novaImagem2.classList.add("opcoesTabela");
-                novaImagem2.setAttribute("onclick", "Excluir('Maria', 'Oliveira Sales')");
-
-                colunaNome.innerHTML =nomeRecebido
-                colunaSobrenome.innerHTML =document.querySelector("#nome2").value
-                colunaEmail.innerHTML =document.querySelector("#sobrenome").value
-                colunaTelefone.innerHTML = document.querySelector("#email").value
-                colunaTokem.innerHTML =document.querySelector("#telefone").value
-                colunaCargo.innerHTML =cargoRecebido
-
-                 novaLinha.appendChild(colunaNome);
-                 novaLinha.appendChild(colunaSobrenome);
-                 novaLinha.appendChild(colunaEmail);
-                 novaLinha.appendChild(colunaTelefone);
-                 novaLinha.appendChild(colunaTokem);
-                 novaLinha.appendChild(colunaCargo);
-
-                 var imagem = document.querySelector("#imgLapis")
-
-                 tdImagens.appendChild(novaImagem)
-                 tdImagens.appendChild(novaImagem2)
-
-                 novaLinha.appendChild(tdImagens);               
-
-                 var tabela = document.getElementById("tabela").getElementsByTagName("tbody")[0];
-                 tabela.appendChild(novaLinha);
-
+                fetch("/maquinas/cadastrar", {
+                 method: "POST",
+                 headers: {
+                "Content-Type": "application/json"
+                },
+                body: JSON.stringify({
+                // crie um atributo que recebe o valor recuperado aqui
+                // Agora vá para o arquivo routes/usuario.js
+                
+                estacaoServer: estacaoRecebida,
+                andarServer: andarRecebido,
+                nomeMaquinaServer: nomeMaquinaRecebido,
+                soServer: soRecebido,
+                fabricanteServer: fabricanteRecebido,
+                statusServer: statusRecebido
+            })
+                }).then(function (resposta) {
+                
+                console.log("resposta: ", resposta);
+                
+            if (resposta.ok) {
+                atualizarTabela()
+                
+                
+                limparFormulario();
+            } else {
+                throw ("Houve um erro ao tentar realizar o cadastro!");
                 }
+                }).catch(function (resposta) {
+                console.log(`#ERRO: ${resposta}`);
+                });
+
+                
+            }
                 else{
                     
-                    linhaEscolhida.getElementsByTagName("td")[0].innerHTML = document.querySelector("#nome").value
-                    linhaEscolhida.getElementsByTagName("td")[1].innerHTML = document.querySelector("#nome2").value
-                    linhaEscolhida.getElementsByTagName("td")[2].innerHTML = document.querySelector("#sobrenome").value
-                    linhaEscolhida.getElementsByTagName("td")[3].innerHTML = document.querySelector("#email").value
-                    linhaEscolhida.getElementsByTagName("td")[4].innerHTML = document.querySelector("#telefone").value
-                    linhaEscolhida.getElementsByTagName("td")[5].innerHTML = document.querySelector("#cargo").value
+
+
+                    fetch(`/maquinas/editar/${funcionarioSelecionado}`, {
+                    method: "PUT",
+                    headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({
+                estacaoServer: estacaoRecebida,
+                andarServer: andarRecebido,
+                nomeMaquinaServer: nomeMaquinaRecebido,
+                soServer: soRecebido,
+                fabricanteServer: fabricanteRecebido,
+                idServer: funcionarioSelecionado,
+                statusServer: statusRecebido
+
+                })
+                }).then(function (resposta) {
+                    atualizarTabela()
+
+                }).catch(function (resposta) {
+                    console.log(`#ERRO: ${resposta}`);
+                });
+                            
+                
+                    
+                        modal.style.display = "none";
                 }
 
                 modal.style.display = "none";
@@ -347,12 +443,35 @@
             }
 
 function ExcluirFinal(){
-// obtém a linha que contém a célula de lixeira clicada
-var linha = linhaEscolhida
+    var linhas = document.getElementsByTagName("tr");
 
-// remove a linha da tabela
-linha.parentNode.removeChild(linha);
-    modalEx.style.display = "none";
+// Loop para excluir cada linha
+alert(linhaEscolhida)
+    for (var i = linhas.length - 1; i > 0; i--) {
+    
+        if(linhas[i].id == linhaEscolhida){
+            alert("aaaaa")
+
+                fetch(`/maquinas/deletar/${linhaEscolhida}`, {
+                    method: "PUT",
+                    headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({
+                id: linhaEscolhida
+                })
+                }).then(function (resposta) {
+                    atualizarTabela()
+                }).catch(function (resposta) {
+                    console.log(`#ERRO: ${resposta}`);
+                });
+                            
+                
+
+  }
+  else{
+  }
+}
 }
 function CancelarEx(){
     modalEx.style.display = "none";
