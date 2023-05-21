@@ -240,18 +240,3 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js"
     integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"
     defer></script>
-
-    <script>
-        const express = require('express');
-        const app = express();
-
-        app.get('/api/meuendpoint', (req, res) => {
-        // Lógica para tratar a requisição e gerar a resposta
-        res.send('Olá, mundo!');
-        });
-
-        const port = process.env.PORT || 8080;
-        app.listen(port, () => {
-        console.log(`Servidor rodando na porta ${port}`);
-        });
-    </script>
