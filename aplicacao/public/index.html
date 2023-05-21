@@ -249,4 +249,9 @@
         // Lógica para tratar a requisição e gerar a resposta
         res.send('Olá, mundo!');
         });
+
+        const port = process.env.PORT || 3000;
+        app.listen(port, () => {
+        console.log(`Servidor rodando na porta ${port}`);
+        });
     </script>
