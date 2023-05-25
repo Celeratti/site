@@ -41,8 +41,7 @@
         <img src="assets/img/gearCM.png" alt="" id="imgGear">
     </th>
   </tr>
-  
-  
+
 </table>
 
 <div class="modal" id="modal">
@@ -50,14 +49,22 @@
         <div class="modal-header">
             Adicionar nova máquina
         </div>
+
+
         <div class="form-group">
-            <label for="nome">Estação:</label>
+            <label for="nome">Linha:</label>
             <select name="nome" id="nome">
-
-
               </select>
             <section id="labelNome">A estação não pode ser nulo</section>
         </div>
+
+        <div class="form-group">
+            <label for="nome">Estação:</label>
+            <select name="nome" id="nome">
+              </select>
+            <section id="labelNome">A estação não pode ser nulo</section>
+        </div>
+
         <div class="form-group">
             <label for="nome">Andar:</label>
             <input type="text" id="nome2" name="nome" required oninput="validarNome()">
@@ -81,13 +88,7 @@
             <section id="labelTelefone">Fabricante Inválido</section>
 
         </div>
-        <div class="form-group">
-            <label for="cargo">Status:</label>
-            <select name="cargo" id="cargo">
-                <option value="Ativa">Ativado</option>
-                <option value="Desativado">Desativado</option>
-              </select>
-        </div>
+
         <hr>
         <div style="display: flex; justify-content: flex"></div>
             <div style="display: flex; justify-content: flex-end">
@@ -134,7 +135,7 @@
             var linhaEscolhida = "";
 
             function editar(nome, sobrenome, email, telefone, cargo, celulaLapis){
-
+                document.querySelector(".modal-header").innerHTML = "Editar Máquina"
                 modal.style.display = "block";               
                 document.querySelector("#nome2").value = sobrenome
                 document.querySelector("#sobrenome").value = email
@@ -144,7 +145,6 @@
                 acao ="Editar"
 
                 funcionarioSelecionado = celulaLapis
-
             }   
             const modalEx = document.getElementById("modalEx");
 
@@ -153,6 +153,7 @@
                 modalEx.style.display = "block";
                 document.querySelector("#lblExcluir").innerHTML = "Deseja excluir a máquina "+ nome+ "?"
                 linhaEscolhida = celulaLixeira;
+                document.querySelector(".modalEx-header").innerHTML = "Excluir Máquina?"
             }
 
 
@@ -222,8 +223,7 @@ function atualizarTabela() {
                 for (let i = 0; i < resposta.length; i++) {
                     
                     var maquina = resposta[i]
-                    if(maquina.status =="Ativa"){
-
+                    if(maquina.fkStatus ==1){
                     var novaLinha = document.createElement("tr");
                     novaLinha.setAttribute("id", maquina.id);
                     var colunaEstacao = document.createElement("td");
@@ -255,7 +255,7 @@ function atualizarTabela() {
                     colunaNomeMaquina.innerHTML =maquina.nomeIdentificador
                     colunaSo.innerHTML =maquina.sistemaOperacional
                     colunaFabricante.innerHTML =maquina.fabricante
-                    colunaStatus.innerHTML =maquina.status
+                    colunaStatus.innerHTML ="Ativa"
 
 
                     novaLinha.appendChild(colunaEstacao);
@@ -305,7 +305,8 @@ function atualizarTabela() {
                 var fabricanteRecebido = document.querySelector("#telefone").value
 
                 var selectElement3 = document.getElementById("cargo");
-                var statusRecebido = selectElement3.value;   
+                
+                alert(statusRecebido)
 
             if(acao == "Salvar"){
 
@@ -392,7 +393,11 @@ function atualizarTabela() {
                 document.querySelector("#telefone").value =""
                 document.querySelector("#email").value = ""
                 modal.style.display = "block";
+                document.querySelector(".modal-header").innerHTML = "Cadastrar Máquina"
                 acao ="Salvar"
+
+                
+                alert(sessionStorage.ID)
             }
             botaoCancel.onclick = function() {
                 modal.style.display = "none";
