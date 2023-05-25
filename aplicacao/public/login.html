@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login</title>
-
+    <link rel="stylesheet" href="assets/css/login.css">
     <link rel="shortcut icon" href="./assets/img/celeratti-mascote.png" type="image/x-icon">
     <link rel="shortcut icon" href="../assets/celeratti-mascote.png" type="image/x-icon">
     <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin>
@@ -30,7 +30,7 @@
                 <div class="caixaUl">
                     <ul>
                         <li>E-mail: </li>
-                        <input type="email" id="email_input" >
+                        <input type="cnpj" id="cnpj_input" >
                         <li>Senha: </li>
                         <input type="password" id="senha_input">
 
@@ -51,10 +51,10 @@
     function entrar() {
         // aguardar();
 
-        var emailVar = email_input.value;
+        var cnpjVar = cnpj_input.value;
         var senhaVar = senha_input.value;
 
-        if (emailVar == "" || senhaVar == "") {
+        if (cnpjVar == "" || senhaVar == "") {
             cardErro.style.display = "block"
             mensagem_erro.innerHTML = "(Mensagem de erro para todos os campos em branco)";
             finalizarAguardar();
@@ -64,7 +64,7 @@
         //     // setInterval(sumirMensagem, 5000)
         // }
 
-        console.log("FORM LOGIN: ", emailVar);
+        console.log("FORM LOGIN: ", cnpjVar);
         console.log("FORM SENHA: ", senhaVar);
 
         fetch("/usuarios/autenticar", {
@@ -73,7 +73,7 @@
                 "Content-Type": "application/json"
             },
             body: JSON.stringify({
-                emailServer: emailVar,
+                cnpjServer: cnpjVar,
                 senhaServer: senhaVar
             })
         }).then(function (resposta) {

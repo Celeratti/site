@@ -93,8 +93,7 @@
 }
 
 .carousel-item {
-    background-image: url(img/slide1.jpg);
-   /* background-color: black; */  
+    background-color: black;   
     background-size: cover;
 }
 
