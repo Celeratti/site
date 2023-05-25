@@ -168,10 +168,6 @@ function obterDadosEstacao() {
 
         bolinhaAlerta.className = `bolinhaAlerta${num}`;
 
-        h3.id = `estacaoNome`;
-        h3.style.width = `100%`
-        h3.style.textAlign = `center`
-
         h3.innerHTML = `${estacao.nome}`;
 
         divEstacao.className = `estacao${i + 1}`;
@@ -220,7 +216,12 @@ function obterDadosEstacao() {
           document.getElementById(`myChart${i + 1}`),
           config
         );
+
+
+
       }
+
+
      }
 
     function atualizarGraficoEstacao1(idEstacao1,dados,myChart) {

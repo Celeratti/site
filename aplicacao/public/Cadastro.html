@@ -32,13 +32,11 @@
                 <div class="caixaUl">
                     <ul>
                         <li>Razão social </li>
-                        <input type="email" id="nome_input">
+                        <input type="text" id="nome_input">
                         <li>Nome fantasia</li>
-                        <input type="email" id="nome_input2">
+                        <input type="text" id="nome_input2">
                         <li>CNPJ: </li>
-                        <input type="email" id="cnpj" maxlength="11" >
-                        <li>E-mail: </li>
-                        <input type="email" id="email_input">
+                        <input type="text" id="cnpj_input" maxlength="11" >
                         <li>Senha: </li>
                         <input type="password" id="senha_input">
                         <li>Confirmar Senha: </li>
@@ -92,11 +90,12 @@ e.target.value = v;
         //Recupere o valor da nova input pelo nome do id
         // Agora vá para o método fetch logo abaixo
         var nomeVar = nome_input.value;
-        var emailVar = email_input.value;
+        var nome2Var = nome_input2.value;
+        var cnpjVar = cnpj_input.value;
         var senhaVar = senha_input.value;
         var confirmacaoSenhaVar = confirmacao_senha_input.value;
 
-        if (nomeVar == "" || emailVar == "" || senhaVar == "" || confirmacaoSenhaVar == "") {
+        if (nomeVar == "" || nome2Var == "" || cnpjVar == "" || senhaVar == "" || confirmacaoSenhaVar == "") {
             // cardErro.style.display = "block"
             // mensagem_erro.innerHTML = "(Mensagem de erro para todos os campos em branco)";
 
@@ -119,7 +118,8 @@ e.target.value = v;
                 // crie um atributo que recebe o valor recuperado aqui
                 // Agora vá para o arquivo routes/usuario.js
                 nomeServer: nomeVar,
-                emailServer: emailVar,
+                nome2Server: nome2Var,
+                cnpjServer: cnpjVar,
                 senhaServer: senhaVar
             })
         }).then(function (resposta) {
