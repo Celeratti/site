@@ -6,7 +6,7 @@ var mySqlConfig = {
     host: "localhost",
     database: "celeratti",
     user: "root",
-    password: "pmp2003",
+    password: "**teste9019K1",
 };
 
 function executar(instrucao) {

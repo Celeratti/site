@@ -24,9 +24,17 @@ function listar(req, res) {
         );
 }
 
+
+
+
+
 function entrar(req, res) {
-    var cnpj = req.body.emailServer;
+    var cnpj = req.body.cnpjServer;
     var senha = req.body.senhaServer;
+
+
+
+
 
     if (cnpj == undefined) {
         res.status(400).send("Seu email está undefined!");

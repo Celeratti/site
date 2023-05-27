@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login</title>
     <link rel="stylesheet" href="assets/css/login.css">
+    <link rel="stylesheet" href="assets/css/reset.css">
     <link rel="shortcut icon" href="./assets/img/celeratti-mascote.png" type="image/x-icon">
     <link rel="shortcut icon" href="../assets/celeratti-mascote.png" type="image/x-icon">
     <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin>
@@ -29,8 +30,8 @@
             <div class="formulario">
                 <div class="caixaUl">
                     <ul>
-                        <li>E-mail: </li>
-                        <input type="cnpj" id="cnpj_input" >
+                        <li>CNPJ: </li>
+                        <input type="cnpj" id="cnpj_input" maxlength="11">
                         <li>Senha: </li>
                         <input type="password" id="senha_input">
 
@@ -45,14 +46,38 @@
     </div>
 </body>
 </html>
+
+<script src="funcoes.js"></script>
 <script>
+
+const input = document.getElementById("cnpj_input");
+input.addEventListener("keyup", formatarCNPJ);
+function formatarCNPJ(e){
+
+var v= e.target.value.replace(/\D/g,"");
+
+v=v.replace(/^(\d{2})(\d)/,"$1.$2");
+
+v=v.replace(/^(\d{2})\.(\d{3})(\d)/,"$1.$2.$3");
+
+v=v.replace(/\.(\d{3})(\d)/,".$1/$2");
+
+v=v.replace(/(\d{4})(\d)/,"$1-$2");  
+
+e.target.value = v;
+
+ 
+
+}
 
 
     function entrar() {
         // aguardar();
 
-        var cnpjVar = cnpj_input.value;
+        var cnpjVar = cnpj_input.value.replace(/[^\d]/g, "");
         var senhaVar = senha_input.value;
+
+
 
         if (cnpjVar == "" || senhaVar == "") {
             cardErro.style.display = "block"
@@ -86,12 +111,12 @@
                     console.log(json);
                     console.log(JSON.stringify(json));
 
-                    sessionStorage.EMAIL_USUARIO = json.email;
-                    sessionStorage.NOME_USUARIO = json.nome;
-                    sessionStorage.ID_USUARIO = json.id;
+                    sessionStorage.ID = json.id;
+
 
                     setTimeout(function () {
-                        window.location = "./dashboard/cards.html";
+
+                        window.location = "CadastroMaquina.html";
                     }, 1000); // apenas para exibir o loading
 
                 });

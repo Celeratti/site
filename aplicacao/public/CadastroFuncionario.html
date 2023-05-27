@@ -115,11 +115,12 @@
 
 </body>
 </html>
-
+<script src="funcoes.js"></script>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.inputmask/3.3.4/jquery.inputmask.bundle.min.js"></script>
 
         <script>
+
 var funcionarioSelecionado = 0;
 
 
@@ -143,7 +144,7 @@ var tabelaHtml = document.querySelector("#tabela")
                 resposta.json().then(function (resposta) {
                     console.log("Dados recebidos: ", JSON.stringify(resposta));
 
-                for (let i = 0; i <= resposta.length; i++) {
+                for (let i = 0; i < resposta.length; i++) {
                     if(resposta[i].esta_ativo != 0){
 
 
@@ -293,9 +294,7 @@ var tabelaHtml = document.querySelector("#tabela")
                 sobreNomeServer: nomeRecebido,
                 telefoneServer: numerosTelefone,
                 emailServer: emailRecebido,
-                senhaServer: "car",
                 cargoServer: novoCargo,
-                ativoServer: "senha"
             })
         }).then(function (resposta) {
 

@@ -24,12 +24,11 @@ function cadastrar(req, res) {
     var sobrenome = req.body.sobreNomeServer;
     var telefone = req.body.telefoneServer;
     var email = req.body.emailServer;
-    var senha = req.body.senhaServer;
     var cargo = req.body.cargoServer;
-    var fkempresa = 2;
+    var fkempresa = req.body.empresaServer;
 
 
-    funcionarioModel.cadastrar(nome, sobrenome, telefone,email, senha, cargo , fkempresa)
+    funcionarioModel.cadastrar(nome, sobrenome, telefone,email, cargo , fkempresa)
             .then(
                 function (resultado) {
                     res.json(resultado);

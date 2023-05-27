@@ -10,10 +10,13 @@ router.get("/atualizarTabela", function (req, res) {
 });
 
 
-router.get("/estacoes", function (req, res) {
+router.post("/estacoes", function (req, res) {
     maquinaController.estacoes(req, res);
 });
 
+router.get("/linhas", function (req, res) {
+    maquinaController.linhas(req, res);
+});
 
 
 router.put("/deletar/:id", function (req, res) {

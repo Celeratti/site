@@ -4,14 +4,13 @@ var sessoes = [];
 
 function cadastrar(req, res) {
     var estacao = req.body.estacaoServer;
-    //var andar = req.body.andarRecebido;
+    var andar = req.body.andarServer;
     var nomeMaquina = req.body.nomeMaquinaServer;
     var so = req.body.soServer;
     var fabricante = req.body.fabricanteServer;
-    var status = req.body.statusServer;
 
 
-    maquinaModel.cadastrar(fabricante, nomeMaquina, so,status, 1 , estacao)
+    maquinaModel.cadastrar(fabricante, nomeMaquina, so, 1 , andar, estacao)
             .then(
                 function (resultado) {
                     res.json(resultado);
@@ -41,8 +40,39 @@ function atualizarTabela(req, res) {
         res.status(500).json(erro.sqlMessage);
     });
 }
+
+
+
 function estacoes(req, res) {
-    maquinaModel.estacoes().then(function (resultado) {
+
+        var linha = req.body.linhaServer;
+    
+    
+            maquinaModel.estacoes(linha)
+            .then(function (resultado) {
+                if (resultado.length > 0) {
+                    res.status(200).json(resultado);
+                } else {
+                    res.status(204).send("Nenhum resultado encontrado!")
+                }
+            }).catch(
+                function (erro) {
+                    console.log(erro);
+                    console.log("Houve um erro ao realizar a consulta! Erro: ", erro.sqlMessage);
+                    res.status(500).json(erro.sqlMessage);
+                }
+            );
+
+}
+
+
+
+
+
+
+
+function linhas(req, res) {
+    maquinaModel.linhas().then(function (resultado) {
         if (resultado.length > 0) {
             res.status(200).json(resultado);
         } else {
@@ -72,6 +102,9 @@ function deletar(req, res) {
             }
         );
 }
+
+
+
 
 
 
@@ -108,5 +141,6 @@ module.exports = {
     estacoes,
     deletar,
     cadastrar, 
-    editar
+    editar,
+    linhas
 }
