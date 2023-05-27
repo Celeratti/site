@@ -31,7 +31,7 @@ function atualizarTabela() {
 
 function editar(novoNome, novoSobreNome, emailRecebido,telefoneRecebido, novoCargo, id) {
     var instrucao = `
-        UPDATE funcionario SET nome = '${novoNome}', sobrenome = '${novoSobreNome}', email = '${emailRecebido}', telefone = '${telefoneRecebido}', fkCargo = '${novoCargo}' WHERE id = ${id};
+        UPDATE funcionario SET nome = '${novoNome}', sobrenome = '${novoSobreNome}', email = '${emailRecebido}', telefone = '${telefoneRecebido}', fkCargo = ${novoCargo} WHERE id = ${id};
     `;
     console.log("Executando a instrução SQL: \n" + instrucao);
     return database.executar(instrucao);

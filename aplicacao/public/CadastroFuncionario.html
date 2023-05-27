@@ -80,7 +80,7 @@
             <label for="cargo">Cargo:</label>
             <select name="cargo" id="cargo">
                 <option value="Gerente">Gerente</option>
-                <option value="Tecnico">Técnico</option>
+                <option value="Técnico">Técnico</option>
                 <option value="Analista">Analista</option>
               </select>
         </div>
@@ -226,6 +226,7 @@ var tabelaHtml = document.querySelector("#tabela")
             var linhaEscolhida = "";
 
             function editar(nome, sobrenome, email, telefone, cargo,  idfuncionario){
+                document.querySelector(".modal-header").innerHTML ="Editar Funcionário"
 
                 modal.style.display = "block";
                 document.querySelector("#nome").value = nome
@@ -244,6 +245,8 @@ var tabelaHtml = document.querySelector("#tabela")
 
 
             function Excluir(nome, sobrenome, idTr){
+                document.querySelector(".modalEx-header").innerHTML ="Excluir Funcionário"
+
                 modalEx.style.display = "block";
                 document.querySelector("#lblExcluir").innerHTML = "Deseja realmente excluir o funcionário(a) "+nome +" "+ sobrenome+ "?"
 
@@ -300,7 +303,7 @@ var tabelaHtml = document.querySelector("#tabela")
 
             if (resposta.ok) {
                 atualizarTabela()
-
+()
 
                 limparFormulario();
             } else {
@@ -351,6 +354,8 @@ var tabelaHtml = document.querySelector("#tabela")
                 document.querySelector("#email").value = ""
                 modal.style.display = "block";
                 acao ="Salvar"
+                document.querySelector(".modal-header").innerHTML ="Adicionar Funcionário"
+
             }
             botaoCancel.onclick = function() {
                 modal.style.display = "none";
