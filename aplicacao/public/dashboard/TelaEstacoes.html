@@ -172,7 +172,7 @@ function obterDadosEstacao() {
         h3.style.width = `100%`
         h3.style.textAlign = `center`
 
-        h3.innerHTML = `${estacao.nome}`;
+        h3.innerHTML = `${estacao.nome_estacao}`;
 
         divEstacao.className = `estacao${i + 1}`;
 
@@ -206,8 +206,8 @@ function obterDadosEstacao() {
         }]   
         };
 
-        dados.datasets[0].data.push(estacao.maquinasComProblemas);
-            dados.datasets[0].data.push(estacao.maquinasOperantes);
+            dados.datasets[0].data.push(estacao.maquinas_com_problemas);
+            dados.datasets[0].data.push(estacao.maquinas_operando_normalmente);
 
             const config = {
             type: 'bar',
