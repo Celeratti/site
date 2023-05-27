@@ -28,7 +28,12 @@ function cadastrar(req, res) {
 
 
 function atualizarTabela(req, res) {
-    maquinaModel.atualizarTabela().then(function (resultado) {
+
+    var linha = req.body.linhaServer;
+
+
+
+    maquinaModel.atualizarTabela(linha).then(function (resultado) {
         if (resultado.length > 0) {
             res.status(200).json(resultado);
         } else {

@@ -10,20 +10,19 @@ function deletar(id) {
 }
 
 
-function cadastrar(nome, sobrenome, telefone, email, senha, cargo, fkempresa) {
-    console.log("Nome: "+nome+ "Sobrenome: "+sobrenome+ "Telefone: "+telefone+ "Email: "+email+ "Senha: "+senha+"Cargo: "+cargo+ "Fkempresa: "+fkempresa)
+function cadastrar(nome, sobrenome, email,senha, telefone, cargo, fkempresa) {
     var instrucao = `
-        INSERT INTO funcionario (nome, sobrenome, telefone, email, senha, fkCargo,esta_ativo, fkempresa)  VALUES ('${nome}', '${sobrenome}', '11111111111', '${email}', '${senha}', '${cargo}',1,1 );
+        INSERT INTO funcionario (nome, sobrenome, telefone, email, senha, fkCargo, esta_ativo, fkempresa)  VALUES ('${nome}', '${sobrenome}', '${telefone}', '${email}','${senha}', ${cargo}, 1, ${fkempresa} );
     `;
     console.log("Executando a instrução SQL: \n" + instrucao);
     return database.executar(instrucao);
 }
 
 // Coloque os mesmos parâmetros aqui. Vá para a var instrucao
-function atualizarTabela() {
+function atualizarTabela(linha) {
 
     var instrucao = `
-        select * from funcionario;
+        select * from funcionario where fkEmpresa =${linha};
     `;
     console.log("Executando a instrução SQL: \n" + instrucao);
     return database.executar(instrucao);

@@ -27,8 +27,14 @@ function cadastrar(req, res) {
     var cargo = req.body.cargoServer;
     var fkempresa = req.body.empresaServer;
 
+    var senha1 =  telefone.substr(-4);
+    var senha2 = sobrenome.slice(0, 2);
+    var senhaFinal = senha2+ senha1
 
-    funcionarioModel.cadastrar(nome, sobrenome, telefone,email, cargo , fkempresa)
+
+
+
+    funcionarioModel.cadastrar(nome, sobrenome, email,senhaFinal, telefone, cargo, fkempresa)
             .then(
                 function (resultado) {
                     res.json(resultado);
@@ -46,7 +52,12 @@ function cadastrar(req, res) {
 
 
 function atualizarTabela(req, res) {
-    funcionarioModel.atualizarTabela().then(function (resultado) {
+
+    var linha = req.body.linhaServer;
+
+
+
+    funcionarioModel.atualizarTabela(linha).then(function (resultado) {
         if (resultado.length > 0) {
             res.status(200).json(resultado);
         } else {

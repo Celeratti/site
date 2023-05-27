@@ -1,3 +1,6 @@
+document.querySelector(".nomeEmpresa").innerHTML =GETNomeEmpresa()
+
+
 var idTr = 0;
             var funcionarioSelecionado = 0;
 
@@ -5,13 +8,17 @@ var idTr = 0;
             var acao =""
             var linhaEscolhida = "";
 
-            function editar(nome, sobrenome, SO, fabricante, cargo, celulaLapis){
+            function editar(andar, nome, so, fabricante, celulaLapis){
+                document.getElementById('linha').disabled = true;
+                document.getElementById('estacoes').disabled = true;
+
+
                 document.querySelector(".modal-header").innerHTML = "Editar Máquina"
                 modal.style.display = "block";               
-                document.querySelector("#andar").value = sobrenome
-                document.querySelector("#sobrenome").value = SO
-                document.querySelector("#fabricante").value = cargo
-                document.querySelector("#SO").value = fabricante
+                document.querySelector("#andar").value = andar
+                document.querySelector("#nome").value = nome
+                document.querySelector("#SO").value = so
+                document.querySelector("#fabricante").value = fabricante
                 acao ="Editar"
 
                 funcionarioSelecionado = celulaLapis
@@ -132,6 +139,8 @@ function carregarEstacoes(linha){
 
 var tabelaHtml = document.querySelector("#tabela")
 function atualizarTabela() {
+    document.getElementById('linha').disabled = false;
+    document.getElementById('estacoes').disabled = false;
         //aguardar();
         var linhas = document.getElementsByTagName("tr");
 
@@ -139,7 +148,15 @@ function atualizarTabela() {
                         linhas[i].remove()
         }
 
-        fetch("/maquinas/atualizarTabela").then(function (resposta) {
+        fetch("/maquinas/atualizarTabela", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                linhaServer: GETIdEmpresa()
+            })
+        }).then(function (resposta) {
             if (resposta.ok) {
                 console.log("AAEEEEEEEEEEEEEEEEEEEE")
 
@@ -150,6 +167,9 @@ function atualizarTabela() {
 
                 resposta.json().then(function (resposta) {
                     console.log("Dados recebidos: ", JSON.stringify(resposta));
+
+
+                    console.log(resposta.length)
 
                 for (let i = 0; i < resposta.length; i++) {
                     
@@ -170,7 +190,7 @@ function atualizarTabela() {
                     novaImagem.src = "assets/img/lapisCF.png";
                     novaImagem.alt = "";
                     novaImagem.classList.add("opcoesTabela");
-                    novaImagem.setAttribute("onclick", `editar('${maquina.nomeEstacao}', '${maquina.andar}', '${maquina.nomeIdentificador}', '${maquina.sistemaOperacional}', '${maquina.fabricante}', ${maquina.id})`);
+                    novaImagem.setAttribute("onclick", `editar('${maquina.andar}', '${maquina.nomeIdentificador}', '${maquina.sistemaOperacional}', '${maquina.fabricante}', ${maquina.id})`);
                     console.log("AAAAAAAAAAAAAAAA: "+maquina.id)
 
                     var novaImagem2= document.createElement("img");
@@ -229,7 +249,6 @@ function atualizarTabela() {
                 var selectElement = document.getElementById("estacoes");
                 var estacaoRecebida = selectElement.value;
 
-                alert(estacaoRecebida)
 
                 var andarRecebido = document.querySelector("#andar").value
                 var nomeMaquinaRecebido = document.querySelector("#nome").value
@@ -265,7 +284,7 @@ function atualizarTabela() {
                 
             if (resposta.ok) {
                 atualizarTabela()
-                
+                openModal()
                 
                 limparFormulario();
             } else {
@@ -329,7 +348,6 @@ function atualizarTabela() {
                 acao ="Salvar"
 
                 
-                alert(sessionStorage.ID)
             }
             botaoCancel.onclick = function() {
                 modal.style.display = "none";
@@ -378,11 +396,9 @@ function ExcluirFinal(){
     var linhas = document.getElementsByTagName("tr");
 
 // Loop para excluir cada linha
-alert(linhaEscolhida)
     for (var i = linhas.length - 1; i > 0; i--) {
     
         if(linhas[i].id == linhaEscolhida){
-            alert("aaaaa")
 
                 fetch(`/maquinas/deletar/${linhaEscolhida}`, {
                     method: "PUT",
@@ -447,3 +463,19 @@ selectLinhas.addEventListener('change', function() {
 
 });
   
+
+function openModal() {
+    document.getElementById("modalAlertaCadastro").classList.add("show");
+    setTimeout(function() {
+      closeModal();
+    }, 5000); // Fechar a modal após 5 segundos (5000 milissegundos)
+  }
+
+  function closeModal() {
+    var modal = document.getElementById("modalAlertaCadastro");
+    modal.classList.add("hide");
+    setTimeout(function() {
+      modal.classList.remove("show");
+      modal.classList.remove("hide");
+    }, 300); // Remover a modal após a transição de 0.3s (300 milissegundos)
+  }

@@ -5,7 +5,7 @@ var funcionarioController = require("../controllers/funcionarioController");
 
 console.log("Cheguei nas rotas")
 
-router.get("/atualizarTabela", function (req, res) {
+router.post("/atualizarTabela", function (req, res) {
     funcionarioController.atualizarTabela(req, res);
 });
 

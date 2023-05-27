@@ -3,11 +3,11 @@ var database = require("../database/config")
 // Coloque os mesmos parâmetros aqui. Vá para a var instrucao
 
 
-function atualizarTabela() {
+function atualizarTabela(linha) {
     var instrucao = `
     SELECT m.fabricante, m.id, m.nomeIdentificador, m.sistemaOperacional, m.fkStatus, m.andar, e.nome as nomeEstacao 
     FROM celeratti.maquina m
-    INNER JOIN celeratti.estacao e ON e.id = m.fkestacao;
+    INNER JOIN celeratti.estacao e ON e.id = m.fkestacao where fkEmpresa =${linha};
     `;
     console.log("Executando a instrução SQL: \n" + instrucao);
     return database.executar(instrucao);

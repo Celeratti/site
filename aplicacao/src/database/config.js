@@ -18,6 +18,8 @@ var sqlServerConfig = {
 }
 
 // CONEXÃO DO MYSQL WORKBENCH (LOCAL)
+
+process.env.AMBIENTE_PROCESSO = "desenvolvimento"
 var mySqlConfig = {
     host: "localhost",
     database: "celeratti",
