@@ -25,8 +25,11 @@
     <a href="dashInicio.html">Voltar para a tela de máquinas</a>
 
     <div id="disco">
-      <canvas id="myChartCanvasDisco"></canvas>
-      <div class="bolinhaAlerta"></div>
+      <div class="" id="">
+        <canvas id="myChartCanvasDisco"></canvas>
+        <div class="bolinhaAlerta"></div>
+      </div>
+    
     </div>
     <div class="legendaDisco">
       <details>
@@ -38,8 +41,10 @@
 
 
     <div id="cpu">
-      <canvas id="myChartCanvasCpu"></canvas>
-      <div class="bolinhaAlerta"></div>
+      <div class="" id="divAlertaCPU">
+        <canvas id="myChartCanvasCpu"></canvas>
+        <div class="" id="bolinhaAlertaCPU"></div>
+      </div>
     </div>
     <div class="legendaCpu">
       <details>
@@ -136,11 +141,25 @@ window.onload = obterDadosGrafico();
         console.log('----------------------------------------------')
         console.log('Estes dados foram recebidos pela funcao "obterDadosGrafico" e passados para "plotarGrafico":')
         console.log(resposta)
-
+        var divCpu = document.getElementById('divAlertaCPU')
+        var divBolinhaCPU = document.getElementById('bolinhaAlertaCPU')
         for (i = 0;i < resposta.length; i++) {
             var registro = resposta[i];
             labels.push(registro.momento_grafico);
             dados.datasets[0].data.push(registro.cpu);
+            if((resposta.lenght-1).cpu < 61.0 ){
+              divBolinhaCPU.classList.toggle('bolinhaAlertaIdeal')
+            }
+            else if ((resposta.lenght-1).cpu > 64.9 && (resposta.lenght-1).cpu < 80) {
+              divCpu.classList.toggle('divAlertaEmergente')
+              divBolinhaCPU.classList.toggle('bolinhaAlertaEmergente')
+            }else if((resposta.lenght-1).cpu > 79.9 && (resposta.lenght-1).cpu < 90){
+              divCpu.classList.toggle('divAlertaCritico')
+              divBolinhaCPU.classList.toggle('bolinhaAlertaCritico')
+            }else{
+              divCpu.classList.toggle('divAlertaUrgente')
+              divBolinhaCPU.classList.toggle('bolinhaAlertaUrgente')
+            }
         }
 
         console.log('----------------------------------------------')

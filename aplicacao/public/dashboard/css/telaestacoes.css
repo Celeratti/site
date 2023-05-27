@@ -85,7 +85,7 @@ body {
 h1 {
     position: absolute;
     display: flex;
-    left: 35%;
+    left: 45%;
 }
 
 #a1{
@@ -208,9 +208,9 @@ color: black;
     position: absolute;
     display: flex;
     top: 20%;
-    left: 23%;
+    left: 21.5%;
     height: 75%;
-    width: 75%;
+    width: 77%;
     background: rgba(255, 255, 255, 0.35);
     box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
     backdrop-filter: blur(13.5px);
@@ -220,9 +220,8 @@ color: black;
 }
 
 .estacoes h3 {
-    position: absolute;
     display: flex;
-    left: 7%;
+    left: -10%;
 }
 
 /* Isso anima a bolinha */
@@ -248,8 +247,8 @@ color: black;
     border-radius: 100px;
     animation: animate 0.80s linear infinite;
     position: absolute;
-    left: 90%;
-    top: 9px;
+    right: 10%;
+    top: 20px;
     z-index: 1px;
 }
 
@@ -311,10 +310,11 @@ color: black;
     border: 1px solid red;
     position: absolute;
     display: flex;
+    flex-direction: column;
     top: -6%;
     left: 1%;
     width: 220px;
-    height: 150px;   
+    height: 220px;   
     border: 1px solid rgba(255, 255, 255, 0.18);
 }
 
@@ -536,7 +536,7 @@ color: black;
     top: 40%;
 }
 
-.borda6{
+.borda6 , .borda14 {
     border: 1px solid red;
     position: absolute;
     display: flex;
@@ -552,7 +552,7 @@ color: black;
     border: 1px solid rgba(255, 255, 255, 0.18);
 }
 
-.estacao6 {
+.estacao6 , .estacao14{
     border: 1px solid red;
     position: absolute;
     display: flex;
@@ -564,7 +564,7 @@ color: black;
     border: 1px solid rgba(255, 255, 255, 0.18);
 }
 
-.estacao6 #myChart6{
+.estacao6 #myChart6, .estacao14 #myChart14{
     position: absolute;
     display: flex;
     flex-direction: column;
@@ -584,7 +584,7 @@ color: black;
     top: 40%;
 }
 
-.borda7{
+.borda7 , .borda15{
     border: 1px solid red;
     position: absolute;
     display: flex;
@@ -599,7 +599,7 @@ color: black;
     border-radius: 10px;
     border: 1px solid rgba(255, 255, 255, 0.18);
 }
-.estacao7 {
+.estacao7 , .estacao15 {
     border: 1px solid red;
     position: absolute;
     display: flex;
@@ -611,7 +611,7 @@ color: black;
     border: 1px solid rgba(255, 255, 255, 0.18);
 }
 
-.estacao7 #myChart7{
+.estacao7 #myChart7, .estacao15 #myChat15{
     position: absolute;
     display: flex;
     flex-direction: column;
@@ -632,7 +632,7 @@ color: black;
     left: 7%;
 }
 
-.borda8{
+.borda8 , .borda16{
     border: 1px solid red;
     position: absolute;
     display: flex;
@@ -648,7 +648,7 @@ color: black;
     border: 1px solid rgba(255, 255, 255, 0.18);
 }
 
-.estacao8 {
+.estacao8 , .estacao16 {
     border: 1px solid red;
     position: absolute;
     display: flex;
@@ -660,7 +660,7 @@ color: black;
     border: 1px solid rgba(255, 255, 255, 0.18);
 }
 
-.estacao8 #myChart8{
+.estacao8 #myChart8, .estacao16 #myChart16{
     position: absolute;
     display: flex;
     flex-direction: column;

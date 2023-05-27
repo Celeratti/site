@@ -1,6 +1,22 @@
 var mysql = require("mysql2");
 var sql = require('mssql');
 
+// CONEXÃO DO SQL SERVER - AZURE (NUVEM)
+var sqlServerConfig = {
+    server: "server-celeratti.database.windows.net",
+    database: "celeratti",
+    user: "admin-celeratti@server-celeratti",
+    password: "#Gfgrupo7",
+    pool: {
+        max: 10,
+        min: 0,
+        idleTimeoutMillis: 30000
+    },
+    options: {
+        encrypt: true, // for azure
+    }
+}
+
 // CONEXÃO DO MYSQL WORKBENCH (LOCAL)
 var mySqlConfig = {
     host: "localhost",
@@ -11,8 +27,6 @@ var mySqlConfig = {
 
 function executar(instrucao) {
     // VERIFICA A VARIÁVEL DE AMBIENTE SETADA EM app.js
-    process.env.AMBIENTE_PROCESSO = "desenvolvimento"
-
     if (process.env.AMBIENTE_PROCESSO == "producao") {
         return new Promise(function (resolve, reject) {
             sql.connect(sqlServerConfig).then(function () {
@@ -41,7 +55,7 @@ function executar(instrucao) {
                 resolve(resultados);
             });
             conexao.on('error', function (erro) {
-                return ("ERRO NO MySQL WORKBENCH (Local): ", erro.sqlMessage);
+                return ("ERRO NO MySQL WORKBENCH: ", erro.sqlMessage);
             });
         });
     } else {

@@ -168,7 +168,15 @@ function obterDadosEstacao() {
 
         bolinhaAlerta.className = `bolinhaAlerta${num}`;
 
+<<<<<<< HEAD
+        h3.id = `estacaoNome`;
+        h3.style.width = `100%`
+        h3.style.textAlign = `center`
+
+        h3.innerHTML = `${estacao.nome_estacao}`;
+=======
         h3.innerHTML = `${estacao.nome}`;
+>>>>>>> 97f2d36b6ddab61b79ed23647986f9c88f7a6e3f
 
         divEstacao.className = `estacao${i + 1}`;
 
@@ -202,8 +210,8 @@ function obterDadosEstacao() {
         }]   
         };
 
-        dados.datasets[0].data.push(estacao.maquinasComProblemas);
-            dados.datasets[0].data.push(estacao.maquinasOperantes);
+            dados.datasets[0].data.push(estacao.maquinas_com_problemas);
+            dados.datasets[0].data.push(estacao.maquinas_operando_normalmente);
 
             const config = {
             type: 'bar',
