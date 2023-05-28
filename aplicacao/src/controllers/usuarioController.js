@@ -2,6 +2,35 @@ var usuarioModel = require("../models/usuarioModel");
 
 var sessoes = [];
 
+
+const nodemailer = require('nodemailer');
+
+function enviarEmail(req, res) {
+
+    var assunto = req.body.assuntoServer;
+    var corpo = req.body.corpoServer;
+    var email = req.body.emailServer;
+
+
+    const transport = nodemailer.createTransport({
+      host: 'outlook.office365.com',
+      port: 587,
+      secure: false,
+      auth:{
+        user: 'celeratti@outlook.com',
+        pass: '#Gfgrupo7',
+      }
+    });
+  
+    return transport.sendMail({
+      from: 'CELERATTI <celeratti@outlook.com>',
+      to: 'celeratti@outlook.com',
+      replyTo: `${email}`,
+      subject: `${assunto}`,
+      html: `<p>${corpo}</p>`
+    });
+  }
+
 function testar(req, res) {
     console.log("ENTRAMOS NA usuarioController");
     res.json("ESTAMOS FUNCIONANDO!");
@@ -109,5 +138,6 @@ module.exports = {
     entrar,
     cadastrar,
     listar,
-    testar
+    testar,
+    enviarEmail
 }

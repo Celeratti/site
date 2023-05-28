@@ -3,6 +3,9 @@ var router = express.Router();
 
 var usuarioController = require("../controllers/usuarioController");
 
+
+console.log("Chemagos em rotas")
+
 router.get("/", function (req, res) {
     usuarioController.testar(req, res);
 });
@@ -14,6 +17,10 @@ router.get("/listar", function (req, res) {
 //Recebendo os dados do html e direcionando para a função cadastrar de usuarioController.js
 router.post("/cadastrar", function (req, res) {
     usuarioController.cadastrar(req, res);
+})
+
+router.post("/enviarEmail", function (req, res) {
+    usuarioController.enviarEmail(req, res);
 })
 
 

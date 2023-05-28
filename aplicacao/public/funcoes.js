@@ -1,3 +1,5 @@
+
+
 function GETIdEmpresa() {
 
     var idUsuario = sessionStorage.ID;

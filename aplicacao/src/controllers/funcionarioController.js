@@ -1,6 +1,15 @@
+const e = require("express");
 var funcionarioModel = require("../models/funcionarioModel");
 
 var sessoes = [];
+
+
+
+
+
+
+
+
 
 function deletar(req, res) {
     var id = req.body.id;
@@ -109,5 +118,5 @@ module.exports = {
     atualizarTabela,
     deletar,
     cadastrar,
-    editar
+    editar,
 }
