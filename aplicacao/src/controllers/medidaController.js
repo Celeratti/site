@@ -84,6 +84,27 @@ function buscarUltimasMedidasMemoria(req, res) {
     });
 }
 
+function buscarUltimasMedidasRede(req, res) {
+
+    const limite_linhas = 7;
+
+    var idMaquina = req.params.idMaquina;
+
+    console.log(`Recuperando as ultimas ${limite_linhas} medidas`);
+
+    medidaModel.buscarUltimasMedidasRede(idMaquina, limite_linhas).then(function (resultado) {
+        if (resultado.length > 0) {
+            res.status(200).json(resultado);
+        } else {
+            res.status(204).send("Nenhum resultado encontrado!")
+        }
+    }).catch(function (erro) {
+        console.log(erro);
+        console.log("Houve um erro ao buscar as ultimas medidas.", erro);
+        res.status(500).json(erro);
+    });
+}
+
 function buscarMedidasEmTempoRealCpu(req, res) {
 
     var idMaquina = req.params.idMaquina;
@@ -141,6 +162,24 @@ function buscarMedidasEmTempoRealMemoria(req, res) {
     });
 }
 
+function buscarMedidasEmTempoRealRede(req, res) {
+
+    var idMaquina = req.params.idMaquina;
+
+    console.log(`Recuperando medidas em tempo real`);
+
+    medidaModel.buscarMedidasEmTempoRealRede(idMaquina).then(function (resultado) {
+        if (resultado.length > 0) {
+            res.status(200).json(resultado[0]);
+        } else {
+            res.status(204).send("Nenhum resultado encontrado!")
+        }
+    }).catch(function (erro) {
+        console.log("Houve um erro ao buscar as ultimas medidas.", erro);
+        res.status(500).json(erro);
+    });
+}
+
 
 function buscarUltimasMedidasEstacao(req, res) {
 
@@ -189,5 +228,7 @@ module.exports = {
     buscarUltimasMedidasMemoria,
     buscarMedidasEmTempoRealMemoria,
     buscarMaquinasEstacoes,
-    buscarTempoRealMaquinas
+    buscarTempoRealMaquinas,
+    buscarUltimasMedidasRede,
+    buscarMedidasEmTempoRealRede
 }

@@ -9,12 +9,15 @@
   <title>Componentes</title>
   <link rel="shortcut icon" href="./assets/img/celeratti-mascote.png" type="image/x-icon">
   <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Dancing+Script&family=Great+Vibes&family=Poppins:wght@300&family=Raleway&display=swap" rel="stylesheet">
-<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Dancing+Script&family=Great+Vibes&family=Poppins:wght@300&family=Raleway&display=swap"
+    rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
+
 <body>
   <main>
 
@@ -22,26 +25,26 @@
       <h1 id="maquina_nome"></h1>
     </div>
 
-    <a href="dashInicio.html">Voltar para a tela de máquinas</a>
+    <a href="TelaEstacoes.html">Voltar para a tela de máquinas</a>
 
     <div id="disco">
-      <div class="" id="">
+      <div class="" id="divAlertaDisco">
         <canvas id="myChartCanvasDisco"></canvas>
-        <div class="bolinhaAlerta"></div>
+        <div class="" id="bolinhaAlertaDisco"></div>
       </div>
-    
+
     </div>
     <div class="legendaDisco">
       <details>
         <summary>Legendas Disco</summary>
-        <img src="img/Group 93tempmetricas.png" alt="">
-        <p>O uso do Disco Aumentou 5% nessa semana, e entrou em estado critico</p>
+        <img src="img/indicadores-disco.png" alt="">
+        <p id="legenda_disco"></p>
       </details>
     </div>
 
 
     <div id="cpu">
-      <div class="" id="divAlertaCPU">
+      <div id="divAlertaCPU">
         <canvas id="myChartCanvasCpu"></canvas>
         <div class="" id="bolinhaAlertaCPU"></div>
       </div>
@@ -49,34 +52,38 @@
     <div class="legendaCpu">
       <details>
         <summary>Legendas CPU</summary>
-        <img src="img/Group 94tempmetricas.png" alt="">
-        <p>O uso da CPU Aumentou 5% nessa semana, e entrou em estado critico</p>
+        <img src="img/indicadores-cpu.png" alt="">
+        <p id="legenda_cpu"></p>
       </details>
     </div>
 
     <div id="rede">
-      <canvas id="myChart3"></canvas>
-      <div class="bolinhaAlerta3"></div>
+      <div id="divAlertaRede">
+        <canvas id="myChartCanvasRede"></canvas>
+        <div id="bolinhaAlertaRede"></div>
+      </div>
     </div>
     <div class="legendaRede">
       <details>
         <summary>Legendas Rede</summary>
-        <img src="img/Group 96tempmetricas.png" alt="">
-        <p>O uso da Rede Aumentou 5% nessa semana, e entrou em estado critico</p>
+        <img src="img/indicadores-latencia.png" alt="">
+        <p id="legenda_rede"></p>
       </details>
     </div>
 
     <div id="memoriaEmUso">
-      <canvas id="myChartCanvasMemoria"></canvas>
-      <div class="bolinhaAlerta2"></div>
+      <div id="divAlertaMemoria">
+        <canvas id="myChartCanvasMemoria"></canvas>
+        <div id="bolinhaAlertaMemoria"></div>
+      </div>
     </div>
     <div class="legendaMemoriaEmUso">
       <details>
         <summary>Legendas Memoria</summary>
-        <img src="img/Group 95tempmetricas.png" alt="">
-        <p>O uso da Memoria RAM Aumentou 5% nessa semana, e entrou em estado critico</p>    
+        <img src="img/indicadores-memoria.png" alt="">
+        <p id="legenda_memoria"></p>
       </details>
-    </div>  
+    </div>
 
   </main>
 
@@ -84,28 +91,28 @@
 
 </html>
 
-
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
 <script>
 
-var params = window.location.search
-const urlParams = new URLSearchParams(params);
-const idMaquina = urlParams.get('idMaquina')
-const nomeMaquina = urlParams.get('nomeMaquina')
-maquina_nome.innerHTML = "ViaMobilidade | Máquina " + nomeMaquina;
+  var params = window.location.search
+  const urlParams = new URLSearchParams(params);
+  const idMaquina = urlParams.get('idMaquina')
+  const nomeMaquina = urlParams.get('nomeMaquina')
+  maquina_nome.innerHTML = "ViaMobilidade | Máquina " + nomeMaquina;
 
-window.onload = obterDadosGrafico();
+  window.onload = obterDadosGrafico();
 
 
   function obterDadosGrafico() {
     obterDadosDisco(idMaquina);
     obterDadosCpu(idMaquina);
-    obterDadosMemoria(idMaquina)
-
+    obterDadosMemoria(idMaquina);
+    obterDadosRede(idMaquina);
   }
 
   function obterDadosCpu(idMaquina) {
-    
-    fetch(`/medidas/ultimas/cpu/${idMaquina}`, {cache: 'no-store'}).then(function (response) {
+
+    fetch(`/medidas/ultimas/cpu/${idMaquina}`, { cache: 'no-store' }).then(function (response) {
       if (response.ok) {
         response.json().then(function (resposta) {
           console.log(`Dados recebidos: ${JSON.stringify(resposta)}`);
@@ -113,124 +120,190 @@ window.onload = obterDadosGrafico();
 
           plotarGraficoCpu(resposta, idMaquina);
         });
-      } else{
+      } else {
         console.error(`Nenhum dado encontrado ou erro na API`);
       }
     })
-        .catch(function (error) {
-          console.error(`Erro na obtenção dos dados p/ gráfico: ${error.message}`)
-        });
+      .catch(function (error) {
+        console.error(`Erro na obtenção dos dados p/ gráfico: ${error.message}`)
+      });
   }
 
-    function plotarGraficoCpu(resposta, idMaquina) {
-        console.log(`iniciando plotagem do gráfico...`);
+  function plotarGraficoCpu(resposta, idMaquina) {
+    console.log(`iniciando plotagem do gráfico...`);
 
-        let labels = [];
+    let labels = [];
 
-        let dados = {
-        labels: labels,
-        datasets: [{
-          label: `Porcentagem de uso`,
-          data: [],
-          fill: false,
-          borderColor: 'rgb(75, 192, 192)',
-          tension: 0.1
-        }]   
-        };
+    let dados = {
+      labels: labels,
+      datasets: [{
+        label: `Porcentagem de uso`,
+        data: [],
+        fill: false,
+        borderColor: 'rgb(75, 192, 192)',
+        tension: 0.1
+      }]
+    };
 
-        console.log('----------------------------------------------')
-        console.log('Estes dados foram recebidos pela funcao "obterDadosGrafico" e passados para "plotarGrafico":')
-        console.log(resposta)
-        var divCpu = document.getElementById('divAlertaCPU')
-        var divBolinhaCPU = document.getElementById('bolinhaAlertaCPU')
-        for (i = 0;i < resposta.length; i++) {
-            var registro = resposta[i];
-            labels.push(registro.momento_grafico);
-            dados.datasets[0].data.push(registro.cpu);
-            if((resposta.lenght-1).cpu < 61.0 ){
-              divBolinhaCPU.classList.toggle('bolinhaAlertaIdeal')
+    console.log('----------------------------------------------')
+    console.log('Estes dados foram recebidos pela funcao "obterDadosGrafico" e passados para "plotarGrafico":')
+    console.log(resposta)
+    var divCpu = document.getElementById('divAlertaCPU')
+    var divBolinhaCPU = document.getElementById('bolinhaAlertaCPU')
+    if ((resposta[resposta.length - 1]).cpu < 61) {
+      divBolinhaCPU.classList.toggle('bolinhaAlertaIdeal')
+      divBolinhaCPU.classList.remove;
+    } else if (resposta[resposta.length - 1].cpu > 64.9 && resposta[resposta.length - 1].cpu < 80) {
+      divBolinhaCPU.classList.toggle('bolinhaAlertaEmergente')
+    } else if (resposta[resposta.length - 1].cpu > 79 && resposta[resposta.length - 1].cpu < 90) {
+      divCpu.classList.toggle('divAlertaCritico')
+      divBolinhaCPU.classList.toggle('bolinhaAlertaCritico')
+    } else {
+      divCpu.classList.toggle('divAlertaUrgente')
+      divBolinhaCPU.classList.toggle('bolinhaAlertaUrgente')
+    }
+
+    var data1 = moment(resposta[0].momento, 'YYYY-MM-DD HH:mm');
+    var data2 = moment(resposta[resposta.length - 1].momento, 'YYYY-MM-DD HH:mm');
+    var diff = moment.duration(data2.diff(data1));
+    var diffHoras = diff.days() * 24 + diff.hours();
+    var diffMinutos = diff.minutes();
+
+    if (resposta[0].cpu - resposta[resposta.length - 1].cpu > 0) {
+      if (diffHoras > 0) {
+        legenda_cpu.innerHTML = "Aumento de " + Math.abs(resposta[0].cpu - resposta[resposta.lenght - 1].cpu).toFixed(2) + "%" + " nas ultímas " + diffHoras + "H"+ diffMinutos + "m"  
+      }else{
+        legenda_cpu.innerHTML = "Aumento de " + Math.abs(resposta[0].cpu - resposta[resposta.lenght - 1].cpu).toFixed(2) + "%" + " nos ultímos " + diffMinutos + " minutos"
+      }
+    } else if (resposta[0].cpu - resposta[resposta.length - 1].cpu < 0) {
+      if (diffHoras > 0) {
+        legenda_cpu.innerHTML = "Diminuição de " + Math.abs(resposta[0].cpu - resposta[resposta.length - 1].cpu).toFixed(2) + "%" + " nas ultímas " + diffHoras + "H" + diffMinutos + "m"  
+      }else{
+        legenda_cpu.innerHTML = "Diminuição de " + Math.abs(resposta[0].cpu - resposta[resposta.length - 1].cpu).toFixed(2) + "%" + " nos ultímos " + diffMinutos + " minutos"
+      }
+    } else {
+      if (diffHoras > 0) {
+        legenda_cpu.innerHTML = "Não houve alteração nas ultímas " + diffHoras + "H" + diffMinutos + "m"  
+      }else{
+        legenda_cpu.innerHTML = "Não houve alteração nos ultímos " + diffMinutos + " minutos"
+      }
+    }
+    for (i = 0; i < resposta.length; i++) {
+      var registro = resposta[i];
+      labels.push(registro.momento_grafico);
+      dados.datasets[0].data.push(registro.cpu);
+
+    }
+
+    console.log('----------------------------------------------')
+    console.log('O gráfico será plotado com os respectivos valores:')
+    console.log('Labels:')
+    console.log(labels)
+    console.log('Dados:')
+    console.log(dados.datasets)
+    console.log('----------------------------------------------')
+
+    // Criando estrutura para plotar gráfico - config
+    const config = {
+      type: 'line',
+      data: dados,
+    };
+
+    let myChart = new Chart(
+      document.getElementById(`myChartCanvasCpu`),
+      config
+    );
+
+    setTimeout(() => atualizarGraficoCpu(idMaquina, dados, myChart), 60000);
+  }
+
+  function atualizarGraficoCpu(idMaquina, dados, myChart) {
+
+    fetch(`/medidas/tempo-real/cpu/${idMaquina}`, { cache: `no-store` }).then(function (response) {
+      if (response.ok) {
+        response.json().then(function (novoRegistro) {
+
+          console.log(`Dados recebidos: ${JSON.stringify(novoRegistro)}`);
+          console.log(`Dados atuais do gráfico`);
+          console.log(dados);
+
+          if (novoRegistro[0].momento_grafico == dados.labels[dados.labels.lenght - 1]) {
+            console.log("---------------------------------------------------------------")
+            console.log("Como não há dados novos para captura, o gráfico não atualizará.")
+            console.log("Horário do novo dado capturado:")
+            console.log(novoRegistro[0].momento_grafico)
+            console.log("Horário do último dado capturado:")
+            console.log(dados.labels[dados.labels.length - 1])
+            console.log("---------------------------------------------------------------")
+          } else {
+
+            dados.labels.shift();
+            dados.labels.push(novoRegistro[0].momento_grafico);
+
+            dados.datasets[0].data.shift();
+            dados.datasets[0].data.push(novoRegistro[0].cpu);
+            var divCpu = document.getElementById('divAlertaCPU')
+            var divBolinhaCPU = document.getElementById('bolinhaAlertaCPU')
+
+            var data1 = moment(dados.labes[0], 'YYYY-MM-DD HH:mm');
+            var data2 = moment(novoRegistro[0].momento, 'YYYY-MM-DD HH:mm');
+            var diff = moment.duration(data2.diff(data1));
+            var diffHoras = diff.days() * 24 + diff.hours();
+            var diffMinutos = diff.minutes();
+
+            if (dados.datasets[0].data[0] - novoRegistro[0].cpu > 0) {
+              if (diffHoras > 0) {
+                legenda_cpu.innerHTML = "Aumento de " + Math.abs(dados.datasets[0].data[0] - novoRegistro[0].cpu).toFixed(2) + "%" + "nas ultímas " + diffHoras + "H" + diffMinutos + "m"  
+              }else{
+                legenda_cpu.innerHTML = "Aumento de " + Math.abs(dados.datasets[0].data[0] - novoRegistro[0].cpu).toFixed(2) + "%" + "nos ultímos " + diffMinutos + " minutos"
+              }
+            } else if (dados.datasets[0].data[0] - novoRegistro[0].cpu < 0) {
+              if (diffHoras > 0) {
+                legenda_cpu.innerHTML = "Diminuição de " + Math.abs(dados.datasets[0].data[0] - novoRegistro[0].cpu).toFixed(2) + "%" + "nas ultímas " + diffHoras + "H" + diffMinutos + "m"  
+              }else{
+                legenda_cpu.innerHTML = "Diminuição de " + Math.abs(dados.datasets[0].data[0] - novoRegistro[0].cpu).toFixed(2) + "%" + "nos ultímos " + diffMinutos + " minutos"
+              }
+            } else {
+              if (diffHoras > 0) {
+                legenda_cpu.innerHTML = "Não houve alteração nas ultímas " + diffHoras + "H" + diffMinutos + "m"  
+              }else{
+                legenda_cpu.innerHTML = "Não houve alteração nos ultímos " + diffMinutos + " minutos"
+              }
             }
-            else if ((resposta.lenght-1).cpu > 64.9 && (resposta.lenght-1).cpu < 80) {
-              divCpu.classList.toggle('divAlertaEmergente')
+
+            if ((novoRegistro[novoRegistro.length - 1]).cpu < 61) {
+              divBolinhaCPU.classList.toggle('bolinhaAlertaIdeal')
+              divBolinhaCPU.classList.remove;
+            } else if (novoRegistro[novoRegistro.length - 1].cpu > 64.9 && novoRegistro[novoRegistro.length - 1].cpu < 80) {
               divBolinhaCPU.classList.toggle('bolinhaAlertaEmergente')
-            }else if((resposta.lenght-1).cpu > 79.9 && (resposta.lenght-1).cpu < 90){
+            } else if (novoRegistro[novoRegistro.length - 1].cpu > 79 && novoRegistro[novoRegistro.length - 1].cpu < 90) {
               divCpu.classList.toggle('divAlertaCritico')
               divBolinhaCPU.classList.toggle('bolinhaAlertaCritico')
-            }else{
+            } else {
               divCpu.classList.toggle('divAlertaUrgente')
               divBolinhaCPU.classList.toggle('bolinhaAlertaUrgente')
             }
-        }
+            myChart.update();
+          }
 
-        console.log('----------------------------------------------')
-        console.log('O gráfico será plotado com os respectivos valores:')
-        console.log('Labels:')
-        console.log(labels)
-        console.log('Dados:')
-        console.log(dados.datasets)
-        console.log('----------------------------------------------')
+          proximaAtualizacao = setTimeout(() => atualizarGrafico(idMaquina, dados, myChart), 60000);
 
-        // Criando estrutura para plotar gráfico - config
-        const config = {
-            type: 'line',
-            data: dados,
-        };
-
-        let myChart = new Chart(
-          document.getElementById(`myChartCanvasCpu`),
-          config
-        );
-
-        setTimeout(() => atualizarGraficoCpu(idMaquina,dados,myChart),60000);
-    }
-
-    function atualizarGraficoCpu(idMaquina,dados,myChart) {
-      
-      fetch(`/medidas/tempo-real/cpu/${idMaquina}`, { cache: `no-store` }).then(function (response) {
-        if (response.ok) {
-          response.json().then(function (novoRegistro) {
-
-            console.log(`Dados recebidos: ${JSON.stringify(novoRegistro)}`);
-            console.log(`Dados atuais do gráfico`);
-            console.log(dados);
-
-            if(novoRegistro[0].momento_grafico == dados.labels[dados.labels.lenght - 1]) {
-              console.log("---------------------------------------------------------------")
-                        console.log("Como não há dados novos para captura, o gráfico não atualizará.")
-                        console.log("Horário do novo dado capturado:")
-                        console.log(novoRegistro[0].momento_grafico)
-                        console.log("Horário do último dado capturado:")
-                        console.log(dados.labels[dados.labels.length - 1])
-                        console.log("---------------------------------------------------------------") 
-            } else{
-
-              dados.labels.shift();
-              dados.labels.push(novoRegistro[0].momento_grafico);
-
-              dados.datasets[0].data.shift();
-              dados.datasets[0].data.push(novoRegistro[0].cpu);
-
-              myChart.update();
-            }
-            
-            proximaAtualizacao = setTimeout(() => atualizarGrafico(idMaquina, dados, myChart),60000);
-
-          });
-        } else{
-          console.error('Nenhum dado encontrado ou erro na API');
-          proximaAtualizacao = setTimeout(() => atualizarGrafico(idMaquina,dados,myChart),60000);
-        }
+        });
+      } else {
+        console.error('Nenhum dado encontrado ou erro na API');
+        proximaAtualizacao = setTimeout(() => atualizarGrafico(idMaquina, dados, myChart), 60000);
+      }
+    })
+      .catch(function (error) {
+        console.error(`Erro na obtenção dos dados p/ gráfico ${error.message}`)
       })
-        .catch(function (error) {
-          console.error(`Erro na obtenção dos dados p/ gráfico ${error.message}`)
-        })
-    }
+  }
 
-    //Graficos Disco
+  //Graficos Disco
 
-    function obterDadosDisco(idMaquina) {
-    
-    fetch(`/medidas/ultimas/disco/${idMaquina}`, {cache: 'no-store'}).then(function (response) {
+  function obterDadosDisco(idMaquina) {
+
+    fetch(`/medidas/ultimas/disco/${idMaquina}`, { cache: 'no-store' }).then(function (response) {
       if (response.ok) {
         response.json().then(function (resposta) {
           console.log(`Dados recebidos: ${JSON.stringify(resposta)}`);
@@ -238,110 +311,212 @@ window.onload = obterDadosGrafico();
 
           plotarGraficoDisco(resposta, idMaquina);
         });
-      } else{
+      } else {
         console.error(`Nenhum dado encontrado ou erro na API`);
       }
     })
-        .catch(function (error) {
-          console.error(`Erro na obtenção dos dados p/ gráfico: ${error.message}`)
-        });
+      .catch(function (error) {
+        console.error(`Erro na obtenção dos dados p/ gráfico: ${error.message}`)
+      });
   }
 
-    function plotarGraficoDisco(resposta, idMaquina) {
-        console.log(`iniciando plotagem do gráfico...`);
+  function plotarGraficoDisco(resposta, idMaquina) {
+    console.log(`iniciando plotagem do gráfico...`);
 
-        let labels = [];
+    let labels = [];
 
-        let dados = {
-        labels: labels,
-        datasets: [{
-          label: `Porcentagem de uso`,
-          data: [],
-          fill: false,
-          borderColor: 'rgb(75, 192, 192)',
-          tension: 0.1
-        }]   
-        };
+    let dados = {
+      labels: labels,
+      datasets: [{
+        label: `Porcentagem de uso`,
+        data: [],
+        fill: false,
+        borderColor: 'rgb(75, 192, 192)',
+        tension: 0.1
+      }]
+    };
 
-        console.log('----------------------------------------------')
-        console.log('Estes dados foram recebidos pela funcao "obterDadosGrafico" e passados para "plotarGrafico":')
-        console.log(resposta)
+    console.log('----------------------------------------------')
+    console.log('Estes dados foram recebidos pela funcao "obterDadosGrafico" e passados para "plotarGrafico":')
+    console.log(resposta)
+    var divDisco = document.getElementById('divAlertaDisco')
+    var divBolinhaDisco = document.getElementById('bolinhaAlertaDisco')
 
-        for (i = 0;i < resposta.length; i++) {
-            var registro = resposta[i];
-            labels.push(registro.momento_grafico);
-            dados.datasets[0].data.push(registro.disco);
-        }
+    var data1 = moment(resposta[0].momento, 'YYYY-MM-DD HH:mm');
+    var data2 = moment(resposta[resposta.length - 1].momento, 'YYYY-MM-DD HH:mm');
+    var diff = moment.duration(data2.diff(data1));
+    var diffHoras = diff.days() * 24 + diff.hours();
+    var diffMinutos = diff.minutes();
 
-        console.log('----------------------------------------------')
-        console.log('O gráfico será plotado com os respectivos valores:')
-        console.log('Labels:')
-        console.log(labels)
-        console.log('Dados:')
-        console.log(dados.datasets)
-        console.log('----------------------------------------------')
-
-        // Criando estrutura para plotar gráfico - config
-        const config = {
-            type: 'line',
-            data: dados,
-        };
-
-        let myChart = new Chart(
-          document.getElementById(`myChartCanvasDisco`),
-          config
-        );
-
-        setTimeout(() => atualizarGraficoDisco(idMaquina,dados,myChart),60000);
+    if (resposta[0].disco - resposta[resposta.length - 1].disco > 0) {
+      if (diffHoras > 0) {
+        legenda_disco.innerHTML = "Aumento de " + Math.abs(resposta[0].disco - resposta[resposta.lenght - 1].disco).toFixed(2) + "%" + "nas ultímas " + diffHoras + "H" + diffMinutos + "m"  
+      }else{
+        legenda_disco.innerHTML = "Aumento de " + Math.abs(resposta[0].disco - resposta[resposta.lenght - 1].disco).toFixed(2) + "%" + "nos ultímos " + diffMinutos + " minutos"
+      }
+    } else if (resposta[0].disco - resposta[resposta.length - 1].disco < 0) {
+      if (diffHoras > 0) {
+        legenda_disco.innerHTML = "Diminuição de " + Math.abs(resposta[0].disco - resposta[resposta.length - 1].disco).toFixed(2) + "%" + " nas ultímas " + diffHoras + "H" + diffMinutos + "m"  
+      }else{
+        legenda_disco.innerHTML = "Diminuição de " + Math.abs(resposta[0].disco - resposta[resposta.length - 1].disco).toFixed(2) + "%" + " nos ultímos " + diffMinutos + " minutos"
+      }
+    } else {
+      if (diffHoras > 0) {
+        legenda_disco.innerHTML = "Não houve alteração nas ultímas " + diffHoras + "H" + diffMinutos + "m"  
+      }else{
+        legenda_disco.innerHTML = "Não houve alteração nos ultímos " + diffMinutos + " minutos"
+      }
     }
-
-    function atualizarGraficoDisco(idMaquina,dados,myChart) {
-      
-      fetch(`/medidas/tempo-real/disco${idMaquina}`, { cache: `no-store` }).then(function (response) {
-        if (response.ok) {
-          response.json().then(function (novoRegistro) {
-
-            console.log(`Dados recebidos: ${JSON.stringify(novoRegistro)}`);
-            console.log(`Dados atuais do gráfico`);
-            console.log(dados);
-
-            if(novoRegistro[0].momento_grafico == dados.labels[dados.labels.lenght - 1]) {
-              console.log("---------------------------------------------------------------")
-                        console.log("Como não há dados novos para captura, o gráfico não atualizará.")
-                        console.log("Horário do novo dado capturado:")
-                        console.log(novoRegistro[0].momento_grafico)
-                        console.log("Horário do último dado capturado:")
-                        console.log(dados.labels[dados.labels.length - 1])
-                        console.log("---------------------------------------------------------------") 
-            } else{
-
-              dados.labels.shift();
-              dados.labels.push(novoRegistro[0].momento_grafico);
-
-              dados.datasets[0].data.shift();
-              dados.datasets[0].data.push(novoRegistro[0].disco);
-
-              myChart.update();
-            }
-            
-            proximaAtualizacao = setTimeout(() => atualizarGrafico(idMaquina, dados, myChart),60000);
-
-          });
-        } else{
-          console.error('Nenhum dado encontrado ou erro na API');
-          proximaAtualizacao = setTimeout(() => atualizarGrafico(idMaquina,dados,myChart),60000);
-        }
-      })
-        .catch(function (error) {
-          console.error(`Erro na obtenção dos dados p/ gráfico ${error.message}`)
-        })
-    }
-
-    //Graficos memória
-
-    function obterDadosMemoria(idMaquina) {
     
-    fetch(`/medidas/ultimas/memoria/${idMaquina}`, {cache: 'no-store'}).then(function (response) {
+    if ((resposta[resposta.length - 1]).disco < 55.0) {
+        divBolinhaDisco.classList.toggle('bolinhaAlertaIdeal')
+        divBolinhaDisco.classList.remove;
+      } else if (resposta[resposta.length - 1].disco >= 55.0 && resposta[resposta.length - 1].disco < 61) {
+        divBolinhaDisco.classList.toggle('bolinhaAlertaEmergente')
+      } else if (resposta[resposta.length - 1].disco >= 61.0 && resposta[resposta.length - 1].disco < 86) {
+        divDisco.classList.toggle('divAlertaCritico')
+        divBolinhaDisco.classList.toggle('bolinhaAlertaCritico')
+      } else {
+        divDisco.classList.toggle('divAlertaUrgente')
+        divBolinhaDisco.classList.toggle('bolinhaAlertaUrgente')
+      }
+    for (i = 0; i < resposta.length; i++) {
+      var registro = resposta[i];
+      labels.push(registro.momento_grafico);
+      dados.datasets[0].data.push(registro.disco);
+    }
+
+    console.log('----------------------------------------------')
+    console.log('O gráfico será plotado com os respectivos valores:')
+    console.log('Labels:')
+    console.log(labels)
+    console.log('Dados:')
+    console.log(dados.datasets)
+    console.log('----------------------------------------------')
+
+    // Criando estrutura para plotar gráfico - config
+    const config = {
+      type: 'line',
+      data: dados,
+      options: {
+        scales: {
+          y: {
+            beginAtZero: true,
+            ticks: {
+              callback: function (value) {
+                return value.toFixed(2);
+              }
+            }
+          },
+        },
+        plugins: {
+          tooltip: {
+            callbacks: {
+              label: function (context) {
+                var value = context.parsed.y;
+                return value.toFixed(2);
+              }
+            }
+          }
+        }
+      }
+    };
+
+    let myChart = new Chart(
+      document.getElementById(`myChartCanvasDisco`),
+      config
+    );
+
+    setTimeout(() => atualizarGraficoDisco(idMaquina, dados, myChart), 60000);
+  }
+
+  function atualizarGraficoDisco(idMaquina, dados, myChart) {
+
+    fetch(`/medidas/tempo-real/disco${idMaquina}`, { cache: `no-store` }).then(function (response) {
+      if (response.ok) {
+        response.json().then(function (novoRegistro) {
+
+          console.log(`Dados recebidos: ${JSON.stringify(novoRegistro)}`);
+          console.log(`Dados atuais do gráfico`);
+          console.log(dados);
+
+          if (novoRegistro[0].momento_grafico == dados.labels[dados.labels.lenght - 1]) {
+            console.log("---------------------------------------------------------------")
+            console.log("Como não há dados novos para captura, o gráfico não atualizará.")
+            console.log("Horário do novo dado capturado:")
+            console.log(novoRegistro[0].momento_grafico)
+            console.log("Horário do último dado capturado:")
+            console.log(dados.labels[dados.labels.length - 1])
+            console.log("---------------------------------------------------------------")
+          } else {
+
+            dados.labels.shift();
+            dados.labels.push(novoRegistro[0].momento_grafico);
+
+            dados.datasets[0].data.shift();
+            dados.datasets[0].data.push(novoRegistro[0].disco);
+            var divDisco = document.getElementById('divAlertaDisco')
+            var divBolinhaDisco = document.getElementById('bolinhaAlertaDisco')
+
+            var data1 = moment(dados.labes[0], 'YYYY-MM-DD HH:mm');
+            var data2 = moment(novoRegistro[0].momento, 'YYYY-MM-DD HH:mm');
+            var diff = moment.duration(data2.diff(data1));
+            var diffHoras = diff.days() * 24 + diff.hours();
+            var diffMinutos = diff.minutes();
+
+            if (dados.datasets[0].data[0] - novoRegistro[0].disco > 0) {
+              if (diffHoras > 0) {
+                legenda_disco.innerHTML = "Aumento de " + Math.abs(dados.datasets[0].data[0] - novoRegistro[0].disco).toFixed(2) + "%" + "nas ultímas" + diffHoras + "H" + diffMinutos + "m"  
+              }else{
+                legenda_disco.innerHTML = "Aumento de " + Math.abs(dados.datasets[0].data[0] - novoRegistro[0].disco).toFixed(2) + "%" + "nos ultímos" + diffMinutos + " minutos"
+              }
+            } else if (dados.datasets[0].data[0] - novoRegistro[0].disco < 0) {
+              if (diffHoras > 0) {
+                legenda_disco.innerHTML = "Diminuição de " + Math.abs(dados.datasets[0].data[0] - novoRegistro[0].disco).toFixed(2) + "%" + " nas ultímas " + diffHoras + "H" + diffMinutos + "m"  
+              }else{
+                legenda_disco.innerHTML = "Diminuição de " + Math.abs(dados.datasets[0].data[0] - novoRegistro[0].disco).toFixed(2) + "%" + " nos ultímos " + diffMinutos + " minutos"
+              }
+            } else {
+              if (diffHoras > 0) {
+                legenda_disco.innerHTML = "Não houve alteração nas ultímas " + diffHoras + "H" + diffMinutos + "m"  
+              }else{
+                legenda_disco.innerHTML = "Não houve alteração nos ultímos " + diffMinutos + " minutos"
+              }
+            }
+
+            if ((resposta[resposta.length - 1]).disco < 55.0) {
+              divBolinhaDisco.classList.toggle('bolinhaAlertaIdeal')
+              divBolinhaDisco.classList.remove;
+            } else if (resposta[resposta.length - 1].disco >= 55.0 && resposta[resposta.length - 1].disco < 61) {
+              divBolinhaDisco.classList.toggle('bolinhaAlertaEmergente')
+            } else if (resposta[resposta.length - 1].disco >= 61.0 && resposta[resposta.length - 1].disco < 86) {
+              divDisco.classList.toggle('divAlertaCritico')
+              divBolinhaDisco.classList.toggle('bolinhaAlertaCritico')
+            } else {
+              divDisco.classList.toggle('divAlertaUrgente')
+              divBolinhaDisco.classList.toggle('bolinhaAlertaUrgente')
+            }
+            myChart.update();
+          }
+
+          proximaAtualizacao = setTimeout(() => atualizarGrafico(idMaquina, dados, myChart), 60000);
+
+        });
+      } else {
+        console.error('Nenhum dado encontrado ou erro na API');
+        proximaAtualizacao = setTimeout(() => atualizarGrafico(idMaquina, dados, myChart), 60000);
+      }
+    })
+      .catch(function (error) {
+        console.error(`Erro na obtenção dos dados p/ gráfico ${error.message}`)
+      })
+  }
+
+  //Graficos memória
+
+  function obterDadosMemoria(idMaquina) {
+
+    fetch(`/medidas/ultimas/memoria/${idMaquina}`, { cache: 'no-store' }).then(function (response) {
       if (response.ok) {
         response.json().then(function (resposta) {
           console.log(`Dados recebidos: ${JSON.stringify(resposta)}`);
@@ -349,103 +524,374 @@ window.onload = obterDadosGrafico();
 
           plotarGraficoMemoria(resposta, idMaquina);
         });
-      } else{
+      } else {
         console.error(`Nenhum dado encontrado ou erro na API`);
       }
     })
-        .catch(function (error) {
-          console.error(`Erro na obtenção dos dados p/ gráfico: ${error.message}`)
-        });
+      .catch(function (error) {
+        console.error(`Erro na obtenção dos dados p/ gráfico: ${error.message}`)
+      });
   }
 
   function plotarGraficoMemoria(resposta, idMaquina) {
-        console.log(`iniciando plotagem do gráfico...`);
+    console.log(`iniciando plotagem do gráfico...`);
 
-        let labels = [];
+    let labels = [];
 
-        let dados = {
-        labels: labels,
-        datasets: [{
-          label: `Porcentagem de uso`,
-          data: [],
-          fill: false,
-          borderColor: 'rgb(75, 192, 192)',
-          tension: 0.1
-        }]   
-        };
+    let dados = {
+      labels: labels,
+      datasets: [{
+        label: `Porcentagem de uso`,
+        data: [],
+        fill: false,
+        borderColor: 'rgb(75, 192, 192)',
+        tension: 0.1
+      }]
+    };
 
-        console.log('----------------------------------------------')
-        console.log('Estes dados foram recebidos pela funcao "obterDadosGrafico" e passados para "plotarGrafico":')
-        console.log(resposta)
+    console.log('----------------------------------------------')
+    console.log('Estes dados foram recebidos pela funcao "obterDadosGrafico" e passados para "plotarGrafico":')
+    console.log(resposta)
+    var divMemoria = document.getElementById('divAlertaMemoria')
+    var divBolinhaMemoria = document.getElementById('bolinhaAlertaMemoria')
 
-        for (i = 0;i < resposta.length; i++) {
-            var registro = resposta[i];
-            labels.push(registro.momento_grafico);
-            dados.datasets[0].data.push(registro.memoria);
-        }
+    var data1 = moment(resposta[0].momento, 'YYYY-MM-DD HH:mm');
+    var data2 = moment(resposta[resposta.length - 1].momento, 'YYYY-MM-DD HH:mm');
+    var diff = moment.duration(data2.diff(data1));
+    var diffHoras = diff.days() * 24 + diff.hours();
+    var diffMinutos = diff.minutes();
 
-        console.log('----------------------------------------------')
-        console.log('O gráfico será plotado com os respectivos valores:')
-        console.log('Labels:')
-        console.log(labels)
-        console.log('Dados:')
-        console.log(dados.datasets)
-        console.log('----------------------------------------------')
-
-        // Criando estrutura para plotar gráfico - config
-        const config = {
-            type: 'line',
-            data: dados,
-        };
-
-        let myChart = new Chart(
-          document.getElementById(`myChartCanvasMemoria`),
-          config
-        );
-
-        setTimeout(() => atualizarGraficoMemoria(idMaquina,dados,myChart),60000);
+    if (resposta[0].memoria - resposta[resposta.length - 1].memoria > 0) {
+      if (diffHoras > 0) {
+        legenda_memoria.innerHTML = "Aumento de " + Math.abs(resposta[0].memoria - resposta[resposta.length - 1].memoria).toFixed(2) + "%" + " nas ultímas " + diffHoras + "H" + diffMinutos + "m"  
+      }else{
+        legenda_memoria.innerHTML = "Aumento de " + Math.abs(resposta[0].memoria - resposta[resposta.lenght - 1].memoria).toFixed(2) + "%" + " nos ultímos " + diffMinutos + " minutos"
+      }
+    } else if (resposta[0].memoria - resposta[resposta.length - 1].memoria < 0) {
+      if (diffHoras > 0) {
+        legenda_memoria.innerHTML = "Diminuição de " + Math.abs(resposta[0].memoria - resposta[resposta.length - 1].memoria).toFixed(2) + "%" + " nas ultímas " + diffHoras + "H" + diffMinutos + "m"  
+      }else{
+        legenda_memoria.innerHTML = "Diminuição de " + Math.abs(resposta[0].memoria - resposta[resposta.length - 1].memoria).toFixed(2) + "%" + " nos ultímos " + diffMinutos + " minutos"
+      }
+    } else {
+      if (diffHoras > 0) {
+        legenda_memoria.innerHTML = "Não houve alteração nas ultímas " + diffHoras + "H" + diffMinutos + "m"  
+      }else{
+        legenda_memoria.innerHTML = "Não houve alteração nos ultímos " + diffMinutos + " minutos"
+      }
     }
 
-    function atualizarGraficoMemoria(idMaquina,dados,myChart) {
-      
-      fetch(`/medidas/tempo-real/memoria/${idMaquina}`, { cache: `no-store` }).then(function (response) {
-        if (response.ok) {
-          response.json().then(function (novoRegistro) {
+    if ((resposta[resposta.length - 1]).memoria < 40.0) {
+        divBolinhaMemoria.classList.toggle('bolinhaAlertaIdeal')
+        divBolinhaMemoria.classList.remove;
+      } else if (resposta[resposta.length - 1].memoria >= 40.0 && resposta[resposta.length - 1].memoria < 70) {
+        divBolinhaMemoria.classList.toggle('bolinhaAlertaEmergente')
+      } else if (resposta[resposta.length - 1].memoria >= 70.0 && resposta[resposta.length - 1].memoria < 90) {
+        divMemoria.classList.toggle('divAlertaCritico')
+        divBolinhaMemoria.classList.toggle('bolinhaAlertaCritico')
+      } else {
+        divMemoria.classList.toggle('divAlertaUrgente')
+        divBolinhaMemoria.classList.toggle('bolinhaAlertaUrgente')
+      }
+    for (i = 0; i < resposta.length; i++) {
+      var registro = resposta[i];
+      labels.push(registro.momento_grafico);
+      dados.datasets[0].data.push(registro.memoria);
+    }
 
-            console.log(`Dados recebidos: ${JSON.stringify(novoRegistro)}`);
-            console.log(`Dados atuais do gráfico`);
-            console.log(dados);
+    console.log('----------------------------------------------')
+    console.log('O gráfico será plotado com os respectivos valores:')
+    console.log('Labels:')
+    console.log(labels)
+    console.log('Dados:')
+    console.log(dados.datasets)
+    console.log('----------------------------------------------')
 
-            if(novoRegistro[0].momento_grafico == dados.labels[dados.labels.lenght - 1]) {
-              console.log("---------------------------------------------------------------")
-                        console.log("Como não há dados novos para captura, o gráfico não atualizará.")
-                        console.log("Horário do novo dado capturado:")
-                        console.log(novoRegistro[0].momento_grafico)
-                        console.log("Horário do último dado capturado:")
-                        console.log(dados.labels[dados.labels.length - 1])
-                        console.log("---------------------------------------------------------------") 
-            } else{
+    // Criando estrutura para plotar gráfico - config
+    const config = {
+      type: 'line',
+      data: dados,
+    };
 
-              dados.labels.shift();
-              dados.labels.push(novoRegistro[0].momento_grafico);
+    let myChart = new Chart(
+      document.getElementById(`myChartCanvasMemoria`),
+      config
+    );
 
-              dados.datasets[0].data.shift();
-              dados.datasets[0].data.push(novoRegistro[0].memoria);
+    setTimeout(() => atualizarGraficoMemoria(idMaquina, dados, myChart), 60000);
+  }
 
-              myChart.update();
+  function atualizarGraficoMemoria(idMaquina, dados, myChart) {
+
+    fetch(`/medidas/tempo-real/memoria/${idMaquina}`, { cache: `no-store` }).then(function (response) {
+      if (response.ok) {
+        response.json().then(function (novoRegistro) {
+
+          console.log(`Dados recebidos: ${JSON.stringify(novoRegistro)}`);
+          console.log(`Dados atuais do gráfico`);
+          console.log(dados);
+
+          if (novoRegistro[0].momento_grafico == dados.labels[dados.labels.lenght - 1]) {
+            console.log("---------------------------------------------------------------")
+            console.log("Como não há dados novos para captura, o gráfico não atualizará.")
+            console.log("Horário do novo dado capturado:")
+            console.log(novoRegistro[0].momento_grafico)
+            console.log("Horário do último dado capturado:")
+            console.log(dados.labels[dados.labels.length - 1])
+            console.log("---------------------------------------------------------------")
+          } else {
+
+            dados.labels.shift();
+            dados.labels.push(novoRegistro[0].momento_grafico);
+
+            dados.datasets[0].data.shift();
+            dados.datasets[0].data.push(novoRegistro[0].memoria);
+            var divMemoria = document.getElementById('divAlertaMemoria')
+            var divBolinhaMemoria = document.getElementById('bolinhaAlertaMemoria')
+
+            var data1 = moment(dados.labes[0], 'YYYY-MM-DD HH:mm');
+            var data2 = moment(novoRegistro[0].momento, 'YYYY-MM-DD HH:mm');
+            var diff = moment.duration(data2.diff(data1));
+            var diffHoras = diff.days() * 24 + diff.hours();
+            var diffMinutos = diff.minutes();
+
+            if (dados.datasets[0].data[0] - novoRegistro[0].memoria > 0) {
+              if (diffHoras > 0) {
+                legenda_memoria.innerHTML = "Aumento de " + Math.abs(dados.datasets[0].data[0] - novoRegistro[0].memoria).toFixed(2) + "%" + " nas ultímas " + diffHoras + "H" + diffMinutos + "m"  
+              }else{
+                legenda_memoria.innerHTML = "Aumento de " + Math.abs(dados.datasets[0].data[0] - novoRegistro[0].memoria).toFixed(2) + "%" + " nos ultímos " + diffMinutos + " minutos"
+              }
+            } else if (dados.datasets[0].data[0] - novoRegistro[0].memoria < 0) {
+              if (diffHoras > 0) {
+                legenda_memoria.innerHTML = "Diminuição de " + Math.abs(dados.datasets[0].data[0] - novoRegistro[0].memoria).toFixed(2) + "%" + " nas ultímas " + diffHoras + "H" + diffMinutos + "m"  
+              }else{
+                legenda_memoria.innerHTML = "Diminuição de " + Math.abs(dados.datasets[0].data[0] - novoRegistro[0].memoria).toFixed(2) + "%" + " nos ultímos " + diffMinutos + " minutos"
+              }
+            } else {
+              if (diffHoras > 0) {
+                legenda_memoria.innerHTML = "Não houve alteração nas ultímas " + diffHoras + "H" + diffMinutos + "m"  
+              }else{
+                legenda_memoria.innerHTML = "Não houve alteração nos ultímos " + diffMinutos + " minutos"
+              }
             }
-            
-            proximaAtualizacao = setTimeout(() => atualizarGraficoMemoria(idMaquina, dados, myChart),60000);
 
-          });
-        } else{
-          console.error('Nenhum dado encontrado ou erro na API');
-          proximaAtualizacao = setTimeout(() => atualizarGraficoMemoria(idMaquina,dados,myChart),60000);
-        }
+            if ((resposta[resposta.length - 1]).memoria < 40.0) {
+              divBolinhaMemoria.classList.toggle('bolinhaAlertaIdeal')
+              divBolinhaMemoria.classList.remove;
+            } else if (resposta[resposta.length - 1].memoria >= 40.0 && resposta[resposta.length - 1].memoria < 70) {
+              divBolinhaMemoria.classList.toggle('bolinhaAlertaEmergente')
+            } else if (resposta[resposta.length - 1].memoria >= 70.0 && resposta[resposta.length - 1].memoria < 90) {
+              divMemoria.classList.toggle('divAlertaCritico')
+              divBolinhaMemoria.classList.toggle('bolinhaAlertaCritico')
+            } else {
+              divMemoria.classList.toggle('divAlertaUrgente')
+              divBolinhaMemoria.classList.toggle('bolinhaAlertaUrgente')
+            }
+
+            myChart.update();
+          }
+
+          proximaAtualizacao = setTimeout(() => atualizarGraficoMemoria(idMaquina, dados, myChart), 60000);
+
+        });
+      } else {
+        console.error('Nenhum dado encontrado ou erro na API');
+        proximaAtualizacao = setTimeout(() => atualizarGraficoMemoria(idMaquina, dados, myChart), 60000);
+      }
+    })
+      .catch(function (error) {
+        console.error(`Erro na obtenção dos dados p/ gráfico ${error.message}`)
       })
-        .catch(function (error) {
-          console.error(`Erro na obtenção dos dados p/ gráfico ${error.message}`)
-        })
+  }
+
+  function obterDadosRede(idMaquina) {
+
+    fetch(`/medidas/ultimas/rede/${idMaquina}`, { cache: 'no-store' }).then(function (response) {
+      if (response.ok) {
+        response.json().then(function (resposta) {
+          console.log(`Dados recebidos: ${JSON.stringify(resposta)}`);
+          resposta.reverse();
+
+          plotarGraficoRede(resposta, idMaquina);
+        });
+      } else {
+        console.error(`Nenhum dado encontrado ou erro na API`);
+      }
+    })
+      .catch(function (error) {
+        console.error(`Erro na obtenção dos dados p/ gráfico: ${error.message}`)
+      });
+  }
+
+  function plotarGraficoRede(resposta, idMaquina) {
+    console.log(`iniciando plotagem do gráfico...`);
+
+    let labels = [];
+
+    let dados = {
+      labels: labels,
+      datasets: [{
+        label: `Latência`,
+        data: [],
+        fill: false,
+        borderColor: 'rgb(75, 192, 192)',
+        tension: 0.1
+      }]
+    };
+
+    console.log('----------------------------------------------')
+    console.log('Estes dados foram recebidos pela funcao "obterDadosGraficoRede" e passados para "plotarGraficoRede":')
+    console.log(resposta)
+    var divRede = document.getElementById('divAlertaRede')
+    var divBolinhaRede = document.getElementById('bolinhaAlertaRede')
+
+    var data1 = moment(resposta[0].momento, 'YYYY-MM-DD HH:mm');
+    var data2 = moment(resposta[resposta.length - 1].momento, 'YYYY-MM-DD HH:mm');
+    var diff = moment.duration(data2.diff(data1));
+    var diffHoras = diff.days() * 24 + diff.hours();
+    var diffMinutos = diff.minutes();
+
+    if (resposta[0].latencia - resposta[resposta.length - 1].latencia > 0) {
+      if (diffHoras > 0) {
+        legenda_rede.innerHTML = "Aumento de " + Math.abs(resposta[0].latencia - resposta[resposta.lenght - 1].latencia) + "ms" + " nas ultímas " + diffHoras + "H" + diffMinutos + "m"  
+      }else{
+        legenda_rede.innerHTML = "Aumento de " + Math.abs(resposta[0].latencia - resposta[resposta.lenght - 1].latencia) + "ms" + " nos ultímos " + diffMinutos + " minutos"
+      }
+    } else if (resposta[0].latencia - resposta[resposta.length - 1].latencia < 0) {
+      if (diffHoras > 0) {
+        legenda_rede.innerHTML = "Diminuição de " + Math.abs(resposta[0].latencia - resposta[resposta.length - 1].latencia).toFixed(2) + "ms" + " nas ultímas " + diffHoras + "H" + diffMinutos + "m"  
+      }else{
+        legenda_rede.innerHTML = "Diminuição de " + Math.abs(resposta[0].latencia - resposta[resposta.length - 1].latencia).toFixed(2) + "ms" + " nos ultímos " + diffMinutos + " minutos"
+      }
+    } else {
+      if (diffHoras > 0) {
+        legenda_rede.innerHTML = "Não houve alteração nas ultímas " + diffHoras + "H" + diffMinutos + "m"  
+      }else{
+        legenda_rede.innerHTML = "Não houve alteração nos ultímos " + diffMinutos + " minutos"
+      }
     }
 
+    if ((resposta[resposta.length - 1]).latencia < 55.0) {
+        divBolinhaRede.classList.toggle('bolinhaAlertaIdeal')
+        divBolinhaRede.classList.remove;
+      } else if (resposta[resposta.length - 1].latencia >= 55.0 && resposta[resposta.length - 1].latencia < 61) {
+        divBolinhaRede.classList.toggle('bolinhaAlertaEmergente')
+      } else if (resposta[resposta.length - 1].latencia >= 61.0 && resposta[resposta.length - 1].latencia < 86) {
+        divRede.classList.toggle('divAlertaCritico')
+        divBolinhaRede.classList.toggle('bolinhaAlertaCritico')
+      } else {
+        divRede.classList.toggle('divAlertaUrgente')
+        divBolinhaRede.classList.toggle('bolinhaAlertaUrgente')
+      }
+
+    for (i = 0; i < resposta.length; i++) {
+      var registro = resposta[i];
+      labels.push(registro.momento_grafico);
+      dados.datasets[0].data.push(registro.latencia);
+    }
+
+    console.log('----------------------------------------------')
+    console.log('O gráfico será plotado com os respectivos valores:')
+    console.log('Labels:')
+    console.log(labels)
+    console.log('Dados:')
+    console.log(dados.datasets)
+    console.log('----------------------------------------------')
+
+    // Criando estrutura para plotar gráfico - config
+    const config = {
+      type: 'line',
+      data: dados,
+    };
+
+    let myChart = new Chart(
+      document.getElementById(`myChartCanvasRede`),
+      config
+    );
+
+    setTimeout(() => atualizarGraficoRede(idMaquina, dados, myChart), 60000);
+  }
+
+  function atualizarGraficoRede(idMaquina,dados,myChart) {
+
+    fetch(`/medidas/tempo-real/rede/${idMaquina}`, { cache: `no-store` }).then(function (response) {
+      if (response.ok) {
+        response.json().then(function (novoRegistro) {
+
+          console.log(`Dados recebidos: ${JSON.stringify(novoRegistro)}`);
+          console.log(`Dados atuais do gráfico`);
+          console.log(dados);
+
+          if (novoRegistro[0].momento_grafico == dados.labels[dados.labels.lenght - 1]) {
+            console.log("---------------------------------------------------------------")
+            console.log("Como não há dados novos para captura, o gráfico não atualizará.")
+            console.log("Horário do novo dado capturado:")
+            console.log(novoRegistro[0].momento_grafico)
+            console.log("Horário do último dado capturado:")
+            console.log(dados.labels[dados.labels.length - 1])
+            console.log("---------------------------------------------------------------")
+          } else {
+
+            dados.labels.shift();
+            dados.labels.push(novoRegistro[0].momento_grafico);
+
+            dados.datasets[0].data.shift();
+            dados.datasets[0].data.push(novoRegistro[0].latencia);
+            var divRede = document.getElementById('divAlertaRede')
+            var divBolinhaRede = document.getElementById('bolinhaAlertaRede')
+
+            var data1 = moment(dados.labes[0], 'YYYY-MM-DD HH:mm');
+            var data2 = moment(novoRegistro[0].momento, 'YYYY-MM-DD HH:mm');
+            var diff = moment.duration(data2.diff(data1));
+            var diffHoras = diff.days() * 24 + diff.hours();
+            var diffMinutos = diff.minutes();
+
+            if (dados.datasets[0].data[0] - novoRegistro[0].latencia > 0) {
+              if (diffHoras > 0) {
+                legenda_rede.innerHTML = "Aumento de " + Math.abs(dados.datasets[0].data[0] - novoRegistro[0].latencia) + "ms" + " nas ultímas " + diffHoras + "H" + diffMinutos + "m"  
+              }else{
+                legenda_rede.innerHTML = "Aumento de " + Math.abs(dados.datasets[0].data[0] - novoRegistro[0].latencia) + "ms" + " nos ultímos " + diffMinutos + " minutos"
+              }
+            }else if (dados.datasets[0].data[0] - novoRegistro[0].latencia < 0) {
+              if (diffHoras > 0) {
+                legenda_rede.innerHTML = "Diminuição de " + Math.abs(dados.datasets[0].data[0] - novoRegistro[0].latencia).toFixed(2) + "ms" + " nas ultímas " + diffHoras + "H" + diffMinutos + "m"  
+              }else{
+                legenda_rede.innerHTML = "Diminuição de " + Math.abs(dados.datasets[0].data[0] - novoRegistro[0].latencia).toFixed(2) + "ms" + " nos ultímos " + diffMinutos + " minutos"
+              }
+            } else {
+              if (diffHoras > 0) {
+                legenda_rede.innerHTML = "Não houve alteração nas ultímas " + diffHoras + "H" + diffMinutos + "m"  
+              }else{
+                legenda_rede.innerHTML = "Não houve alteração nos ultímos " + diffMinutos + " minutos"
+              }
+            }
+
+            if ((novoRegistro[resposta.length - 1]).latencia < 55.0) {
+              divBolinhaRede.classList.toggle('bolinhaAlertaIdeal')
+              divBolinhaRede.classList.remove;
+            } else if (novoRegistro[resposta.length - 1].latencia >= 55.0 && resposta[resposta.length - 1].latencia < 61) {
+              divBolinhaRede.classList.toggle('bolinhaAlertaEmergente')
+            } else if (novoRegistro[resposta.length - 1].latencia >= 61.0 && resposta[resposta.length - 1].latencia < 86) {
+              divRede.classList.toggle('divAlertaCritico')
+              divBolinhaRede.classList.toggle('bolinhaAlertaCritico')
+            } else {
+              divRede.classList.toggle('divAlertaUrgente')
+              divBolinhaRede.classList.toggle('bolinhaAlertaUrgente')
+            }
+
+            myChart.update();
+          }
+
+          proximaAtualizacao = setTimeout(() => atualizarGraficoRede(idMaquina, dados, myChart), 60000);
+
+        });
+      } else {
+        console.error('Nenhum dado encontrado ou erro na API');
+        proximaAtualizacao = setTimeout(() => atualizarGraficoRede(idMaquina, dados, myChart), 60000);
+      }
+    })
+      .catch(function (error) {
+        console.error(`Erro na obtenção dos dados p/ gráfico ${error.message}`)
+      })      
+  }
 </script>
