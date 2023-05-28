@@ -1,6 +1,9 @@
 var mysql = require("mysql2");
 var sql = require('mssql');
 
+process.env.AMBIENTE_PROCESSO = "producao"
+
+
 // CONEXÃO DO SQL SERVER - AZURE (NUVEM)
 var sqlServerConfig = {
     server: "server-celeratti.database.windows.net",
@@ -16,10 +19,7 @@ var sqlServerConfig = {
         encrypt: true, // for azure
     }
 }
-
 // CONEXÃO DO MYSQL WORKBENCH (LOCAL)
-
-process.env.AMBIENTE_PROCESSO = "desenvolvimento"
 var mySqlConfig = {
     host: "localhost",
     database: "celeratti",
