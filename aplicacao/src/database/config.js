@@ -1,7 +1,7 @@
 var mysql = require("mysql2");
 var sql = require('mssql');
 
-process.env.AMBIENTE_PROCESSO = "producao"
+process.env.AMBIENTE_PROCESSO = "desenvolvimento"
 
 
 // CONEXÃO DO SQL SERVER - AZURE (NUVEM)

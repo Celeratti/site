@@ -10,9 +10,8 @@ function listar() {
 }
 
 function id() {
-
     var instrucao = `
-    select TOP (1) * from [dbo].[empresa] order by id desc;
+    select TOP (1) * from empresa order by id desc;
     `;
     console.log("Executando a instrução SQL: \n" + instrucao);
     return database.executar(instrucao);

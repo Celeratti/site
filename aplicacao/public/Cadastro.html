@@ -120,8 +120,8 @@ e.target.value = v;
 
         });
 
-
     function cadastrar() {
+        idRecebido+=1
         // aguardar();
 
         //Recupere o valor da nova input pelo nome do id
@@ -131,6 +131,8 @@ e.target.value = v;
         var cnpjVar = cnpj_input.value;
         var senhaVar = senha_input.value;
         var confirmacaoSenhaVar = confirmacao_senha_input.value;
+
+        cnpjVar = cnpjVar.replace(/\D/g, "")
 
         var id=0;
 
@@ -160,7 +162,7 @@ e.target.value = v;
                 nome2Server: nome2Var,
                 cnpjServer: cnpjVar,
                 senhaServer: senhaVar,
-                idVar: idRecebido
+                idServer: idRecebido
             })
         }).then(function (resposta) {
 
