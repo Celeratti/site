@@ -1,11 +1,36 @@
 var database = require("../database/config");
 
+function buscarAlertas() {
+
+    instrucaoSql = ''
+
+    if (process.env.AMBIENTE_PROCESSO == "producao") {
+        instrucaoSql = `SELECT mc.id, mc.NomeIdentificador, ec.nome,gc.insercao, ta.cor AS TipoAlerta
+        FROM GrupoComponentes gc
+        JOIN Alertas a ON gc.id = a.FkGrupoComponentes
+        JOIN ComponenteCausa cc ON a.FkComponenteCausa = cc.Id
+        JOIN Maquina mc ON gc.FkMaquina = mc.Id
+        JOIN TipoAlerta ta ON a.FkTipoAlerta = ta.Id
+        JOIN estacao ec ON ec.id = mc.fkEstacao
+        WHERE gc.Insercao >= DATEADD(minute, -182, GETDATE()) AND ta.cor = 'Urgente' ORDER BY gc.Insercao DESC;`
+    } else if (process.env.AMBIENTE_PROCESSO == "desenvolvimento") {
+        instrucaoSql = ``
+    } else {
+        console.log("\nO AMBIENTE (produção OU desenvolvimento) NÃO FOI DEFINIDO EM app.js\n");
+            return
+    }
+
+    console.log("Executando a instrução SQL: \n" + instrucaoSql);
+    return database.executar(instrucaoSql);
+
+}
+
 function buscarMaquinasEstacoes(idEstacao, limite_linhas) {
 
     instrucaoSql = ''
 
     if (process.env.AMBIENTE_PROCESSO == "producao") {
-        instrucaoSql = `SELECT TOP ${limite_linhas} m.id , m.nomeIdentificador,g.memoriaEmUso , g.discoUso, g.cpuUtilizacao FROM estacao as e JOIN maquina as m ON m.fkestacao = e.id JOIN grupoComponentes as g ON g.id = (
+        instrucaoSql = `SELECT TOP ${limite_linhas} m.id , m.nomeIdentificador,g.memoriaEmUso , g.discoUso, g.cpuUtilizacao,g.latencia FROM estacao as e JOIN maquina as m ON m.fkestacao = e.id JOIN grupoComponentes as g ON g.id = (
             SELECT MAX(id)
             FROM grupoComponentes
             WHERE fkMaquina = m.id
@@ -218,22 +243,50 @@ function buscarUltimasMedidasEstacao(limite_linhas) {
 
     if (process.env.AMBIENTE_PROCESSO == "producao") {
         instrucaoSql = `SELECT
-        e.id AS id_estacao,
-        e.nome AS nome_estacao,
-        COUNT(DISTINCT CASE WHEN gc.Insercao >= DATEADD(HOUR, -2, GETDATE()) THEN m.id END) AS maquinas_com_problemas,
-        (SELECT COUNT(DISTINCT m2.id) FROM maquina m2 WHERE m2.fkEstacao = e.id) - COUNT(DISTINCT CASE WHEN gc.Insercao >= DATEADD(HOUR, -2, GETDATE()) THEN m.id END) AS maquinas_operando_normalmente
+        COALESCE(t1.id_estacao, t2.estacao_id) AS estacao_id,
+        COALESCE(t1.nome_estacao, t2.estacao_nome) AS estacao_nome,
+        COALESCE(t1.maquinas_com_problemas, 0) AS maquinas_com_problemas,
+        COALESCE(t1.maquinas_operando_normalmente, 0) AS maquinas_operando_normalmente,
+        COALESCE(t2.quantidade_maquinas, 0) AS quantidade_maquinas,
+        COALESCE(t2.quantidade_emergente, 0) AS quantidade_emergente,
+        COALESCE(t2.quantidade_critico, 0) AS quantidade_critico,
+        COALESCE(t2.quantidade_urgente, 0) AS quantidade_urgente
     FROM
-        estacao e
-        LEFT JOIN maquina m ON e.id = m.fkEstacao
-        LEFT JOIN grupoComponentes gc ON m.id = gc.fkMaquina
-        LEFT JOIN alertas a ON gc.id = a.fKGrupoComponentes
-        LEFT JOIN tipoAlerta ta ON a.fkTipoAlerta = ta.id
-    WHERE
-        ta.cor = ('Urgente')
-        OR (gc.Insercao IS NULL OR gc.Insercao < DATEADD(HOUR, -2, GETDATE()))
-    GROUP BY
-        e.id, e.nome;
-    `
+        (SELECT
+            e.id AS id_estacao,
+            e.nome AS nome_estacao,
+            COUNT(DISTINCT CASE WHEN gc.Insercao >= DATEADD(HOUR, -4, GETDATE()) THEN m.id END) AS maquinas_com_problemas,
+            (SELECT COUNT(DISTINCT m2.id) FROM maquina m2 WHERE m2.fkEstacao = e.id) - COUNT(DISTINCT CASE WHEN gc.Insercao >= DATEADD(HOUR, -2, GETDATE() AT TIME ZONE 'E. South America Standard Time') THEN m.id END) AS maquinas_operando_normalmente
+        FROM
+            estacao e
+            LEFT JOIN maquina m ON e.id = m.fkEstacao
+            LEFT JOIN grupoComponentes gc ON m.id = gc.fkMaquina
+            LEFT JOIN alertas a ON gc.id = a.fkGrupoComponentes
+            LEFT JOIN tipoAlerta ta ON a.fkTipoAlerta = ta.id
+        WHERE
+            ta.cor IN ('Urgente')
+            OR (gc.Insercao IS NULL OR gc.Insercao < DATEADD(HOUR, -4, GETDATE()))
+        GROUP BY
+            e.id, e.nome) AS t1
+        FULL OUTER JOIN
+        (SELECT
+            e.id AS estacao_id,
+            e.nome AS estacao_nome,
+            COUNT(DISTINCT m.id) AS quantidade_maquinas,
+            SUM(CASE WHEN ta.cor = 'Emergente' THEN 1 ELSE 0 END) AS quantidade_emergente,
+            SUM(CASE WHEN ta.cor = 'Critico' THEN 1 ELSE 0 END) AS quantidade_critico,
+            SUM(CASE WHEN ta.cor = 'Urgente' THEN 1 ELSE 0 END) AS quantidade_urgente
+        FROM
+            estacao e
+            LEFT JOIN maquina m ON e.id = m.fkestacao
+            LEFT JOIN grupoComponentes gc ON m.id = gc.fkMaquina
+            LEFT JOIN alertas a ON gc.id = a.fkGrupoComponentes
+            LEFT JOIN tipoAlerta ta ON a.fkTipoAlerta = ta.id
+        WHERE
+            gc.insercao >= DATEADD(HOUR, -4, GETDATE())
+        GROUP BY
+            e.id,
+            e.nome) AS t2 ON t1.id_estacao = t2.estacao_id;`
     } else if (process.env.AMBIENTE_PROCESSO == "desenvolvimento") {
         instrucaoSql = `SELECT COUNT(DISTINCT maquina.id) AS maquinas_com_problemas,(SELECT COUNT(DISTINCT maquina.id) FROM maquina) - COUNT(DISTINCT maquina.id) AS maquinas_operando_normalmente FROM maquina LEFT JOIN grupoComponentes ON maquina.id = grupoComponentes.fkMaquina LEFT JOIN alertas ON grupoComponentes.id = alertas.fkGrupoComponentes LEFT JOIN tipoAlerta ON alertas.fkTipoAlerta = tipoAlerta.id WHERE tipoAlerta.cor IN ('Crítico', 'Urgente');`
     } else {
@@ -250,13 +303,11 @@ function buscarTempoRealMaquinas(idEstacao) {
     instrucaoSql = ''
 
     if (process.env.AMBIENTE_PROCESSO == "producao") {
-        instrucaoSql = `select top 1
-        dht11_temperatura as temperatura, 
-        dht11_umidade as umidade,  
-                        CONVERT(varchar, momento, 108) as momento_grafico, 
-                        fk_aquario 
-                        from medida where fk_aquario = ${idAquario} 
-                    order by id desc`;
+        instrucaoSql = `SELECT m.id , m.nomeIdentificador,g.memoriaEmUso , g.discoUso, g.cpuUtilizacao,g.latencia FROM estacao as e JOIN maquina as m ON m.fkestacao = e.id JOIN grupoComponentes as g ON g.id = (
+            SELECT MAX(id)
+            FROM grupoComponentes
+            WHERE fkMaquina = m.id
+          ) WHERE e.id = ${idEstacao};`;
 
     } else if (process.env.AMBIENTE_PROCESSO == "desenvolvimento") {
         instrucaoSql = ``;
@@ -281,5 +332,6 @@ module.exports = {
     buscarMaquinasEstacoes,
     buscarTempoRealMaquinas,
     buscarUltimasMedidasRede,
-    buscarMedidasEmTempoRealRede
+    buscarMedidasEmTempoRealRede,
+    buscarAlertas
 }

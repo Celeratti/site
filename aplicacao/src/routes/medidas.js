@@ -48,4 +48,8 @@ router.get("/tempo-real/maquinas/:idEstacao", function (req, res) {
     medidaController.buscarTempoRealMaquinas(req, res);
 })
 
+router.get("/alertas", function (req, res) {
+    medidaController.buscarAlertas(req, res);
+})
+
 module.exports = router;

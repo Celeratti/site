@@ -55,7 +55,6 @@
         var senhaVar = senha_input.value;
 
         if (cnpjVar == "" || senhaVar == "") {
-            cardErro.style.display = "block"
             mensagem_erro.innerHTML = "(Mensagem de erro para todos os campos em branco)";
             finalizarAguardar();
             return false;
@@ -91,7 +90,7 @@
                     sessionStorage.ID_USUARIO = json.id;
 
                     setTimeout(function () {
-                        window.location = "./dashboard/cards.html";
+                        window.location = "../Cadastro";
                     }, 1000); // apenas para exibir o loading
 
                 });
