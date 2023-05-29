@@ -6,7 +6,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Funcinario-Cadastro</title>
     <link rel="stylesheet" href="assets/cadastroFuncionario.css">
-
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.inputmask/3.3.4/jquery.inputmask.bundle.min.js"></script>
 
@@ -20,6 +19,12 @@
 </head>
 <body onload="atualizarTabela()">
     <!--<h1 class="tituloPrincipal">CELERATTI</h1>-->
+
+    <ul class="links">
+        <li>Dashboards</li>
+        <li>Funcionários</li>
+    </ul>
+
     <div class="teste-logo"> 
         <img src="assets/img/CELERATTICF.png" alt="">
     </div>
@@ -27,23 +32,24 @@
 
     <h1 class="nomeEmpresa">Via Mobilidade</h1>
     <h1 class="subTitulo">Cadastro de funcionários</h1>
-
     <img src="assets/img/addCF.png" id="add" alt="">
-<button id="btn_add" data-toggle="modal" data-target="#exampleModal" onclick="Adicionar()"> Add Usuário</button>
-<img src="assets/img/lupaCF.png" alt="" id="icon_lupa">
-<input type="text" id="ipt_pesquisar" placeholder="Pesquisar">
+    <button id="btn_add" data-toggle="modal" data-target="#exampleModal" onclick="Adicionar()"> Add Usuário</button>
+    <img src="assets/img/lupaCF.png" alt="" id="icon_lupa">
+    <input type="text" id="ipt_pesquisar" placeholder="Pesquisar">
+
 
 <table id="tabela">
+    <tr>
+        <th>Nome</th>
+        <th>Sobrenome</th>
+        <th>Email</th>
+        <th>Telefone</th>
+        <th>Cargo</th>
+        <th id="thOpcoes">
+            <img src="assets/img/gearCF.png" alt="" id="imgGear">
+        </th>
+    </tr>
 
-    <th>Nome</th>
-    <th>Sobrenome</th>
-    <th>Email</th>
-    <th>Telefone</th>
-    <th>Cargo</th>
-    <th id="thOpcoes">
-        <img src="assets/img/gearCF.png" alt="" id="imgGear">
-    </th>
-  </tr>
  
   
 </table>
@@ -115,12 +121,15 @@
 
 </body>
 </html>
-
+<script src="funcoes.js"></script>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.inputmask/3.3.4/jquery.inputmask.bundle.min.js"></script>
 
         <script>
+
 var funcionarioSelecionado = 0;
+
+document.querySelector(".nomeEmpresa").innerHTML =GETNomeEmpresa()
 
 
 var tabelaHtml = document.querySelector("#tabela")
@@ -132,7 +141,15 @@ var tabelaHtml = document.querySelector("#tabela")
                         linhas[i].remove()
         }
 
-        fetch("/funcionarios/atualizarTabela").then(function (resposta) {
+        fetch("/funcionarios/atualizarTabela", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                linhaServer: GETIdEmpresa()
+            })
+        }).then(function (resposta) {
             if (resposta.ok) {
 
                 if (resposta.status == 204) {
@@ -143,7 +160,7 @@ var tabelaHtml = document.querySelector("#tabela")
                 resposta.json().then(function (resposta) {
                     console.log("Dados recebidos: ", JSON.stringify(resposta));
 
-                for (let i = 0; i <= resposta.length; i++) {
+                for (let i = 0; i < resposta.length; i++) {
                     if(resposta[i].esta_ativo != 0){
 
 
@@ -277,6 +294,7 @@ var tabelaHtml = document.querySelector("#tabela")
                 if(novoCargo =="Analista"){
                     novoCargo=3
                 }    
+                alert(novoCargo)
 
                 
                 if(acao == "Salvar"){
@@ -293,9 +311,8 @@ var tabelaHtml = document.querySelector("#tabela")
                 sobreNomeServer: nomeRecebido,
                 telefoneServer: numerosTelefone,
                 emailServer: emailRecebido,
-                senhaServer: "car",
                 cargoServer: novoCargo,
-                ativoServer: "senha"
+                empresaServer: GETIdEmpresa()
             })
         }).then(function (resposta) {
 
@@ -402,6 +419,7 @@ var tabelaHtml = document.querySelector("#tabela")
 
             function validarTelefone(){
                 var telefone = document.querySelector("#telefone").value
+
                 var numeros = telefone.match(/\d+/g).map(Number);
                 var string = numeros.toString();
                 var StringSemVirgulas = string.replace(/,/g, "");             

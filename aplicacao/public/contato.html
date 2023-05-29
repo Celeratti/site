@@ -30,17 +30,17 @@
             <div class="formulario">
                 <div class="caixaUl">
                     <ul>
-                        <li>Nome:</li>
-                        <input type="email" id="nome_input">
                         <li>E-Mail: </li>
                         <input type="email" id="email_input">
+                        <li>Assunto:</li>
+                        <input type="email" id="assunto_input">
                         <li id="liObservacao">Digite sua observação:</li>
                         <div id="caixaArea">                        
-                            <textarea name="" cols="55" rows="13" style="background-color: white;" placeholder="Observação"></textarea>
+                            <textarea name="" cols="55" rows="13" style="background-color: white;" placeholder="Observação" id="corpo"></textarea>
                         </div>
                         </textarea>
                         
-                        <button class="btn" onclick="cadastrar()">Enviar</button>
+                        <button class="btn" onclick="enviarEmail()">Enviar</button>
                     </ul>
                 </div>
             </div>
@@ -48,6 +48,8 @@
 </div>
     </div>
 </body>
+
+<script src="funcoes.js"></script>
 
 <!--<script>
     function CadastroEmpresa(){
@@ -74,31 +76,26 @@ e.target.value = v;
 </html>
 
 <script>
-    function cadastrar() {
-        // aguardar();
 
-        //Recupere o valor da nova input pelo nome do id
-        // Agora vá para o método fetch logo abaixo
-        var nomeVar = nome_input.value;
-        var emailVar = email_input.value;
-        var senhaVar = senha_input.value;
-        var confirmacaoSenhaVar = confirmacao_senha_input.value;
 
-        if (nomeVar == "" || emailVar == "" || senhaVar == "" || confirmacaoSenhaVar == "") {
-            // cardErro.style.display = "block"
-            // mensagem_erro.innerHTML = "(Mensagem de erro para todos os campos em branco)";
 
-            // finalizarAguardar();
 
-            alert("Deu ruim")
-            return false;
-        }
-        else {
-            // setInterval(sumirMensagem, 5000)
-        }
 
-        // Enviando o valor da nova input
-        fetch("/usuarios/cadastrar", {
+
+
+    function enviarEmail() {
+
+        var emailRecebido = email_input.value
+        const textarea = document.getElementById('corpo');
+        const corpo = textarea.value;
+        var assuntoRecebido = assunto_input.value
+
+        document.getElementById('email_input').value = '';
+  document.getElementById('assunto_input').value = '';
+  document.getElementById('corpo').value = '';
+
+       
+        fetch("/usuarios/enviarEmail", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json"
@@ -106,9 +103,9 @@ e.target.value = v;
             body: JSON.stringify({
                 // crie um atributo que recebe o valor recuperado aqui
                 // Agora vá para o arquivo routes/usuario.js
-                nomeServer: nomeVar,
-                emailServer: emailVar,
-                senhaServer: senhaVar
+                emailServer: emailRecebido,
+                corpoServer: corpo,
+                assuntoServer: assuntoRecebido
             })
         }).then(function (resposta) {
 
@@ -136,8 +133,6 @@ e.target.value = v;
         return false;
     }
 
-    // function sumirMensagem() {
-    //     cardErro.style.display = "none"
-    // }
+
 
 </script>

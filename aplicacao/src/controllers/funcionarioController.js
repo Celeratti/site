@@ -1,6 +1,15 @@
+const e = require("express");
 var funcionarioModel = require("../models/funcionarioModel");
 
 var sessoes = [];
+
+
+
+
+
+
+
+
 
 function deletar(req, res) {
     var id = req.body.id;
@@ -24,12 +33,17 @@ function cadastrar(req, res) {
     var sobrenome = req.body.sobreNomeServer;
     var telefone = req.body.telefoneServer;
     var email = req.body.emailServer;
-    var senha = req.body.senhaServer;
     var cargo = req.body.cargoServer;
-    var fkempresa = 2;
+    var fkempresa = req.body.empresaServer;
+
+    var senha1 =  telefone.substr(-4);
+    var senha2 = sobrenome.slice(0, 2);
+    var senhaFinal = senha2+ senha1
 
 
-    funcionarioModel.cadastrar(nome, sobrenome, telefone,email, senha, cargo , fkempresa)
+
+
+    funcionarioModel.cadastrar(nome, sobrenome, email,senhaFinal, telefone, cargo, fkempresa)
             .then(
                 function (resultado) {
                     res.json(resultado);
@@ -47,7 +61,12 @@ function cadastrar(req, res) {
 
 
 function atualizarTabela(req, res) {
-    funcionarioModel.atualizarTabela().then(function (resultado) {
+
+    var linha = req.body.linhaServer;
+
+
+
+    funcionarioModel.atualizarTabela(linha).then(function (resultado) {
         if (resultado.length > 0) {
             res.status(200).json(resultado);
         } else {
@@ -99,5 +118,5 @@ module.exports = {
     atualizarTabela,
     deletar,
     cadastrar,
-    editar
+    editar,
 }

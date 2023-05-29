@@ -3,6 +3,9 @@ var router = express.Router();
 
 var usuarioController = require("../controllers/usuarioController");
 
+
+console.log("Chemagos em rotas")
+
 router.get("/", function (req, res) {
     usuarioController.testar(req, res);
 });
@@ -16,8 +19,15 @@ router.post("/cadastrar", function (req, res) {
     usuarioController.cadastrar(req, res);
 })
 
+router.post("/enviarEmail", function (req, res) {
+    usuarioController.enviarEmail(req, res);
+})
+
+
 router.post("/autenticar", function (req, res) {
     usuarioController.entrar(req, res);
 });
+
+
 
 module.exports = router;

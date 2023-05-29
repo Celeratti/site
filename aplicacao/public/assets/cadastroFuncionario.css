@@ -105,21 +105,12 @@ color: #000000;
   border-bottom: 0.01px solid rgba(82, 76, 76, 0.105);
 }
 
-  #btn_add{
-    position: absolute;
-    margin-top: -60px;
-    margin-left:1235px;
-    background-color: #9F111B;
-    color: white;
-    height: 30px;
-    width: 130px;
-    padding-left: 35px;
-  }
+
 #add{
   width: 20px;
   height: 20px;
-  margin-left: 1245px;
-  margin-top: -55px;
+  margin-top:  195px;
+  margin-left:1245px;
   z-index: 2;
   position: absolute;
 }
@@ -129,10 +120,27 @@ color: #000000;
     color: black;
 }
 
+.links {
+  display: flex;
+  list-style: none;
+  padding: 0;
+  margin-left: 1100px;
+  margin-top: 50px;
+}
+
+.links li {
+  margin-right: 10px; /* Espaçamento opcional entre os elementos */
+  margin-left: 20px;
+  font-weight: bold;
+  font-size: 15pt;
+}
+.links li:hover {
+  cursor: pointer;
+}
 #ipt_pesquisar{
   position: absolute;
-  margin-top: -60px;
-  margin-left: 970px;
+  margin-top: 190px;
+  margin-left: 960px;
   background-color: #f2f2f2;
   height: 25px;
   border: none;
@@ -141,12 +149,24 @@ color: #000000;
   height: 30px;
 }
 
+#btn_add{
+  position: absolute;
+  margin-top: 190px;
+  margin-left:1234px;
+  background-color: #9F111B;
+  color: white;
+  height: 30px;
+  width: 130px;
+  padding-left: 35px;
+}
+
+
 #icon_lupa{
   position: absolute;
-  margin-top: -55px;
-  margin-left: 980px;
-width: 22px;
-z-index: 2;
+  margin-top: 194px;
+  margin-left: 968px;
+  width: 22px;
+  z-index: 2;
 }
 #icon_lupa:hover{
   cursor: pointer;
