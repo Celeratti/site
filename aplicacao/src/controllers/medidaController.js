@@ -1,5 +1,21 @@
 var medidaModel = require("../models/medidaModel");
 
+function buscarAlertas(req,res) {
+    console.log(`Trazendo alertas gerados nos ultimos 5 minutos`);
+
+    medidaModel.buscarAlertas().then(function (resultado) {
+        if (resultado.length > 0) {
+            res.status(200).json(resultado);
+        } else {
+            res.status(204).send("Nenhum resultado encontrado!")
+        }
+    }).catch(function (erro) {
+        console.log(erro);
+        console.log("Houve um erro ao buscar as ultimas medidas.", erro.sqlMessage);
+        res.status(500).json(erro.sqlMessage);
+    });
+}
+
 function buscarMaquinasEstacoes(req, res) {
 
     const limite_linhas = 8;
@@ -187,7 +203,7 @@ function buscarUltimasMedidasEstacao(req, res) {
 
     console.log(`Recuperando as ultimas ${limite_linhas} medidas`);
 
-    medidaModel.buscarUltimasMedidasEstacao( limite_linhas).then(function (resultado) {
+    medidaModel.buscarUltimasMedidasEstacao(limite_linhas).then(function (resultado) {
         if (resultado.length > 0) {
             res.status(200).json(resultado);
         } else {
@@ -230,5 +246,6 @@ module.exports = {
     buscarMaquinasEstacoes,
     buscarTempoRealMaquinas,
     buscarUltimasMedidasRede,
-    buscarMedidasEmTempoRealRede
+    buscarMedidasEmTempoRealRede,
+    buscarAlertas
 }

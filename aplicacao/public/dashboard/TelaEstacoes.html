@@ -32,23 +32,19 @@
       </div>
 
       <div class="email">
-        <h3>mario.silva@viaestacao.com</h3>
+        <h3 id="b_email">mario.silva@viaestacao.com</h3>
       </div>
 
       <div class="cargo">
         <h3>Analista de Dashboard</h3>
       </div>
 
-      <div class="cargo">
-      </div>
       <div class="btn-logout" onclick="limparSessao()">
         <h3>Sair</h3>
       </div>
 
     </div>
   </div>
-
-  <!-- <a id= "a2" href="dashInicio.html">Voltar para a tela de linhas</a> -->
 
   <h1>Estações - Linha 2 - Verde</h1>
 
@@ -81,17 +77,53 @@
 
 </html>
 
-
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script defer>
 
 
   window.onload = obterDadosGrafico();
-
   function obterDadosGrafico() {
-    obterDadosEstacao()
+    b_usuario.innerHTML = sessionStorage.NOME_USUARIO;
+    b_email.innerHTML = sessionStorage.EMAIL_USUARIO;
+    obterDadosAlertas();
+    obterDadosEstacao();
   }
 
-  //Estação 1
+  function obterDadosAlertas() {
+
+    fetch(`/medidas/alertas`, { cache: 'no-store' }).then(function (response) {
+      if (response.ok) {
+        response.json().then(function (resposta) {
+          console.log(`Dados recebidos: ${JSON.stringify(resposta)}`);
+          dispararAlertas(resposta);
+        });
+      } else {
+        console.error(`Nenhum dado encontrado ou erro na API`);
+      }
+    })
+      .catch(function (error) {
+        console.error(`Erro na obtenção dos dados p/ gráfico: ${error.message}`)
+      });
+  }
+
+  function dispararAlertas(resposta) {
+    if (resposta.length > 0) {
+      let alertList = '<ul class="listaAlertas">';
+      for (let i = 0; i < resposta.length; i++) {
+        const alert = resposta[i];
+        alertList += `<li class="listItemAlertas"><p>${resposta[i].NomeIdentificador} da estação ${resposta[i].nome} gerou um alerta.</p><a href="/dashboard/TelaMaquina.html?idMaquina=${resposta[i].id}&nomeMaquina=${resposta[i].NomeIdentificador}"><button class="botoes-alertas">Verificar</button></a></li>`;
+      }
+      alertList += '</ul>';
+
+      Swal.fire({
+        title: 'Alerta!',
+        html: alertList,
+        type: 'warning',
+        width: '750px',
+      });
+    };
+  }
+
 
   function obterDadosEstacao() {
 
@@ -99,7 +131,6 @@
       if (response.ok) {
         response.json().then(function (resposta) {
           console.log(`Dados recebidos: ${JSON.stringify(resposta)}`);
-
           plotarGrafico(resposta);
         });
       } else {
@@ -111,9 +142,8 @@
       });
   }
 
+
   function plotarGrafico(resposta) {
-
-
     var estacoes = document.getElementById('tela1');
 
     var estacoes1 = document.getElementById('tela2');
@@ -134,9 +164,11 @@
         estacoes = estacoes1;
       }
 
-      var num = Math.random() * 4;
-
       var estacao = resposta[i];
+
+      var saldoEstacao = 100;
+      var alertas = (estacao.quantidade_emergente * 0.20) + (estacao.quantidade_critico * 0.33) + (estacao.quantidade_urgente * 0.42);
+      saldoEstacao -= (alertas * (estacao.quantidade_maquinas));
 
       var ancoraEstacao = document.createElement('a');
 
@@ -153,33 +185,39 @@
       ancoraEstacao.id = 'a1';
 
       bordaEstacao.className = `borda${i + 1}`;
-
-      num = Math.floor(num);
-
-      num++;
-
-      bolinhaAlerta.className = `bolinhaAlerta${num}`;
-      h3.id = `estacaoNome`;
-      h3.style.width = `100%`
-      h3.style.textAlign = `center`
-      var nomeEstacao = estacao.nome_estacao;
-      console.log(nomeEstacao)
-      if(nomeEstacao.length > 12){
-        h3.style.left = `15%`;
-      }else if(nomeEstacao.length <= 8){
-        h3.style.left = `37%`
-      }else if (nomeEstacao.length <= 12){
-        h3.style.left = `30%`
+      console.log(saldoEstacao);
+      if (saldoEstacao <= 25) {
+        bolinhaAlerta.className = `bolinhaAlertaUrgente`;
+      } else if (saldoEstacao <= 50) {
+        bolinhaAlerta.className = `bolinhaAlertaCritico`;
+      } else if (saldoEstacao <= 75) {
+        bolinhaAlerta.className = `bolinhaAlertaEmergente`;
+      } else {
+        bolinhaAlerta.className = `bolinhaAlertaIdeal`;
       }
-      
+      h3.id = `estacaoNome`;
+      h3.style.textAlign = `center`
+      var nomeEstacao = estacao.estacao_nome;
+      console.log(nomeEstacao)
+      if (nomeEstacao.length > 12) {
+        h3.style.width = `250px`
+        h3.style.paddingLeft = `20px`;
+      } else if (nomeEstacao.length <= 8) {
+        h3.style.width = `100px`
+        h3.style.paddingLeft = `65px`
+      } else if (nomeEstacao.length <= 12) {
+        h3.style.width = `150px`
+        h3.style.paddingLeft = `45px`
+      }
 
-      h3.innerHTML = `${estacao.nome_estacao}`;
+
+      h3.innerHTML = `${estacao.estacao_nome}`;
 
       divEstacao.className = `estacao${i + 1}`;
 
       grafico.id = `myChart${i + 1}`;
 
-      ancoraEstacao.href = `TelaMaquinasEstacoes.html?idEstacao=${estacao.id_estacao}`
+      ancoraEstacao.href = `TelaMaquinasEstacoes.html?idEstacao=${estacao.estacao_id}`
 
       divEstacao.appendChild(grafico);
 
@@ -221,9 +259,6 @@
         document.getElementById(`myChart${i + 1}`),
         config
       );
-
-
-
     }
 
 

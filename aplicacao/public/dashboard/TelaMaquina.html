@@ -171,9 +171,9 @@
 
     if (resposta[0].cpu - resposta[resposta.length - 1].cpu > 0) {
       if (diffHoras > 0) {
-        legenda_cpu.innerHTML = "Aumento de " + Math.abs(resposta[0].cpu - resposta[resposta.lenght - 1].cpu).toFixed(2) + "%" + " nas ultímas " + diffHoras + "H"+ diffMinutos + "m"  
+        legenda_cpu.innerHTML = "Aumento de " + Math.abs(resposta[0].cpu - resposta[resposta.length - 1].cpu).toFixed(2) + "%" + " nas ultímas " + diffHoras + "H"+ diffMinutos + "m"  
       }else{
-        legenda_cpu.innerHTML = "Aumento de " + Math.abs(resposta[0].cpu - resposta[resposta.lenght - 1].cpu).toFixed(2) + "%" + " nos ultímos " + diffMinutos + " minutos"
+        legenda_cpu.innerHTML = "Aumento de " + Math.abs(resposta[0].cpu - resposta[resposta.length - 1].cpu).toFixed(2) + "%" + " nos ultímos " + diffMinutos + " minutos"
       }
     } else if (resposta[0].cpu - resposta[resposta.length - 1].cpu < 0) {
       if (diffHoras > 0) {
@@ -565,7 +565,7 @@
       if (diffHoras > 0) {
         legenda_memoria.innerHTML = "Aumento de " + Math.abs(resposta[0].memoria - resposta[resposta.length - 1].memoria).toFixed(2) + "%" + " nas ultímas " + diffHoras + "H" + diffMinutos + "m"  
       }else{
-        legenda_memoria.innerHTML = "Aumento de " + Math.abs(resposta[0].memoria - resposta[resposta.lenght - 1].memoria).toFixed(2) + "%" + " nos ultímos " + diffMinutos + " minutos"
+        legenda_memoria.innerHTML = "Aumento de " + Math.abs(resposta[0].memoria - resposta[resposta.length - 1].memoria).toFixed(2) + "%" + " nos ultímos " + diffMinutos + " minutos"
       }
     } else if (resposta[0].memoria - resposta[resposta.length - 1].memoria < 0) {
       if (diffHoras > 0) {
@@ -753,9 +753,9 @@
 
     if (resposta[0].latencia - resposta[resposta.length - 1].latencia > 0) {
       if (diffHoras > 0) {
-        legenda_rede.innerHTML = "Aumento de " + Math.abs(resposta[0].latencia - resposta[resposta.lenght - 1].latencia) + "ms" + " nas ultímas " + diffHoras + "H" + diffMinutos + "m"  
+        legenda_rede.innerHTML = "Aumento de " + Math.abs(resposta[0].latencia - resposta[resposta.length - 1].latencia) + "ms" + " nas ultímas " + diffHoras + "H" + diffMinutos + "m"  
       }else{
-        legenda_rede.innerHTML = "Aumento de " + Math.abs(resposta[0].latencia - resposta[resposta.lenght - 1].latencia) + "ms" + " nos ultímos " + diffMinutos + " minutos"
+        legenda_rede.innerHTML = "Aumento de " + Math.abs(resposta[0].latencia - resposta[resposta.length - 1].latencia) + "ms" + " nos ultímos " + diffMinutos + " minutos"
       }
     } else if (resposta[0].latencia - resposta[resposta.length - 1].latencia < 0) {
       if (diffHoras > 0) {

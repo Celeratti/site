@@ -8,16 +8,19 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Dancing+Script&family=Great+Vibes&family=Poppins:wght@300&family=Raleway&display=swap" rel="stylesheet">
+  <link
+    href="https://fonts.googleapis.com/css2?family=Dancing+Script&family=Great+Vibes&family=Poppins:wght@300&family=Raleway&display=swap"
+    rel="stylesheet">
   <link rel="stylesheet" href="css/maquinasestacoes.css">
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   <link rel="shortcut icon" href="./assets/img/celeratti-mascote.png" type="image/x-icon">
   <title>Máquinas</title>
 </head>
+
 <body>
   <h1>Estacão - Vila Prudente | Máquinas</h1>
 
-  <a id= "a1" href="TelaEstacoes.html">Voltar para a tela de estações</a>
+  <a id="a1" href="TelaEstacoes.html">Voltar para a tela de estações</a>
 
   <div class="legenda">
     <p>Ideal</p>
@@ -33,117 +36,194 @@
   <div class="botoes">
     <button id="btn1" onclick="trocar()">1</button>
     <button id="btn2" onclick="trocar1()" style="display: none;">2</button>
-</div>
-<div class="graficos">
-  <div id="tela1"> 
+  </div>
+  <div class="graficos">
+    <div id="tela1">
+
+    </div>
+
+    <div id="tela2" style="display: none;"></div>
 
   </div>
 
-  <div id="tela2" style="display: none;"></div>
-  
-</div>
-  
 </body>
+
 </html>
-
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script>
-  
-var params = window.location.search
-const urlParams = new URLSearchParams(params);
-const idEstacao= urlParams.get('idEstacao')
-console.log(idEstacao)
-window.onload = obterDadosGrafico();
+  var myChart1;
+  var myChart2;
+  var myChart3;
+  var myChart4;
+  var myChart5;
+  var myChart6;
+  var myChart7;
+  var myChart8;
+  var params = window.location.search
+  const urlParams = new URLSearchParams(params);
+  const idEstacao = urlParams.get('idEstacao')
+  console.log(idEstacao)
+  window.onload = obterDadosGrafico();
 
-function obterDadosGrafico() {
-  obterDadosEstacao(idEstacao)
-}
+  function obterDadosGrafico() {
+    obterDadosAlertas()
+    obterDadosEstacao(idEstacao)
+  }
 
-//Estação 1
+  function obterDadosAlertas() {
 
-function obterDadosEstacao(idEstacao) {
-    
-    fetch(`/medidas/estacoes/maquinas/${idEstacao}`, {cache: 'no-store'}).then(function (response) {
+    fetch(`/medidas/alertas`, { cache: 'no-store' }).then(function (response) {
       if (response.ok) {
         response.json().then(function (resposta) {
           console.log(`Dados recebidos: ${JSON.stringify(resposta)}`);
+          dispararAlertas(resposta);
+        });
+      } else {
+        console.error(`Nenhum dado encontrado ou erro na API`);
+      }
+    })
+      .catch(function (error) {
+        console.error(`Erro na obtenção dos dados p/ gráfico: ${error.message}`)
+      });
+  } setTimeout => obterDadosAlertas(), 120000;
 
+  function dispararAlertas(resposta) {
+    if (resposta.length > 0) {
+      let alertList = '<ul class="listaAlertas">';
+      for (let i = 0; i < resposta.length; i++) {
+        const alert = resposta[i];
+        alertList += `<li class="listItemAlertas"><p>${resposta[i].NomeIdentificador} da estação ${resposta[i].nome} gerou um alerta.</p><a href="/dashboard/TelaMaquina.html?idMaquina=${resposta[i].id}&nomeMaquina=${resposta[i].NomeIdentificador}"><button class="botoes-alertas">Verificar</button></a></li>`;
+      }
+      alertList += '</ul>';
+
+      Swal.fire({
+        title: 'Alerta!',
+        html: alertList,
+        type: 'warning',
+        width: '750px',
+      });
+    };
+  }
+
+
+  //Estação 1
+
+  function obterDadosEstacao(idEstacao) {
+
+    fetch(`/medidas/estacoes/maquinas/${idEstacao}`, { cache: 'no-store' }).then(function (response) {
+      if (response.ok) {
+        response.json().then(function (resposta) {
+          console.log(`Dados recebidos: ${JSON.stringify(resposta)}`);
           plotarGrafico(resposta);
         });
-      } else{
+      } else {
         console.error(`Nenhum dado encontrado ou erro na API`);
       }
     }).catch(function (error) {
-          console.error(`Erro na obtenção dos dados p/ gráfico: ${error.message}`)
-        });
-}
+      console.error(`Erro na obtenção dos dados p/ gráfico: ${error.message}`)
+    });
+  }
 
-    function plotarGrafico(resposta) {
-      var page1 = document.getElementById('tela1');
+  function plotarGrafico(resposta) {
+    var page1 = document.getElementById('tela1');
 
-      var page2 = document.getElementById('tela2');
+    var page2 = document.getElementById('tela2');
 
-      tela1.innerHTML = "";
+    tela1.innerHTML = "";
 
-      tela2.innerHTML = "";
+    tela2.innerHTML = "";
 
-      if(resposta.length > 4){
-        btn2.style.display = 'block';
+    if (resposta.length > 4) {
+      btn2.style.display = 'block';
+    }
+
+    for (let i = 0; i < resposta.length; i++) {
+
+      if ((i + 1) > 4) {
+        page1 = page2;
       }
 
-      for (let i = 0; i < resposta.length; i++) {
+      var maquina = resposta[i];
 
-        if((i + 1) > 4){
-          page1 = page2;
-        }
+      var bolinhaSaldo = 100
+      if (resposta[i].memoriaEmUso >= 90) {
+        bolinhaSaldo -= 25;
+      } else if (resposta[i].memoriaEmUso >= 80 && resposta[i].memoriaEmUso < 90) {
+        bolinhaSaldo -= 20;
+      } else if (resposta[i].memoriaEmUso >= 61 && resposta[i].memoriaEmUso < 80) {
+        bolinhaSaldo -= 12.5;
+      }
 
-        var num = Math.random()* 4; 
+      if (resposta[i].discoUso >= 90) {
+        bolinhaSaldo -= 25;
+      } else if (resposta[i].discoUso >= 61 && resposta[i].discoUso < 90) {
+        bolinhaSaldo -= 20;
+      } else if (resposta[i].discoUso >= 55 && resposta[i].discoUso < 61) {
+        bolinhaSaldo -= 12.5
+      }
 
-        var maquina = resposta[i];
-        
-        var ancoraMaquina = document.createElement('a');
+      if (resposta[i].cpuUtilizacao >= 90) {
+        bolinhaSaldo -= 25;
+      } else if (resposta[i].cpuUtilizacao >= 66 && resposta[i].cpuUtilizacao < 90) {
+        bolinhaSaldo -= 20;
+      } else if (resposta[i].cpuUtilizacao >= 40 && resposta[i].cpuUtilizacao < 66) {
+        bolinhaSaldo -= 12.5
+      }
 
-        var bordaMaquina = document.createElement('div');
-        
-        var h3 = document.createElement('h3');
+      if (resposta[i].latencia >= 201) {
+        bolinhaSaldo -= 25;
+      } else if (resposta[i].latencia >= 101 && resposta[i].latencia < 201) {
+        bolinhaSaldo -= 20;
+      } else if (resposta[i].latencia >= 50 && resposta[i].latencia < 101) {
+        bolinhaSaldo -= 12.5
+      }
+      var ancoraMaquina = document.createElement('a');
 
-        var divMaquina = document.createElement('div');
-        
-        var bolinhaAlerta = document.createElement('div');
+      var bordaMaquina = document.createElement('div');
 
-        var grafico = document.createElement('canvas');
+      var h3 = document.createElement('h3');
 
-        bordaMaquina.className = `borda${i + 1}`;
+      var divMaquina = document.createElement('div');
 
-        num = Math.floor(num);
+      var bolinhaAlerta = document.createElement('div');
 
-        num++;
+      var grafico = document.createElement('canvas');
 
-        bolinhaAlerta.className = `bolinhaAlerta${num}`;
+      bordaMaquina.className = `borda${i + 1}`;
 
-        h3.innerHTML = `${maquina.nomeIdentificador}`;
+      bolinhaAlerta.id = `bolinhaAlerta${i + 1}`
 
-        divMaquina.className = `maquina${i + 1}`;
+      if (bolinhaSaldo <= 25) {
+        bolinhaAlerta.className = `bolinhaAlertaUrgente`
+      } else if (bolinhaSaldo > 25 && bolinhaSaldo <= 50) {
+        bolinhaAlerta.className = `bolinhaAlertaCritico`
+      } else if (bolinhaSaldo > 50 && bolinhaSaldo <= 75) {
+        bolinhaAlerta.className = `bolinhaAlertaEmergente`
+      } else {
+        bolinhaAlerta.className = `bolinhaAlertaIdeal`
+      }
+      h3.innerHTML = `${maquina.nomeIdentificador}`;
 
-        grafico.id = `myChart${i + 1}`;
+      divMaquina.className = `maquina${i + 1}`;
 
-        ancoraMaquina.href = `TelaMaquina.html?idMaquina=${maquina.id}&&nomeMaquina=${maquina.nomeIdentificador}`
+      grafico.id = `myChart${i + 1}`;
 
-        divMaquina.appendChild(bolinhaAlerta);
-        
-        divMaquina.appendChild(grafico);
+      ancoraMaquina.href = `TelaMaquina.html?idMaquina=${maquina.id}&&nomeMaquina=${maquina.nomeIdentificador}`
 
-        bordaMaquina.appendChild(h3);
+      divMaquina.appendChild(bolinhaAlerta);
 
-        bordaMaquina.appendChild(divMaquina);
+      divMaquina.appendChild(grafico);
 
-        ancoraMaquina.appendChild(bordaMaquina);
+      bordaMaquina.appendChild(h3);
 
-        page1.appendChild(ancoraMaquina);
+      bordaMaquina.appendChild(divMaquina);
 
-        let labels = [];
+      ancoraMaquina.appendChild(bordaMaquina);
 
-        let dados = {
-          labels: ['RAM', 'Disco', 'CPU'],
+      page1.appendChild(ancoraMaquina);
+
+      let dados = {
+        labels: ['Memória', 'Disco', 'CPU', 'Latência'],
         datasets: [{
           label: `Porcentagem de uso`,
           data: [],
@@ -151,70 +231,56 @@ function obterDadosEstacao(idEstacao) {
           backgroundColor: 'red',
           borderColor: 'rgb(255, 255, 192)',
           tension: 0.1
-      }]
-        }   
+        },
+        {
+          label: 'Latência (ms)',
+          data: [],
+          backgroundColor: 'red',
+        }]
+      };
 
-        dados.datasets[0].data.push(maquina.memoriaEmUso);
-        dados.datasets[0].data.push(maquina.discoUso);
-        dados.datasets[0].data.push(maquina.cpuUtilizacao);
-
-            const config = {
-            type: 'bar',
-            data: dados,
-        };
-
-        let nomeVariavel = `myChart` + (i + 1);
-
-        let valorVariavel = new Chart(
-          document.getElementById(`myChart${i + 1}`),
-          config
-        );
+      var options = {
+        scales: {
+          y: {
+            beginAtZero: true,
+            max: 100,
+            ticks: {
+              callback: function (value) {
+                return value + '%';
+              },
+            },
+          },
+          y1: {
+            beginAtZero: true,
+            position: 'right',
+            ticks: {
+              callback: function (value) {
+                return value + 'ms';
+              },
+            },
+          },
+        },
       }
+
+      dados.datasets[0].data.push(maquina.memoriaEmUso);
+      dados.datasets[0].data.push(maquina.discoUso);
+      dados.datasets[0].data.push(maquina.cpuUtilizacao);
+      dados.datasets[0].data.push(maquina.latencia);
+
+      const config = {
+        type: 'bar',
+        data: dados,
+        options: options,
+      };
+
+      let nomeVariavel = `myChart${i + 1}`;
+
+       let valorVariavel = new Chart(
+        document.getElementById(`myChart${i + 1}`),
+        config
+      );
     }
-      setTimeout(() => atualizarGraficoEstacao(idEstacao,dados,myChart),60000);
-     
-
-
-    function atualizarGraficoEstacao(idEstacao,dados,myChart) {
-      
-      fetch(`/tempo-real/maquinas/${idEstacao}`, { cache: `no-store` }).then(function (response) {
-        if (response.ok) {
-          response.json().then(function (novoRegistro) {
-
-            console.log(`Dados recebidos: ${JSON.stringify(novoRegistro)}`);
-            console.log(`Dados atuais do gráfico`);
-            console.log(dados);
-
-            if(novoRegistro[0].data == dados.labels[dados.labels.lenght - 1]) {
-              console.log("---------------------------------------------------------------")
-                        console.log("Como não há dados novos para captura, o gráfico não atualizará.")
-                        console.log("Horário do novo dado capturado:")
-                        console.log(novoRegistro[0].estacao)
-                        console.log("Horário do último dado capturado:")
-                        console.log(dados.labels[dados.labels.length - 1])
-                        console.log("---------------------------------------------------------------") 
-            } else{
-
-              dados.data.shift();
-              dados.datasets[0].data.push(maquina.memoriaEmUso);
-              dados.datasets[0].data.push(maquina.discoUso);
-              dados.datasets[0].data.push(maquina.cpuUtilizacao);
-
-
-              myChart.update();
-            }
-            
-            proximaAtualizacao = setTimeout(() => atualizarGraficoEstacao(idEstacao, dados, myChart),60000);
-
-          });
-        } else{
-          console.error('Nenhum dado encontrado ou erro na API');
-          proximaAtualizacao = setTimeout(() => atualizarGraficoEstacao(idEstacao,dados,myChart),60000);
-        }
-      })
-        .catch(function (error) {
-          console.error(`Erro na obtenção dos dados p/ gráfico ${error.message}`)
-        })
-    }
+  }
+  setTimeout(() => obterDadosEstacao(idEstacao), 60000);
 </script>
 <script src="telas.js"></script>

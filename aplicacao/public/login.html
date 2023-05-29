@@ -31,7 +31,7 @@
                 <div class="caixaUl">
                     <ul>
                         <li>CNPJ: </li>
-                        <input type="cnpj" id="cnpj_input" maxlength="11">
+                        <input type="cnpj" id="cnpj_input" maxlength="14">
                         <li>Senha: </li>
                         <input type="password" id="senha_input">
 
@@ -84,7 +84,6 @@ e.target.value = v;
 
 
         if (cnpjVar == "" || senhaVar == "") {
-            cardErro.style.display = "block"
             mensagem_erro.innerHTML = "(Mensagem de erro para todos os campos em branco)";
             finalizarAguardar();
             return false;
@@ -120,6 +119,7 @@ e.target.value = v;
 
 
                     setTimeout(function () {
+                        window.location = "../Cadastro";
 
                         window.location = "CadastroMaquina.html";
                     }, 1000); // apenas para exibir o loading

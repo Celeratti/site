@@ -80,7 +80,7 @@ function entrar(req, res) {
 
 
     if (cnpj == undefined) {
-        res.status(400).send("Seu email está undefined!");
+        res.status(400).send("Seu cnpj está undefined!");
     } else if (senha == undefined) {
         res.status(400).send("Sua senha está indefinida!");
     } else {
