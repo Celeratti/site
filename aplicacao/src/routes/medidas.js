@@ -15,6 +15,10 @@ router.get("/ultimas/memoria/:idMaquina", function (req, res) {
     medidaController.buscarUltimasMedidasMemoria(req, res);
 });
 
+router.get("/ultimas/rede/:idMaquina", function (req, res) {
+    medidaController.buscarUltimasMedidasRede(req, res);
+});
+
 router.get("/tempo-real/cpu/:idMaquina", function (req, res) {
     medidaController.buscarMedidasEmTempoRealCpu(req, res);
 })
@@ -25,6 +29,10 @@ router.get("/tempo-real/disco/:idMaquina", function (req, res) {
 
 router.get("/tempo-real/memoria/:idMaquina", function (req, res) {
     medidaController.buscarMedidasEmTempoRealMemoria(req, res);
+})
+
+router.get("/tempo-real/rede/:idMaquina", function (req, res) {
+    medidaController.buscarMedidasEmTempoRealRede(req, res);
 })
 
 router.get("/ultimas/Estacao", function (req, res) {

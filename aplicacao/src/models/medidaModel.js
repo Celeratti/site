@@ -31,13 +31,13 @@ function buscarUltimasMedidasCpu(idMaquina, limite_linhas) {
 
     if (process.env.AMBIENTE_PROCESSO == "producao") {
         instrucaoSql = `SELECT TOP ${limite_linhas} cpuUtilizacao as cpu,
-        dataHoraInsercao as momento,
-        date_format(dataHoraInsercao,'%H:%i:%s') as momento_grafico
+        Insercao AS momento,
+        FORMAT(Insercao, 'HH:mm') AS momento_grafico
         FROM grupoComponentes WHERE fkMaquina = ${idMaquina} order by id DESC;`
     } else if (process.env.AMBIENTE_PROCESSO == "desenvolvimento") {
         instrucaoSql = `SELECT cpuUtilizacao as cpu,
-        dataHoraInsercao as momento,
-        date_format(dataHoraInsercao,'%H:%i:%s') as momento_grafico
+        Insercao as momento,
+        date_format(Insercao,'%H:%i:%s') as momento_grafico
         FROM grupoComponentes WHERE fkMaquina = ${idMaquina} order by id DESC LIMIT ${limite_linhas};`
     } else {
         console.log("\nO AMBIENTE (produção OU desenvolvimento) NÃO FOI DEFINIDO EM app.js\n");
@@ -54,12 +54,12 @@ function buscarUltimasMedidasDisco(idMaquina, limite_linhas) {
 
     if (process.env.AMBIENTE_PROCESSO == "producao") {
         instrucaoSql = `SELECT TOP ${limite_linhas} CAST(round(discoUso, 2) as DECIMAL(10,2)) as disco,
-        dataHoraInsercao as momento,
-        date_format(dataHoraInsercao,'%H:%i:%s') as momento_grafico
+        Insercao AS momento,
+        FORMAT(Insercao, 'HH:mm') AS momento_grafico
         FROM grupoComponentes WHERE fkMaquina = ${idMaquina} order by id DESC;`
     } else if (process.env.AMBIENTE_PROCESSO == "desenvolvimento") {
         instrucaoSql = `SELECT CAST(round(discoUso, 2) as DECIMAL(10,2)) as disco,
-        dataHoraInsercao as momento,
+        Insercao as momento,
         date_format(dataHoraInsercao,'%H:%i:%s') as momento_grafico
         FROM grupoComponentes WHERE fkMaquina = ${idMaquina} order by id DESC LIMIT ${limite_linhas};`
     } else {
@@ -77,15 +77,37 @@ function buscarUltimasMedidasMemoria(idMaquina, limite_linhas) {
     instrucaoSql = ''
 
     if (process.env.AMBIENTE_PROCESSO == "producao") {
-        instrucaoSql = `SELECT TOP ${limite_linhas} memoriaEmUso as memoria,
-        dataHoraInsercao as momento,
-        date_format(dataHoraInsercao,'%H:%i:%s') as momento_grafico
-        FROM grupoComponentes WHERE fkMaquina = ${idMaquina} order by id DESC`
+        instrucaoSql = `SELECT TOP ${limite_linhas} CAST(memoriaEmUso AS DECIMAL(10, 2)) AS memoria,Insercao AS momento,
+        FORMAT(Insercao, 'HH:mm') AS momento_grafico FROM grupoComponentes WHERE fkMaquina = ${idMaquina} ORDER BY id DESC
+    `
     } else if (process.env.AMBIENTE_PROCESSO == "desenvolvimento") {
         instrucaoSql = `SELECT memoriaEmUso as memoria,
         dataHoraInsercao as momento,
         date_format(dataHoraInsercao,'%H:%i:%s') as momento_grafico
         FROM grupoComponentes WHERE fkMaquina = ${idMaquina} order by id DESC LIMIT ${limite_linhas};`
+    } else {
+        console.log("\nO AMBIENTE (produção OU desenvolvimento) NÃO FOI DEFINIDO EM app.js\n");
+        return
+    }
+
+    console.log("Executando a instrução SQL: \n" + instrucaoSql);
+    return database.executar(instrucaoSql);
+}
+
+function buscarUltimasMedidasRede(idMaquina, limite_linhas) {
+
+    instrucaoSql = ''
+
+    if (process.env.AMBIENTE_PROCESSO == "producao") {
+        instrucaoSql = `SELECT TOP ${limite_linhas}
+        CAST(ROUND(latencia, 2) AS DECIMAL(10, 2)) AS latencia,
+        Insercao AS momento,
+        FORMAT(Insercao, 'HH:mm') AS momento_grafico
+        FROM grupoComponentes
+        WHERE fkMaquina = ${idMaquina}
+        ORDER BY id DESC`;
+    } else if (process.env.AMBIENTE_PROCESSO == "desenvolvimento") {
+        instrucaoSql = ``
     } else {
         console.log("\nO AMBIENTE (produção OU desenvolvimento) NÃO FOI DEFINIDO EM app.js\n");
         return
@@ -101,8 +123,8 @@ function buscarMedidasEmTempoRealCpu(idMaquina) {
 
     if (process.env.AMBIENTE_PROCESSO == "producao") {
         instrucaoSql = `SELECT TOP 1 cpuUtilizacao as cpu,
-        dataHoraInsercao as momento,
-        date_format(dataHoraInsercao,'%H:%i:%s') as momento_grafico
+        Insercao AS momento,
+        FORMAT(Insercao, 'HH:mm') AS momento_grafico
         FROM grupoComponentes WHERE fkMaquina = ${idMaquina} order by id DESC;`;
     } else if (process.env.AMBIENTE_PROCESSO == "desenvolvimento") {
         instrucaoSql = `SELECT cpuUtilizacao as cpu,
@@ -123,10 +145,13 @@ function buscarMedidasEmTempoRealDisco(idMaquina) {
     instrucaoSql = ''
 
     if (process.env.AMBIENTE_PROCESSO == "producao") {
-        instrucaoSql = `SELECT TOP 1 CAST(round(discoUso, 2) as DECIMAL(10,2)) as disco,
-        dataHoraInsercao as momento,
-        date_format(dataHoraInsercao,'%H:%i:%s') as momento_grafico
-        FROM grupoComponentes WHERE fkMaquina = ${idMaquina} order by id DESC`;
+        instrucaoSql = `SELECT TOP 1 
+        CAST(ROUND(discoUso, 2) AS DECIMAL(10, 2)) AS disco,
+        Insercao AS momento,
+        FORMAT(Insercao, 'HH:mm') AS momento_grafico
+        FROM grupoComponentes
+        WHERE fkMaquina = ${idMaquina}
+        ORDER BY id DESC;`;
     } else if (process.env.AMBIENTE_PROCESSO == "desenvolvimento") {
         instrucaoSql = `SELECT CAST(round(discoUso, 2) as DECIMAL(10,2)) as disco,
         dataHoraInsercao as momento,
@@ -148,12 +173,12 @@ function buscarMedidasEmTempoRealMemoria(idMaquina) {
 
     if (process.env.AMBIENTE_PROCESSO == "producao") {
         instrucaoSql = `SELECT TOP 1 memoriaEmUso as memoria,
-        dataHoraInsercao as momento,
-        date_format(dataHoraInsercao,'%H:%i:%s') as momento_grafico
+        Insercao AS momento,
+        FORMAT(Insercao, 'HH:mm') AS momento_grafico
         FROM grupoComponentes WHERE fkMaquina = ${idMaquina} order by id DESC`
     } else if (process.env.AMBIENTE_PROCESSO == "desenvolvimento") {
         instrucaoSql = `SELECT memoriaEmUso as memoria,
-        dataHoraInsercao as momento,
+        Insercao as momento,
         date_format(dataHoraInsercao,'%H:%i:%s') as momento_grafico
         FROM grupoComponentes WHERE fkMaquina = ${idMaquina} order by id DESC LIMIT 1;`
     } else {
@@ -165,6 +190,26 @@ function buscarMedidasEmTempoRealMemoria(idMaquina) {
     return database.executar(instrucaoSql);
 }
 
+
+function buscarMedidasEmTempoRealRede(idMaquina) {
+
+    instrucaoSql = ''
+
+    if (process.env.AMBIENTE_PROCESSO == "producao") {
+        instrucaoSql = `SELECT TOP 1 latencia as latencia, Insercao AS momento,
+        FORMAT(Insercao, 'HH:mm') AS momento_grafico
+        FROM grupoComponentes WHERE fkMaquina = ${idMaquina} order by id DESC`;
+    } else if (process.env.AMBIENTE_PROCESSO == "desenvolvimento") {
+        instrucaoSql = ``
+    } else {
+        console.log("\nO AMBIENTE (produção OU desenvolvimento) NÃO FOI DEFINIDO EM app.js\n");
+        return
+    }
+    console.log("Executando a instrução SQL: \n" + instrucaoSql);
+    return database.executar(instrucaoSql);
+}
+
+    
 
 
 function buscarUltimasMedidasEstacao(limite_linhas) {
@@ -184,7 +229,7 @@ function buscarUltimasMedidasEstacao(limite_linhas) {
         LEFT JOIN alertas a ON gc.id = a.fKGrupoComponentes
         LEFT JOIN tipoAlerta ta ON a.fkTipoAlerta = ta.id
     WHERE
-        ta.cor IN ('Crítico', 'Urgente')
+        ta.cor = ('Urgente')
         OR (gc.Insercao IS NULL OR gc.Insercao < DATEADD(HOUR, -2, GETDATE()))
     GROUP BY
         e.id, e.nome;
@@ -224,14 +269,17 @@ function buscarTempoRealMaquinas(idEstacao) {
     return database.executar(instrucaoSql);
 }
 
+
 module.exports = {
     buscarUltimasMedidasCpu,
     buscarMedidasEmTempoRealCpu,
     buscarUltimasMedidasDisco,
-    buscarMedidasEmTempoRealDisco, 
+    buscarMedidasEmTempoRealDisco,
     buscarUltimasMedidasEstacao,
     buscarUltimasMedidasMemoria,
     buscarMedidasEmTempoRealMemoria,
     buscarMaquinasEstacoes,
-    buscarTempoRealMaquinas
+    buscarTempoRealMaquinas,
+    buscarUltimasMedidasRede,
+    buscarMedidasEmTempoRealRede
 }

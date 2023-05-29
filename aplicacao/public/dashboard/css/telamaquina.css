@@ -16,7 +16,7 @@ main {
     position: absolute;
     display: flex;
     width: 100%;
-    height: 650px;
+    height: 550px;
 }
 
 
@@ -54,6 +54,34 @@ main a {
 
     100% {
         opacity: 0;
+    }
+}
+
+@keyframes animateBoxShadowUrgente {
+    0% {
+        box-shadow: 0 2px 8px 0 #ff0000;
+    }
+
+    50% {
+        box-shadow: 0 8px 32px 0 #ff0000;
+    }
+
+    100% {
+        box-shadow: 0 2px 8px 0  #ff0000;
+    }
+}
+
+@keyframes animateBoxShadowCritico {
+    0% {
+        box-shadow: 0 2px 8px 0 #ff6600;
+    }
+
+    50% {
+        box-shadow: 0 8px 32px 0 #ff6600;
+    }
+
+    100% {
+        box-shadow: 0 2px 8px 0  #ff6600;
     }
 }
 
@@ -141,20 +169,16 @@ summary{
 .divAlertaUrgente{
     width: 100%;
     border-radius: 10px;
-    box-shadow: 0 10px 32px 0 #ff0000;
-    animation:animate 1.10s linear infinite; 
+    animation:animateBoxShadowUrgente 1.10s linear infinite; 
 }
 .divAlertaCritico{
     width: 100%;
     border-radius: 10px;
-    box-shadow: 0 10px 32px 0 #ff6600;
-    animation:animate 1.10s linear infinite; 
+    animation:animateBoxShadowCritico 1.10s linear infinite; 
 }
-.divAlertaEmergente{
+
+#divAlertaCPU , #divAlertaDisco, #divAlertaMemoria, #divAlertaRede{
     width: 100%;
-    border-radius: 10px;
-    box-shadow: 0 10px 32px 0 #ffe600;
-    animation:animate 1.10s linear infinite; 
 }
 
 .bolinhaAlertaCritico {
@@ -162,7 +186,7 @@ summary{
     width: 16px;
     height: 16px;
     border-radius: 100px;
-    animation: animate 0.80s linear infinite;
+    animation: animateBoxShadow 0.80s linear infinite;
     position: absolute;
     left: 93%;
     top: 9px;

@@ -2,88 +2,80 @@
 <html lang="pt-br">
 
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Estações</title>
-    <link rel="stylesheet" href="css/telaestacoes.css">
-    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
-    <script src="telas.js"></script>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link rel="shortcut icon" href="./assets/img/celeratti-mascote.png" type="image/x-icon">
-    <link
-        href="https://fonts.googleapis.com/css2?family=Dancing+Script&family=Great+Vibes&family=Poppins:wght@300&family=Raleway&display=swap"
-        rel="stylesheet">
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Estações</title>
+  <link rel="stylesheet" href="css/telaestacoes.css">
+  <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+  <script src="telas.js"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="shortcut icon" href="./assets/img/celeratti-mascote.png" type="image/x-icon">
+  <link
+    href="https://fonts.googleapis.com/css2?family=Dancing+Script&family=Great+Vibes&family=Poppins:wght@300&family=Raleway&display=swap"
+    rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
 </head>
 
 <body>
 
-    <div class="janela">
-        <div class="header-left">
-            <img src="img/Logo.png" alt="">
+  <div class="janela">
+    <div class="header-left">
+      <img src="img/Logo.png" alt="">
 
-            <div class="hello">
-                <h3>Olá, <span id="b_usuario">Mario</span>!</h3>
-            </div>
+      <div class="hello">
+        <h3>Olá, <span id="b_usuario">Mario</span>!</h3>
+      </div>
 
-            <div class="email">
-                    <h3>mario.silva@viaestacao.com</h3>
-            </div>
+      <div class="email">
+        <h3>mario.silva@viaestacao.com</h3>
+      </div>
 
-            <div class="cargo">
-                <h3>Analista de Dashboard</h3>
-            </div>
+      <div class="cargo">
+        <h3>Analista de Dashboard</h3>
+      </div>
 
-            <div class="cargo">
-              <div class="navegacao">
-                <details>
-                  <summary><b>Navegação</b></summary>
-                  <!-- <p><a href="TelaEstacoes.html">Estações</a></p> -->
-                  <!-- <p><a href="TelaMaquina.html">Máquinas</a></p> -->
-                  <!-- <p><a href="TelaMaquina.html">Componentes</a></p> -->
-                </details>
-              </div>
-            </div>
-            <div class="btn-logout" onclick="limparSessao()">
-                <h3>Sair</h3>
-            </div>
+      <div class="cargo">
+      </div>
+      <div class="btn-logout" onclick="limparSessao()">
+        <h3>Sair</h3>
+      </div>
 
-        </div>
     </div>
+  </div>
 
-    <!-- <a id= "a2" href="dashInicio.html">Voltar para a tela de linhas</a> -->
+  <!-- <a id= "a2" href="dashInicio.html">Voltar para a tela de linhas</a> -->
 
-    <h1>Estações  - Linha 2  - Verde</h1>
+  <h1>Estações - Linha 2 - Verde</h1>
 
-    <div class="legenda">
-        <p>Ideal</p>
-        <div class="bolinha1"></div>
-        <p>Emergente</p>
-        <div class="bolinha2"></div>
-        <p>Crítico</p>
-        <div class="bolinha3"></div>
-        <p>Urgente</p>
-        <div class="bolinha4"></div>
-    </div>
+  <div class="legenda">
+    <p>Ideal</p>
+    <div class="bolinha1"></div>
+    <p>Emergente</p>
+    <div class="bolinha2"></div>
+    <p>Crítico</p>
+    <div class="bolinha3"></div>
+    <p>Urgente</p>
+    <div class="bolinha4"></div>
+  </div>
 
-    <div class="botoes">
-        <button id="btn1" onclick="trocar()">1</button>
-        <button id="btn2" onclick="trocar1()" style="display: none;">2</button>
-    </div>
+  <div class="botoes">
+    <button id="btn1" onclick="trocar()">1</button>
+    <button id="btn2" onclick="trocar1()" style="display: none;">2</button>
+  </div>
 
-    <div class="estacoes" id="tela1" style="display: block;">
-    </div>
-    
+  <div class="estacoes" id="tela1" style="display: block;">
+  </div>
 
 
-    <div class="estacoes" id="tela2" style="display: none;">
 
-    </div> 
+  <div class="estacoes" id="tela2" style="display: none;">
+
+  </div>
 
 </body>
 
@@ -93,113 +85,118 @@
 <script defer>
 
 
-window.onload = obterDadosGrafico();
+  window.onload = obterDadosGrafico();
 
-function obterDadosGrafico() {
-  obterDadosEstacao()
-}
+  function obterDadosGrafico() {
+    obterDadosEstacao()
+  }
 
-//Estação 1
+  //Estação 1
 
-function obterDadosEstacao() {
-    
-    fetch(`/medidas/ultimas/Estacao`, {cache: 'no-store'}).then(function (response) {
+  function obterDadosEstacao() {
+
+    fetch(`/medidas/ultimas/Estacao`, { cache: 'no-store' }).then(function (response) {
       if (response.ok) {
         response.json().then(function (resposta) {
           console.log(`Dados recebidos: ${JSON.stringify(resposta)}`);
 
           plotarGrafico(resposta);
         });
-      } else{
+      } else {
         console.error(`Nenhum dado encontrado ou erro na API`);
       }
     })
-        .catch(function (error) {
-          console.error(`Erro na obtenção dos dados p/ gráfico: ${error.message}`)
-        });
+      .catch(function (error) {
+        console.error(`Erro na obtenção dos dados p/ gráfico: ${error.message}`)
+      });
   }
 
-    function plotarGrafico(resposta) {
+  function plotarGrafico(resposta) {
 
 
-      var estacoes = document.getElementById('tela1');
+    var estacoes = document.getElementById('tela1');
 
-      var estacoes1 = document.getElementById('tela2');
+    var estacoes1 = document.getElementById('tela2');
 
-      tela1.innerHTML = "";
+    tela1.innerHTML = "";
 
-      tela2.innerHTML = "";
+    tela2.innerHTML = "";
 
-      let graficos = [];
+    let graficos = [];
 
-      if(resposta.length > 8){
-        btn2.style.display = 'block';
+    if (resposta.length > 8) {
+      btn2.style.display = 'block';
+    }
+
+    for (let i = 0; i < resposta.length; i++) {
+
+      if ((i + 1) > 8) {
+        estacoes = estacoes1;
       }
 
-      for (let i = 0; i < resposta.length; i++) {
+      var num = Math.random() * 4;
 
-        if((i + 1) > 8){
-          estacoes = estacoes1;
-        }
+      var estacao = resposta[i];
 
-        var num = Math.random()* 4; 
+      var ancoraEstacao = document.createElement('a');
 
-        var estacao = resposta[i];
-        
-        var ancoraEstacao = document.createElement('a');
+      var bordaEstacao = document.createElement('div');
 
-        var bordaEstacao = document.createElement('div');
+      var bolinhaAlerta = document.createElement('div');
 
-        var bolinhaAlerta = document.createElement('div');
+      var h3 = document.createElement('h3');
 
-        var h3 = document.createElement('h3');
+      var divEstacao = document.createElement('div');
 
-        var divEstacao = document.createElement('div');
+      var grafico = document.createElement('canvas');
 
-        var grafico = document.createElement('canvas');
-        
-        ancoraEstacao.id ='a1';
+      ancoraEstacao.id = 'a1';
 
-        bordaEstacao.className = `borda${i + 1}`;
+      bordaEstacao.className = `borda${i + 1}`;
 
-        num = Math.floor(num);
+      num = Math.floor(num);
 
-        num++;
+      num++;
 
-        bolinhaAlerta.className = `bolinhaAlerta${num}`;
+      bolinhaAlerta.className = `bolinhaAlerta${num}`;
+      h3.id = `estacaoNome`;
+      h3.style.width = `100%`
+      h3.style.textAlign = `center`
+      var nomeEstacao = estacao.nome_estacao;
+      console.log(nomeEstacao)
+      if(nomeEstacao.length > 12){
+        h3.style.left = `15%`;
+      }else if(nomeEstacao.length <= 8){
+        h3.style.left = `37%`
+      }else if (nomeEstacao.length <= 12){
+        h3.style.left = `30%`
+      }
+      
 
-<<<<<<< HEAD
-        h3.id = `estacaoNome`;
-        h3.style.width = `100%`
-        h3.style.textAlign = `center`
+      h3.innerHTML = `${estacao.nome_estacao}`;
 
-        h3.innerHTML = `${estacao.nome_estacao}`;
-=======
-        h3.innerHTML = `${estacao.nome}`;
->>>>>>> 97f2d36b6ddab61b79ed23647986f9c88f7a6e3f
+      divEstacao.className = `estacao${i + 1}`;
 
-        divEstacao.className = `estacao${i + 1}`;
+      grafico.id = `myChart${i + 1}`;
 
-        grafico.id = `myChart${i + 1}`;
+      ancoraEstacao.href = `TelaMaquinasEstacoes.html?idEstacao=${estacao.id_estacao}`
 
-        ancoraEstacao.href = `TelaMaquinasEstacoes.html?idEstacao=${estacao.id}`
+      divEstacao.appendChild(grafico);
 
-        divEstacao.appendChild(grafico);
+      bordaEstacao.appendChild(bolinhaAlerta);
 
-        bordaEstacao.appendChild(bolinhaAlerta);
+      bordaEstacao.appendChild(h3);
 
-        bordaEstacao.appendChild(h3);
+      bordaEstacao.appendChild(divEstacao);
 
-        bordaEstacao.appendChild(divEstacao);
+      ancoraEstacao.appendChild(bordaEstacao);
 
-        ancoraEstacao.appendChild(bordaEstacao);
+      estacoes.appendChild(ancoraEstacao);
 
-        estacoes.appendChild(ancoraEstacao);
+      let labels = [];
 
-        let labels = [];
-
-        let dados = {
-          labels: ['C.problemas', 'Operantes'],
+      let dados = {
+        labels: ['C.problemas', 'Operantes'],
         datasets: [{
           label: `Quantidade de máquinas`,
           data: [],
@@ -207,71 +204,71 @@ function obterDadosEstacao() {
           backgroundColor: 'red',
           borderColor: 'rgb(255, 255, 192)',
           tension: 0.1
-        }]   
-        };
+        }]
+      };
 
-            dados.datasets[0].data.push(estacao.maquinas_com_problemas);
-            dados.datasets[0].data.push(estacao.maquinas_operando_normalmente);
+      dados.datasets[0].data.push(estacao.maquinas_com_problemas);
+      dados.datasets[0].data.push(estacao.maquinas_operando_normalmente);
 
-            const config = {
-            type: 'bar',
-            data: dados,
-        };
+      const config = {
+        type: 'bar',
+        data: dados,
+      };
 
-        let nomeVariavel = `myChart` + (i + 1);
+      let nomeVariavel = `myChart` + (i + 1);
 
-        let valorVariavel = new Chart(
-          document.getElementById(`myChart${i + 1}`),
-          config
-        );
-
-
-
-      }
+      let valorVariavel = new Chart(
+        document.getElementById(`myChart${i + 1}`),
+        config
+      );
 
 
-     }
 
-    function atualizarGraficoEstacao1(idEstacao1,dados,myChart) {
-      
-      fetch(`/medidas/tempo-real/Estacao1/${idEstacao1}`, { cache: `no-store` }).then(function (response) {
-        if (response.ok) {
-          response.json().then(function (novoRegistro) {
-
-            console.log(`Dados recebidos: ${JSON.stringify(novoRegistro)}`);
-            console.log(`Dados atuais do gráfico`);
-            console.log(dados);
-
-            if(novoRegistro[0].data == dados.labels[dados.labels.lenght - 1]) {
-              console.log("---------------------------------------------------------------")
-                        console.log("Como não há dados novos para captura, o gráfico não atualizará.")
-                        console.log("Horário do novo dado capturado:")
-                        console.log(novoRegistro[0].estacao)
-                        console.log("Horário do último dado capturado:")
-                        console.log(dados.labels[dados.labels.length - 1])
-                        console.log("---------------------------------------------------------------") 
-            } else{
-
-              dados.labels.shift();
-              dados.labels.push(novoRegistro[0].maquinasComProblemas);
-
-              dados.labels.shift();
-              dados.labels.push(novoRegistro[0].maquinasOperantes);
-
-
-              myChart.update();
-            }
-            
-            proximaAtualizacao = setTimeout(() => atualizarGraficoEstacao1(idEstacao1, dados, myChart),60000);
-
-          });
-        } else{
-          console.error('Nenhum dado encontrado ou erro na API');
-          proximaAtualizacao = setTimeout(() => atualizarGraficoEstacao1(idEstacao1,dados,myChart),60000);
-        }
-      })
-        .catch(function (error) {
-          console.error(`Erro na obtenção dos dados p/ gráfico ${error.message}`)
-        })
     }
+
+
+  }
+
+  function atualizarGraficoEstacao1(idEstacao1, dados, myChart) {
+
+    fetch(`/medidas/tempo-real/Estacao1/${idEstacao1}`, { cache: `no-store` }).then(function (response) {
+      if (response.ok) {
+        response.json().then(function (novoRegistro) {
+
+          console.log(`Dados recebidos: ${JSON.stringify(novoRegistro)}`);
+          console.log(`Dados atuais do gráfico`);
+          console.log(dados);
+
+          if (novoRegistro[0].data == dados.labels[dados.labels.lenght - 1]) {
+            console.log("---------------------------------------------------------------")
+            console.log("Como não há dados novos para captura, o gráfico não atualizará.")
+            console.log("Horário do novo dado capturado:")
+            console.log(novoRegistro[0].estacao)
+            console.log("Horário do último dado capturado:")
+            console.log(dados.labels[dados.labels.length - 1])
+            console.log("---------------------------------------------------------------")
+          } else {
+
+            dados.labels.shift();
+            dados.labels.push(novoRegistro[0].maquinasComProblemas);
+
+            dados.labels.shift();
+            dados.labels.push(novoRegistro[0].maquinasOperantes);
+
+
+            myChart.update();
+          }
+
+          proximaAtualizacao = setTimeout(() => atualizarGraficoEstacao1(idEstacao1, dados, myChart), 60000);
+
+        });
+      } else {
+        console.error('Nenhum dado encontrado ou erro na API');
+        proximaAtualizacao = setTimeout(() => atualizarGraficoEstacao1(idEstacao1, dados, myChart), 60000);
+      }
+    })
+      .catch(function (error) {
+        console.error(`Erro na obtenção dos dados p/ gráfico ${error.message}`)
+      })
+  }
 </script>
