@@ -98,7 +98,7 @@
   const urlParams = new URLSearchParams(params);
   const idMaquina = urlParams.get('idMaquina')
   const nomeMaquina = urlParams.get('nomeMaquina')
-  maquina_nome.innerHTML = "ViaMobilidade | Máquina " + nomeMaquina;
+  maquina_nome.innerHTML =  GETNomeEmpresa()+" | Máquina " + nomeMaquina;
 
   window.onload = obterDadosGrafico();
 
