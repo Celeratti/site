@@ -27,7 +27,7 @@ body{
   margin-right: 10px; /* Espaçamento opcional entre os elementos */
   margin-left: 20px;
   font-weight: bold;
-  font-size: 15pt;
+  font-size: 17pt;
 }
 .links li:hover {
   cursor: pointer;

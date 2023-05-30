@@ -21,8 +21,8 @@
     <!--<h1 class="tituloPrincipal">CELERATTI</h1>-->
 
     <ul class="links">
-        <li>Dashboards</li>
-        <li>Funcionários</li>
+        <li id="dash">Dashboards</li>
+        <li id="maquinas">Máquinas</li>
     </ul>
 
     <div class="teste-logo"> 
@@ -126,6 +126,19 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.inputmask/3.3.4/jquery.inputmask.bundle.min.js"></script>
 
         <script>
+const dashLink = document.getElementById('dash');
+  const maquinasLink = document.getElementById('maquinas');
+
+  // Adiciona os manipuladores de evento de clique aos links do menu
+  dashLink.addEventListener('click', function() {
+    window.location.href = 'dashboard/TelaEstacoes.html'; // Redireciona para a página de dashboards
+  });
+
+  maquinasLink.addEventListener('click', function() {
+    window.location.href = 'CadastroMaquina.html'; // Redireciona para a página de máquinas
+  });
+
+
 
 var funcionarioSelecionado = 0;
 
@@ -294,7 +307,6 @@ var tabelaHtml = document.querySelector("#tabela")
                 if(novoCargo =="Analista"){
                     novoCargo=3
                 }    
-                alert(novoCargo)
 
                 
                 if(acao == "Salvar"){
@@ -434,7 +446,6 @@ var tabelaHtml = document.querySelector("#tabela")
             }
 
             function Adicionar(){
-                    alert("teste")
                    
                 acao = "Editar"
             }

@@ -1,38 +1,5 @@
 document.querySelector(".nomeEmpresa").innerHTML =GETNomeEmpresa()
 
-var idRecebido =0;
-        fetch("/maquinas/id").then(function (resposta) {
-            if (resposta.ok) {
-                console.log("AAEEEEEEEEEEEEEEEEEEEE")
-
-                if (resposta.status == 204) {
-
-                    throw "Nenhum resultado encontrado!!";
-                }
-
-                resposta.json().then(function (resposta) {
-                    console.log("Dados recebidos: ", JSON.stringify(resposta));
-
-                    console.log(resposta.length)
-
-                for (let i = 0; i < resposta.length; i++) {
-                    
-                    var empresa = resposta[i]
-                    idRecebido = empresa.id
-            
-                    
-                }
-                
-
-                });
-            } else {
-                throw ('Houve um erro na API!');
-
-            }
-        }).catch(function (resposta) {
-            console.error(resposta);
-
-        });
 
 
 
@@ -189,7 +156,7 @@ function atualizarTabela() {
                 "Content-Type": "application/json"
             },
             body: JSON.stringify({
-                linhaServer: GETIdEmpresa()
+                idEmpresaServer: GETIdEmpresa()
             })
         }).then(function (resposta) {
             if (resposta.ok) {
@@ -207,9 +174,10 @@ function atualizarTabela() {
                     console.log(resposta.length)
 
                 for (let i = 0; i < resposta.length; i++) {
-                    
                     var maquina = resposta[i]
-                    if(maquina.fkStatus ==1){
+                    if(maquina.Status ==1){
+
+
                     var novaLinha = document.createElement("tr");
                     novaLinha.setAttribute("id", maquina.id);
                     var colunaEstacao = document.createElement("td");
@@ -225,7 +193,7 @@ function atualizarTabela() {
                     novaImagem.src = "assets/img/lapisCF.png";
                     novaImagem.alt = "";
                     novaImagem.classList.add("opcoesTabela");
-                    novaImagem.setAttribute("onclick", `editar('${maquina.andar}', '${maquina.nomeIdentificador}', '${maquina.sistemaOperacional}', '${maquina.fabricante}', ${maquina.id})`);
+                    novaImagem.setAttribute("onclick", `editar('${maquina.andar}', '${maquina.nomeMaquina}', '${maquina.sistemaOperacional}', '${maquina.fabricante}', ${maquina.id})`);
                     console.log("AAAAAAAAAAAAAAAA: "+maquina.id)
 
                     var novaImagem2= document.createElement("img");
@@ -236,13 +204,12 @@ function atualizarTabela() {
                     novaImagem2.setAttribute("onclick", `Excluir('${maquina.nomeIdentificador}', ${maquina.id})`);
 
 
-                    colunaEstacao.innerHTML =maquina.nomeEstacao
+                    colunaEstacao.innerHTML =maquina.Estação
                     colunaAndar.innerHTML =maquina.andar
-                    colunaNomeMaquina.innerHTML =maquina.nomeIdentificador
+                    colunaNomeMaquina.innerHTML =maquina.nomeMaquina
                     colunaSo.innerHTML =maquina.sistemaOperacional
                     colunaFabricante.innerHTML =maquina.fabricante
-                    colunaStatus.innerHTML ="Ativa"
-
+                    colunaStatus.innerHTML = "Ativa"
 
                     novaLinha.appendChild(colunaEstacao);
                     novaLinha.appendChild(colunaAndar);
@@ -310,9 +277,8 @@ function atualizarTabela() {
                 andarServer: andarRecebido,
                 nomeMaquinaServer: nomeMaquinaRecebido,
                 soServer: soRecebido,
-                andarServer: andarRecebido,
+                empresaServer: GETIdEmpresa(),
                 fabricanteServer: fabricanteRecebido,
-                idServer: idRecebido
             })
                 }).then(function (resposta) {
                 
@@ -334,8 +300,6 @@ function atualizarTabela() {
             }
                 else{
                     
-
-
                     fetch(`/maquinas/editar/${funcionarioSelecionado}`, {
                     method: "PUT",
                     headers: {
@@ -348,7 +312,6 @@ function atualizarTabela() {
                 soServer: soRecebido,
                 fabricanteServer: fabricanteRecebido,
                 idServer: funcionarioSelecionado,
-                statusServer: statusRecebido,
                 empresaServer: GETIdEmpresa()
 
 

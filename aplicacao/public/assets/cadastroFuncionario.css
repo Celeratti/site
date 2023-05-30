@@ -26,8 +26,7 @@
   width: 314px;
   height: 69px;
   left: 620px;
-  top: 34px;
-
+  top: 50px;
   font-size: 45px;
   line-height: 54px;
   color: #000000;
@@ -38,7 +37,7 @@
 width: 484px;
 height: 69px;
 left: 590px;
-top: 90px;
+top: 110px;
 
 line-height: 42px;
 
@@ -132,7 +131,7 @@ color: #000000;
   margin-right: 10px; /* Espaçamento opcional entre os elementos */
   margin-left: 20px;
   font-weight: bold;
-  font-size: 15pt;
+  font-size: 17pt;
 }
 .links li:hover {
   cursor: pointer;

@@ -16,8 +16,8 @@
 <body>
 
     <ul class="links">
-        <li>Dashboards</li>
-        <li>Funcionários</li>
+        <li id="dash">Dashboards</li>
+        <li id = funcionario>Funcionários</li>
     </ul>
 
     <!--<h1 class="tituloPrincipal">CELERATTI</h1>-->
@@ -141,3 +141,18 @@
 </html>
 <script src="funcoes.js"></script>
 <script src="telaMaquina.js"></script>
+
+
+<script>
+      const dashLink = document.getElementById('dash');
+  const funcionarioLink = document.getElementById('funcionario');
+
+  // Adiciona os manipuladores de evento de clique aos links do menu
+  dashLink.addEventListener('click', function() {
+    window.location.href = 'dashboard/TelaEstacoes.html'; // Redireciona para a página de dashboards
+  });
+
+  funcionarioLink.addEventListener('click', function() {
+    window.location.href = 'CadastroFuncionario.html'; // Redireciona para a página de funcionários
+  });
+</script>
