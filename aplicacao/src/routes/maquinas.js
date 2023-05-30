@@ -33,4 +33,10 @@ router.put("/editar/:id", function (req, res) {
 });
 
 
+
+router.get("/id", function (req, res) {
+    maquinaController.id(req, res);
+});
+
+
 module.exports = router;

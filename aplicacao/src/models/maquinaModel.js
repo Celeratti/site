@@ -20,6 +20,8 @@ function estacoes() {
     console.log("Executando a instrução SQL: \n" + instrucao);
     return database.executar(instrucao);
 }
+
+
 function linhas() {
 
     var instrucao = `
@@ -37,9 +39,9 @@ function deletar(id) {
     return database.executar(instrucao);
 }
 
-function cadastrar(fabricante, nomeIdentificador, sistemaOperacional, fkEmpresa, andar, fkEstacao) {
+function cadastrar(fabricante, nomeIdentificador, sistemaOperacional, fkEmpresa, andar, fkEstacao, id) {
     var instrucao = `
-        INSERT INTO maquina (fabricante, nomeIdentificador, sistemaOperacional, fkStatus, fkEmpresa, andar, fkEstacao)  VALUES ('${fabricante}', '${nomeIdentificador}', '${sistemaOperacional}', 2 , ${fkEmpresa}, '${andar}', ${fkEstacao});
+        INSERT INTO maquina (fabricante, nomeIdentificador, sistemaOperacional, fkStatus, fkEmpresa, andar, fkEstacao)  VALUES ('${fabricante}', '${nomeIdentificador}', '${sistemaOperacional}', 2 , ${fkEmpresa}, '${andar}', ${fkEstacao}, ${id});
     `;
     console.log("Executando a instrução SQL: \n" + instrucao);
     return database.executar(instrucao);
@@ -59,5 +61,5 @@ module.exports = {
     deletar,
     cadastrar,
     editar,
-    linhas
+    linhas,
 };

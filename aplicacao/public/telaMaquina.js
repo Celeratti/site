@@ -1,5 +1,40 @@
 document.querySelector(".nomeEmpresa").innerHTML =GETNomeEmpresa()
 
+var idRecebido =0;
+        fetch("/maquinas/id").then(function (resposta) {
+            if (resposta.ok) {
+                console.log("AAEEEEEEEEEEEEEEEEEEEE")
+
+                if (resposta.status == 204) {
+
+                    throw "Nenhum resultado encontrado!!";
+                }
+
+                resposta.json().then(function (resposta) {
+                    console.log("Dados recebidos: ", JSON.stringify(resposta));
+
+                    console.log(resposta.length)
+
+                for (let i = 0; i < resposta.length; i++) {
+                    
+                    var empresa = resposta[i]
+                    idRecebido = empresa.id
+            
+                    
+                }
+                
+
+                });
+            } else {
+                throw ('Houve um erro na API!');
+
+            }
+        }).catch(function (resposta) {
+            console.error(resposta);
+
+        });
+
+
 
 var idTr = 0;
             var funcionarioSelecionado = 0;
@@ -277,6 +312,7 @@ function atualizarTabela() {
                 soServer: soRecebido,
                 andarServer: andarRecebido,
                 fabricanteServer: fabricanteRecebido,
+                idServer: idRecebido
             })
                 }).then(function (resposta) {
                 

@@ -8,9 +8,10 @@ function cadastrar(req, res) {
     var nomeMaquina = req.body.nomeMaquinaServer;
     var so = req.body.soServer;
     var fabricante = req.body.fabricanteServer;
+    var id = req.body.idServer
 
 
-    maquinaModel.cadastrar(fabricante, nomeMaquina, so, 1 , andar, estacao)
+    maquinaModel.cadastrar(fabricante, nomeMaquina, so, 1 , andar, estacao, id)
             .then(
                 function (resultado) {
                     res.json(resultado);
@@ -71,6 +72,19 @@ function estacoes(req, res) {
 }
 
 
+function id(req, res) {
+    maquinaModel.id().then(function (resultado) {
+        if (resultado.length > 0) {
+            res.status(200).json(resultado);
+        } else {
+            res.status(204).send("Nenhum resultado encontrado!")
+        }
+    }).catch(function (erro) {
+        console.log(erro);
+        console.log("Houve um erro ao buscar os avisos: ", erro.sqlMessage);
+        res.status(500).json(erro.sqlMessage);
+    });
+}
 
 
 
@@ -147,5 +161,6 @@ module.exports = {
     deletar,
     cadastrar, 
     editar,
-    linhas
+    linhas,
+    id
 }
