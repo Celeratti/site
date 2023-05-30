@@ -35,7 +35,7 @@ router.get("/tempo-real/rede/:idMaquina", function (req, res) {
     medidaController.buscarMedidasEmTempoRealRede(req, res);
 })
 
-router.get("/ultimas/Estacao", function (req, res) {
+router.get("/ultimas/Estacao/:idLinha", function (req, res) {
     medidaController.buscarUltimasMedidasEstacao(req, res);
 });
 
@@ -48,7 +48,7 @@ router.get("/tempo-real/maquinas/:idEstacao", function (req, res) {
     medidaController.buscarTempoRealMaquinas(req, res);
 })
 
-router.get("/alertas", function (req, res) {
+router.get("/alertas/:idLinha", function (req, res) {
     medidaController.buscarAlertas(req, res);
 })
 

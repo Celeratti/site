@@ -11,6 +11,20 @@ body {
 }
 
 
+#select-box{
+    width: 20%;
+    margin-left: 1050px;
+}
+
+#slbox{
+    width: 200px;
+    height: 50px;
+    border: solid 2px black;
+    font-size: 20px;
+    color: black;
+    margin-top: 15px;
+}
+
 .listaAlertas {
     display: flex;
     flex-direction: column;
@@ -120,7 +134,7 @@ body {
 h1 {
     position: absolute;
     display: flex;
-    left: 45%;
+    left: 40%;
 }
 
 #a1{

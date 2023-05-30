@@ -1,9 +1,12 @@
 var medidaModel = require("../models/medidaModel");
 
 function buscarAlertas(req,res) {
+
+    idLinha = req.params.idLinha;
+
     console.log(`Trazendo alertas gerados nos ultimos 5 minutos`);
 
-    medidaModel.buscarAlertas().then(function (resultado) {
+    medidaModel.buscarAlertas(idLinha).then(function (resultado) {
         if (resultado.length > 0) {
             res.status(200).json(resultado);
         } else {
@@ -199,11 +202,13 @@ function buscarMedidasEmTempoRealRede(req, res) {
 
 function buscarUltimasMedidasEstacao(req, res) {
 
+    idLinha = req.params.idLinha;
+
     const limite_linhas = 14;
 
     console.log(`Recuperando as ultimas ${limite_linhas} medidas`);
 
-    medidaModel.buscarUltimasMedidasEstacao(limite_linhas).then(function (resultado) {
+    medidaModel.buscarUltimasMedidasEstacao(limite_linhas,idLinha).then(function (resultado) {
         if (resultado.length > 0) {
             res.status(200).json(resultado);
         } else {

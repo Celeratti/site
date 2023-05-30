@@ -28,15 +28,7 @@
       <img src="img/Logo.png" alt="">
 
       <div class="hello">
-        <h3>Olá, <span id="b_usuario">Mario</span>!</h3>
-      </div>
-
-      <div class="email">
-        <h3 id="b_email">mario.silva@viaestacao.com</h3>
-      </div>
-
-      <div class="cargo">
-        <h3>Analista de Dashboard</h3>
+        <h3><span id="b_nome_fantasia"></span></h3>
       </div>
 
       <div class="btn-logout" onclick="limparSessao()">
@@ -46,7 +38,14 @@
     </div>
   </div>
 
-  <h1>Estações - Linha 2 - Verde</h1>
+  <h1 id="titulo_estacoes">Estações - Linha 2 - Verde</h1>
+  <div id="select-box">
+    <select id="slbox" onchange="chamarEstacao(this.value)">
+      <option value="2" selected>Linha Verde</option>
+      <option value="4">Linha Amarela</option>
+    </select>
+  </div>
+
 
   <div class="legenda">
     <p>Ideal</p>
@@ -78,20 +77,32 @@
 </html>
 
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script src="../funcoes.js"></script>
 <script defer>
 
+  var idLinha = 2;
 
+  function chamarEstacao(valor) {
+    if (valor == 2) {
+      titulo_estacoes.innerHTML = ''
+      titulo_estacoes.innerHTML = 'Estações - Linha 2 - Verde'
+      obterDadosEstacao(2);
+    } else if (valor == 4) {
+      titulo_estacoes.innerHTML = ''
+      titulo_estacoes.innerHTML = 'Estações - Linha 4 - Amarela'
+      obterDadosEstacao(4);
+    }
+  }
   window.onload = obterDadosGrafico();
   function obterDadosGrafico() {
-    b_usuario.innerHTML = sessionStorage.NOME_USUARIO;
-    b_email.innerHTML = sessionStorage.EMAIL_USUARIO;
-    obterDadosAlertas();
-    obterDadosEstacao();
+    b_nome_fantasia.innerHTML = GETNomeEmpresa();
+    obterDadosAlertas(idLinha);
+    obterDadosEstacao(idLinha);
   }
 
-  function obterDadosAlertas() {
+  function obterDadosAlertas(idLinha) {
 
-    fetch(`/medidas/alertas`, { cache: 'no-store' }).then(function (response) {
+    fetch(`/medidas/alertas/${idLinha}`, { cache: 'no-store' }).then(function (response) {
       if (response.ok) {
         response.json().then(function (resposta) {
           console.log(`Dados recebidos: ${JSON.stringify(resposta)}`);
@@ -125,9 +136,9 @@
   }
 
 
-  function obterDadosEstacao() {
+  function obterDadosEstacao(idLinha) {
 
-    fetch(`/medidas/ultimas/Estacao`, { cache: 'no-store' }).then(function (response) {
+    fetch(`/medidas/ultimas/Estacao/${idLinha}`, { cache: 'no-store' }).then(function (response) {
       if (response.ok) {
         response.json().then(function (resposta) {
           console.log(`Dados recebidos: ${JSON.stringify(resposta)}`);
@@ -159,151 +170,105 @@
     }
 
     for (let i = 0; i < resposta.length; i++) {
+    if ((i + 1) > 8) {
+      estacoes = estacoes1;
+    }
 
-      if ((i + 1) > 8) {
-        estacoes = estacoes1;
-      }
+    var estacao = resposta[i];
 
-      var estacao = resposta[i];
+    var saldoEstacao = 100;
+    var alertas = (estacao.quantidade_emergente * 0.20) + (estacao.quantidade_critico * 0.33) + (estacao.quantidade_urgente * 0.42);
+    saldoEstacao -= (alertas * (estacao.quantidade_maquinas));
 
-      var saldoEstacao = 100;
-      var alertas = (estacao.quantidade_emergente * 0.20) + (estacao.quantidade_critico * 0.33) + (estacao.quantidade_urgente * 0.42);
-      saldoEstacao -= (alertas * (estacao.quantidade_maquinas));
+    var ancoraEstacao = document.createElement('a');
 
-      var ancoraEstacao = document.createElement('a');
+    var bordaEstacao = document.createElement('div');
 
-      var bordaEstacao = document.createElement('div');
+    var bolinhaAlerta = document.createElement('div');
 
-      var bolinhaAlerta = document.createElement('div');
+    var h3 = document.createElement('h3');
 
-      var h3 = document.createElement('h3');
+    var divEstacao = document.createElement('div');
 
-      var divEstacao = document.createElement('div');
+    var grafico = document.createElement('canvas');
 
-      var grafico = document.createElement('canvas');
+    ancoraEstacao.id = 'a1';
 
-      ancoraEstacao.id = 'a1';
-
-      bordaEstacao.className = `borda${i + 1}`;
-      console.log(saldoEstacao);
-      if (saldoEstacao <= 25) {
-        bolinhaAlerta.className = `bolinhaAlertaUrgente`;
-      } else if (saldoEstacao <= 50) {
-        bolinhaAlerta.className = `bolinhaAlertaCritico`;
-      } else if (saldoEstacao <= 75) {
-        bolinhaAlerta.className = `bolinhaAlertaEmergente`;
-      } else {
-        bolinhaAlerta.className = `bolinhaAlertaIdeal`;
-      }
-      h3.id = `estacaoNome`;
-      h3.style.textAlign = `center`
-      var nomeEstacao = estacao.estacao_nome;
-      console.log(nomeEstacao)
-      if (nomeEstacao.length > 12) {
-        h3.style.width = `250px`
-        h3.style.paddingLeft = `20px`;
-      } else if (nomeEstacao.length <= 8) {
-        h3.style.width = `100px`
-        h3.style.paddingLeft = `65px`
-      } else if (nomeEstacao.length <= 12) {
-        h3.style.width = `150px`
-        h3.style.paddingLeft = `45px`
-      }
-
-
-      h3.innerHTML = `${estacao.estacao_nome}`;
-
-      divEstacao.className = `estacao${i + 1}`;
-
-      grafico.id = `myChart${i + 1}`;
-
-      ancoraEstacao.href = `TelaMaquinasEstacoes.html?idEstacao=${estacao.estacao_id}`
-
-      divEstacao.appendChild(grafico);
-
-      bordaEstacao.appendChild(bolinhaAlerta);
-
-      bordaEstacao.appendChild(h3);
-
-      bordaEstacao.appendChild(divEstacao);
-
-      ancoraEstacao.appendChild(bordaEstacao);
-
-      estacoes.appendChild(ancoraEstacao);
-
-      let labels = [];
-
-      let dados = {
-        labels: ['C.problemas', 'Operantes'],
-        datasets: [{
-          label: `Quantidade de máquinas`,
-          data: [],
-          fill: false,
-          backgroundColor: 'red',
-          borderColor: 'rgb(255, 255, 192)',
-          tension: 0.1
-        }]
-      };
-
-      dados.datasets[0].data.push(estacao.maquinas_com_problemas);
-      dados.datasets[0].data.push(estacao.maquinas_operando_normalmente);
-
-      const config = {
-        type: 'bar',
-        data: dados,
-      };
-
-      let nomeVariavel = `myChart` + (i + 1);
-
-      let valorVariavel = new Chart(
-        document.getElementById(`myChart${i + 1}`),
-        config
-      );
+    bordaEstacao.className = `borda${i + 1}`;
+    console.log(saldoEstacao);
+    if (saldoEstacao <= 25) {
+      bolinhaAlerta.className = `bolinhaAlertaUrgente`;
+    } else if (saldoEstacao <= 50) {
+      bolinhaAlerta.className = `bolinhaAlertaCritico`;
+    } else if (saldoEstacao <= 75) {
+      bolinhaAlerta.className = `bolinhaAlertaEmergente`;
+    } else {
+      bolinhaAlerta.className = `bolinhaAlertaIdeal`;
+    }
+    h3.id = `estacaoNome`;
+    h3.style.textAlign = `center`
+    var nomeEstacao = estacao.estacao_nome;
+    console.log(nomeEstacao)
+    if (nomeEstacao.length > 12) {
+      h3.style.width = `250px`
+      h3.style.paddingLeft = `20px`;
+    } else if (nomeEstacao.length <= 8) {
+      h3.style.width = `100px`
+      h3.style.paddingLeft = `65px`
+    } else if (nomeEstacao.length <= 12) {
+      h3.style.width = `150px`
+      h3.style.paddingLeft = `45px`
     }
 
 
+    h3.innerHTML = `${estacao.estacao_nome}`;
+
+    divEstacao.className = `estacao${i + 1}`;
+
+    grafico.id = `myChart${i + 1}`;
+
+    ancoraEstacao.href = `TelaMaquinasEstacoes.html?idEstacao=${estacao.estacao_id}&&nomeEstacao=${estacao.estacao_nome}`
+
+    divEstacao.appendChild(grafico);
+
+    bordaEstacao.appendChild(bolinhaAlerta);
+
+    bordaEstacao.appendChild(h3);
+
+    bordaEstacao.appendChild(divEstacao);
+
+    ancoraEstacao.appendChild(bordaEstacao);
+
+    estacoes.appendChild(ancoraEstacao);
+
+    let labels = [];
+
+    let dados = {
+      labels: ['C.problemas', 'Operantes'],
+      datasets: [{
+        label: `Quantidade de máquinas`,
+        data: [],
+        fill: false,
+        backgroundColor: 'red',
+        borderColor: 'rgb(255, 255, 192)',
+        tension: 0.1
+      }]
+    };
+
+    dados.datasets[0].data.push(estacao.maquinas_com_problemas);
+    dados.datasets[0].data.push(estacao.maquinas_operando_normalmente);
+
+    const config = {
+      type: 'bar',
+      data: dados,
+    };
+
+    let nomeVariavel = `myChart` + (i + 1);
+
+    let valorVariavel = new Chart(
+      document.getElementById(`myChart${i + 1}`),
+      config
+    );
   }
-
-  function atualizarGraficoEstacao1(idEstacao1, dados, myChart) {
-
-    fetch(`/medidas/tempo-real/Estacao1/${idEstacao1}`, { cache: `no-store` }).then(function (response) {
-      if (response.ok) {
-        response.json().then(function (novoRegistro) {
-
-          console.log(`Dados recebidos: ${JSON.stringify(novoRegistro)}`);
-          console.log(`Dados atuais do gráfico`);
-          console.log(dados);
-
-          if (novoRegistro[0].data == dados.labels[dados.labels.lenght - 1]) {
-            console.log("---------------------------------------------------------------")
-            console.log("Como não há dados novos para captura, o gráfico não atualizará.")
-            console.log("Horário do novo dado capturado:")
-            console.log(novoRegistro[0].estacao)
-            console.log("Horário do último dado capturado:")
-            console.log(dados.labels[dados.labels.length - 1])
-            console.log("---------------------------------------------------------------")
-          } else {
-
-            dados.labels.shift();
-            dados.labels.push(novoRegistro[0].maquinasComProblemas);
-
-            dados.labels.shift();
-            dados.labels.push(novoRegistro[0].maquinasOperantes);
-
-
-            myChart.update();
-          }
-
-          proximaAtualizacao = setTimeout(() => atualizarGraficoEstacao1(idEstacao1, dados, myChart), 60000);
-
-        });
-      } else {
-        console.error('Nenhum dado encontrado ou erro na API');
-        proximaAtualizacao = setTimeout(() => atualizarGraficoEstacao1(idEstacao1, dados, myChart), 60000);
-      }
-    })
-      .catch(function (error) {
-        console.error(`Erro na obtenção dos dados p/ gráfico ${error.message}`)
-      })
-  }
+  } setTimeout => obterDadosGrafico(idLinha), 60000;
 </script>

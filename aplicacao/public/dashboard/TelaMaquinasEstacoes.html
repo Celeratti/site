@@ -18,7 +18,7 @@
 </head>
 
 <body>
-  <h1>Estacão - Vila Prudente | Máquinas</h1>
+  <h1 id="nome_estacao"></h1>
 
   <a id="a1" href="TelaEstacoes.html">Voltar para a tela de estações</a>
 
@@ -51,18 +51,12 @@
 </html>
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script>
-  var myChart1;
-  var myChart2;
-  var myChart3;
-  var myChart4;
-  var myChart5;
-  var myChart6;
-  var myChart7;
-  var myChart8;
   var params = window.location.search
   const urlParams = new URLSearchParams(params);
   const idEstacao = urlParams.get('idEstacao')
+  const nomeEstacao = urlParams.get('nomeEstacao')
   console.log(idEstacao)
+  nome_estacao.innerHTML = `Estacão - ${nomeEstacao} | Máquinas`;
   window.onload = obterDadosGrafico();
 
   function obterDadosGrafico() {

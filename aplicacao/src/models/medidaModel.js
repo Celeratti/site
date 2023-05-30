@@ -1,18 +1,18 @@
 var database = require("../database/config");
 
-function buscarAlertas() {
+function buscarAlertas(idLinha) {
 
     instrucaoSql = ''
 
     if (process.env.AMBIENTE_PROCESSO == "producao") {
-        instrucaoSql = `SELECT mc.id, mc.NomeIdentificador, ec.nome,gc.insercao, ta.cor AS TipoAlerta
+        instrucaoSql = `SELECT mc.id, mc.NomeIdentificador, ec.nome,gc.insercao, ta.tipo AS TipoAlerta
         FROM GrupoComponentes gc
         JOIN Alertas a ON gc.id = a.FkGrupoComponentes
         JOIN ComponenteCausa cc ON a.FkComponenteCausa = cc.Id
         JOIN Maquina mc ON gc.FkMaquina = mc.Id
         JOIN TipoAlerta ta ON a.FkTipoAlerta = ta.Id
         JOIN estacao ec ON ec.id = mc.fkEstacao
-        WHERE gc.Insercao >= DATEADD(minute, -182, GETDATE()) AND ta.cor = 'Urgente' ORDER BY gc.Insercao DESC;`
+        WHERE gc.Insercao >= DATEADD(minute, -182, GETDATE()) AND ta.tipo = 'URGENTE' AND e.fkLinha = ${idLinha} ORDER BY gc.Insercao DESC;`
     } else if (process.env.AMBIENTE_PROCESSO == "desenvolvimento") {
         instrucaoSql = ``
     } else {
@@ -34,7 +34,7 @@ function buscarMaquinasEstacoes(idEstacao, limite_linhas) {
             SELECT MAX(id)
             FROM grupoComponentes
             WHERE fkMaquina = m.id
-          ) WHERE e.id = ${idEstacao};`
+          ) WHERE e.id = ${idEstacao} AND g.Insercao >= DATEADD(HOUR, -4, GETDATE()) ;`
     } else if (process.env.AMBIENTE_PROCESSO == "desenvolvimento") {
         instrucaoSql = `SELECT m.id , m.nomeIdentificador,g.memoriaEmUso , g.discoUso, g.cpuUtilizacao FROM estacao as e JOIN maquina as m ON m.fkestacao = e.id JOIN grupoComponentes as g ON g.id = (
             SELECT MAX(id)
@@ -237,12 +237,12 @@ function buscarMedidasEmTempoRealRede(idMaquina) {
     
 
 
-function buscarUltimasMedidasEstacao(limite_linhas) {
+function buscarUltimasMedidasEstacao(limite_linhas,idLinha) {
 
     instrucaoSql = ''
 
     if (process.env.AMBIENTE_PROCESSO == "producao") {
-        instrucaoSql = `SELECT
+        instrucaoSql = `SELECT TOP ${limite_linhas}
         COALESCE(t1.id_estacao, t2.estacao_id) AS estacao_id,
         COALESCE(t1.nome_estacao, t2.estacao_nome) AS estacao_nome,
         COALESCE(t1.maquinas_com_problemas, 0) AS maquinas_com_problemas,
@@ -255,8 +255,8 @@ function buscarUltimasMedidasEstacao(limite_linhas) {
         (SELECT
             e.id AS id_estacao,
             e.nome AS nome_estacao,
-            COUNT(DISTINCT CASE WHEN gc.Insercao >= DATEADD(HOUR, -4, GETDATE()) THEN m.id END) AS maquinas_com_problemas,
-            (SELECT COUNT(DISTINCT m2.id) FROM maquina m2 WHERE m2.fkEstacao = e.id) - COUNT(DISTINCT CASE WHEN gc.Insercao >= DATEADD(HOUR, -2, GETDATE() AT TIME ZONE 'E. South America Standard Time') THEN m.id END) AS maquinas_operando_normalmente
+            COUNT(DISTINCT CASE WHEN gc.Insercao >= DATEADD(MINUTE, -195, GETDATE()) THEN m.id END) AS maquinas_com_problemas,
+            (SELECT COUNT(DISTINCT m2.id) FROM maquina m2 WHERE m2.fkEstacao = e.id) - COUNT(DISTINCT CASE WHEN gc.Insercao >= DATEADD(HOUR, -4, GETDATE()) THEN m.id END) AS maquinas_operando_normalmente
         FROM
             estacao e
             LEFT JOIN maquina m ON e.id = m.fkEstacao
@@ -264,18 +264,19 @@ function buscarUltimasMedidasEstacao(limite_linhas) {
             LEFT JOIN alertas a ON gc.id = a.fkGrupoComponentes
             LEFT JOIN tipoAlerta ta ON a.fkTipoAlerta = ta.id
         WHERE
-            ta.cor IN ('Urgente')
-            OR (gc.Insercao IS NULL OR gc.Insercao < DATEADD(HOUR, -4, GETDATE()))
+            (ta.tipo IN ('URGENTE') OR gc.Insercao IS NULL)
+            AND (gc.Insercao >= DATEADD(MINUTE, -195, GETDATE()) OR m.id IS NULL)
+            AND e.fkLinha = ${idLinha}
         GROUP BY
             e.id, e.nome) AS t1
-        FULL OUTER JOIN
+    FULL OUTER JOIN
         (SELECT
             e.id AS estacao_id,
             e.nome AS estacao_nome,
             COUNT(DISTINCT m.id) AS quantidade_maquinas,
-            SUM(CASE WHEN ta.cor = 'Emergente' THEN 1 ELSE 0 END) AS quantidade_emergente,
-            SUM(CASE WHEN ta.cor = 'Critico' THEN 1 ELSE 0 END) AS quantidade_critico,
-            SUM(CASE WHEN ta.cor = 'Urgente' THEN 1 ELSE 0 END) AS quantidade_urgente
+            SUM(CASE WHEN ta.tipo = 'EMERGENTE' THEN 1 ELSE 0 END) AS quantidade_emergente,
+            SUM(CASE WHEN ta.tipo = 'CRITICO' THEN 1 ELSE 0 END) AS quantidade_critico,
+            SUM(CASE WHEN ta.tipo = 'URGENTE' THEN 1 ELSE 0 END) AS quantidade_urgente
         FROM
             estacao e
             LEFT JOIN maquina m ON e.id = m.fkestacao
@@ -283,12 +284,13 @@ function buscarUltimasMedidasEstacao(limite_linhas) {
             LEFT JOIN alertas a ON gc.id = a.fkGrupoComponentes
             LEFT JOIN tipoAlerta ta ON a.fkTipoAlerta = ta.id
         WHERE
-            gc.insercao >= DATEADD(HOUR, -4, GETDATE())
+            gc.insercao >= DATEADD(MINUTE, -195, GETDATE())
+            AND e.fkLinha = ${idLinha} 
         GROUP BY
             e.id,
             e.nome) AS t2 ON t1.id_estacao = t2.estacao_id;`
     } else if (process.env.AMBIENTE_PROCESSO == "desenvolvimento") {
-        instrucaoSql = `SELECT COUNT(DISTINCT maquina.id) AS maquinas_com_problemas,(SELECT COUNT(DISTINCT maquina.id) FROM maquina) - COUNT(DISTINCT maquina.id) AS maquinas_operando_normalmente FROM maquina LEFT JOIN grupoComponentes ON maquina.id = grupoComponentes.fkMaquina LEFT JOIN alertas ON grupoComponentes.id = alertas.fkGrupoComponentes LEFT JOIN tipoAlerta ON alertas.fkTipoAlerta = tipoAlerta.id WHERE tipoAlerta.cor IN ('Crítico', 'Urgente');`
+        instrucaoSql = `SELECT COUNT(DISTINCT maquina.id) AS maquinas_com_problemas,(SELECT COUNT(DISTINCT maquina.id) FROM maquina) - COUNT(DISTINCT maquina.id) AS maquinas_operando_normalmente FROM maquina LEFT JOIN grupoComponentes ON maquina.id = grupoComponentes.fkMaquina LEFT JOIN alertas ON grupoComponentes.id = alertas.fkGrupoComponentes LEFT JOIN tipoAlerta ON alertas.fkTipoAlerta = tipoAlerta.id WHERE tipoAlerta.tipo IN ('CRITICO', 'URGENTE');`
     } else {
         console.log("\nO AMBIENTE (produção OU desenvolvimento) NÃO FOI DEFINIDO EM app.js\n");
         return
