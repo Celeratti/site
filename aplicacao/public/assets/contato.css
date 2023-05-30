@@ -357,3 +357,59 @@ button{
         width:400px;
     }
 }
+
+
+
+
+.modalAlerta {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    width: 250px;
+    background-color: #111217;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    padding: 10px;
+    box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.3);
+    opacity: 1;
+    transition: opacity 0.3s ease-in-out;
+    display: none;
+  
+  }
+  
+  .modalAlerta-content {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    color: white;
+    font-weight: bold;
+  }
+
+  .modalAlerta-content {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    color: white;
+    font-weight: bold;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+  }
+  
+  .modalAlerta-close {
+    cursor: pointer;
+    font-weight: bold;
+  }
+  #doneIcon{
+    width: 20px;
+    height: 20px;
+    margin-left: 205px;
+    margin-top: -20px;
+    position: absolute;
+  }
+  .modalAlerta.show {
+    opacity: 1;
+    display: block;
+  }
+  
+  .modalAlerta.hide {
+    opacity: 0;
+  }

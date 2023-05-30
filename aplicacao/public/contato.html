@@ -47,6 +47,22 @@
         </div>
 </div>
     </div>
+
+
+    
+<div id="modalAlertaCadastro" class="modalAlerta">
+    <div class="modalAlerta-content">
+      <span id="tituloModalAlerta">
+          E-Mail Enviado com sucesso!
+          <div class="vertical-line"></div>
+          <img src="assets/img/feito.png" id="doneIcon" alt="">
+  
+      </span>
+      <span class="modalAlerta-close" onclick="closeModal()">X</span>
+    </div>
+  </div>
+
+
 </body>
 
 <script src="funcoes.js"></script>
@@ -80,10 +96,27 @@ e.target.value = v;
 
 
 
+function openModal() {
+    document.getElementById("modalAlertaCadastro").classList.add("show");
+    setTimeout(function() {
+      closeModal();
+    }, 5000); // Fechar a modal após 5 segundos (5000 milissegundos)
+  }
+
+  function closeModal() {
+    var modal = document.getElementById("modalAlertaCadastro");
+    modal.classList.add("hide");
+    setTimeout(function() {
+      modal.classList.remove("show");
+      modal.classList.remove("hide");
+    }, 300); // Remover a modal após a transição de 0.3s (300 milissegundos)
+  }
+
 
 
 
     function enviarEmail() {
+        openModal()
 
         var emailRecebido = email_input.value
         const textarea = document.getElementById('corpo');
