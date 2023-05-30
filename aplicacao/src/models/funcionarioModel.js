@@ -12,7 +12,7 @@ function deletar(id) {
 
 function cadastrar(nome, sobrenome, email,senha, telefone, cargo, fkempresa) {
     var instrucao = `
-        INSERT INTO funcionario (nome, sobrenome, telefone, email, senha, fkCargo, esta_ativo, fkempresa)  VALUES ('${nome}', '${sobrenome}', '${telefone}', '${email}','${senha}', ${cargo}, 1, ${fkempresa} );
+        INSERT INTO funcionario (nome, sobrenome, telefone, email, senha, fkCargo, esta_ativo, fkempresa)  VALUES ('${nome}', '${sobrenome}', '${telefone}', '${email}','${senha}', ${cargo}, 1, ${fkempresa});
     `;
     console.log("Executando a instrução SQL: \n" + instrucao);
     return database.executar(instrucao);

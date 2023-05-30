@@ -7,11 +7,10 @@ function cadastrar(req, res) {
     var andar = req.body.andarServer;
     var nomeMaquina = req.body.nomeMaquinaServer;
     var so = req.body.soServer;
+    var empresa = req.body.empresaServer;
     var fabricante = req.body.fabricanteServer;
-    var id = req.body.idServer
 
-
-    maquinaModel.cadastrar(fabricante, nomeMaquina, so, 1 , andar, estacao, id)
+    maquinaModel.cadastrar(fabricante, nomeMaquina, so,  empresa, andar, estacao)
             .then(
                 function (resultado) {
                     res.json(resultado);
@@ -30,11 +29,11 @@ function cadastrar(req, res) {
 
 function atualizarTabela(req, res) {
 
-    var linha = req.body.linhaServer;
+    var idEmpresa = req.body.idEmpresaServer;
 
 
 
-    maquinaModel.atualizarTabela(linha).then(function (resultado) {
+    maquinaModel.atualizarTabela(idEmpresa).then(function (resultado) {
         if (resultado.length > 0) {
             res.status(200).json(resultado);
         } else {
@@ -138,8 +137,10 @@ function editar(req, res) {
 
     var fabricante = req.body.fabricanteServer;
     var id = req.body.idServer;
+
+    console.log("ERRO000000000000: "+id)
  
-    maquinaModel.editar(fabricante, nomeMaquina, so, status, estacao, id)
+    maquinaModel.editar(fabricante, nomeMaquina, so, id)
         .then(
             function (resultado) {
                 res.json(resultado);
